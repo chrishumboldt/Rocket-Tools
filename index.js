@@ -148,9 +148,7 @@ module.exports = {
 		}
 	},
 	log: function($text) {
-		if (window.console) {
-			console.log($text);
-		}
+		console.log($text);
 	},
 	formatBytes: function($bytes, $decimals) {
 		if ($bytes == 0) return '0 Byte';
