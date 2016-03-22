@@ -551,4 +551,4 @@ exports.web = function() {
 		uppercaseAll: uppercaseAll,
 		uppercaseFirst: uppercaseFirst
 	};
-}();
+};
