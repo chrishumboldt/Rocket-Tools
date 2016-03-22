@@ -7,12 +7,6 @@
 var web = function() {
 
 	// Variables
-	var $webEl = {
-		body: document.getElementsByTagName('body')[0],
-		html: document.getElementsByTagName('html')[0],
-		title: document.getElementsByTagName('title')[0],
-		webplateScript: document.getElementById('webplate')
-	};
 	var $webMonths = [{
 		number: '01',
 		name: 'january',
@@ -500,134 +494,8 @@ var web = function() {
 		return $string.charAt(0).toUpperCase() + $string.slice(1);
 	};
 
-	// URL
-	var url = function($ret) {
-		var $ret = $ret || 'all';
-		var $crtScriptSrc = $webEl.webplateScript.getAttribute('src').replace('start.js', '');
-		var $windowLocation = window.location;
-		var $fullUrl = $windowLocation.href;
-
-		var $currentUrl = $fullUrl.split('#')[0];
-		var $hash = $windowLocation.hash.substring(1);
-		var $host = $windowLocation.host;
-		var $protocol = $windowLocation.protocol + '//';
-
-		var $baseUrl = '';
-		if (document.getElementsByTagName('base').length > 0) {
-			$baseUrl = document.getElementsByTagName('base')[0].href;
-		} else {
-			$baseUrl = $protocol + $host;
-		}
-		var $pathname = $windowLocation.pathname;
-		var $segments = [];
-		var $pathnameSplit = $pathname.split('/');
-		for (var $i = 0, $len = $pathnameSplit.length; $i < $len; $i++) {
-			if ($pathnameSplit[$i].indexOf('.') < 0 && $pathnameSplit[$i] != '') {
-				$segments.push($pathnameSplit[$i]);
-			}
-		}
-
-		var $objUrl = {
-			baseUrl: $baseUrl,
-			currentUrl: $currentUrl,
-			fullUrl: $fullUrl,
-			hash: $hash,
-			host: $host,
-			pathname: $pathname,
-			protocol: $protocol,
-			segments: $segments
-		};
-
-		if ($ret === 'all') {
-			return $objUrl;
-		} else {
-			return $objUrl[$ret];
-		}
-	};
-
-	// Webplate
-	var overlayAdd = function() {
-		var $webplateOverlay = document.createElement('div');
-		idAdd($webplateOverlay, $webPrefix.basic + 'overlay');
-		if (!exists(document.getElementById($webPrefix.basic + 'overlay'))) {
-			$webEl.body.appendChild($webplateOverlay);
-		}
-	};
-	var overlayHide = function() {
-		classRemove($webEl.html, 'web-overlay-reveal');
-	};
-	var overlayShow = function() {
-		setTimeout(function() {
-			classAdd($webEl.html, 'web-overlay-reveal');
-		}, 50);
-	};
-	var scrollTo = function($options) {
-		var $self = this;
-
-		$options = $options || false;
-		$self.options = {
-			selector: $options.selector || '.scroll-to',
-			duration: 1000,
-			offset: $options.offset || 0,
-			offsetLarge: $options.offsetLarge || false
-		};
-
-		var $elements = document.querySelectorAll($self.options.selector);
-
-		for (var $i = $elements.length - 1; $i >= 0; $i--) {
-			scrollToExecute($elements[$i], $self.options);
-		}
-	};
-	var scrollToExecute = function($element, $options) {
-		$element.onclick = function(event) {
-			var $vOffset = $options.offset;
-			if (($options.offsetLarge !== false) && (window.innerWidth > 700)) {
-				$vOffset = $options.offsetLarge;
-			}
-			var $scrollToElement = document.getElementById(this.getAttribute('href').substring(1));
-			if ($scrollToElement != null) {
-				event.preventDefault();
-				Velocity($scrollToElement, 'scroll', {
-					duration: $options.duration,
-					easing: 'easeout',
-					offset: $vOffset
-				});
-			}
-		};
-	};
-
-	// Component facades
-	var button = function($options) {
-		return new buttonplate($options);
-	};
-	var flicker = function($options) {
-		return new flickerplate($options);
-	};
-	var form = function($options) {
-		return new formplate($options);
-	};
-	var injectplateExecute = function() {
-		return new injectplate();
-	};
-	var loader = function($options) {
-		return new loaderplate($options);
-	};
-	var menu = function($options) {
-		return new menuplate($options);
-	};
-	var message = function($options) {
-		return new messageplate($options);
-	};
-	var modal = function($options) {
-		return new modalplate($options);
-	};
-	var tab = function($options) {
-		return new tabplate($options);
-	};
-
 	// Return
 	return {
-		element: $webEl,
 		prefix: $webPrefix,
 		exists: exists,
 		hasWhiteSpace: hasWhiteSpace,
@@ -681,20 +549,6 @@ var web = function() {
 		removeLast: removeLast,
 		removeWhiteSpace: removeWhiteSpace,
 		uppercaseAll: uppercaseAll,
-		uppercaseFirst: uppercaseFirst,
-		url: url,
-		overlayAdd: overlayAdd,
-		overlayHide: overlayHide,
-		overlayShow: overlayShow,
-		scrollTo: scrollTo,
-		button: button,
-		flicker: flicker,
-		form: form,
-		injectplateExecute: injectplateExecute,
-		loader: loader,
-		menu: menu,
-		message: message,
-		modal: modal,
-		tab: tab
+		uppercaseFirst: uppercaseFirst
 	};
 }();
