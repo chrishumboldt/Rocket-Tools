@@ -59,7 +59,7 @@ var $webTypes = {
 	images: ['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png']
 };
 
-exports.web = {
+module.exports = {
 	exists: function($element) {
 		return ($element === null || typeof($element) === undefined) ? false : true;
 	},
