@@ -4,7 +4,7 @@
  * Author: Chris Humboldt
  */
 
-var web = function() {
+exports.web = function() {
 
 	// Variables
 	var $webMonths = [{
