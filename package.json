@@ -1,6 +1,6 @@
 {
   "name": "webplate-tools",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "The Webplate tools as a node module.",
   "main": "index.js",
   "scripts": {
