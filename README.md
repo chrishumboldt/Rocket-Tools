@@ -73,10 +73,10 @@ Method | Description
 `Web.exists(x)` | Check if **x** exists. This is based on a null, undefined and false check.
 `Web.has.spaces(str)` | Check if string **str** has any spaces.
 `Web.has.class(el, class)` | Check if element **el** has the class name **class**.
-`Web.has.extension(str, ext)` | Check if string **str** has an extension in array "ext". **ext** is an array and is optional.
+`Web.has.extension(str, ext)` | Check if string **str** has an extension in array **ex**. **ext** is an array and is optional.
 `Web.is.array(ar)` | Check to see if **ar** is an array.
 `Web.is.colour(hex)` | Check if **hex** is a hexadecimal colour code.
-`Web.is.date(date, regExp)` | Check to see if string **date** is in a date format. **regExp** is optional and defaults to "yyyy-mm-dd".
+<span style="white-space: nowrap;">`Web.is.date(date, regExp)`</span> | Check to see if string **date** is in a date format. **regExp** is optional and defaults to "yyyy-mm-dd".
 
 ##### Examples
 ```javascript
