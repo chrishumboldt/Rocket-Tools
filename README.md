@@ -125,7 +125,7 @@ Method | Description
 `class.add(elms, classes)` | Add class names **classes** to all elements **elms**.
 `class.clear(elm)` | Remove all class names from a single element **elm**.
 `class.remove(elms, classes)` | Remove class names **classes** from all elements **elms**.
-`class.replace(elms, remove, add)` | Remove class names **remove** from all elements **elms** and replace with **add**.
+`class.replace(elms, remove, add)` | Remove class names **remove** from all elements **elms**.<br>Replace with **add**.
 `class.toggle(elms, class)` | Remove / add class name **class** from all elements **elms**.
 
 ##### Some examples
