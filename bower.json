@@ -1,0 +1,22 @@
+{
+   "name": "webplate-tools",
+   "description": "The Webplate Tools library is a lightweight set of Javascript methods and facades that facilitate quicker and easier development.",
+   "main": "build/js/webplate-tools.js",
+   "authors": [
+      "Chris Humboldt"
+   ],
+   "license": "Apache-2.0",
+   "keywords": [
+      "Webplate",
+      "Tools",
+      "Javascript"
+   ],
+   "homepage": "https://github.com/chrishumboldt/Webplate-Tools",
+   "ignore": [
+      "**/.*",
+      "node_modules",
+      "bower_components",
+      "test",
+      "tests"
+   ]
+}
