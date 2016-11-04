@@ -74,18 +74,22 @@ Web.exists(x);
 - Check if "x" exists. This will return a boolean based on a null, undefined and false check.
 */
 Web.exists(document.querySelector('.some-class')); // true / false
-
+```
+```javascript
 /*
 Web.has.spaces(str)
 - Check if string "str" has any spaces.
 */
 Web.has.spaces('This is a test'); // true
-
+```
+```javascript
 /*
 Web.has.class(el, class)
 - Check if element "el" has the class name "class".
 */
 Web.has.class(document.querySelector('.some-class')); // true / false
+```
+```javascript
 /*
 Web.has.extension(str, ext)
 - Check if string "str" has an extension in array "ext".
