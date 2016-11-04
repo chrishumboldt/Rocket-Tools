@@ -77,9 +77,11 @@ Method | Description
 
 ##### Examples
 ```javascript
-Web.exists(document.querySelector('.some-class')); // true / false
+var exampleEl = document.querySelector('.element');
+
+Web.exists(exampleEl); // true / false
 Web.has.spaces('This is a test'); // true
-Web.has.class(document.querySelector('.some-class'), 'some-class'); // true
+Web.has.class(exampleEl, 'example'); // true
 
 // "ext" default: ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv']
 Web.has.extension('filename.json'); // true
