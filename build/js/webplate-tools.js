@@ -345,7 +345,7 @@ var Web = (function () {
 
 			returnValue += day + ' ' + month + ' ' + year;
 			if (withTime) {
-				returnValue += ' ' + time.basic(thisDate);
+				returnValue += ', ' + time.basic(thisDate);
 			}
 			return returnValue;
 		},
