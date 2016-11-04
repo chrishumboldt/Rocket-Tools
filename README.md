@@ -76,7 +76,7 @@ Method | Description
 `Web.has.extension(str, ext)` | Check if string **str** has an extension in array **ex**. **ext** is an array and is optional.
 `Web.is.array(ar)` | Check to see if **ar** is an array.
 `Web.is.colour(hex)` | Check if **hex** is a hexadecimal colour code.
-<span style="white-space: nowrap;">`Web.is.date(date, regExp)`</span> | Check to see if string **date** is in a date format. **regExp** is optional and defaults to "yyyy-mm-dd".
+`Web.is.date(date, regExp)` | Check to see if string **date** is in a date format.<br>**regExp** is optional and defaults to "yyyy-mm-dd".
 
 ##### Examples
 ```javascript
