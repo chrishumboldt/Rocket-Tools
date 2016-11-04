@@ -149,4 +149,4 @@ Web.class.add(elms, 'block');
 #### Dates
 Method | Description
 ---- | ----
-`date.basic(date, time)` | Return a basic date value.<br>**date** is optional if false will return the current date.<br>**time** is also optional and by default is set to false. If set to true the time will be appended to the return.
+`date.basic(date, time)` | Return a basic date value. **date** is optional and if false will return the current date.<br>**time** is also optional, defaults to false and if set to true will be appended the time to the return.
