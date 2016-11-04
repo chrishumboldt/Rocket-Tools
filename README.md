@@ -65,9 +65,15 @@ Web.defaults.log = false;
 ```
 
 ## Methods
-Below is a list of the all the methods, the default values and the options. Remember to preface all method calls with **Web**.
+Below is a list of the all the methods, the default values and the options.
 
 #### Basic Checks
+###### Web.exists(x);
+Check if **x** exists. This will return a boolean based on a null, undefined and false check.
+```javascript
+Web.exists(document.getElementsByTagName('html')[0]); // true
+```
+
 | Method | Default | Description |
 | ---- | ---- | ---- |
 | exists(x) | | Check if **x** exists. This will return a boolean based on a null, undefined and false check. |
