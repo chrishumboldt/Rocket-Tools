@@ -99,21 +99,20 @@ Method | Description
 `is.json(json)` | Check if **json** is valid JSON.
 `is.password(str, regExp)` | Check if string **str** is a password (**regExp** optional).
 `is.time(str, regExp)` | Check if string **str** is a valid time value (**regExp** optional).
-`is.touch()` | A very basic touchscreen check.
+`is.touch()` | A very basic touchscreen check on the current window.
 `is.url(str, regExp)` | Check if string **str** is a valid url (**regExp** optional).
-
-##### Arrays
-Name | Value
----- | ----
-Extensions | ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv']
-Image Extensions | ['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png']
 
 ##### Some Examples
 ```javascript
-var exampleEl = document.querySelector('.element');
+var exampleEl = document.querySelector('.element'); // Assume this element is accessible
+var filename = 'filename.json';
+var time = '12:54:07';
 
-Web.exists(exampleEl); // true / false
+Web.exists(exampleEl); // true
 Web.has.spaces('This is a test'); // true
 Web.has.class(exampleEl, 'example'); // true
-Web.has.extension('filename.json'); // true
+Web.has.extension(filename, ['jpg', 'png']); // false
+
+Web.is.integer(filename); // false
+Web.is.time(time); // true
 ```
