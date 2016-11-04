@@ -76,17 +76,17 @@ Method | Description
 `Web.has.extension(str, ext)` | Check if string **str** has an extension in array **ext**.<br>**ext** checks against the extensions array and is optional.
 `Web.is.array(ar)` | Check if **ar** is an array.
 `Web.is.colour(hex)` | Check if **hex** is a hexadecimal colour code.
-`Web.is.date(date, regExp)` | Check if string **date** is in a date format.<br>**regExp** is optional.
+`Web.is.date(date, regExp)` | Check if string **date** is in a date format (**regExp** optional).
 `Web.is.element(el)` | Check if **el** is a DOM element.
-`Web.is.email(email, regExp)` | Check if string **email** is a valid email address.<br>**regExp** is optional.
+`Web.is.email(email, regExp)` | Check if string **email** is a valid email address (**regExp** optional).
 `Web.is.float(int)` | Check if **int** is a floating point number.
 `Web.is.integer(int)` | Check if **int** is an integer (whole number).
 `Web.is.image(str, ext)` | Check if string **str** has an extension in array **ext**.<br>**ext** is an array of image types and is optional.
 `Web.is.json(json)` | Check if **json** is valid JSON.
-`Web.is.password(str, regExp)` | Check if string **str** is a password.<br>**regExp** is optional.
-`Web.is.time(str, regExp)` | Check if string **str** is a valid time value.<br>**regExp** is optional.
+`Web.is.password(str, regExp)` | Check if string **str** is a password (**regExp** optional).
+`Web.is.time(str, regExp)` | Check if string **str** is a valid time value (**regExp** optional).
 `Web.is.touch()` | A very basic touchscreen check.
-`Web.is.url(str, regExp)` | Check if string **str** is a valid url.<br>**regExp** is optional.
+`Web.is.url(str, regExp)` | Check if string **str** is a valid url (**regExp** optional).
 
 ##### Arrays
 Name | Value
