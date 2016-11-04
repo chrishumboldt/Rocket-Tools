@@ -20,7 +20,7 @@ Next include the required Javascript file.
 ```html
 <body>
 	/* Your content goes here */
-   <script src="js/webplate-tools.min.js"></script>
+	<script src="js/webplate-tools.min.js"></script>
 </body>
 ```
 
