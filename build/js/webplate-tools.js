@@ -32,7 +32,21 @@
 var Web = (function () {
 	// Defaults
 	var defaults = {
-		log: true
+		extensions: {
+			all: ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv'],
+			images: ['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png']
+		},
+		log: true,
+		regexp: {
+			colour: /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/,
+			date: /^[0-9]{4}-[0-9]{2}-[0-9]{2}/,
+			email: /([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i,
+			float: /^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?/,
+			integer: /^[0-9]+/,
+			password: /^(?=.*\d).{6,}/,
+			time: /([01]\d|2[0-3]):([0-5]\d)/,
+			url: /(https?:\/\/[^\s]+)/g
+		}
 	}
 	// Variables
 	var webMonths = [{
@@ -99,10 +113,6 @@ var Web = (function () {
 		},
 		list: ['active', 'closed', 'hidden', 'inactive', 'open', 'selected', 'toggled', 'visible']
 	};
-	var webTypes = {
-		extensions: ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv'],
-		images: ['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png']
-	};
 
 	// Basic checks
 	var exists = function (check) {
@@ -116,7 +126,7 @@ var Web = (function () {
 			return (' ' + element.className + ' ').indexOf(' ' + thisClass + ' ') > -1;
 		},
 		extension: function (file, arAllowedTypes) {
-			var allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : webTypes.extensions;
+			var allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : defaults.extensions.all;
 			return allowedTypes[file.split('.').pop().toLowerCase()];
 		}
 	};
@@ -128,27 +138,27 @@ var Web = (function () {
 			is.colour(color);
 		},
 		colour: function (colour) {
-			return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.test(colour);
+			return defaults.regexp.colour.test(colour);
 		},
 		date: function (date, regExp) {
-			var regExp = (regExp instanceof RegExp) ? regExp : /^[0-9]{4}-[0-9]{2}-[0-9]{2}/;
+			var regExp = (regExp instanceof RegExp) ? regExp : defaults.regexp.date;
 			return regExp.test(date);
 		},
 		element: function (element) {
 			return (element.nodeType && element.nodeType === 1) ? true : false;
 		},
 		email: function (email, regExp) {
-			var regExp = (regExp instanceof RegExp) ? regExp : /([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i;
+			var regExp = (regExp instanceof RegExp) ? regExp : defaults.regexp.email;
 			return regExp.test(email);
 		},
 		float: function (int) {
-			return /^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?/.test(int);
+			return defaults.regexp.float.test(int);
 		},
 		integer: function (int) {
-			return /^[0-9]+/.test(int);
+			return defaults.regexp.integer.test(int);
 		},
 		image: function (file, arAllowedTypes) {
-			var allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : webTypes.images;
+			var allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : defaults.extensions.images;
 			return allowedTypes[file.split('.').pop().toLowerCase()];
 		},
 		json: function (json) {
@@ -162,18 +172,18 @@ var Web = (function () {
 			return true;
 		},
 		password: function (password, regExp) {
-			var regExp = (regExp instanceof RegExp) ? regExp : /^(?=.*\d).{6,}/;
+			var regExp = (regExp instanceof RegExp) ? regExp : defaults.regexp.password;
 			return regExp.test(password);
 		},
 		time: function (time, regExp) {
-			var regExp = (regExp instanceof RegExp) ? regExp : /([01]\d|2[0-3]):([0-5]\d)/;
+			var regExp = (regExp instanceof RegExp) ? regExp : defaults.regexp.time;
 			return regExp.test(time);
 		},
 		touch: function () {
 			return 'ontouchstart' in window || 'onmsgesturechange' in window;
 		},
 		url: function (url, regExp) {
-			var regExp = (regExp instanceof RegExp) ? regExp : /(https?:\/\/[^\s]+)/g;
+			var regExp = (regExp instanceof RegExp) ? regExp : defaults.regexp.url;
 			return regExp.test(url);
 		}
 	};
