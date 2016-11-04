@@ -293,13 +293,13 @@ var Web = (function () {
 
 	// Component facades
 	var button = function (options) {
-		if (typeof Buttonplate != 'undefined') {
+		if (typeof Buttonplate !== 'undefined') {
 			return Buttonplate.init(options);
 		}
 		return false;
 	};
 	var flicker = function (options) {
-		if (typeof Flickerplate != 'undefined') {
+		if (typeof Flickerplate !== 'undefined') {
 			return Flickerplate.init(options);
 		}
 		return false;
@@ -307,8 +307,8 @@ var Web = (function () {
 	var form = function (options) {
 		return false;
 	};
-	var injectplateExecute = function () {
-		if (typeof Injectplate != 'undefined') {
+	var injector = function () {
+		if (typeof Injectplate !== 'undefined') {
 			return Injectplate.init();
 		}
 		return false;
@@ -1193,8 +1193,6 @@ var Web = (function () {
 		exists: exists,
 		has: has,
 		is: is,
-		date: date,
-		log: log,
 		class: {
 			add: classMethods.add,
 			clear: classMethods.clear,
@@ -1203,8 +1201,10 @@ var Web = (function () {
 			toggle: classMethods.toggle
 		},
 		clone: clone,
+		date: date,
 		dom: dom,
 		event: eventMethods,
+		log: log,
 		get: get,
 		helper: helper,
 		id: id,
