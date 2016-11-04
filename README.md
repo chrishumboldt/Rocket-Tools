@@ -73,35 +73,19 @@ Below is a list of the all the methods with a description.
 | Web.exists(x) | Check if "x" exists. This is based on a null, undefined and false check. |
 | Web.has.spaces(str) | Check if string "str" has any spaces. |
 | Web.has.class(el, class) | Check if element "el" has the class name "class". |
-| Web.has.extension(str, ext) | Check if string "str" has an extension in array "ext".<br><br>**Defaults**<br>"ext": ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv'] |
+| Web.has.extension(str, ext) | Check if string "str" has an extension in array "ext". **ext** is an array and is optional. |
 
 ```javascript
-/*
-Web.exists(x);
-- Check if "x" exists. This will return a boolean based on a null, undefined and false check.
-*/
+// exists
 Web.exists(document.querySelector('.some-class')); // true / false
-```
-```javascript
-/*
-Web.has.spaces(str)
-- Check if string "str" has any spaces.
-*/
+
+// Has spaces
 Web.has.spaces('This is a test'); // true
-```
-```javascript
-/*
-Web.has.class(el, class)
-- Check if element "el" has the class name "class".
-*/
+
+// Has class
 Web.has.class(document.querySelector('.some-class'), 'some-class'); // true
-```
-```javascript
-/*
-Web.has.extension(str, ext)
-- Check if string "str" has an extension in array "ext".
-- Defaults:
-	"ext": ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv']
-*/
+
+// Has extension
+// "ext" default: ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv']
 Web.has.extension('filename.json'); // true
 ```
