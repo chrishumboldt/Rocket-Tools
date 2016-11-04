@@ -7,6 +7,7 @@ The Webplate Tools library is a lightweight set of Javascript methods that facil
 	* [Defaults](#defaults)
 * [Methods](#methods)
 	* [Basic Checks](#basic-checks)
+	* [Classes](#classes)
 
 ## Getting Started
 You can either download a copy of the source files or install Webplate Tools via Bower.
@@ -95,7 +96,7 @@ Method | Description
 `is.element(el)` | Check if **el** is a DOM element.
 `is.email(email, regExp)` | Check if string **email** is a valid email address (**regExp** optional).
 `is.float(int)` | Check if **int** is a floating point number.
-`is.integer(int)` | Check if **int** is an integer (whole number).
+`is.integer(int)` | Check if **int** is a whole number.
 `is.image(str, ext)` | Check if string **str** has an extension in array **ext**.<br>**ext** checks against the images extensions array and is optional.
 `is.json(json)` | Check if **json** is valid JSON.
 `is.password(str, regExp)` | Check if string **str** is a password (**regExp** optional).
@@ -105,15 +106,35 @@ Method | Description
 
 ##### Some Examples
 ```javascript
-var exampleEl = document.querySelector('.element'); // Assume this element is accessible
+var elm = document.querySelector('.element');
 var filename = 'filename.json';
 var time = '12:54:07';
 
-Web.exists(exampleEl); // true
+Web.exists(elm); // true
 Web.has.spaces('This is a test'); // true
-Web.has.class(exampleEl, 'example'); // true
+Web.has.class(elm, 'example'); // true
 Web.has.extension(filename, ['jpg', 'png']); // false
 
 Web.is.integer(filename); // false
 Web.is.time(time); // true
+```
+
+#### Classes
+Method | Description
+class.add(elms, classes) | Add class names **classes** to elements **elms**.
+class.clear(elm) | Remove all class names from element **elm**.
+class.remove(elms, classes) | Remove class names **classes** from elements **elms**.
+class.replace(elms, remove, add) | Remove class names **remove** from elements **elms** and replace with **add**.
+class.toggle(elms, class) | Remove / add class name **class** from elements **elms**.
+
+##### Some examples
+```javascript
+var elm = document.querySelector('.element');
+
+// Classes can be either a string, space separated string list or an array.
+Web.class.add(elm, 'block');
+Web.class.add(elm, 'block blue rounded');
+Web.class.add(elm, ['block', 'blue', 'rounded']);
+
+Web.class.replace(elm, 'block', 'circle');
 ```
