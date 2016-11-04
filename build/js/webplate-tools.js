@@ -137,7 +137,7 @@ var Web = (function () {
 			return (element.nodeType && element.nodeType === 1) ? true : false;
 		},
 		email: function (email, regExp) {
-			var regExp = regExp || /([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i;
+			var regExp = (regExp instanceof RegExp) ? regExp : /([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i;
 			return regExp.test(email);
 		},
 		float: function (int) {
@@ -161,18 +161,18 @@ var Web = (function () {
 			return true;
 		},
 		password: function (password, regExp) {
-			var regExp = regExp || /^(?=.*\d).{6,}/;
+			var regExp = (regExp instanceof RegExp) ? regExp : /^(?=.*\d).{6,}/;
 			return regExp.test(password);
 		},
 		time: function (time, regExp) {
-			var regExp = regExp || /([01]\d|2[0-3]):([0-5]\d)/;
+			var regExp = (regExp instanceof RegExp) ? regExp : /([01]\d|2[0-3]):([0-5]\d)/;
 			return regExp.test(time);
 		},
 		touch: function () {
 			return 'ontouchstart' in window || 'onmsgesturechange' in window;
 		},
 		url: function (url, regExp) {
-			var regExp = regExp || /(https?:\/\/[^\s]+)/g;
+			var regExp = (regExp instanceof RegExp) ? regExp : /(https?:\/\/[^\s]+)/g;
 			return regExp.test(url);
 		}
 	};
