@@ -65,9 +65,16 @@ Web.defaults.log = false;
 ```
 
 ## Methods
-Below is a list of the all the methods, the default values and the options.
+Below is a list of the all the methods with a description.
 
 #### Basic Checks
+| Method | Description |
+| ---- | ---- |
+| Web.exists(x) | Check if "x" exists. This is based on a null, undefined and false check. |
+| Web.has.spaces(str) | Check if string "str" has any spaces. |
+| Web.has.class(el, class) | Check if element "el" has the class name "class". |
+| Web.has.extension(str, ext) | Check if string "str" has an extension in array "ext".<br><br>**Defaults**<br>"ext": ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv'] |
+
 ```javascript
 /*
 Web.exists(x);
@@ -87,7 +94,7 @@ Web.has.spaces('This is a test'); // true
 Web.has.class(el, class)
 - Check if element "el" has the class name "class".
 */
-Web.has.class(document.querySelector('.some-class')); // true / false
+Web.has.class(document.querySelector('.some-class'), 'some-class'); // true
 ```
 ```javascript
 /*
