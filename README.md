@@ -73,29 +73,42 @@ Method | Description
 `Web.exists(x)` | Check if **x** exists. This is based on a null, undefined and false check.
 `Web.has.spaces(str)` | Check if string **str** has any spaces.
 `Web.has.class(el, class)` | Check if element **el** has the class name **class**.
-`Web.has.extension(str, ext)` | Check if string **str** has an extension in array **ext**.<br>**ext** is an array and is optional.
+`Web.has.extension(str, ext)` | Check if string **str** has an extension in array **ext**.<br>**ext** checks against the extensions array and is optional.
 `Web.is.array(ar)` | Check if **ar** is an array.
 `Web.is.colour(hex)` | Check if **hex** is a hexadecimal colour code.
-`Web.is.date(date, regExp)` | Check if string **date** is in a date format.<br>**regExp** is optional and defaults to "yyyy-mm-dd".
+`Web.is.date(date, regExp)` | Check if string **date** is in a date format.<br>**regExp** is optional.
 `Web.is.element(el)` | Check if **el** is a DOM element.
-`Web.is.email(email, regExp)` | Check if string **email** is a valid email address.<br>**regExp** is optional and overwrites the default check.
+`Web.is.email(email, regExp)` | Check if string **email** is a valid email address.<br>**regExp** is optional.
 `Web.is.float(int)` | Check if **int** is a floating point number.
 `Web.is.integer(int)` | Check if **int** is an integer (whole number).
 `Web.is.image(str, ext)` | Check if string **str** has an extension in array **ext**.<br>**ext** is an array of image types and is optional.
 `Web.is.json(json)` | Check if **json** is valid JSON.
-`Web.is.password(str, regExp)` | Check if string **str** is a password.<br>**regExp** is optional and overwrites the default check.
-`Web.is.time(str, regExp)` | Check if string **str** is a valid time value.<br>**regExp** is optional and overwrites the default check.
+`Web.is.password(str, regExp)` | Check if string **str** is a password.<br>**regExp** is optional.
+`Web.is.time(str, regExp)` | Check if string **str** is a valid time value.<br>**regExp** is optional.
 `Web.is.touch()` | A very basic touchscreen check.
-`Web.is.url(str, regExp)` | Check if string **str** is a valid url.<br>**regExp** is optional and overwrites the default check.
+`Web.is.url(str, regExp)` | Check if string **str** is a valid url.<br>**regExp** is optional.
 
-##### Examples
+##### Arrays
+Name | Value
+---- | ----
+Extensions | ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv']
+Image Extensions | ['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png']
+
+##### Regular Expressions
+| Name | RegExp |
+| ---- | ---- |
+| date | /^[0-9]{4}-[0-9]{2}-[0-9]{2}/ |
+| email | /([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i |
+| password | /^(?=.*\d).{6,}/ |
+| time | /([01]\d|2[0-3]):([0-5]\d)/ |
+| url | /(https?:\/\/[^\s]+)/g |
+
+##### Some Examples
 ```javascript
 var exampleEl = document.querySelector('.element');
 
 Web.exists(exampleEl); // true / false
 Web.has.spaces('This is a test'); // true
 Web.has.class(exampleEl, 'example'); // true
-
-// "ext" default: ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv']
 Web.has.extension('filename.json'); // true
 ```

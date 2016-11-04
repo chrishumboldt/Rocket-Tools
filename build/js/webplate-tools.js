@@ -130,8 +130,9 @@ var Web = (function () {
 		colour: function (colour) {
 			return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.test(colour);
 		},
-		date: function (date) {
-			return /^[0-9]{4}-[0-9]{2}-[0-9]{2}/.test(date);
+		date: function (date, regExp) {
+			var regExp = (regExp instanceof RegExp) ? regExp : /^[0-9]{4}-[0-9]{2}-[0-9]{2}/;
+			return regExp.test(date);
 		},
 		element: function (element) {
 			return (element.nodeType && element.nodeType === 1) ? true : false;
