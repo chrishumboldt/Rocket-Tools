@@ -59,10 +59,17 @@ You can overwrite the library options globally by altering the defaults. To do s
 /*
 This allows you to use the Web.log() method throughout your project
 and when deploying to production, assign this a value of "false" to
-prevent any forgot console.log message from displaying.
+prevent any forgotten console.log messages from displaying.
 */
 Web.defaults.log = false;
 ```
 
 ## Methods
-Below is a list of the all the methods, the default values and the options.
+Below is a list of the all the methods, the default values and the options. Remember to preface all method calls with **Web**.
+
+#### Basic Checks
+| Method | Default | Description |
+| exists(x) | | Check if **x** exists. This will return a boolean based on a null, undefined and false check. |
+| has.spaces(str) | | Check is string **s** has any spaces. |
+| has.class(el, class) | | Check is element **el** has the class name **class**. |
+| has.extension(str, ext) | ext = ['png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv'] | Check if string **str** has an extension in array **ext**. |
