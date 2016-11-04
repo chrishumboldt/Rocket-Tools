@@ -1,5 +1,5 @@
 # Webplate Tools
-The Webplate Tools library is a lightweight set of Javascript methods and facades that facilitate quicker and easier development.
+The Webplate Tools library is a lightweight set of Javascript methods that facilitate quicker and easier development.
 
 * [Getting Started](#getting-started)
 * [Getting Started With NPM](#getting-started-with-npm)
@@ -16,6 +16,7 @@ Next include the required Javascript file.
 
 ```html
 <body>
+	/* Your content goes here */
    <script src="js/webplate-tools.min.js"></script>
 </body>
 ```
@@ -36,11 +37,12 @@ var Web = require('webplate-tools');
 **NOTE:** There are slight differences between the Node and standard library files. These differences should not affect its usage but please report any issue should you find any.
 
 ## Initilisation
-The library is automatically initilised due the Revealing Module Pattern used and is bound to the **Web** variable. This variable acts as the libraries namespace and scopes all methods to this declaration. An example of a method call can be seen below:
+The library is automatically initilised due the Revealing Module Pattern used and is bound to the **Web** variable. This variable acts as the libraries namespace and scopes all methods to this declaration. An example of some method calls can be seen below:
 
 ```javascript
 // Convert a string to uppercase
 var boldName = Web.string.uppercase.all('Chris Humboldt');
+
 // Generate a random integer
 var randomNumber = Web.random.integer();
 ```
