@@ -70,10 +70,18 @@ Below is a list of the all the methods, the default values and the options.
 #### Basic Checks
 ```javascript
 Web.exists(x);
-// Check if **x** exists. This will return a boolean based on a null, undefined and false check.
+// Check if "x" exists. This will return a boolean based on a null, undefined and false check.
 
 // Example:
 Web.exists(document.getElementsByTagName('html')[0]); // true
+```
+```javascript
+Web.has.spaces(str);
+// Check if string "str" has any spaces.
+```
+```javascript
+Web.has.class(el, class);
+// Check if element "el" has the class name "class".
 ```
 
 | Method | Default | Description |
