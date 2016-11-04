@@ -68,9 +68,11 @@ Web.defaults.log = false;
 Below is a list of the all the methods, the default values and the options.
 
 #### Basic Checks
-##### Web.exists(x);
-Check if **x** exists. This will return a boolean based on a null, undefined and false check.
 ```javascript
+Web.exists(x);
+// Check if **x** exists. This will return a boolean based on a null, undefined and false check.
+
+// Example:
 Web.exists(document.getElementsByTagName('html')[0]); // true
 ```
 
