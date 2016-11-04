@@ -147,7 +147,8 @@ Web.class.add(elms, 'block');
 ```
 
 #### Dates
-Method | Description
----- | ----
-`date.basic(date, time)` | Return a basic date value.<br>**date** is optional and if false will return the current date.<br>**time** is also optional, defaults to false and appends the time to the return.
-`date.crtDB` | Will return the current date in a standard database format "yyyy-mm-dd".
+Method | Options | Description
+---- | ---- | ----
+`date.basic(date, time)` | time: true, false | Return a basic date value.<br>If **date** is false will return the current date.<br>**time** defaults to false and appends the time to the return.
+`date.crtDB()` | | Will return the current date in a standard database format "yyyy-mm-dd".
+`date.day(date, type)` | type = short, long  | Return the day value of **date**. if **type** is set to "long", then a leading zero will accompany the day.
