@@ -68,7 +68,22 @@ Web.defaults.log = false;
 Below is a list of the all the methods, the default values and the options.
 
 #### Basic Checks
-#####Web.exists(x);
+```javascript
+// Web.exists(x);
+// Check if "x" exists. This will return a boolean based on a null, undefined and false check.
+Web.exists(document.querySelector('.some-class')); // true / false
+
+// Web.has.spaces(str);
+// Check if string "str" has any spaces.
+Web.has.spaces('This is a test'); // true
+
+// Web.has.class(el, class);
+// Check if element "el" has the class name "class".
+Web.has.class(document.querySelector('.some-class')); // true / false
+```
+
+
+##### Web.exists(x);
 Check if "x" exists. This will return a boolean based on a null, undefined and false check.
 ```javascript
 Web.exists(document.querySelector('.some-class')); // true / false
