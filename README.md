@@ -149,6 +149,6 @@ Web.class.add(elms, 'block');
 #### Dates
 Method | Options | Description
 ---- | ---- | ----
-`date.basic(date, time)` | time: true, false | Return a basic date value.<br>If **date** is false will return the current date.<br>**time** defaults to false and appends the time to the return.
+`date.basic(date, time)` | time = true, false | Return a basic date value.<br>If **date** is false will return the current date.<br>**time** defaults to false and appends the time to the return.
 `date.crtDB()` | | Will return the current date in a standard database format "yyyy-mm-dd".
-`date.day(date, type)` | type = short, long  | Return the day value of **date**. if **type** is set to "long", then a leading zero will accompany the day.
+`date.day(date, type)` | type = short, long  | Return the day value of **date**.<br>A **type** of "long" adds a leading zero if required.
