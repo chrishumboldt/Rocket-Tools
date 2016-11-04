@@ -53,7 +53,21 @@ var randomNumber = Web.random.integer();
 Make sure not to overwrite or reassign this variable name to anything else within your project.
 
 #### Defaults
-You can overwrite the library options globally by altering the defaults. To do so reference the defaults object property. For now there is only the **log** option with the plan to add more as needed.
+You can overwrite the library options globally by altering the defaults. To do so reference the defaults object property.
+
+| Property | Default |
+| ---- | ---- |
+| `defaults.extensions.all` | ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv'] |
+| `defaults.extensions.images` | ['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png'] |
+| `defaults.log` | true |
+| `defaults.regexp.colour` | /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/ |
+| `defaults.regexp.date` | /^[0-9]{4}-[0-9]{2}-[0-9]{2}/ |
+| `defaults.regexp.email` | /([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i |
+| `defaults.regexp.float` | /^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?/ |
+| `defaults.regexp.integer` | /^[0-9]+/ |
+| `defaults.regexp.password` | /^(?=.*\d).{6,}/ |
+| `defaults.regexp.time` | /([01]\d|2[0-3]):([0-5]\d)/ |
+| `defaults.regexp.url` | /(https?:\/\/[^\s]+)/g |
 
 ```javascript
 /*
@@ -70,38 +84,29 @@ Below is a list of the all the methods with a description.
 #### Basic Checks
 Method | Description
 ---- | ----
-`Web.exists(x)` | Check if **x** exists. This is based on a null, undefined and false check.
-`Web.has.spaces(str)` | Check if string **str** has any spaces.
-`Web.has.class(el, class)` | Check if element **el** has the class name **class**.
-`Web.has.extension(str, ext)` | Check if string **str** has an extension in array **ext**.<br>**ext** checks against the extensions array and is optional.
-`Web.is.array(ar)` | Check if **ar** is an array.
-`Web.is.colour(hex)` | Check if **hex** is a hexadecimal colour code.
-`Web.is.date(date, regExp)` | Check if string **date** is in a date format (**regExp** optional).
-`Web.is.element(el)` | Check if **el** is a DOM element.
-`Web.is.email(email, regExp)` | Check if string **email** is a valid email address (**regExp** optional).
-`Web.is.float(int)` | Check if **int** is a floating point number.
-`Web.is.integer(int)` | Check if **int** is an integer (whole number).
-`Web.is.image(str, ext)` | Check if string **str** has an extension in array **ext**.<br>**ext** is an array of image types and is optional.
-`Web.is.json(json)` | Check if **json** is valid JSON.
-`Web.is.password(str, regExp)` | Check if string **str** is a password (**regExp** optional).
-`Web.is.time(str, regExp)` | Check if string **str** is a valid time value (**regExp** optional).
-`Web.is.touch()` | A very basic touchscreen check.
-`Web.is.url(str, regExp)` | Check if string **str** is a valid url (**regExp** optional).
+`exists(x)` | Check if **x** exists. This is based on a null, undefined and false check.
+`has.spaces(str)` | Check if string **str** has any spaces.
+`has.class(el, class)` | Check if element **el** has the class name **class**.
+`has.extension(str, ext)` | Check if string **str** has an extension in array **ext**.<br>**ext** checks against the all extensions array and is optional.
+`is.array(ar)` | Check if **ar** is an array.
+`is.colour(hex)` | Check if **hex** is a hexadecimal colour code.
+`is.date(date, regExp)` | Check if string **date** is in a date format (**regExp** optional).
+`is.element(el)` | Check if **el** is a DOM element.
+`is.email(email, regExp)` | Check if string **email** is a valid email address (**regExp** optional).
+`is.float(int)` | Check if **int** is a floating point number.
+`is.integer(int)` | Check if **int** is an integer (whole number).
+`is.image(str, ext)` | Check if string **str** has an extension in array **ext**.<br>**ext** checks against the images extensions array and is optional.
+`is.json(json)` | Check if **json** is valid JSON.
+`is.password(str, regExp)` | Check if string **str** is a password (**regExp** optional).
+`is.time(str, regExp)` | Check if string **str** is a valid time value (**regExp** optional).
+`is.touch()` | A very basic touchscreen check.
+`is.url(str, regExp)` | Check if string **str** is a valid url (**regExp** optional).
 
 ##### Arrays
 Name | Value
 ---- | ----
 Extensions | ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv']
 Image Extensions | ['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png']
-
-##### Regular Expressions
-| Name | RegExp |
-| ---- | ---- |
-| date | /^[0-9]{4}-[0-9]{2}-[0-9]{2}/ |
-| email | /([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i |
-| password | /^(?=.*\d).{6,}/ |
-| time | /([01]\d|2[0-3]):([0-5]\d)/ |
-| url | /(https?:\/\/[^\s]+)/g |
 
 ##### Some Examples
 ```javascript
