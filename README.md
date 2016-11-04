@@ -69,6 +69,7 @@ You can overwrite the library options globally by altering the defaults. To do s
 | `defaults.regexp.time` | /([01]\d|2[0-3]):([0-5]\d)/ |
 | `defaults.regexp.url` | /(https?:\/\/[^\s]+)/g |
 
+##### Example
 ```javascript
 /*
 This allows you to use the Web.log() method throughout your project
