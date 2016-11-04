@@ -69,6 +69,7 @@ Below is a list of the all the methods, the default values and the options. Reme
 
 #### Basic Checks
 | Method | Default | Description |
+| ---- | ---- | ---- |
 | exists(x) | | Check if **x** exists. This will return a boolean based on a null, undefined and false check. |
 | has.spaces(str) | | Check is string **s** has any spaces. |
 | has.class(el, class) | | Check is element **el** has the class name **class**. |
