@@ -75,17 +75,12 @@ Below is a list of the all the methods with a description.
 | Web.has.class(el, class) | Check if element "el" has the class name "class". |
 | Web.has.extension(str, ext) | Check if string "str" has an extension in array "ext". **ext** is an array and is optional. |
 
+##### Examples
 ```javascript
-// exists
 Web.exists(document.querySelector('.some-class')); // true / false
-
-// Has spaces
 Web.has.spaces('This is a test'); // true
-
-// Has class
 Web.has.class(document.querySelector('.some-class'), 'some-class'); // true
 
-// Has extension
 // "ext" default: ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv']
 Web.has.extension('filename.json'); // true
 ```
