@@ -68,12 +68,12 @@ Web.defaults.log = false;
 Below is a list of the all the methods with a description.
 
 #### Basic Checks
-| Method | Description |
-| ---- | ---- |
-| Web.exists(x) | Check if "x" exists. This is based on a null, undefined and false check. |
-| Web.has.spaces(str) | Check if string "str" has any spaces. |
-| Web.has.class(el, class) | Check if element "el" has the class name "class". |
-| Web.has.extension(str, ext) | Check if string "str" has an extension in array "ext". **ext** is an array and is optional. |
+Method | Description
+---- | ----
+Web.exists(x) | Check if **x** exists. This is based on a null, undefined and false check.
+Web.has.spaces(str) | Check if string **str** has any spaces.
+Web.has.class(el, class) | Check if element **el** has the class name **class**.
+Web.has.extension(str, ext) | Check if string **str** has an extension in array "ext". **ext** is an array and is optional.
 
 ##### Examples
 ```javascript
