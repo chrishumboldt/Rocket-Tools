@@ -4,6 +4,9 @@ The Webplate Tools library is a lightweight set of Javascript methods that facil
 * [Getting Started](#getting-started)
 * [Getting Started With NPM](#getting-started-with-npm)
 * [Initialization](#initialization)
+	* [Defaults](#defaults)
+* [Methods](#methods)
+	* [Basic Checks](#basic-checks)
 
 ## Getting Started
 You can either download a copy of the source files or install Webplate Tools via Bower.
@@ -37,7 +40,7 @@ var Web = require('webplate-tools');
 **NOTE:** There are slight differences between the Node and standard library files. These differences should not affect its usage but please report any issue should you find any.
 
 ## Initialization
-The library is automatically initialized due the Revealing Module Pattern used and is bound to the **Web** variable. This variable acts as the libraries namespace and scopes all methods to this declaration. An example of some method calls can be seen below:
+The library is automatically initialized due the Revealing Module Pattern used and is bound to the variable **Web**. This variable acts as the libraries namespace and scopes all methods to this declaration. An example of some method calls can be seen below:
 
 ```javascript
 // Convert a string to uppercase
@@ -48,3 +51,18 @@ var randomNumber = Web.random.integer();
 ```
 
 Make sure not to overwrite or reassign this variable name to anything else within your project.
+
+#### Defaults
+You can overwrite the library options globally by altering the defaults. To do so reference the defaults object property. For now there is only the **log** option with the plan to add more as needed.
+
+```javascript
+/*
+This allows you to use the Web.log() method throughout your project
+and when deploying to production, assign this a value of "false" to
+prevent any forgot console.log message from displaying.
+*/
+Web.defaults.log = false;
+```
+
+## Methods
+Below is a list of the all the methods, the default values and the options.

@@ -5,6 +5,7 @@
 **/
 
 // Table of contents
+// Defaults
 // Variables
 // Basic checks
 // Classes
@@ -29,12 +30,11 @@
 // Return
 
 var Web = (function () {
-	// Variables
-	if (typeof webGlobal !== 'object') {
-		var webGlobal = {
-			log: true
-		}
+	// Defaults
+	var defaults = {
+		log: true
 	}
+	// Variables
 	var webMonths = [{
 		number: '01',
 		name: 'january',
@@ -507,7 +507,7 @@ var Web = (function () {
 
 	// Development
 	var log = function (text) {
-		if (window && window.console && webGlobal.log) {
+		if (window && window.console && defaults.log) {
 			console.log(text);
 		}
 	};
@@ -1178,6 +1178,7 @@ var Web = (function () {
 
 	// Return
 	return  {
+		defaults: defaults,
 		exists: exists,
 		has: has,
 		is: is,
