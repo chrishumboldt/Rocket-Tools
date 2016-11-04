@@ -121,11 +121,12 @@ Web.is.time(time); // true
 
 #### Classes
 Method | Description
+---- | ----
 class.add(elms, classes) | Add class names **classes** to elements **elms**.
 class.clear(elm) | Remove all class names from element **elm**.
 class.remove(elms, classes) | Remove class names **classes** from elements **elms**.
 class.replace(elms, remove, add) | Remove class names **remove** from elements **elms** and replace with **add**.
-class.toggle(elms, class) | Remove / add class name **class** from elements **elms**.
+class.toggle(elms, class) | Remove / add single class name **class** from elements **elms**.
 
 ##### Some examples
 ```javascript
