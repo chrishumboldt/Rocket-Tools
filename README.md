@@ -94,7 +94,7 @@ Web.has.class(document.querySelector('.some-class')); // true / false
 Web.has.extension(str, ext)
 - Check if string "str" has an extension in array "ext".
 - Defaults:
-	- "ext": ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv']
+	"ext": ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv']
 */
 Web.has.extension('filename.json'); // true
 ```
