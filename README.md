@@ -69,39 +69,28 @@ Below is a list of the all the methods, the default values and the options.
 
 #### Basic Checks
 ```javascript
-// Web.exists(x);
-// Check if "x" exists. This will return a boolean based on a null, undefined and false check.
+/*
+Web.exists(x);
+- Check if "x" exists. This will return a boolean based on a null, undefined and false check.
+*/
 Web.exists(document.querySelector('.some-class')); // true / false
 
-// Web.has.spaces(str);
-// Check if string "str" has any spaces.
+/*
+Web.has.spaces(str)
+- Check if string "str" has any spaces.
+*/
 Web.has.spaces('This is a test'); // true
 
-// Web.has.class(el, class);
-// Check if element "el" has the class name "class".
+/*
+Web.has.class(el, class)
+- Check if element "el" has the class name "class".
+*/
 Web.has.class(document.querySelector('.some-class')); // true / false
+/*
+Web.has.extension(str, ext)
+- Check if string "str" has an extension in array "ext".
+- Defaults:
+	- "ext": ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv']
+*/
+Web.has.extension('filename.json'); // true
 ```
-
-
-##### Web.exists(x);
-Check if "x" exists. This will return a boolean based on a null, undefined and false check.
-```javascript
-Web.exists(document.querySelector('.some-class')); // true / false
-```
-##### Web.has.spaces(str);
-Check if string "str" has any spaces.
-```javascript
-Web.has.spaces('This is a test'); // true
-```
-##### Web.has.class(el, class);
-Check if element "el" has the class name "class".
-```javascript
-Web.has.class(document.querySelector('.some-class')); // true / false
-```
-
-| Method | Default | Description |
-| ---- | ---- | ---- |
-| exists(x) | | Check if **x** exists. This will return a boolean based on a null, undefined and false check. |
-| has.spaces(str) | | Check if string **str** has any spaces. |
-| has.class(el, class) | | Check if element **el** has the class name **class**. |
-| has.extension(str, ext) | ext = ['png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv'] | Check if string **str** has an extension in array **ext**. |

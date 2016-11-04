@@ -100,7 +100,7 @@ var Web = (function () {
 		list: ['active', 'closed', 'hidden', 'inactive', 'open', 'selected', 'toggled', 'visible']
 	};
 	var webTypes = {
-		extensions: ['png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv'],
+		extensions: ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv'],
 		images: ['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png']
 	};
 
