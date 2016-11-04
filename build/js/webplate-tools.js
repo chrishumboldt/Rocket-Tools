@@ -116,7 +116,7 @@ var Web = (function () {
 			return (' ' + element.className + ' ').indexOf(' ' + thisClass + ' ') > -1;
 		},
 		extension: function (file, arAllowedTypes) {
-			var allowedTypes = arAllowedTypes || webTypes.extensions;
+			var allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : webTypes.extensions;
 			return allowedTypes[file.split('.').pop().toLowerCase()];
 		}
 	};
@@ -147,7 +147,7 @@ var Web = (function () {
 			return /^[0-9]+/.test(int);
 		},
 		image: function (file, arAllowedTypes) {
-			var allowedTypes = arAllowedTypes || webTypes.images;
+			var allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : webTypes.images;
 			return allowedTypes[file.split('.').pop().toLowerCase()];
 		},
 		json: function (json) {
