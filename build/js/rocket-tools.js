@@ -46,7 +46,7 @@ var RocketTools = (function () {
 			time: /([01]\d|2[0-3]):([0-5]\d)/,
 			url: /(https?:\/\/[^\s]+)/g
 		},
-		request = {
+		request: {
 			async: true,
 			data: false,
 			dataForce: false,
@@ -60,6 +60,10 @@ var RocketTools = (function () {
 			timeout: false,
 			type: false,
 			withCredentials: false
+		},
+		storage: {
+			name: false,
+			type: 'session'
 		}
 	}
 	// Variables
@@ -296,7 +300,7 @@ var RocketTools = (function () {
 		switch(typeof elm) {
 			case 'object':
 				if (elm instanceof Array) {
-					return JSON.parse(JSON.stringify(elm));
+					return helper.parse.json(JSON.stringify(elm));
 				}
 				break;
 			default:
@@ -493,9 +497,15 @@ var RocketTools = (function () {
 	};
 
 	// Development
-	var log = function (text) {
+	var log = function (text, error) {
 		if (window && window.console && defaults.log) {
-			console.log(text);
+			var error = (typeof error === 'boolean') ? error : false;
+
+			if (error) {
+				throw new Error(text);
+			} else {
+				console.log(text);
+			}
 		}
 	};
 
@@ -642,6 +652,14 @@ var RocketTools = (function () {
 
 			return returnArray;
 		},
+		parse: {
+			json: function (json) {
+				if (is.json(json)) {
+					return JSON.parse(json);
+				}
+				return json;
+			}
+		},
 		setDefault: function (setValue, defaultValue) {
 			if (typeof setValue == 'undefined' && typeof defaultValue == 'undefined') {
 				return false;
@@ -736,16 +754,8 @@ var RocketTools = (function () {
 	};
 
 	// Request
-	var parse = {
-		json: function (json) {
-			if (is.json(json)) {
-				return JSON.parse(json);
-			}
-			return json;
-		}
-	};
-	var request = (function () {
-		var run = function (uOptions) {
+	var request = {
+		run: function (uOptions) {
 			if (!exists(uOptions) || !exists(uOptions.url)) {
 				return false;
 			}
@@ -792,11 +802,11 @@ var RocketTools = (function () {
 						}
 						if (this.status >= 200 && this.status < 300) {
 							if (options.onSuccess) {
-								options.onSuccess(parse.json(this.responseText), this.status, xhr.getAllResponseHeaders());
+								options.onSuccess(helper.parse.json(this.responseText), this.status, xhr.getAllResponseHeaders());
 							}
 						} else {
 							if (options.onError) {
-								options.onError(parse.json(this.responseText), this.status, xhr.getAllResponseHeaders());
+								options.onError(helper.parse.json(this.responseText), this.status, xhr.getAllResponseHeaders());
 							}
 						}
 						break;
@@ -860,32 +870,24 @@ var RocketTools = (function () {
 			} else {
 				xhr.send();
 			}
-		};
-		var runDelete = function (uOptions) {
+		},
+		runDelete: function (uOptions) {
 			uOptions.type = 'DELETE';
-			run(uOptions);
-		};
-		var runGet = function (uOptions) {
+			this.run(uOptions);
+		},
+		runGet: function (uOptions) {
 			uOptions.type = 'GET';
-			run(uOptions);
-		};
-		var runPost = function (uOptions) {
+			this.run(uOptions);
+		},
+		runPost: function (uOptions) {
 			uOptions.type = 'POST';
-			run(uOptions);
-		};
-		var runPut = function (uOptions) {
+			this.run(uOptions);
+		},
+		runPut: function (uOptions) {
 			uOptions.type = 'PUT';
-			run(uOptions);
-		};
-
-		return {
-			delete: runDelete,
-			get: runGet,
-			post: runPost,
-			put: runPut,
-			run: run
-		};
-	})();
+			this.run(uOptions);
+		}
+	};
 
 	// State
 	var state = {
@@ -931,92 +933,77 @@ var RocketTools = (function () {
 
 	// Storage
 	var storage = {
-		engine: {
-			name: 'web-store',
-			type: 'session'
-		},
 		add: function (name, value) {
 			if (!exists(name) || !exists(value)) {
 				return false;
 			}
-			var thisEngine = this.engine;
-			var storage = false;
-			switch (thisEngine.type) {
-				case 'local':
-					storage = localStorage.getItem(thisEngine.name);
-					break;
-
-				case 'session':
-					storage = sessionStorage.getItem(thisEngine.name);
-					break;
-			}
-			if (storage) {
-				storage = JSON.parse(storage);
+			var store = storage.getStorageEngine();
+			if (store) {
+				store = helper.parse.json(store);
 			} else {
-				storage = {};
+				store = {};
 			}
-			storage[name] = value;
-			switch (thisEngine.type) {
+			store[name] = value;
+			switch (defaults.storage.type) {
 				case 'local':
-					localStorage.setItem(thisEngine.name, JSON.stringify(storage));
+					localStorage.setItem(defaults.storage.name, JSON.stringify(store));
 					break;
 
 				case 'session':
-					sessionStorage.setItem(thisEngine.name, JSON.stringify(storage));
+					sessionStorage.setItem(defaults.storage.name, JSON.stringify(store));
 					break;
 			}
 		},
 		clear: function () {
-			localStorage.removeItem(this.engine.name);
-			sessionStorage.removeItem(this.engine.name);
+			localStorage.removeItem(defaults.storage.name);
+			sessionStorage.removeItem(defaults.storage.name);
 		},
 		get: function (name) {
 			if (!exists(name)) {
 				return false;
 			}
-			var thisEngine = this.engine;
-			var storage = false;
-			switch (thisEngine.type) {
+			var store = storage.getStorageEngine();
+			if (store) {
+				store = helper.parse.json(store);
+				return store[name];
+			} else {
+				return false;
+			}
+		},
+		getStorageEngine: function () {
+			// Catch
+			if (!defaults.storage.name) {
+				log('ROCKET: You have not set the storage name. Provide a name for [Rocket].defaults.storage.name.', true);
+				return false;
+			}
+			switch (defaults.storage.type) {
 				case 'local':
-					storage = localStorage.getItem(thisEngine.name);
+					return localStorage.getItem(defaults.storage.name);
 					break;
 
 				case 'session':
-					storage = sessionStorage.getItem(thisEngine.name);
+					return sessionStorage.getItem(defaults.storage.name);
 					break;
-			}
-			if (storage) {
-				storage = JSON.parse(storage);
-				return storage[name];
-			} else {
-				return false;
+
+				default:
+					return false;
 			}
 		},
 		remove: function (name) {
 			if (!exists(name)) {
 				return false;
 			}
-			var thisEngine = this.engine;
-			var storage = false;
-			switch (thisEngine.type) {
-				case 'local':
-					storage = localStorage.getItem(thisEngine.name);
-					break;
-
-				case 'session':
-					storage = sessionStorage.getItem(thisEngine.name);
-					break;
-			}
-			if (storage) {
-				storage = JSON.parse(storage);
-				delete storage[name];
-				switch (thisEngine.type) {
+			var store = storage.getStorageEngine();
+			if (store) {
+				store = helper.parse.json(store);
+				delete store[name];
+				switch (defaults.storage.type) {
 					case 'local':
-						localStorage.setItem(thisEngine.name, JSON.stringify(storage));
+						localStorage.setItem(defaults.storage.name, JSON.stringify(store));
 						break;
 
 					case 'session':
-						sessionStorage.setItem(thisEngine.name, JSON.stringify(storage));
+						sessionStorage.setItem(defaults.storage.name, JSON.stringify(store));
 						break;
 				}
 			}
@@ -1169,22 +1156,23 @@ var RocketTools = (function () {
 		id: id,
 		input: input,
 		state: state,
-		parse: parse,
-		request: request,
-		storage: storage,
+		request: {
+			run: request.run,
+			delete: request.runDelete,
+			get: request.runGet,
+			post: request.runPost,
+			put: request.runPut
+		},
+		storage: {
+			add: storage.add,
+			clear: storage.clear,
+			get: storage.get,
+			remove: storage.remove
+		},
 		string: string,
 		random: random,
 		time: time,
 		url: url,
-		overlay: overlay,
-		button: button,
-		flicker: flicker,
-		form: form,
-		injector: injector,
-		loader: loader,
-		menu: menu,
-		message: message,
-		modal: modal,
-		tab: tab
+		overlay: overlay
 	};
 });

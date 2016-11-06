@@ -8,6 +8,7 @@ The Rocket Tools library is a lightweight set of Javascript methods that facilit
 	* [Basic](#basic)
 	* [Regular Expressions](#regular-expressions)
 	* [Request](#request)
+	* [Storage](#storage)
 * [Methods](#methods)
 	* [Basic Checks](#basic-checks)
 	* [Classes](#classes)
@@ -21,6 +22,7 @@ The Rocket Tools library is a lightweight set of Javascript methods that facilit
 	* [Random](#random)
 	* [Request](#request-1)
 	* [States](#states)
+	* [Storage](#storage-1)
 
 ## Getting Started
 You can either download a copy of the source files or install Rocket Tools via Bower.
@@ -107,6 +109,12 @@ Property | Default
 `defaults.request.timeout` | `false`
 `defaults.request.type` | `false`
 `defaults.request.withCredentials` | `false`
+
+#### Storage
+Property | Default
+---- | ----
+`defaults.storage.name` | `false`
+`defaults.storage.type` | `session`
 
 ```javascript
 /*
@@ -370,4 +378,12 @@ var elm = document.getElementById('my-element');
 
 Rocket.state.set(elm, 'visible'); // A class of '_state-visible' has now been added to this element.
 Rocket.state.toggle(elm, 'visible'); // The class has now be changed to '_state-hidden'.
+```
+
+#### Storage
+These methods facade the browser storage API by putting all data into a JSON object. **Note** that in order to use these methods you need to first set the [defaults storage](#storage) name. See an example of how to do so below:
+
+```javascript
+// Set the storage name
+Rocket.defaults.storage.name = 'my-storage-name';
 ```
