@@ -195,5 +195,7 @@ Web.dom.wallpaper('.example'); // A background style is now applied.
 
 Web.dom.select('.example'); // Both elements are returned in an array.
 Web.dom.select('#example')[0]; // This is how you would reference a unique element.
+
+Web.dom.title.innerHTML = 'New Title'; // The document title is now changed.
 </script>
 ```
