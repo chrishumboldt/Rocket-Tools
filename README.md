@@ -96,7 +96,7 @@ Property | Default
 `defaults.request.async` | `true`
 `defaults.request.data` | `false`
 `defaults.request.dataForce` | `false`
-`defaults.request.dataType` | 'json'
+`defaults.request.dataType` | `json`
 `defaults.request.headers` | `false`
 `defaults.request.onStart` | `false`
 `defaults.request.onLoading` | `false`
