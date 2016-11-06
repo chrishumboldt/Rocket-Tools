@@ -208,9 +208,9 @@ Rocket.date.month('12-03-2016', 'long') // March
 ```
 
 #### Development
-Method | Description
+Method | Optins | Description
 ---- | ----
-`log(val)` | Console log `val` if the window.log option is available. The `Rocket.defaults.log` option must also be set to `true`.
+`log(val, error)` | error: `true` `false` | Console log `val` if the window.log option is available.<br>The `Rocket.defaults.log` option must also be set to `true`.<br>`error` defaults to `false`, but if `true` will throw an error to the console instead of a simple log.
 
 ```javascript
 Rocket.log('This is a test.');
