@@ -40,10 +40,10 @@ Once done require Webplate Tools as you would any other module.
 var Web = require('webplate-tools');
 ```
 
-**NOTE:** There are slight differences between the Node and standard library files. These differences should not affect its usage but please report any issue should you find any.
+`NOTE:` There are slight differences between the Node and standard library files. These differences should not affect its usage but please report any issue should you find any.
 
 ## Initialization
-The library is automatically initialized due the Revealing Module Pattern used and is bound to the variable **Web**. This variable acts as the libraries namespace and scopes all methods to this declaration. An example of some method calls can be seen below:
+The library is automatically initialized due the Revealing Module Pattern used and is bound to the variable `Web`. This variable acts as the libraries namespace and scopes all methods to this declaration. An example of some method calls can be seen below:
 
 ```javascript
 // Convert a string to uppercase
@@ -88,23 +88,23 @@ Below is a list of the all the methods with a description.
 #### Basic Checks
 Method | Description
 ---- | ----
-`exists(x)` | Check if **x** exists. This is based on a `null`, `undefined` and `false` check.
-`has.spaces(str)` | Check if string **str** has any spaces.
-`has.class(el, class)` | Check if element **el** has the class name **class**.
-`has.extension(str, ext)` | Check if string **str** has an extension in array **ext**.<br>**ext** checks against the all extensions array and is optional.
-`is.array(ar)` | Check if **ar** is an array.
-`is.colour(hex)` | Check if **hex** is a hexadecimal colour code.
-`is.date(date, regExp)` | Check if string **date** is in a date format (**regExp** optional).
-`is.element(el)` | Check if **el** is a DOM element.
-`is.email(email, regExp)` | Check if string **email** is a valid email address (**regExp** optional).
-`is.float(int)` | Check if **int** is a floating point number.
-`is.integer(int)` | Check if **int** is a whole number.
-`is.image(str, ext)` | Check if string **str** has an extension in array **ext**.<br>**ext** checks against the images extensions array and is optional.
-`is.json(json)` | Check if **json** is valid JSON.
-`is.password(str, regExp)` | Check if string **str** is a password (**regExp** optional).
-`is.time(str, regExp)` | Check if string **str** is a valid time value (**regExp** optional).
+`exists(x)` | Check if `x` exists. This is based on a `null`, `undefined` and `false` check.
+`has.spaces(str)` | Check if string `str` has any spaces.
+`has.class(el, class)` | Check if element `el` has the class name `class`.
+`has.extension(str, ext)` | Check if string `str` has an extension in array `ext`.<br>`ext` checks against the all extensions array and is optional.
+`is.array(ar)` | Check if `ar` is an array.
+`is.colour(hex)` | Check if `hex` is a hexadecimal colour code.
+`is.date(date, regExp)` | Check if string `date` is in a date format (`regExp` optional).
+`is.element(el)` | Check if `el` is a DOM element.
+`is.email(email, regExp)` | Check if string `email` is a valid email address (`regExp` optional).
+`is.float(int)` | Check if `int` is a floating point number.
+`is.integer(int)` | Check if `int` is a whole number.
+`is.image(str, ext)` | Check if string `str` has an extension in array `ext`.<br>`ext` checks against the images extensions array and is optional.
+`is.json(json)` | Check if `json` is valid JSON.
+`is.password(str, regExp)` | Check if string `str` is a password (`regExp` optional).
+`is.time(str, regExp)` | Check if string `str` is a valid time value (`regExp` optional).
 `is.touch()` | A very basic touchscreen check on the current window.
-`is.url(str, regExp)` | Check if string **str** is a valid url (**regExp** optional).
+`is.url(str, regExp)` | Check if string `str` is a valid url (`regExp` optional).
 
 ##### Some Examples
 ```javascript
@@ -124,11 +124,11 @@ Web.is.time(time); // true
 #### Classes
 Method | Description
 ---- | ----
-`class.add(elms, classes)` | Add class names **classes** to all elements **elms**.
-`class.clear(elm)` | Remove all class names from a single element **elm**.
-`class.remove(elms, classes)` | Remove class names **classes** from all elements **elms**.
-`class.replace(elms, remove, add)` | Remove class names **remove** from all elements **elms**.<br>Replace with **add**.
-`class.toggle(elms, class)` | Remove / add class name **class** from all elements **elms**.
+`class.add(elms, classes)` | Add class names `classes` to all elements `elms`.
+`class.clear(elm)` | Remove all class names from a single element `elm`.
+`class.remove(elms, classes)` | Remove class names `classes` from all elements `elms`.
+`class.replace(elms, remove, add)` | Remove class names `remove` from all elements `elms`.<br>Replace with `add`.
+`class.toggle(elms, class)` | Remove / add class name `class` from all elements `elms`.
 
 ##### Some examples
 ```javascript
@@ -148,17 +148,17 @@ Web.class.add(elms, 'block');
 ```
 
 #### Dates
-The arguments in the date methods below are all **optional**. Also if no **date** is provided or is `false`, then the current date and time will be used.
+The arguments in the date methods below are all `optional`. Also if no `date` is provided or is `false`, then the current date and time will be used.
 
 Method | Options | Description
 ---- | ---- | ----
-`date.basic(date, time)` | time = `true`, `false` | Return a basic date value.<br>**time** defaults to `false`.
-`date.crtDB()` | | Will return the current date in a standard db format. <br>"yyyy-mm-dd"
-`date.day(date, type)` | type = `short`, `long` | Return the day value of **date**.<br>A **type** of "long" adds a leading zero if required.
-`date.month(date, type)` | type = `short`, `long`, `number` | Return the month value of **date**.
-`date.toISO(date, time)` | time = `true`, `false` | Attempt to transform **date** into an ISO format.<br>**time** defaults to `false`.
-`date.transform(date)` | | Attempt to transform **date** into a Javascript date.
-`date.year(date, type)` | type = short, long | Return the year value of **date**.
+`date.basic(date, time)` | time = `true`, `false` | Return a basic date value.<br>`time` defaults to `false`.
+`date.crtDB()` | | Will return the current date in a standard db format. <br>`yyyy-mm-dd`
+`date.day(date, type)` | type = `short`, `long` | Return the day value of `date`.<br>A `type` of "long" adds a leading zero if required.
+`date.month(date, type)` | type = `short`, `long`, `number` | Return the month value of `date`.
+`date.toISO(date, time)` | time = `true`, `false` | Attempt to transform `date` into an ISO format.<br>`time` defaults to `false`.
+`date.transform(date)` | | Attempt to transform `date` into a Javascript date.
+`date.year(date, type)` | type = short, long | Return the year value of `date`.
 
 ```javascript
 Web.date.basic('22-04-2016', true) // 22 April 2016, 16:45
@@ -168,4 +168,4 @@ Web.date.month('22-04-2016', 'long') // March
 #### Development
 Method | Description
 ---- | ----
-`Web.log(text)` | Console log **text** if the window.log option is available. The `defaults.log` option must also be set to `true`.
+`Web.log(text)` | Console log `text` if the window.log option is available. The `defaults.log` option must also be set to `true`.
