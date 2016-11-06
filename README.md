@@ -72,23 +72,23 @@ Make sure not to overwrite or reassign this variable name to anything else withi
 You can overwrite the library options globally by altering the defaults. To do so reference the defaults object property.
 
 #### Basic
-| Property | Default |
-| ---- | ---- |
-| `defaults.extensions.all` | ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv'] |
-| `defaults.extensions.images` | ['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png'] |
-| `defaults.log` | true |
+Property | Default
+---- | ----
+`defaults.extensions.all` | `['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv']`
+`defaults.extensions.images` | `['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png']`
+`defaults.log` | `true`
 
 #### Regular Expressions
-| Property | Default |
-| ---- | ---- |
-| `defaults.regexp.colour` | /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/ |
-| `defaults.regexp.date` | /^[0-9]{4}-[0-9]{2}-[0-9]{2}/ |
-| `defaults.regexp.email` | /([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i |
-| `defaults.regexp.float` | /^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?/ |
-| `defaults.regexp.integer` | /^[0-9]+/ |
-| `defaults.regexp.password` | /^(?=.*\d).{6,}/ |
-| `defaults.regexp.time` | /([01]\d|2[0-3]):([0-5]\d)/ |
-| `defaults.regexp.url` | /(https?:\/\/[^\s]+)/g |
+Property | Default
+---- | ----
+`defaults.regexp.colour` | `/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/`
+`defaults.regexp.date` | `/^[0-9]{4}-[0-9]{2}-[0-9]{2}/`
+`defaults.regexp.email` | `/([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i`
+`defaults.regexp.float` | `/^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?/`
+`defaults.regexp.integer` | `/^[0-9]+/`
+`defaults.regexp.password` | `/^(?=.*\d).{6,}/`
+`defaults.regexp.time` | `/([01]\d|2[0-3]):([0-5]\d)/`
+`defaults.regexp.url` | `/(https?:\/\/[^\s]+)/g`
 
 #### Request
 Property | Default
@@ -321,4 +321,5 @@ Option | Default | Description
 `url` | | Set the request `URL`.
 `async` | `true` | Determine if request must be asynchronous.
 `data` | `false` | Attach data to the request.<br>`GET` request date it attached as a query string.<br>`POST` request data is attached in the body.
-`dataForce` | `false` | If set, force the way data is attached. In this way you can attach a body to a `GET` request.<br>The options are `queryString` or `body`.
+`dataForce` | `false` | If set, force the way data is attached. In this way you can attach a body to a `GET` request. The options are `queryString` or `body`.
+`dataType` | `json` | Set the data type that you will be sending. The options are `json`, `form` or `formdate`.
