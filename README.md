@@ -13,7 +13,7 @@ The Webplate Tools library is a lightweight set of Javascript methods that facil
 	* [DOM](#dom)
 	* [Events](#events)
 	* [Helpers](#helpers)
-	* [ID's](#id-s)
+	* [ID's](#ids)
 	* [Inputs](#inputs)
 
 ## Getting Started
