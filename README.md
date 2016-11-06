@@ -229,13 +229,14 @@ Method | Options | Description
 ```javascript
 var myElement = document.getElementById('#element');
 var myNumbers = [1,1,2,3,4,5,5,5,5];
-var myString = 'This is a simple string';
+var myString = 'This is a string';
 
 Web.helper.makeArray(myElement); // Returns [element]
 Web.helper.makeArray(myNumbers); // Returns [1,1,2,3,4,5,5,5,5]
 Web.helper.makeArray(myNumbers, true) // Returns [1,2,3,4,5]
-Web.helper.makeArray(myString) // Returns ['This', 'is', 'a', 'simple', 'string']
+Web.helper.makeArray(myString) // Returns ['This', 'is', 'a', 'string']
 
-Web.helper.setDefault(awesome, myString); // Returns 'This is a simple string' as awesome is undefined.
+Web.helper.setDefault(awesome, myString); // Returns 'This is a string' as awesome is undefined.
 Web.helper.setDefault('Coolio', myString); // Returns 'Coolio' as the types match to string.
+Web.helper.setDefault(2, myString); // Returns 'This is a string' as 2 is not a string.
 ```
