@@ -51,7 +51,7 @@ var Rocket = require('rocket-tools');
 `NOTE:` There are slight differences between the Node and standard library files. These differences should not affect its usage but please report any issue should you find any.
 
 ## Initialization
-The library is initialized assigned to a variable of your choice, although for the sake of convenience it is recommended to use `Rocket`. This variable acts as the libraries namespace and scopes all methods to this declaration. An example can be seen below:
+The library is initialized and assigned to a variable of your choice, although for the sake of convenience it is recommended to use `Rocket`. This variable acts as the libraries namespace and scopes all methods to this declaration. An example can be seen below:
 
 ```javascript
 // Initialize
