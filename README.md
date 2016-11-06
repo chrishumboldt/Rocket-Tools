@@ -158,7 +158,7 @@ Method | Options | Description
 `date.month(date, type)` | type = `short`, `long`, `number` | Return the month value of `date`.
 `date.toISO(date, time)` | time = `true`, `false` | Attempt to transform `date` into an ISO format.<br>`time` defaults to `false`.
 `date.transform(date)` | | Attempt to transform `date` into a Javascript date.
-`date.year(date, type)` | type = short, long | Return the year value of `date`.
+`date.year(date, type)` | type = `short`, `long` | Return the year value of `date`.
 
 ```javascript
 Web.date.basic('22-04-2016', true) // 22 April 2016, 16:45
