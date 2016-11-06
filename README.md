@@ -10,6 +10,7 @@ The Webplate Tools library is a lightweight set of Javascript methods that facil
 	* [Classes](#classes)
 	* [Dates](#dates)
 	* [Development](#development)
+	* [DOM](#dom)
 
 ## Getting Started
 You can either download a copy of the source files or install Webplate Tools via Bower.
@@ -166,8 +167,32 @@ Web.date.month('22-04-2016', 'long') // March
 #### Development
 Method | Description
 ---- | ----
-`Web.log(val)` | Console log `val` if the window.log option is available. The `defaults.log` option must also be set to `true`.
+`log(val)` | Console log `val` if the window.log option is available. The `defaults.log` option must also be set to `true`.
 
 ```javascript
 Web.log('This is a test.');
+```
+
+#### DOM
+Method | Description
+---- | ----
+`dom.body` | Access the document body element.
+`dom.html` | Access the document html element.
+`dom.ratio(sel, int)` | Select all elements with selector `sel`.<br>Set the height values to the width values times `int`.
+`dom.remove(elms)` | Remove all elements `elms`.
+`dom.select(sel)` | Select all elements with selector `sel`.<br>**Always** returns an array even if unique selector was used.
+`dom.title` | Access the document title element.
+`dom.wallpaper(sel)` | Select all elements with selector `sel`.<br>Set the background image of the element to the `data-background` value of the element.<br>The background size property will be set to cover.
+
+```html
+<div id="example" class="example" style="width:50px;">Example</div>
+<div class="example" data-background="img/cool-image.jpg">Example</div>
+
+<script>
+Web.dom.ratio('#example', 1.5); // The elements height will now be 75px.
+Web.dom.wallpaper('.example'); // A background style is now applied.
+
+Web.dom.select('.example'); // Both elements are returned in an array.
+Web.dom.select('#example')[0]; // This is how you would reference a unique element.
+</script>
 ```

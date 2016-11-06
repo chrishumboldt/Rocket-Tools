@@ -560,7 +560,7 @@ var Web = (function () {
 		},
 		select: function (selector) {
 			if (selector.indexOf('.') > -1 || has.spaces(selector)) {
-				var returnElements = document.querySelectorAll(selector);
+				var returnElements = dom.select(selector);
 				if (returnElements.length > 0) {
 					return returnElements;
 				}
