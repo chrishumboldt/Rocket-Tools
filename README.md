@@ -341,11 +341,17 @@ Rocket.request.get({
 	data: {
 		key: 'value'
 	},
+	onStart: function () {
+		Rocket.log('Starting request...');
+	},
 	onError: function (error, status) {
 		Rocket.log(status + ': ' + error);
 	},
 	onSuccess: function (data) {
 		Rocket.log(data);
+	},
+	onComplete: function () {
+		Rocket.log('Request done!!!');
 	}
 });
 ```
