@@ -524,22 +524,16 @@ var RocketTools = (function () {
 		},
 		remove: function (selElm) {
 			if (exists(selElm)) {
-				if (selElm.nodeType == undefined) {
+				if (is.element(selElm)) {
+					selElm.parentNode.removeChild(selElm);
+				} else if (typeof selElm === 'string') {
 					var elements = dom.select(selElm);
-					if (elements !== null) {
-						if (elements.nodeType == undefined) {
-							for (var i = elements.length - 1; i >= 0; i--) {
-								if (elements[i] !== null) {
-									elements[i].parentNode.removeChild(elements[i]);
-								}
+					if (elements.length > 0) {
+						for (var i = elements.length - 1; i >= 0; i--) {
+							if (is.element(elements[i])) {
+								elements[i].parentNode.removeChild(elements[i]);
 							}
-						} else {
-							elements.parentNode.removeChild(elements);
 						}
-					}
-				} else {
-					if (selElm !== null) {
-						selElm.parentNode.removeChild(selElm);
 					}
 				}
 			}
