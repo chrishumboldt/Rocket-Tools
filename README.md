@@ -155,7 +155,7 @@ Method | Options | Description
 `date.basic(date, time)` | time: `true` `false` | Return a basic date value.<br>`time` defaults to `false`.
 `date.crtDB()` | | Will return the current date in a standard db format. <br>`yyyy-mm-dd`
 `date.day(date, type)` | type: `short` `long` | Return the day value of `date`.<br>A `type` of "long" adds a leading zero if required.
-`date.month(date, type)` | type: `short` `long`, `number` | Return the month value of `date`.
+`date.month(date, type)` | type: `short` `long` `number` | Return the month value of `date`.
 `date.toISO(date, time)` | time: `true` `false` | Attempt to transform `date` into an ISO format.<br>`time` defaults to `false`.
 `date.transform(date)` | | Attempt to transform `date` into a Javascript date.
 `date.year(date, type)` | type: `short` `long` | Return the year value of `date`.
