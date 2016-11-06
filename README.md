@@ -300,6 +300,6 @@ Method | Description
 **Note** that all defaults are set from the [request defaults](#request) above.
 
 Option | Default | Description
----- | ----
+---- | ---- | ----
 `url` | | Set the request `URL`.
 `async` | `true` | Determine if request must be asynchronous.
