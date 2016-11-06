@@ -305,6 +305,8 @@ Method | Description
 `random.string(len, text)` | Return a random alphanumeric string of length `len`.<br>`text` defaults to `false` but if `true` will exclude integers. `len` defaults to 5.
 
 #### Request
+The `options` is **always** provided in the form of an object.
+
 Method | Description
 ---- | ----
 `request.delete(options)` | Make a `DELETE` request. See the available options below.
@@ -332,3 +334,18 @@ Option | Default | Description
 `timeout` | `false` | Set the request timeout in seconds.
 `type` | `false` | Set the type of request made. **Only used** on the `Rocket.request.run()` method.
 `withCredentials` | `false` | Set the `withCredentials` option for the request.
+
+```javascript
+Rocket.request.get({
+	url: 'http://restplate.com/api/tests/get',
+	data: {
+		key: 'value'
+	},
+	onError: function (error, status) {
+		Rocket.log(status + ': ' + error);
+	},
+	onSuccess: function (data) {
+		Rocket.log(data);
+	}
+});
+```
