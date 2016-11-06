@@ -7,6 +7,7 @@ The Rocket Tools library is a lightweight set of Javascript methods that facilit
 * [Defaults](#defaults)
 	* [Basic](#basic)
 	* [Regular Expressions](#regular-expressions)
+	* [Request](#request)
 * [Methods](#methods)
 	* [Basic Checks](#basic-checks)
 	* [Classes](#classes)
@@ -18,7 +19,7 @@ The Rocket Tools library is a lightweight set of Javascript methods that facilit
 	* [ID's](#ids)
 	* [Inputs](#inputs)
 	* [Random](#random)
-	* [Request](#request)
+	* [Request](#request-1)
 
 ## Getting Started
 You can either download a copy of the source files or install Rocket Tools via Bower.
@@ -294,3 +295,11 @@ Method | Description
 `request.post(options)` | Make a `POST` request. See the available options below.
 `request.put(options)` | Make a `PUT` request. See the available options below.
 `request.run(options)` | Make a request of your choice. See the available options below.
+
+##### Options
+**Note** that all defaults are set from the [request defaults](#request) above.
+
+Option | Default | Description
+---- | ----
+`url` | | Set the request `URL`.
+`async` | `true` | Determine if request must be asynchronous.
