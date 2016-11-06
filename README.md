@@ -222,5 +222,5 @@ Web.event.remove(button, 'click', sayHi); // The sayHi function has now been rem
 
 #### Helpers
 Method | Options | Description
----- | ----
+---- | ---- | ----
 `helper.makeArray(val, unique)` | unique: `true` `false` | Will **attempt** to return an array based on `val`.<br>`unique` will return only uniqeu array values and defaults to `false`.
