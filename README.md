@@ -13,6 +13,8 @@ The Webplate Tools library is a lightweight set of Javascript methods that facil
 	* [DOM](#dom)
 	* [Events](#events)
 	* [Helpers](#helpers)
+	* [ID's](#id-s)
+	* [Inputs](#inputs)
 
 ## Getting Started
 You can either download a copy of the source files or install Webplate Tools via Bower.
@@ -240,3 +242,18 @@ Web.helper.setDefault(awesome, myString); // Returns 'This is a string' as aweso
 Web.helper.setDefault('Coolio', myString); // Returns 'Coolio' as the types match to string.
 Web.helper.setDefault(2, myString); // Returns 'This is a string' as 2 is not a string.
 ```
+
+#### ID's
+Method | Description
+---- | ----
+`id.add(elm, id)` | Add `id` to element `elm`.
+`id.remove(elm, id)` | Remove `id` from element `elm`.
+
+```javascript
+var elm = document.querySelector('.element');
+
+Web.id.add(elm, 'my-element');
+Web.id.remove(elm, 'my-element');
+```
+
+#### Inputs
