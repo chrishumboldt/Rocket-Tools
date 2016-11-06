@@ -177,7 +177,7 @@ Web.date.month('22-04-2016', 'long') // March
 #### Development
 Method | Description
 ---- | ----
-`log(val)` | Console log `val` if the window.log option is available. The `defaults.log` option must also be set to `true`.
+`log(val)` | Console log `val` if the window.log option is available. The `Web.defaults.log` option must also be set to `true`.
 
 ```javascript
 Web.log('This is a test.');
