@@ -315,7 +315,6 @@ Method | Description
 `request.put(options)` | Make a `PUT` request. See the available options below.
 `request.run(options)` | Make a request of your choice. See the available options below.
 
-##### Options
 **Note** that all defaults are set by the [request defaults](#request) above.
 
 Option | Default | Description
