@@ -56,7 +56,7 @@ var RocketTools = (function () {
 			onLoading: false,
 			onSuccess: false,
 			onError: false,
-			onEnd: false,
+			onComplete: false,
 			timeout: false,
 			type: false,
 			withCredentials: false
@@ -760,7 +760,7 @@ var RocketTools = (function () {
 				onLoading: (typeof uOptions.onLoading === 'function') ? uOptions.onLoading : defaults.request.onLoading,
 				onSuccess: (typeof uOptions.onSuccess === 'function') ? uOptions.onSuccess : defaults.request.onSuccess,
 				onError: (typeof uOptions.onError === 'function') ? uOptions.onError : defaults.request.onError,
-				onEnd: (typeof uOptions.onEnd === 'function') ? uOptions.onEnd : defaults.request.onEnd,
+				onComplete: (typeof uOptions.onComplete === 'function') ? uOptions.onComplete : defaults.request.onComplete,
 				timeout: (typeof uOptions.timeout === 'number') ? time.seconds(uOptions.timeout) : defaults.request.timeout,
 				type: (exists(uOptions.type)) ? string.uppercase.all(uOptions.type) : defaults.request.type,
 				withCredentials: (typeof uOptions.withCredentials === 'boolean') ? uOptions.withCredentials : defaults.request.withCredentials
@@ -787,8 +787,8 @@ var RocketTools = (function () {
 						break;
 
 					case 4:
-						if (options.onEnd) {
-							options.onEnd(this);
+						if (options.onComplete) {
+							options.onComplete(this);
 						}
 						if (this.status >= 200 && this.status < 300) {
 							if (options.onSuccess) {
