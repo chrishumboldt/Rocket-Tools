@@ -134,12 +134,12 @@ Method | Description
 ---- | ----
 `exists(x)` | Check if `x` exists. This is based on a `null`, `undefined` and `false` check.
 `has.spaces(str)` | Check if string `str` has any spaces.
-`has.class(el, class)` | Check if element `el` has the class name `class`.
+`has.class(elm, class)` | Check if element `elm` has the class name `class`.
 `has.extension(str, ext)` | Check if string `str` has an extension in array `ext`.<br>`ext` checks against the all extensions array and is optional.
 `is.array(ar)` | Check if `ar` is an array.
 `is.colour(hex)` | Check if `hex` is a hexadecimal colour code.
 `is.date(date, regExp)` | Check if string `date` is in a date format (`regExp` optional).
-`is.element(el)` | Check if `el` is a DOM element.
+`is.element(elm)` | Check if `elm` is a DOM element.
 `is.email(email, regExp)` | Check if string `email` is a valid email address (`regExp` optional).
 `is.float(int)` | Check if `int` is a floating point number.
 `is.integer(int)` | Check if `int` is a whole number.
