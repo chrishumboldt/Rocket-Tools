@@ -363,4 +363,4 @@ Method | Description
 ---- | ----
 `state.add(elm, state)` | Set a `state` on a single element `elm`.
 `state.clear(elm)` | Clear all states currently set on a single element `elm`.
-`state.toggle(elm, state)` | Set a `state` on a single element `elm`. If that state is already set, then change it to its opposing state.
+`state.toggle(elm, state)` | Set a `state` on a single element `elm`.<br>If set, then change it to its opposing state.
