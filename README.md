@@ -185,8 +185,9 @@ Method | Description
 `dom.wallpaper(sel)` | Select all elements with selector `sel`.<br>Set the background image of the element to the elements `data-background` attribute.<br>The background size property will be set to cover.
 
 ```html
-<div id="example" class="example" style="width:50px;">Example</div>
-<div class="example" data-background="img/cool-image.jpg">Example</div>
+<div id="example" style="width:50px;"></div>
+<div class="example" data-background="img/cool-image-1.jpg"></div>
+<div class="example" data-background="img/cool-image-2.jpg"></div>
 
 <script>
 Web.dom.ratio('#example', 1.5); // The elements height will now be 75px.
