@@ -752,7 +752,7 @@ var RocketTools = (function () {
 			var options = {
 				url: uOptions.url,
 				async: (typeof uOptions.async === 'string') ? uOptions.async : defaults.request.async,
-				data: (exists(uOptions.data)) ? uOptions.data : defaults.data,
+				data: (exists(uOptions.data)) ? uOptions.data : defaults.request.data,
 				dataForce: (typeof uOptions.dataForce === 'string') ? uOptions.dataForce : defaults.request.dataForce,
 				dataType: (exists(uOptions.dataType)) ? uOptions.dataType : defaults.request.dataType,
 				headers: (typeof uOptions.headers === 'object') ? uOptions.headers : defaults.request.headers,

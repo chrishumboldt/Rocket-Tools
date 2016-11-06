@@ -320,3 +320,5 @@ Option | Default | Description
 ---- | ---- | ----
 `url` | | Set the request `URL`.
 `async` | `true` | Determine if request must be asynchronous.
+`data` | `false` | Attach data to the request.<br>`GET` request date it attached as a query string.<br>`POST` request data is attached in the body.
+`dataForce` | `false` | If set, force the way data is attached. In this way you can attach a body to a `GET` request.<br>The options are `queryString` or `body`.
