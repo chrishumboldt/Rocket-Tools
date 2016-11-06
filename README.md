@@ -182,7 +182,7 @@ Method | Description
 `dom.remove(elms)` | Remove all elements `elms`.
 `dom.select(sel)` | Select all elements with selector `sel`.<br>**Always** returns an array even if unique selector was used.
 `dom.title` | Access the document title element.
-`dom.wallpaper(sel)` | Select all elements with selector `sel`.<br>Set the background image of the element to the `data-background` value of the element.<br>The background size property will be set to cover.
+`dom.wallpaper(sel)` | Select all elements with selector `sel`.<br>Set the background image of the element to the elements `data-background` attribute.<br>The background size property will be set to cover.
 
 ```html
 <div id="example" class="example" style="width:50px;">Example</div>
