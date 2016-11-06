@@ -5,6 +5,7 @@ The Webplate Tools library is a lightweight set of Javascript methods that facil
 * [Getting Started With NPM](#getting-started-with-npm)
 * [Initialization](#initialization)
 * [Defaults](#defaults)
+	* [Basic](#basic)
 	* [Regular Expressions](#regular-expressions)
 * [Methods](#methods)
 	* [Basic Checks](#basic-checks)
@@ -64,6 +65,7 @@ Make sure not to overwrite or reassign this variable name to anything else withi
 ## Defaults
 You can overwrite the library options globally by altering the defaults. To do so reference the defaults object property.
 
+#### Basic
 | Property | Default |
 | ---- | ---- |
 | `defaults.extensions.all` | ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv'] |
