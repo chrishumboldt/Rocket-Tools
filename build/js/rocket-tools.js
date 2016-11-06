@@ -938,11 +938,12 @@ var RocketTools = (function () {
 				return false;
 			}
 			var store = storage.getStorageEngine();
-			if (store) {
-				store = helper.parse.json(store);
-			} else {
-				store = {};
+			// Catch
+			if (!store) {
+				return false;
 			}
+			// Continue
+			store = helper.parse.json(store);
 			store[name] = value;
 			switch (defaults.storage.type) {
 				case 'local':
@@ -955,20 +956,23 @@ var RocketTools = (function () {
 			}
 		},
 		clear: function () {
-			localStorage.removeItem(defaults.storage.name);
-			sessionStorage.removeItem(defaults.storage.name);
+			if (defaults.storage.name !== false) {
+				localStorage.removeItem(defaults.storage.name);
+				sessionStorage.removeItem(defaults.storage.name);
+			}
 		},
-		get: function (name) {
-			if (!exists(name)) {
+		get: function (key) {
+			if (!exists(key)) {
 				return false;
 			}
 			var store = storage.getStorageEngine();
-			if (store) {
-				store = helper.parse.json(store);
-				return store[name];
-			} else {
+			// Catch
+			if (!store) {
 				return false;
 			}
+			// Continue
+			store = helper.parse.json(store);
+			return store[key];
 		},
 		getStorageEngine: function () {
 			// Catch
@@ -976,6 +980,7 @@ var RocketTools = (function () {
 				log('ROCKET: You have not set the storage name. Provide a name for [Rocket].defaults.storage.name.', true);
 				return false;
 			}
+			// Continue
 			switch (defaults.storage.type) {
 				case 'local':
 					return localStorage.getItem(defaults.storage.name);
@@ -989,23 +994,26 @@ var RocketTools = (function () {
 					return false;
 			}
 		},
-		remove: function (name) {
-			if (!exists(name)) {
+		remove: function (key) {
+			if (!exists(key)) {
 				return false;
 			}
 			var store = storage.getStorageEngine();
-			if (store) {
-				store = helper.parse.json(store);
-				delete store[name];
-				switch (defaults.storage.type) {
-					case 'local':
-						localStorage.setItem(defaults.storage.name, JSON.stringify(store));
-						break;
+			// Catch
+			if (!store) {
+				return false;
+			}
+			// Continue
+			store = helper.parse.json(store);
+			delete store[key];
+			switch (defaults.storage.type) {
+				case 'local':
+					localStorage.setItem(defaults.storage.name, JSON.stringify(store));
+					break;
 
-					case 'session':
-						sessionStorage.setItem(defaults.storage.name, JSON.stringify(store));
-						break;
-				}
+				case 'session':
+					sessionStorage.setItem(defaults.storage.name, JSON.stringify(store));
+					break;
 			}
 		}
 	};

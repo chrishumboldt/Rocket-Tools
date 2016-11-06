@@ -381,9 +381,22 @@ Rocket.state.toggle(elm, 'visible'); // The class has now be changed to '_state-
 ```
 
 #### Storage
-These methods facade the browser storage API by putting all data into a JSON object. **Note** that in order to use these methods you need to first set the [defaults storage](#storage) name. See an example of how to do so below:
+These methods facade the browser storage API by putting all data into a JSON object. **Note** that in order to use these methods you need to first set the [defaults storage](#storage) name.
+
+Method | Description
+---- | ----
+`storage.add(key, value)` | Add a `key`, `value` store pair to the storage.
+`storage.clear()` | Destroy the storage with the name set by `Rocket.defaults.storage.name`.
+`storage.get(key)` | Get the storage `value` of `key`.
+`storage.remove(key)` | Remove the storage item reference with `key`.
 
 ```javascript
-// Set the storage name
+// A storage name is required and only needs to be declared once.
 Rocket.defaults.storage.name = 'my-storage-name';
+
+Rocket.storage.add('name', 'Chris Humboldt');
+Rocket.storage.get('name'); // Return 'Chris Humboldt'
+Rocket.storage.remove('name');
+
+Rocket.storage.clear(); // Storage with name 'my-storage-name' will no longer exist.
 ```
