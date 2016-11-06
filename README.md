@@ -11,6 +11,7 @@ The Webplate Tools library is a lightweight set of Javascript methods that facil
 	* [Dates](#dates)
 	* [Development](#development)
 	* [DOM](#dom)
+	* [Events](#events)
 
 ## Getting Started
 You can either download a copy of the source files or install Webplate Tools via Bower.
@@ -198,4 +199,22 @@ Web.dom.select('#example')[0]; // This is how you would reference a unique eleme
 
 Web.dom.title.innerHTML = 'New Title'; // The document title is now changed.
 </script>
+```
+
+#### Events
+The events methods will automatically determine the best type of event assignment based on your browser.
+
+Method | Description
+---- | ----
+`event.add(elm, event, func)` | Attach a function `func` to element `elm` when `event` occurs.
+`event.remove(elm, event, func)` | Remove function `func` from element `elm` when `event` occurs.
+
+```javascript
+var button = document.getElementById('button');
+var sayHi = function () {
+	alert('Hi');
+};
+
+Web.event.add(button, 'click', sayHi); // Hi will be alerted every time the button is clicked.
+Web.event.remove(button, 'click', sayHi); // The sayHi function has been removed from this event.
 ```
