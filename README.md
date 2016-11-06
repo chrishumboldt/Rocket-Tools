@@ -106,7 +106,6 @@ Method | Description
 `is.touch()` | A very basic touchscreen check on the current window.
 `is.url(str, regExp)` | Check if string `str` is a valid url (`regExp` optional).
 
-##### Some Examples
 ```javascript
 var elm = document.querySelector('.element');
 var filename = 'filename.json';
@@ -130,7 +129,6 @@ Method | Description
 `class.replace(elms, remove, add)` | Remove class names `remove` from all elements `elms`.<br>Replace with `add`.
 `class.toggle(elms, class)` | Remove / add class name `class` from all elements `elms`.
 
-##### Some examples
 ```javascript
 var elm = document.querySelector('.element');
 
@@ -168,4 +166,8 @@ Web.date.month('22-04-2016', 'long') // March
 #### Development
 Method | Description
 ---- | ----
-`Web.log(text)` | Console log `text` if the window.log option is available. The `defaults.log` option must also be set to `true`.
+`Web.log(val)` | Console log `val` if the window.log option is available. The `defaults.log` option must also be set to `true`.
+
+```javascript
+Web.log('This is a test.');
+```
