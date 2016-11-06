@@ -364,3 +364,10 @@ Method | Description
 `state.add(elm, state)` | Set a `state` on a single element `elm`.
 `state.clear(elm)` | Clear all states currently set on a single element `elm`.
 `state.toggle(elm, state)` | Set a `state` on a single element `elm`. If set, then change it to its opposing state.
+
+```javascript
+var elm = document.getElementById('my-element');
+
+Rocket.state.set(elm, 'visible'); // A class of '_state-visible' has now been added to this element.
+Rocket.state.toggle(elm, 'visible'); // The class has now be changed to '_state-hidden'.
+```
