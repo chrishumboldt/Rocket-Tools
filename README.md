@@ -1,5 +1,5 @@
-# Webplate Tools
-The Webplate Tools library is a lightweight set of Javascript methods that facilitate quicker and easier development.
+# Rocket Tools
+The Rocket Tools library is a lightweight set of Javascript methods that facilitate quicker and easier development.
 
 * [Getting Started](#getting-started)
 * [Getting Started With NPM](#getting-started-with-npm)
@@ -20,10 +20,10 @@ The Webplate Tools library is a lightweight set of Javascript methods that facil
 	* [Random](#random)
 
 ## Getting Started
-You can either download a copy of the source files or install Webplate Tools via Bower.
+You can either download a copy of the source files or install Rocket Tools via Bower.
 
 ```
-bower install webplate-tools
+bower install rocket-tools
 ```
 
 Next include the required Javascript file.
@@ -31,34 +31,37 @@ Next include the required Javascript file.
 ```html
 <body>
 	/* Your content goes here */
-	<script src="js/webplate-tools.min.js"></script>
+	<script src="js/rocket-tools.min.js"></script>
 </body>
 ```
 
 ## Getting Started With NPM
-If you instead wish to use Weplate Tools as a Node module simply install using the following command.
+If you instead wish to use Rocket Tools as a Node module simply install using the following command.
 
 ```
-npm install webplate-tools
+npm install rocket-tools
 ```
 
-Once done require Webplate Tools as you would any other module.
+Once done require Rocket Tools as you would any other module.
 
 ```javascript
-var Web = require('webplate-tools');
+var Rocket = require('rocket-tools');
 ```
 
 `NOTE:` There are slight differences between the Node and standard library files. These differences should not affect its usage but please report any issue should you find any.
 
 ## Initialization
-The library is automatically initialized due the Revealing Module Pattern used and is bound to the variable `Web`. This variable acts as the libraries namespace and scopes all methods to this declaration. An example of some method calls can be seen below:
+The library is initialized assigned to a variable of your choice, although for the sake of convenience it is recommended to use `Rocket`. This variable acts as the libraries namespace and scopes all methods to this declaration. An example can be seen below:
 
 ```javascript
+// Initialize
+var Rocket = new RocketTools;
+
 // Convert a string to uppercase
-var boldName = Web.string.uppercase.all('Chris Humboldt');
+var boldName = Rocket.string.uppercase.all('Chris Humboldt');
 
 // Generate a random integer
-var randomNumber = Web.random.integer();
+var randomNumber = Rocket.random.integer();
 ```
 
 Make sure not to overwrite or reassign this variable name to anything else within your project.
@@ -87,11 +90,11 @@ You can overwrite the library options globally by altering the defaults. To do s
 
 ```javascript
 /*
-This allows you to use the Web.log() method throughout your project
+This allows you to use the Rocket.log() method throughout your project
 and when deploying to production, assign this a value of "false" to
 prevent any forgotten console.log messages from displaying.
 */
-Web.defaults.log = false;
+Rocket.defaults.log = false;
 ```
 
 ## Methods
@@ -123,13 +126,13 @@ var elm = document.querySelector('.element');
 var filename = 'filename.json';
 var time = '12:54:07';
 
-Web.exists(elm); // true
-Web.has.spaces('This is a test'); // true
-Web.has.class(elm, 'example'); // true
-Web.has.extension(filename, ['jpg', 'png']); // false
+Rocket.exists(elm); // true
+Rocket.has.spaces('This is a test'); // true
+Rocket.has.class(elm, 'example'); // true
+Rocket.has.extension(filename, ['jpg', 'png']); // false
 
-Web.is.integer(filename); // false
-Web.is.time(time); // true
+Rocket.is.integer(filename); // false
+Rocket.is.time(time); // true
 ```
 
 #### Classes
@@ -145,16 +148,16 @@ Method | Description
 var elm = document.querySelector('.element');
 
 // Classes can be either a string, space separated string list or an array.
-Web.class.add(elm, 'block');
-Web.class.add(elm, 'block blue rounded');
-Web.class.add(elm, ['block', 'blue', 'rounded']);
+Rocket.class.add(elm, 'block');
+Rocket.class.add(elm, 'block blue rounded');
+Rocket.class.add(elm, ['block', 'blue', 'rounded']);
 
-Web.class.replace(elm, 'block', 'circle');
+Rocket.class.replace(elm, 'block', 'circle');
 
 // You can also execute one class change on multiple elements at once.
 var elms = document.querySelectorAll('.elements');
 
-Web.class.add(elms, 'block');
+Rocket.class.add(elms, 'block');
 ```
 
 #### Dates
@@ -171,17 +174,17 @@ Method | Options | Description
 `date.year(date, type)` | type: `short` `long` | Return the year value of `date`.<br>`type` defaults to `short`.
 
 ```javascript
-Web.date.basic('22-04-2016', true) // 22 April 2016, 16:45
-Web.date.month('22-04-2016', 'long') // March
+Rocket.date.basic('22-04-2016', true) // 22 April 2016, 16:45
+Rocket.date.month('22-04-2016', 'long') // March
 ```
 
 #### Development
 Method | Description
 ---- | ----
-`log(val)` | Console log `val` if the window.log option is available. The `Web.defaults.log` option must also be set to `true`.
+`log(val)` | Console log `val` if the window.log option is available. The `Rocket.defaults.log` option must also be set to `true`.
 
 ```javascript
-Web.log('This is a test.');
+Rocket.log('This is a test.');
 ```
 
 #### DOM
@@ -201,13 +204,13 @@ Method | Description
 <div class="example" data-background="img/cool-image-2.jpg"></div>
 
 <script>
-Web.dom.ratio('#example', 1.5); // The elements height will now be 75px.
-Web.dom.wallpaper('.example'); // A background style is now applied.
+Rocket.dom.ratio('#example', 1.5); // The elements height will now be 75px.
+Rocket.dom.wallpaper('.example'); // A background style is now applied.
 
-Web.dom.select('.example'); // Both elements are returned in an array.
-Web.dom.select('#example')[0]; // This is how you would reference a unique element.
+Rocket.dom.select('.example'); // Both elements are returned in an array.
+Rocket.dom.select('#example')[0]; // This is how you would reference a unique element.
 
-Web.dom.title.innerHTML = 'New Title'; // The document title is now changed.
+Rocket.dom.title.innerHTML = 'New Title'; // The document title is now changed.
 </script>
 ```
 
@@ -225,8 +228,8 @@ var sayHi = function () {
 	alert('Hi');
 };
 
-Web.event.add(button, 'click', sayHi); // Hi will be alerted every time the button is clicked.
-Web.event.remove(button, 'click', sayHi); // The sayHi function has now been removed from this event.
+Rocket.event.add(button, 'click', sayHi); // Hi will be alerted every time the button is clicked.
+Rocket.event.remove(button, 'click', sayHi); // The sayHi function has now been removed from this event.
 ```
 
 #### Helpers
@@ -240,14 +243,14 @@ var myElement = document.getElementById('#element');
 var myNumbers = [1,1,2,3,4,5,5,5,5];
 var myString = 'This is a string';
 
-Web.helper.makeArray(myElement); // Returns [element]
-Web.helper.makeArray(myNumbers); // Returns [1,1,2,3,4,5,5,5,5]
-Web.helper.makeArray(myNumbers, true) // Returns [1,2,3,4,5]
-Web.helper.makeArray(myString) // Returns ['This', 'is', 'a', 'string']
+Rocket.helper.makeArray(myElement); // Returns [element]
+Rocket.helper.makeArray(myNumbers); // Returns [1,1,2,3,4,5,5,5,5]
+Rocket.helper.makeArray(myNumbers, true) // Returns [1,2,3,4,5]
+Rocket.helper.makeArray(myString) // Returns ['This', 'is', 'a', 'string']
 
-Web.helper.setDefault(awesome, myString); // Returns 'This is a string' as awesome is undefined.
-Web.helper.setDefault('Coolio', myString); // Returns 'Coolio' as the types match to string.
-Web.helper.setDefault(2, myString); // Returns 'This is a string' as 2 is not a string.
+Rocket.helper.setDefault(awesome, myString); // Returns 'This is a string' as awesome is undefined.
+Rocket.helper.setDefault('Coolio', myString); // Returns 'Coolio' as the types match to string.
+Rocket.helper.setDefault(2, myString); // Returns 'This is a string' as 2 is not a string.
 ```
 
 #### ID's
@@ -259,8 +262,8 @@ Method | Description
 ```javascript
 var elm = document.querySelector('.element');
 
-Web.id.add(elm, 'my-element');
-Web.id.remove(elm, 'my-element');
+Rocket.id.add(elm, 'my-element');
+Rocket.id.remove(elm, 'my-element');
 ```
 
 #### Inputs
@@ -270,8 +273,8 @@ Method | Description
 `input.enable(sel)` | Select all elements (inputs) with selector `sel`.<br>Remove the `disabled` attribute from each element.
 
 ```javascript
-Web.input.disable('.form-input');
-Web.input.enable('.form-input');
+Rocket.input.disable('.form-input');
+Rocket.input.enable('.form-input');
 ```
 
 #### Random

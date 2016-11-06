@@ -1,5 +1,5 @@
 /**
- * File: engine/js/src/tools.js
+ * File: build/js/rocket-tools.js
  * Type: Javascript tools
  * Author: Chris Humboldt
 **/
@@ -10,7 +10,6 @@
 // Basic checks
 // Classes
 // Clone
-// Component facades
 // Dates
 // Development
 // DOM
@@ -29,7 +28,7 @@
 // URL
 // Return
 
-var Web = (function () {
+var RocketTools = (function () {
 	// Defaults
 	var defaults = {
 		extensions: {
@@ -289,44 +288,6 @@ var Web = (function () {
 				return false;
 				break;
 		}
-	};
-
-	// Component facades
-	var button = function (options) {
-		if (typeof Buttonplate !== 'undefined') {
-			return Buttonplate.init(options);
-		}
-		return false;
-	};
-	var flicker = function (options) {
-		if (typeof Flickerplate !== 'undefined') {
-			return Flickerplate.init(options);
-		}
-		return false;
-	};
-	var form = function (options) {
-		return false;
-	};
-	var injector = function () {
-		if (typeof Injectplate !== 'undefined') {
-			return Injectplate.init();
-		}
-		return false;
-	};
-	var loader = function (options) {
-		return false;
-	};
-	var menu = function (options) {
-		return false;
-	};
-	var message = function (options) {
-		return false;
-	};
-	var modal = function (options) {
-		return false;
-	};
-	var tab = function (options) {
-		return false;
 	};
 
 	// Dates
@@ -1221,11 +1182,11 @@ var Web = (function () {
 		button: button,
 		flicker: flicker,
 		form: form,
-		injectplateExecute: injectplateExecute,
+		injector: injector,
 		loader: loader,
 		menu: menu,
 		message: message,
 		modal: modal,
 		tab: tab
 	};
-})();
+});
