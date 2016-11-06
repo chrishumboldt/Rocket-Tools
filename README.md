@@ -209,7 +209,7 @@ Rocket.date.month('12-03-2016', 'long') // March
 
 #### Development
 Method | Optins | Description
----- | ----
+---- | ---- | ----
 `log(val, error)` | error: `true` `false` | Console log `val` if the window.log option is available.<br>The `Rocket.defaults.log` option must also be set to `true`.<br>`error` defaults to `false`, but if `true` will throw an error to the console instead of a simple log.
 
 ```javascript
