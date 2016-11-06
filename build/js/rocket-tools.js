@@ -145,7 +145,7 @@ var RocketTools = (function () {
 		},
 		extension: function (file, arAllowedTypes) {
 			var allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : defaults.extensions.all;
-			return allowedTypes[file.split('.').pop().toLowerCase()];
+			return (allowedTypes.indexOf(file.split('.').pop().toLowerCase()) > -1) ? true : false;
 		}
 	};
 	var is = {
