@@ -708,18 +708,18 @@ var RocketTools = (function () {
 	// Overlay
 	var overlay = {
 		add: function () {
-			var webplateOverlay = document.createElement('div');
-			id.add(webplateOverlay, rocketPrefix.basic + 'overlay');
+			var rocketOverlay = document.createElement('div');
+			id.add(rocketOverlay, rocketPrefix.basic + 'overlay');
 			if (!exists(document.getElementById(rocketPrefix.basic + 'overlay'))) {
-				dom.body.appendChild(webplateOverlay);
+				dom.body.appendChild(rocketOverlay);
 			}
 		},
 		hide: function () {
-			classMethods.remove(dom.html, 'web-overlay-reveal');
+			classMethods.remove(dom.html, 'rocket-overlay-reveal');
 		},
 		show: function () {
 			setTimeout(function () {
-				classMethods.add(dom.html, 'web-overlay-reveal');
+				classMethods.add(dom.html, 'rocket-overlay-reveal');
 			}, 50);
 		}
 	};
