@@ -265,7 +265,7 @@ Rocket.event.remove(button, 'click', sayHi); // The sayHi function has now been 
 Method | Options | Description
 ---- | ---- | ----
 `helper.makeArray(val, unique)` | unique: `true` `false` | Will **attempt** to return an array based on `val`.<br>`unique` will return only unique array values.<br>`unique` defaults to `false`.
-`helper.parse.json(json)` | | Will attempt to parse `json` if needs be. |
+`helper.parse.json(json)` | | Will attempt to safely parse `json`. |
 `helper.setDefault(val, default)` | | Will compare `val` to `default` and return.<br>Should be used for **matching value types** only.
 
 ```javascript
