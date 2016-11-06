@@ -224,3 +224,4 @@ Web.event.remove(button, 'click', sayHi); // The sayHi function has now been rem
 Method | Options | Description
 ---- | ---- | ----
 `helper.makeArray(val, unique)` | unique: `true` `false` | Will **attempt** to return an array based on `val`.<br>`unique` will return only unique array values.<br>`unique` defaults to `false`.
+`helper.setDefault(val, default)` | | Will compare `val` to `default`.<br>If the type matches `val` will be returned else `default` will be returned.<br>Should be used for matching value types.
