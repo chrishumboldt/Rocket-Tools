@@ -24,6 +24,7 @@ The Rocket Tools library is a lightweight set of Javascript methods that facilit
 	* [States](#states)
 	* [Storage](#storage-1)
 	* [Strings](#strings)
+	* [Time](#time)
 
 ## Getting Started
 You can either download a copy of the source files or install Rocket Tools via Bower.
@@ -422,4 +423,23 @@ var myString = 'hello bright world!'.
 
 Rocket.string.remove.firstAndLast(myString); // Returns 'ello bright world'
 Rocket.string.uppercase.all(myString); // Returns 'HELLO BRIGHT WORLD!'
+```
+
+#### Time
+Method | Description
+---- | ----
+`time.basic(date)` | Transform and return the time value of `date`. This **excludes** seconds and milliseconds.
+`time.exact(date)` | Transform and return the time value of `date`. This **includes** seconds and milliseconds.
+`time.full(date)` | Transform and return the time value of `date`. This **includes** seconds.
+`time.hours(int)` | Return the millisecond value of `int` hours.
+`time.minutes(int)` | Return the millisecond value of `int` minutes.
+`time.seconds(int)` | Return the millisecond value of `int` seconds.
+
+```javascript
+var myDate = new Date();
+
+Rocket.time.basic(myDate); // Returns the time in format '21:17'
+Rocket.time.full(myDate); // Returns the time in format '21:17:5'
+
+Rocket.time.minutes(5); // Returns '300000' milliseconds
 ```
