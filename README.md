@@ -330,5 +330,5 @@ Option | Default | Description
 `onStart` | `false` | Attach a function to execute as the request is made.
 `onSuccess` | `false` | Attach a function to execute if the request is successful. The `error`, `status` and `header` variables are returned.
 `timeout` | `false` | Set the request timeout in seconds.
-`type` | `false` | Set the type of request made. **Note** is only used on the `Rocket.request.run()` method.
+`type` | `false` | Set the type of request made. **Only used** on the `Rocket.request.run()` method.
 `withCredentials` | `false` | Set the `withCredentials` option for the request.
