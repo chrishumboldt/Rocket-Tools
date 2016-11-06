@@ -20,6 +20,7 @@ The Rocket Tools library is a lightweight set of Javascript methods that facilit
 	* [Inputs](#inputs)
 	* [Random](#random)
 	* [Request](#request-1)
+	* [States](#states)
 
 ## Getting Started
 You can either download a copy of the source files or install Rocket Tools via Bower.
@@ -309,11 +310,11 @@ The `options` is **always** provided in the form of an object.
 
 Method | Description
 ---- | ----
-`request.delete(options)` | Make a `DELETE` request. See the available options below.
-`request.get(options)` | Make a `GET` request. See the available options below.
-`request.post(options)` | Make a `POST` request. See the available options below.
-`request.put(options)` | Make a `PUT` request. See the available options below.
-`request.run(options)` | Make a request of your choice. See the available options below.
+`request.delete(options)` | Make a `DELETE` request. See the available `options` below.
+`request.get(options)` | Make a `GET` request. See the available `options` below.
+`request.post(options)` | Make a `POST` request. See the available `options` below.
+`request.put(options)` | Make a `PUT` request. See the available `options` below.
+`request.run(options)` | Make a request of your choice. See the available `options` below.
 
 **Note** that all defaults are set by the [request defaults](#request) above.
 
@@ -354,3 +355,12 @@ Rocket.request.get({
 	}
 });
 ```
+
+#### States
+There are a predefined list of states with an opposing state that can be added to elements in the form of a class. The states are `active`, `open` and `visible` with the opposites being `inactive`, `closed` and `hidden`. All states are prefixed with `_state-`.
+
+Method | Description
+---- | ----
+`state.add(elm, state)` | Set a `state` on a single element `elm`.
+`state.clear(elm)` | Clear all states currently set on a single element `elm`.
+`state.toggle(elm, state)` | Set a `state` on a single element `elm`. If that state is already set, then change it to its opposing state.

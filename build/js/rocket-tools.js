@@ -63,7 +63,7 @@ var RocketTools = (function () {
 		}
 	}
 	// Variables
-	var webMonths = [{
+	var rocketMonths = [{
 		number: '01',
 		name: 'january',
 		nameShort: 'jan'
@@ -112,11 +112,11 @@ var RocketTools = (function () {
 		name: 'december',
 		nameShort: 'dec'
 	}];
-	var webPrefix = {
-		basic: 'web-',
+	var rocketPrefix = {
+		basic: 'rocket-',
 		state: '_state-'
 	};
-	var webState = {
+	var rocketState = {
 		alts: {
 			active: 'inactive',
 			closed: 'open',
@@ -383,9 +383,9 @@ var RocketTools = (function () {
 			switch (type) {
 				case 'long':
 					thisMonth = (thisMonth.length === 1) ? '0' + thisMonth : thisMonth;
-					for (var i = 0, len = webMonths.length; i < len; i++) {
-					   if (webMonths[i].number == thisMonth) {
-							thisMonth = string.uppercase.first(webMonths[i].name);
+					for (var i = 0, len = rocketMonths.length; i < len; i++) {
+					   if (rocketMonths[i].number == thisMonth) {
+							thisMonth = string.uppercase.first(rocketMonths[i].name);
 							break;
 						}
 					}
@@ -395,9 +395,9 @@ var RocketTools = (function () {
 					break;
 				default:
 					thisMonth = (thisMonth.length === 1) ? '0' + thisMonth : thisMonth;
-					for (var i = 0, len = webMonths.length; i < len; i++) {
-					   if (webMonths[i].number == thisMonth) {
-							thisMonth = string.uppercase.first(webMonths[i].nameShort);
+					for (var i = 0, len = rocketMonths.length; i < len; i++) {
+					   if (rocketMonths[i].number == thisMonth) {
+							thisMonth = string.uppercase.first(rocketMonths[i].nameShort);
 							break;
 						}
 					}
@@ -421,9 +421,9 @@ var RocketTools = (function () {
 						time = dateSplit[i];
 					} else {
 						var lowerDateSplit = string.lowercase(dateSplit[i]);
-						for (var i2 = 0, len2 = webMonths.length; i2 < len2; i2++) {
-							if (lowerDateSplit === webMonths[i2].name || lowerDateSplit === webMonths[i2].nameShort) {
-								month = webMonths[i2].number;
+						for (var i2 = 0, len2 = rocketMonths.length; i2 < len2; i2++) {
+							if (lowerDateSplit === rocketMonths[i2].name || lowerDateSplit === rocketMonths[i2].nameShort) {
+								month = rocketMonths[i2].number;
 								break;
 							}
 						}
@@ -697,8 +697,8 @@ var RocketTools = (function () {
 	var overlay = {
 		add: function () {
 			var webplateOverlay = document.createElement('div');
-			id.add(webplateOverlay, webPrefix.basic + 'overlay');
-			if (!exists(document.getElementById(webPrefix.basic + 'overlay'))) {
+			id.add(webplateOverlay, rocketPrefix.basic + 'overlay');
+			if (!exists(document.getElementById(rocketPrefix.basic + 'overlay'))) {
 				dom.body.appendChild(webplateOverlay);
 			}
 		},
@@ -893,29 +893,29 @@ var RocketTools = (function () {
 			if (!exists(element)) {
 				return false;
 			}
-			var newWebStates = webState.list.slice().map(function (newState) {
-				return webPrefix.state + newState;
+			var newRocketStates = rocketState.list.slice().map(function (newState) {
+				return rocketPrefix.state + newState;
 			});
-			var stateClass = newWebStates.splice(newWebStates.indexOf(webPrefix.state + state), 1);
-			classMethods.replace(element, newWebStates, stateClass);
+			var stateClass = newrocketStates.splice(newrocketStates.indexOf(rocketPrefix.state + state), 1);
+			classMethods.replace(element, newRocketStates, stateClass);
 		},
 		clear: function (element) {
 			if (!exists(element)) {
 				return false;
 			}
-			var newWebStates = webState.list.slice().map(function (newState) {
-				return webPrefix.state + newState;
+			var newRocketStates = rocketState.list.slice().map(function (newState) {
+				return rocketPrefix.state + newState;
 			});
-			classMethods.remove(element, newWebStates);
+			classMethods.remove(element, newRocketStates);
 		},
 		toggle: function (element, state, clear) {
 			if (!exists(element)) {
 				return false;
 			}
-			if (webState.list.indexOf(state) > -1) {
-				var altState = webState.alts[state] || false;
+			if (rocketState.list.indexOf(state) > -1) {
+				var altState = rocketState.alts[state] || false;
 				var clear = (typeof clear === 'boolean') ? clear : false;
-				var stateClass = webPrefix.state + state;
+				var stateClass = rocketPrefix.state + state;
 				if (has.class(element, stateClass)) {
 					if (clear || altState === false) {
 						this.clear(element);
