@@ -12,6 +12,7 @@ The Webplate Tools library is a lightweight set of Javascript methods that facil
 	* [Development](#development)
 	* [DOM](#dom)
 	* [Events](#events)
+	* [Helpers](#helpers)
 
 ## Getting Started
 You can either download a copy of the source files or install Webplate Tools via Bower.
@@ -216,5 +217,10 @@ var sayHi = function () {
 };
 
 Web.event.add(button, 'click', sayHi); // Hi will be alerted every time the button is clicked.
-Web.event.remove(button, 'click', sayHi); // The sayHi function has been removed from this event.
+Web.event.remove(button, 'click', sayHi); // The sayHi function has now been removed from this event.
 ```
+
+#### Helpers
+Method | Options | Description
+---- | ----
+`helper.makeArray(val, unique)` | unique: `true` `false` | Will **attempt** to return an array based on `val`.<br>`unique` will return only uniqeu array values and defaults to `false`.
