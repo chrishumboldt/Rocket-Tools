@@ -1098,46 +1098,65 @@ var RocketTools = (function () {
 	};
 
 	// URL
-	var url = function (ret) {
-		var ret = (typeof ret === 'string') ? ret : 'all';
-		var windowLocation = window.location;
-		var fullUrl = windowLocation.href;
+	var url = {
+		all: function () {
+			var windowLocation = window.location;
+			var fullUrl = windowLocation.href;
 
-		var currentUrl = fullUrl.split('#')[0];
-		var hash = windowLocation.hash.substring(1);
-		var host = windowLocation.host;
-		var protocol = windowLocation.protocol + '//';
+			var currentUrl = fullUrl.split('#')[0];
+			var hash = windowLocation.hash.substring(1);
+			var host = windowLocation.host;
+			var protocol = windowLocation.protocol + '//';
 
-		var baseUrl = '';
-		if (document.getElementsByTagName('base').length > 0) {
-			baseUrl = document.getElementsByTagName('base')[0].href;
-		} else {
-			baseUrl = protocol + host;
-		}
-		var pathname = windowLocation.pathname;
-		var segments = [];
-		var pathnameSplit = pathname.split('/');
-		for (var i = 0, len = pathnameSplit.length; i < len; i++) {
-			if (pathnameSplit[i].indexOf('.') < 0 && pathnameSplit[i] != '') {
-				segments.push(pathnameSplit[i]);
+			var baseUrl = '';
+			if (document.getElementsByTagName('base').length > 0) {
+				baseUrl = document.getElementsByTagName('base')[0].href;
+			} else {
+				baseUrl = protocol + host;
 			}
-		}
+			var pathname = windowLocation.pathname;
+			var segments = [];
+			var pathnameSplit = pathname.split('/');
+			for (var i = 0, len = pathnameSplit.length; i < len; i++) {
+				if (pathnameSplit[i].indexOf('.') < 0 && pathnameSplit[i] != '') {
+					segments.push(pathnameSplit[i]);
+				}
+			}
 
-		var objUrl = {
-			baseUrl: baseUrl,
-			currentUrl: currentUrl,
-			fullUrl: fullUrl,
-			hash: hash,
-			host: host,
-			pathname: pathname,
-			protocol: protocol,
-			segments: segments
-		};
-
-		if (ret === 'all') {
-			return objUrl;
-		} else {
-			return objUrl[ret];
+			return {
+				base: baseUrl,
+				current: currentUrl,
+				full: fullUrl,
+				hash: hash,
+				host: host,
+				pathname: pathname,
+				protocol: protocol,
+				segments: segments
+			};
+		},
+		base: function () {
+			return url.all().base;
+		},
+		current: function () {
+			return url.all().current;
+		},
+		full: function () {
+			return url.all().full;
+		},
+		hash: function () {
+			return url.all().hash;
+		},
+		host: function () {
+			return url.all().host;
+		},
+		pathname: function () {
+			return url.all().pathname;
+		},
+		protocol: function () {
+			return url.all().protocol;
+		},
+		segments: function () {
+			return url.all().segments;
 		}
 	};
 

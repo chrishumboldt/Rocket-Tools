@@ -25,6 +25,7 @@ The Rocket Tools library is a lightweight set of Javascript methods that facilit
 	* [Storage](#storage-1)
 	* [Strings](#strings)
 	* [Time](#time)
+	* [URL](#url)
 
 ## Getting Started
 You can either download a copy of the source files or install Rocket Tools via Bower.
@@ -443,3 +444,45 @@ Rocket.time.full(myDate); // Returns the time in format '21:17:5'
 
 Rocket.time.minutes(5); // Returns '300000' milliseconds
 ```
+
+#### URL
+Method | Description
+---- | ----
+`url.all()` | Returns an object containing all URL information. This includes:<br>`base`, `current`, `full`, `hash`, `host`, `pathname`, `protocol` and `segments`.
+`url.base()` | Returns the `base` of URL.
+`url.current()` | Returns the `current` URL.
+`url.full()` | Returns the `full` URL.
+`url.hash()` | Returns the `hash` of URL.
+`url.host()` | Returns the `host` of URL.
+`url.pathname()` | Returns the `pathname` of URL.
+`url.protocol()` | Returns the `protocol` of URL.
+`url.segments()` | Returns the `segments` of URL.
+
+```javascript
+// Let assume the current URL is:
+// http://chrishumboldt.com/rocket/test.html
+
+Rocket.url.base(); // Returns 'http://chrishumboldt.com'
+Rocket.url.pathname(); // Returns '/rocket/test.html'
+```
+
+## Author
+Created and maintained by Chris Humboldt<br>
+Website: <a href="http://chrishumboldt.com/">chrishumboldt.com</a><br>
+Twitter: <a href="https://twitter.com/chrishumboldt">twitter.com/chrishumboldt</a><br>
+GitHub <a href="https://github.com/chrishumboldt">github.com/chrishumboldt</a><br>
+
+## Copyright and License
+Copyright 2016 Rocket Project
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
