@@ -112,10 +112,10 @@ Property | Default
 `defaults.request.withCredentials` | `false`
 
 #### Storage
-Property | Default
+Property | Options | Default
 ---- | ----
-`defaults.storage.name` | `false`
-`defaults.storage.type` | `session`
+`defaults.storage.name` | | `false`
+`defaults.storage.type` | `local` `session` | `session`
 
 ```javascript
 /*
