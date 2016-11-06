@@ -23,6 +23,7 @@ The Rocket Tools library is a lightweight set of Javascript methods that facilit
 	* [Request](#request-1)
 	* [States](#states)
 	* [Storage](#storage-1)
+	* [Strings](#strings)
 
 ## Getting Started
 You can either download a copy of the source files or install Rocket Tools via Bower.
@@ -399,4 +400,26 @@ Rocket.storage.get('name'); // Return 'Chris Humboldt'
 Rocket.storage.remove('name');
 
 Rocket.storage.clear(); // Storage with name 'my-storage-name' will no longer exist.
+```
+
+#### Strings
+Method | Description
+---- | ----
+`string.format.bytes(bytes)` | Format the integer `bytes` into a human readable form.<br>This will output KB, MB, GB as needed.
+`string.lowercase.all(str)` | Lowercase all characters of `str`.
+`string.lowercase.first(str)` | Lowercase the first character of `str`.
+`string.lowercase.last(str)` | Lowercase the last character of `str`.
+`string.remove.first(str)` | Remove the first character of `str`.
+`string.remove.firstAndLast(str)` | Remove the first and last characters of `str`.
+`string.remove.last(str)` | Remove the last character of `str`.
+`string.remove.spaces(str)` | Remove all space characters of `str`.
+`string.uppercase.all(str)` | Uppercase all characters of `str`.
+`string.uppercase.first(str)` | Uppercase the first character of `str`.
+`string.uppercase.last(str)` | Uppercase the last character of `str`.
+
+```javascript
+var myString = 'hello bright world!'.
+
+Rocket.string.remove.firstAndLast(myString); // Returns 'ello bright world'
+Rocket.string.uppercase.all(myString); // Returns 'HELLO BRIGHT WORLD!'
 ```
