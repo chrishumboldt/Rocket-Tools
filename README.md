@@ -334,7 +334,7 @@ Option | Default | Description
 ---- | ---- | ----
 `url` | | Set the request `URL`.
 `async` | `true` | Determine if request must be asynchronous.
-`data` | `false` | Attach data to the request. `GET` request data ia attached as a query string. `POST` request data is attached in the body.
+`data` | `false` | Attach data to the request. `GET` request data is attached as a query string. `POST` request data is attached in the body.
 `dataForce` | `false` | If set, force the way data is attached. In this way you can attach a body to a `GET` request. The options are `queryString` or `body`.
 `dataType` | `json` | Set the data type that you will be sending. The options are `json`, `form` or `formdata`.
 `headers` | `false` | Attach custom headers to the request.
