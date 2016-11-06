@@ -9,6 +9,7 @@ The Webplate Tools library is a lightweight set of Javascript methods that facil
 	* [Basic Checks](#basic-checks)
 	* [Classes](#classes)
 	* [Dates](#dates)
+	* [Development](#development)
 
 ## Getting Started
 You can either download a copy of the source files or install Webplate Tools via Bower.
@@ -87,7 +88,7 @@ Below is a list of the all the methods with a description.
 #### Basic Checks
 Method | Description
 ---- | ----
-`exists(x)` | Check if **x** exists. This is based on a null, undefined and false check.
+`exists(x)` | Check if **x** exists. This is based on a `null`, `undefined` and `false` check.
 `has.spaces(str)` | Check if string **str** has any spaces.
 `has.class(el, class)` | Check if element **el** has the class name **class**.
 `has.extension(str, ext)` | Check if string **str** has an extension in array **ext**.<br>**ext** checks against the all extensions array and is optional.
@@ -147,19 +148,24 @@ Web.class.add(elms, 'block');
 ```
 
 #### Dates
-The arguments in the date methods below are all **optional**. Also if no **date** is provided or is false, then the current date and time will be used.
+The arguments in the date methods below are all **optional**. Also if no **date** is provided or is `false`, then the current date and time will be used.
 
 Method | Options | Description
 ---- | ---- | ----
-`date.basic(date, time)` | time = true, false | Return a basic date value.<br>**time** defaults to false.
+`date.basic(date, time)` | time = `true`, `false` | Return a basic date value.<br>**time** defaults to `false`.
 `date.crtDB()` | | Will return the current date in a standard db format. <br>"yyyy-mm-dd"
-`date.day(date, type)` | type = short, long | Return the day value of **date**.<br>A **type** of "long" adds a leading zero if required.
-`date.month(date, type)` | type = short, long, number | Return the month value of **date**.
-`date.toISO(date, time)` | time = true, false | Attempt to transform **date** into an ISO format.<br>**time** defaults to false.
+`date.day(date, type)` | type = `short`, `long` | Return the day value of **date**.<br>A **type** of "long" adds a leading zero if required.
+`date.month(date, type)` | type = `short`, `long`, `number` | Return the month value of **date**.
+`date.toISO(date, time)` | time = `true`, `false` | Attempt to transform **date** into an ISO format.<br>**time** defaults to `false`.
 `date.transform(date)` | | Attempt to transform **date** into a Javascript date.
-`date.month(date, type)` | type = short, long | Return the year value of **date**.
+`date.year(date, type)` | type = short, long | Return the year value of **date**.
 
 ```javascript
-Web.date.basic('04-22-2016', true) // 22 April 2016, 16:45
-Web.date.month('04-22-2016', 'long') // March
+Web.date.basic('22-04-2016', true) // 22 April 2016, 16:45
+Web.date.month('22-04-2016', 'long') // March
 ```
+
+#### Development
+Method | Description
+---- | ----
+`Web.log(text)` | Console log **text** if the window.log option is available. The `defaults.log` option must also be set to `true`.
