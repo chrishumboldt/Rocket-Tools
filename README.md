@@ -225,3 +225,17 @@ Method | Options | Description
 ---- | ---- | ----
 `helper.makeArray(val, unique)` | unique: `true` `false` | Will **attempt** to return an array based on `val`.<br>`unique` will return only unique array values.<br>`unique` defaults to `false`.
 `helper.setDefault(val, default)` | | Will compare `val` to `default` and return.<br>Should be used for **matching value types** only.
+
+```javascript
+var myElement = document.getElementById('#element');
+var myNumbers = [1,1,2,3,4,5,5,5,5];
+var myString = 'This is a simple string';
+
+Web.helper.makeArray(myElement); // Returns [element]
+Web.helper.makeArray(myNumbers); // Returns [1,1,2,3,4,5,5,5,5]
+Web.helper.makeArray(myNumbers, true) // Returns [1,2,3,4,5]
+Web.helper.makeArray(myString) // Returns ['This', 'is', 'a', 'simple', 'string']
+
+Web.helper.setDefault(awesome, myString); // Returns 'This is a simple string' as awesome is undefined.
+Web.helper.setDefault('Coolio', myString); // Returns 'Coolio' as the types match to string.
+```
