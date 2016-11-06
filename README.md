@@ -158,7 +158,7 @@ Web.class.add(elms, 'block');
 ```
 
 #### Dates
-The arguments in the date methods below are all `optional`. Also if no `date` is provided or is `false`, then the current date and time will be used.
+The arguments in the date methods below are all optional. Also if no `date` is provided or is `false`, then the current date and time will be used.
 
 Method | Options | Description
 ---- | ---- | ----
@@ -275,6 +275,8 @@ Web.input.enable('.form-input');
 ```
 
 #### Random
+All arguments are `optional`.
+
 Method | Description
 ---- | ----
 `random.integer(max, min)` | Return a random integer ranging from `min` to `max`.<br>`max` defaults to 10 and `min` defaults to 1.
