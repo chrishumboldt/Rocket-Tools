@@ -90,6 +90,23 @@ You can overwrite the library options globally by altering the defaults. To do s
 | `defaults.regexp.time` | /([01]\d|2[0-3]):([0-5]\d)/ |
 | `defaults.regexp.url` | /(https?:\/\/[^\s]+)/g |
 
+#### Request
+Property | Default
+---- | ----
+`defaults.request.async` | `true`
+`defaults.request.data` | `false`
+`defaults.request.dataForce` | `false`
+`defaults.request.dataType` | 'json'
+`defaults.request.headers` | `false`
+`defaults.request.onStart` | `false`
+`defaults.request.onLoading` | `false`
+`defaults.request.onSuccess` | `false`
+`defaults.request.onError` | `false`
+`defaults.request.onEnd` | `false`
+`defaults.request.timeout` | `false`
+`defaults.request.type` | `false`
+`defaults.request.withCredentials` | `false`
+
 ```javascript
 /*
 This allows you to use the Rocket.log() method throughout your project
@@ -297,7 +314,7 @@ Method | Description
 `request.run(options)` | Make a request of your choice. See the available options below.
 
 ##### Options
-**Note** that all defaults are set from the [request defaults](#request) above.
+**Note** that all defaults are set by the [request defaults](#request) above.
 
 Option | Default | Description
 ---- | ---- | ----
