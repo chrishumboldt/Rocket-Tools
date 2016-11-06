@@ -113,7 +113,7 @@ Property | Default
 
 #### Storage
 Property | Options | Default
----- | ----
+---- | ---- | ----
 `defaults.storage.name` | | `false`
 `defaults.storage.type` | `local` `session` | `session`
 
