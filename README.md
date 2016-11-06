@@ -204,7 +204,7 @@ Method | Options | Description
 
 ```javascript
 Rocket.date.basic('22-04-2016', true) // 22 April 2016, 16:45
-Rocket.date.month('22-04-2016', 'long') // March
+Rocket.date.month('12-03-2016', 'long') // March
 ```
 
 #### Development
