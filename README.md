@@ -257,3 +257,12 @@ Web.id.remove(elm, 'my-element');
 ```
 
 #### Inputs
+Method | Description
+---- | ----
+`input.disable(sel)` | Select all elements (inputs) with selector `sel`.<br>Set a `disabled` attribute on each element.
+`input.enable(sel)` | Select all elements (inputs) with selector `sel`.<br>Remove the `disabled` attribute from each element.
+
+```javascript
+Web.input.disable('.form-input');
+Web.input.enable('.form-input');
+```
