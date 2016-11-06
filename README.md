@@ -1,5 +1,5 @@
 # Rocket Tools
-The Rocket Tools library is a lightweight set of Javascript methods that facilitate quicker and easier development.
+The Rocket Tools library is a lightweight (16 KB) set of Javascript methods that facilitate quicker and easier development.
 
 * [Getting Started](#getting-started)
 * [Getting Started With NPM](#getting-started-with-npm)
@@ -65,11 +65,9 @@ The library is initialized and assigned to a variable of your choice, although f
 // Initialize
 var Rocket = new RocketTools;
 
-// Convert a string to uppercase
-var boldName = Rocket.string.uppercase.all('Chris Humboldt');
-
-// Generate a random integer
-var randomNumber = Rocket.random.integer();
+// Some methods
+var boldName = Rocket.string.uppercase.all('Chris Humboldt'); // Convert a string to uppercase
+var randomNumber = Rocket.random.integer(); // Generate a random integer
 ```
 
 Make sure not to overwrite or reassign this variable name to anything else within your project.
