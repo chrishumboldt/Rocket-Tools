@@ -17,6 +17,7 @@ The Webplate Tools library is a lightweight set of Javascript methods that facil
 	* [Helpers](#helpers)
 	* [ID's](#ids)
 	* [Inputs](#inputs)
+	* [Random](#random)
 
 ## Getting Started
 You can either download a copy of the source files or install Webplate Tools via Bower.
@@ -272,3 +273,9 @@ Method | Description
 Web.input.disable('.form-input');
 Web.input.enable('.form-input');
 ```
+
+#### Random
+Method | Description
+---- | ----
+`random.integer(max, min)` | Return a random integer ranging from `min` to `max`.<br>`max` defaults to 10 and `min` defaults to 1.
+`random.string(len, text)` | Return a random alphanumeric string of length `len`.<br>`text` defaults to `false` but if `true` will exclude integers.<br>`len` defaults to 5.
