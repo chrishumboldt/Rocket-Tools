@@ -18,6 +18,7 @@ The Rocket Tools library is a lightweight set of Javascript methods that facilit
 	* [ID's](#ids)
 	* [Inputs](#inputs)
 	* [Random](#random)
+	* [Request](#request)
 
 ## Getting Started
 You can either download a copy of the source files or install Rocket Tools via Bower.
@@ -284,3 +285,12 @@ Method | Description
 ---- | ----
 `random.integer(max, min)` | Return a random integer ranging from `min` to `max`.<br>`max` defaults to 10 and `min` defaults to 1.
 `random.string(len, text)` | Return a random alphanumeric string of length `len`.<br>`text` defaults to `false` but if `true` will exclude integers. `len` defaults to 5.
+
+#### Request
+Method | Description
+---- | ----
+`request.delete(options)` | Make a `DELETE` request. See the available options below.
+`request.get(options)` | Make a `GET` request. See the available options below.
+`request.post(options)` | Make a `POST` request. See the available options below.
+`request.put(options)` | Make a `PUT` request. See the available options below.
+`request.run(options)` | Make a request of your choice. See the available options below.

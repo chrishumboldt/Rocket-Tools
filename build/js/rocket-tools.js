@@ -45,6 +45,21 @@ var RocketTools = (function () {
 			password: /^(?=.*\d).{6,}/,
 			time: /([01]\d|2[0-3]):([0-5]\d)/,
 			url: /(https?:\/\/[^\s]+)/g
+		},
+		request = {
+			async: true,
+			data: false,
+			dataForce: false,
+			dataType: 'json',
+			headers: false,
+			onStart: false,
+			onLoading: false,
+			onSuccess: false,
+			onError: false,
+			onEnd: false,
+			timeout: false,
+			type: false,
+			withCredentials: false
 		}
 	}
 	// Variables
@@ -730,41 +745,25 @@ var RocketTools = (function () {
 		}
 	};
 	var request = (function () {
-		var defaults = {
-			async: true,
-			data: false,
-			dataForce: false,
-			dataType: 'json',
-			headers: false,
-			onStart: false,
-			onLoading: false,
-			onSuccess: false,
-			onError: false,
-			onEnd: false,
-			timeout: false,
-			type: false,
-			withCredentials: false
-		};
 		var run = function (uOptions) {
 			if (!exists(uOptions) || !exists(uOptions.url)) {
 				return false;
 			}
-
 			var options = {
 				url: uOptions.url,
-				async: (typeof uOptions.async === 'string') ? uOptions.async : defaults.async,
+				async: (typeof uOptions.async === 'string') ? uOptions.async : defaults.request.async,
 				data: (exists(uOptions.data)) ? uOptions.data : defaults.data,
-				dataForce: (typeof uOptions.dataForce === 'string') ? uOptions.dataForce : defaults.dataForce,
-				dataType: (exists(uOptions.dataType)) ? uOptions.dataType : defaults.dataType,
-				headers: (typeof uOptions.headers === 'object') ? uOptions.headers : defaults.headers,
-				onStart: (typeof uOptions.onStart === 'function') ? uOptions.onStart : defaults.onStart,
-				onLoading: (typeof uOptions.onLoading === 'function') ? uOptions.onLoading : defaults.onLoading,
-				onSuccess: (typeof uOptions.onSuccess === 'function') ? uOptions.onSuccess : defaults.onSuccess,
-				onError: (typeof uOptions.onError === 'function') ? uOptions.onError : defaults.onError,
-				onEnd: (typeof uOptions.onEnd === 'function') ? uOptions.onEnd : defaults.onEnd,
-				timeout: (typeof uOptions.timeout === 'number') ? time.seconds(uOptions.timeout) : defaults.timeout,
-				type: (exists(uOptions.type)) ? string.uppercase.all(uOptions.type) : defaults.type,
-				withCredentials: (typeof uOptions.withCredentials === 'boolean') ? uOptions.withCredentials : defaults.withCredentials
+				dataForce: (typeof uOptions.dataForce === 'string') ? uOptions.dataForce : defaults.request.dataForce,
+				dataType: (exists(uOptions.dataType)) ? uOptions.dataType : defaults.request.dataType,
+				headers: (typeof uOptions.headers === 'object') ? uOptions.headers : defaults.request.headers,
+				onStart: (typeof uOptions.onStart === 'function') ? uOptions.onStart : defaults.request.onStart,
+				onLoading: (typeof uOptions.onLoading === 'function') ? uOptions.onLoading : defaults.request.onLoading,
+				onSuccess: (typeof uOptions.onSuccess === 'function') ? uOptions.onSuccess : defaults.request.onSuccess,
+				onError: (typeof uOptions.onError === 'function') ? uOptions.onError : defaults.request.onError,
+				onEnd: (typeof uOptions.onEnd === 'function') ? uOptions.onEnd : defaults.request.onEnd,
+				timeout: (typeof uOptions.timeout === 'number') ? time.seconds(uOptions.timeout) : defaults.request.timeout,
+				type: (exists(uOptions.type)) ? string.uppercase.all(uOptions.type) : defaults.request.type,
+				withCredentials: (typeof uOptions.withCredentials === 'boolean') ? uOptions.withCredentials : defaults.request.withCredentials
 			};
 			var xhr = new XMLHttpRequest();
 			xhr.withCredentials = options.withCredentials;
@@ -880,7 +879,6 @@ var RocketTools = (function () {
 		};
 
 		return {
-			defaults: defaults,
 			delete: runDelete,
 			get: runGet,
 			post: runPost,
