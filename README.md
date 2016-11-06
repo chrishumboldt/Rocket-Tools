@@ -5,6 +5,7 @@ The Webplate Tools library is a lightweight set of Javascript methods that facil
 * [Getting Started With NPM](#getting-started-with-npm)
 * [Initialization](#initialization)
 	* [Defaults](#defaults)
+		* [Regular Expressions](#regular-expressions)
 * [Methods](#methods)
 	* [Basic Checks](#basic-checks)
 	* [Classes](#classes)
@@ -68,6 +69,10 @@ You can overwrite the library options globally by altering the defaults. To do s
 | `defaults.extensions.all` | ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv'] |
 | `defaults.extensions.images` | ['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png'] |
 | `defaults.log` | true |
+
+##### Regular Expressions
+| Property | Default |
+| ---- | ---- |
 | `defaults.regexp.colour` | /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/ |
 | `defaults.regexp.date` | /^[0-9]{4}-[0-9]{2}-[0-9]{2}/ |
 | `defaults.regexp.email` | /([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i |
@@ -77,7 +82,6 @@ You can overwrite the library options globally by altering the defaults. To do s
 | `defaults.regexp.time` | /([01]\d|2[0-3]):([0-5]\d)/ |
 | `defaults.regexp.url` | /(https?:\/\/[^\s]+)/g |
 
-##### Example
 ```javascript
 /*
 This allows you to use the Web.log() method throughout your project
