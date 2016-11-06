@@ -324,13 +324,13 @@ Option | Default | Description
 `async` | `true` | Determine if request must be asynchronous.
 `data` | `false` | Attach data to the request. `GET` request date it attached as a query string. `POST` request data is attached in the body.
 `dataForce` | `false` | If set, force the way data is attached. In this way you can attach a body to a `GET` request. The options are `queryString` or `body`.
-`dataType` | `json` | Set the data type that you will be sending. The options are `json`, `form` or `formdate`.
+`dataType` | `json` | Set the data type that you will be sending. The options are `json`, `form` or `formdata`.
 `headers` | `false` | Attach custom headers to the request.
 `onComplete` | `false` | Attach a function to execute once the request is complete.
 `onError` | `false` | Attach a function to execute if the request is unsuccessful. The `error`, `status` and `header` variables are returned.
 `onLoading` | `false` | Attach a function to execute while the request is loading. This is a continuous state.
 `onStart` | `false` | Attach a function to execute as the request is made.
-`onSuccess` | `false` | Attach a function to execute if the request is successful. The `error`, `status` and `header` variables are returned.
+`onSuccess` | `false` | Attach a function to execute if the request is successful. The `data`, `status` and `header` variables are returned.
 `timeout` | `false` | Set the request timeout in seconds.
 `type` | `false` | Set the type of request made. **Only used** on the `Rocket.request.run()` method.
 `withCredentials` | `false` | Set the `withCredentials` option for the request.
