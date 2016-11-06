@@ -222,7 +222,7 @@ Method | Description
 `dom.body` | Access the document body element.
 `dom.html` | Access the document html element.
 `dom.ratio(sel, int)` | Select all elements with selector `sel`.<br>Set the height values to the width values times `int`.
-`dom.remove(val)` | Remove all elements. `val` can either be an element or a selector.
+`dom.remove(val)` | Remove element(s). `val` can either be an element or a selector.
 `dom.select(sel)` | Select all elements with selector `sel`.<br>**Always** returns an array even if unique selector was used.
 `dom.title` | Access the document title element.
 `dom.wallpaper(sel)` | Select all elements with selector `sel`.<br>Set the background image of the element to the elements `data-background` attribute.<br>The background size property will be set to cover.
