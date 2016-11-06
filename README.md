@@ -4,8 +4,8 @@ The Webplate Tools library is a lightweight set of Javascript methods that facil
 * [Getting Started](#getting-started)
 * [Getting Started With NPM](#getting-started-with-npm)
 * [Initialization](#initialization)
-	* [Defaults](#defaults)
-		* [Regular Expressions](#regular-expressions)
+* [Defaults](#defaults)
+	* [Regular Expressions](#regular-expressions)
 * [Methods](#methods)
 	* [Basic Checks](#basic-checks)
 	* [Classes](#classes)
@@ -61,7 +61,7 @@ var randomNumber = Web.random.integer();
 
 Make sure not to overwrite or reassign this variable name to anything else within your project.
 
-#### Defaults
+## Defaults
 You can overwrite the library options globally by altering the defaults. To do so reference the defaults object property.
 
 | Property | Default |
@@ -70,7 +70,7 @@ You can overwrite the library options globally by altering the defaults. To do s
 | `defaults.extensions.images` | ['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png'] |
 | `defaults.log` | true |
 
-##### Regular Expressions
+#### Regular Expressions
 | Property | Default |
 | ---- | ---- |
 | `defaults.regexp.colour` | /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/ |
