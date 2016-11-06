@@ -233,15 +233,14 @@ Method | Description
 <div class="example" data-background="img/cool-image-2.jpg"></div>
 
 <script>
+Rocket.dom.title.innerHTML = 'New Title'; // The document title is now changed.
 Rocket.dom.ratio('#example', 1.5); // The elements height will now be 75px.
 Rocket.dom.wallpaper('.example'); // A background style is now applied.
 
 Rocket.dom.select('.example'); // Both elements are returned in an array.
 Rocket.dom.select('#example')[0]; // This is how you would reference a unique element.
 
-Rocket.dom.title.innerHTML = 'New Title'; // The document title is now changed.
-
-Rocket.dom.remove('#exmaple'); // Remove with selector
+Rocket.dom.remove('#example'); // Remove with selector
 Rocket.dom.remove(document.getElementById('exmaple')); // Remove element directly
 </script>
 ```
