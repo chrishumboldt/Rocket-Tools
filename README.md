@@ -56,7 +56,7 @@ Once done require Rocket Tools as you would any other module.
 var Rocket = require('rocket-tools');
 ```
 
-`NOTE:` There are slight differences between the Node and standard library files. These differences should not affect its usage but please report any issue should you find any.
+**NOTE** that there are slight differences between the NodeJS and standard library files. These differences should not affect its usage but please report any issue should you find any.
 
 ## Initialization
 The library is initialized and assigned to a variable of your choice, although for the sake of convenience it is recommended to use `Rocket`. This variable acts as the libraries namespace and scopes all methods to this declaration. An example can be seen below:
@@ -328,7 +328,7 @@ Method | Description
 `request.put(options)` | Make a `PUT` request. See the available `options` below.
 `request.run(options)` | Make a request of your choice. See the available `options` below.
 
-**Note** that all defaults are set by the [request defaults](#request) above.
+**NOTE** that all defaults are set by the [request defaults](#request) above.
 
 Option | Default | Description
 ---- | ---- | ----
@@ -385,7 +385,7 @@ Rocket.state.toggle(elm, 'visible'); // The class has now be changed to '_state-
 ```
 
 #### Storage
-These methods facade the browser storage API by putting all data into a JSON object. **Note** that in order to use these methods you need to first set the [defaults storage](#storage) name.
+These methods facade the browser storage API by putting all data into a JSON object. **NOTE** that in order to use these methods you need to first set the [defaults storage](#storage) name.
 
 Method | Description
 ---- | ----
