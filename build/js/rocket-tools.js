@@ -540,7 +540,7 @@ var RocketTools = (function () {
 		},
 		select: function (selector) {
 			if (selector.indexOf('.') > -1 || has.spaces(selector)) {
-				var returnElements = dom.select(selector);
+				var returnElements = document.querySelectorAll(selector);
 				if (returnElements.length > 0) {
 					return returnElements;
 				}
