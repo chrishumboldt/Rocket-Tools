@@ -932,12 +932,7 @@ var RocketTools = (function () {
 				return false;
 			}
 			var store = storage.getStorageEngine();
-			// Catch
-			if (!store) {
-				return false;
-			}
-			// Continue
-			store = helper.parse.json(store);
+
 			store[name] = value;
 			switch (defaults.storage.type) {
 				case 'local':
@@ -961,11 +956,10 @@ var RocketTools = (function () {
 			}
 			var store = storage.getStorageEngine();
 			// Catch
-			if (!store) {
+			if (!exists(store[key])) {
 				return false;
 			}
 			// Continue
-			store = helper.parse.json(store);
 			return store[key];
 		},
 		getStorageEngine: function () {
@@ -975,18 +969,21 @@ var RocketTools = (function () {
 				return false;
 			}
 			// Continue
+			var store;
 			switch (defaults.storage.type) {
 				case 'local':
-					return localStorage.getItem(defaults.storage.name);
+					store = localStorage.getItem(defaults.storage.name);
 					break;
 
 				case 'session':
-					return sessionStorage.getItem(defaults.storage.name);
+					store = sessionStorage.getItem(defaults.storage.name);
 					break;
-
-				default:
-					return false;
 			}
+			// Return
+			if (store) {
+				return helper.parse.json(store);
+			}
+			return {};
 		},
 		remove: function (key) {
 			if (!exists(key)) {
@@ -994,11 +991,10 @@ var RocketTools = (function () {
 			}
 			var store = storage.getStorageEngine();
 			// Catch
-			if (!store) {
+			if (!exists(store[key])) {
 				return false;
 			}
 			// Continue
-			store = helper.parse.json(store);
 			delete store[key];
 			switch (defaults.storage.type) {
 				case 'local':
