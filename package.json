@@ -1,14 +1,14 @@
 {
    "name": "rocket-tools",
    "version": "1.0.0",
-   "description": "The Webplate Tools library is a lightweight set of Javascript methods that facilitate quicker and easier development.",
+   "description": "The Rocket Tools library is a lightweight set of Javascript methods for quicker and easier development.",
    "main": "index.js",
    "repository": {
       "type": "git",
       "url": "git+https://github.com/chrishumboldt/Webplate-Tools.git"
    },
    "keywords": [
-      "Webplate",
+      "Rocket",
       "Tools",
       "Javascript"
    ],

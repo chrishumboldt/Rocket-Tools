@@ -1,13 +1,13 @@
 {
    "name": "rocket-tools",
-   "description": "The Webplate Tools library is a lightweight set of Javascript methods that facilitate quicker and easier development.",
-   "main": "build/js/webplate-tools.js",
+   "description": "The Rocket Tools library is a lightweight set of Javascript methods for quicker and easier development.",
+   "main": "build/js/rocket-tools.js",
    "authors": [
       "Chris Humboldt"
    ],
    "license": "Apache-2.0",
    "keywords": [
-      "Webplate",
+      "Rocket",
       "Tools",
       "Javascript"
    ],
