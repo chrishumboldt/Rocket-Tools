@@ -1063,18 +1063,32 @@ var Rocket = (function () {
 	var time = {
 		basic: function (thisTime) {
 			var thisTime = date.transform(thisTime);
-			return thisTime.getHours() + ':' + thisTime.getMinutes();
+			var hours = time.leadingZero(thisTime.getHours());
+			var minutes = time.leadingZero(thisTime.getMinutes());
+			return hours + ':' + minutes;
 		},
 		exact: function (thisTime) {
 			var thisTime = date.transform(thisTime);
-			return thisTime.getHours() + ':' + thisTime.getMinutes() + ':' + thisTime.getSeconds() + ':' + thisTime.getMilliseconds();
+			var hours =  time.leadingZero(thisTime.getHours());
+			var minutes =  time.leadingZero(thisTime.getMinutes());
+			var seconds =  time.leadingZero(thisTime.getSeconds());
+			var milliseconds =  time.leadingZero(thisTime.getMilliseconds());
+
+			return hours + ':' + minutes + ':' + seconds + ':' + milliseconds;
 		},
 		full: function (thisTime) {
 			var thisTime = date.transform(thisTime);
-			return thisTime.getHours() + ':' + thisTime.getMinutes() + ':' + thisTime.getSeconds();
+			var hours = time.leadingZero(thisTime.getHours());
+			var minutes = time.leadingZero(thisTime.getMinutes());
+			var seconds = time.leadingZero(thisTime.getSeconds());
+
+			return hours + ':' + minutes + ':' + seconds;
 		},
 		hours: function (hours) {
 			return hours * 60 * 60 * 1000;
+		},
+		leadingZero: function (int) {
+			return ((int < 10) ? '0' : '') + int;
 		},
 		minutes: function (minutes) {
 			return minutes * 60 * 1000;
