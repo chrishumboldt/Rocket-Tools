@@ -580,9 +580,6 @@ var RocketTools = (function () {
 		},
 		index: function (node) {
 			return [].indexOf.call(node.parentNode.children, node);
-		},
-		integers: function (string) {
-			return string.replace(/^\D+ /g, '').replace(/ /g, '');
 		}
 	};
 

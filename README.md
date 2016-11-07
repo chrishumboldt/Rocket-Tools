@@ -16,6 +16,7 @@ The Rocket Tools library is a lightweight (16 KB) set of Javascript methods for 
 	* [Development](#development)
 	* [DOM](#dom)
 	* [Events](#events)
+	* [Gets](#gets)
 	* [Helpers](#helpers)
 	* [ID's](#ids)
 	* [Inputs](#inputs)
@@ -59,18 +60,15 @@ var Rocket = require('rocket-tools');
 **NOTE** that there are slight differences between the NodeJS and standard library files. These differences should not affect its usage but please report any issue should you find any.
 
 ## Initialization
-The library is initialized and assigned to a variable of your choice, although for the sake of convenience it is recommended to use `Rocket`. This variable acts as the libraries namespace and scopes all methods to this declaration. An example can be seen below:
+The library is automatically initialized and assigned to the variable `Rocket`. This variable acts as the libraries namespace and scopes all methods to this declaration. An example of it in use can be seen below:
 
 ```javascript
-// Initialize
-var Rocket = new RocketTools;
-
 // Some methods
 var boldName = Rocket.string.uppercase.all('Chris Humboldt'); // Convert a string to uppercase
 var randomNumber = Rocket.random.integer(); // Generate a random integer
 ```
 
-Make sure not to overwrite or reassign this variable name to anything else within your project.
+Make sure not to overwrite or reassign the `Rocket` variable name to anything else within your project.
 
 ## Defaults
 You can overwrite the library options globally by altering the defaults. To do so reference the defaults object property.
@@ -261,6 +259,16 @@ var sayHi = function () {
 
 Rocket.event.add(button, 'click', sayHi); // Hi will be alerted every time the button is clicked.
 Rocket.event.remove(button, 'click', sayHi); // The sayHi function has now been removed from this event.
+```
+
+#### Gets
+Method | Description
+---- | ----
+`get.extension(str)` | Return the extension of string `str`.
+`get.index(elm)` | Return the index integer of `elm` in its parent container.
+
+```javascript
+Rocket.get.extension('awesome.jpg'); // Returns 'jpg'.
 ```
 
 #### Helpers
