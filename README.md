@@ -201,7 +201,7 @@ Method | Options | Description
 `date.year(date, type)` | type: `short` `long` | Return the year value of `date`.<br>`type` defaults to `short`.
 
 ```javascript
-Rocket.date.basic('22-04-2016', true) // 22 April 2016, 16:45
+Rocket.date.basic('22-04-2016', true) // 22 Apr 2016, 16:45
 Rocket.date.month('12-03-2016', 'long') // March
 ```
 
