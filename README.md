@@ -449,7 +449,7 @@ Method | Description
 var myDate = new Date();
 
 Rocket.time.basic(myDate); // Returns the time in format '21:17'
-Rocket.time.full(myDate); // Returns the time in format '21:17:5'
+Rocket.time.full(myDate); // Returns the time in format '21:17:05'
 
 Rocket.time.minutes(5); // Returns '300000' milliseconds
 ```
