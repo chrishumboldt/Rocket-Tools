@@ -1,3 +1,5 @@
+#!usr/bin/env node
+
 /**
  * File: index.js
  * Type: Javascript NodeJS module file
