@@ -476,6 +476,7 @@ var RocketTools = (function () {
 
 	// Development
 	var log = function (text, error) {
+		// CHANGE
 		if (defaults.log) {
 			var error = (typeof error === 'boolean') ? error : false;
 
@@ -489,8 +490,8 @@ var RocketTools = (function () {
 
 	// DOM
 	var dom = {
-		body: (document) ? document.getElementsByTagName('body')[0] : false,
-		html: (document) ? document.getElementsByTagName('html')[0] : false,
+		body: (typeof document !== 'undefined') ? document.getElementsByTagName('body')[0] : false,
+		html: (typeof document !== 'undefined') ? document.getElementsByTagName('html')[0] : false,
 		ratio: function (selector, multiplier) {
 			var elements = document.querySelectorAll(selector);
 			if (typeof (multiplier) === 'undefined') {
@@ -535,7 +536,7 @@ var RocketTools = (function () {
 				}
 			}
 		},
-		title: (document) ? document.getElementsByTagName('title')[0] : false,
+		title: (typeof document !== 'undefined') ? document.getElementsByTagName('title')[0] : false,
 		wallpaper: function (selector) {
 			var elements = dom.select(selector);
 			for (var i = elements.length - 1; i >= 0; i--) {
@@ -545,7 +546,7 @@ var RocketTools = (function () {
 				}
 			}
 		},
-		webplateScript: (document) ? document.getElementById('webplate') : false
+		webplateScript: (typeof document !== 'undefined') ? document.getElementById('webplate') : false
 	};
 
 	// Events
