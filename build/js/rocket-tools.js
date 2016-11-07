@@ -241,14 +241,14 @@ var Rocket = (function () {
 			var arClassesAdd = helper.makeArray(classesAdd, true);
 			var arClassesRemove = helper.makeArray(classesRemove, true);
 			var actionAdd = (arClassesAdd.length > 0) ? true : false;
-			var actionRemvoe = (arClassesRemove.length > 0) ? true : false;
+			var actionRemove = (arClassesRemove.length > 0) ? true : false;
 
 			// Execute
 			for (var i = 0, len = arElements.length; i < len; i++) {
-			   if (actionAdd) {
+				if (actionAdd) {
 					classMethods.executeAdd(arElements[i], arClassesAdd)
 				}
-				if (actionRemvoe) {
+				if (actionRemove) {
 					classMethods.executeRemove(arElements[i], arClassesRemove)
 				}
 			}
