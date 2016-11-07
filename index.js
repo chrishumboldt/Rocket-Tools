@@ -476,9 +476,9 @@ var RocketTools = (function () {
 
 	// Development
 	var log = function (text, error) {
-		// CHANGE HERE
 		if (defaults.log) {
 			var error = (typeof error === 'boolean') ? error : false;
+
 			if (error) {
 				throw new Error(text);
 			} else {
@@ -489,8 +489,8 @@ var RocketTools = (function () {
 
 	// DOM
 	var dom = {
-		body: document.getElementsByTagName('body')[0],
-		html: document.getElementsByTagName('html')[0],
+		body: (document) ? document.getElementsByTagName('body')[0] : false,
+		html: (document) ? document.getElementsByTagName('html')[0] : false,
 		ratio: function (selector, multiplier) {
 			var elements = document.querySelectorAll(selector);
 			if (typeof (multiplier) === 'undefined') {
@@ -535,7 +535,7 @@ var RocketTools = (function () {
 				}
 			}
 		},
-		title: document.getElementsByTagName('title')[0],
+		title: (document) ? document.getElementsByTagName('title')[0] : false,
 		wallpaper: function (selector) {
 			var elements = dom.select(selector);
 			for (var i = elements.length - 1; i >= 0; i--) {
@@ -545,7 +545,7 @@ var RocketTools = (function () {
 				}
 			}
 		},
-		webplateScript: document.getElementById('webplate')
+		webplateScript: (document) ? document.getElementById('webplate') : false
 	};
 
 	// Events
