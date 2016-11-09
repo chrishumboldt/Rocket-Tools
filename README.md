@@ -10,6 +10,7 @@ The Rocket Tools library is a lightweight (16 KB) set of Javascript methods for 
 	* [Request](#request)
 	* [Storage](#storage)
 * [Methods](#methods)
+	* [Arrays](#arrays)
 	* [Basic Checks](#basic-checks)
 	* [Classes](#classes)
 	* [Dates](#dates)
@@ -126,6 +127,23 @@ Rocket.defaults.log = false;
 
 ## Methods
 Below is a list of the all the methods with a description.
+
+#### Arrays
+Method | Description
+---- | ----
+`array.make(val, unique)` | unique: `true` `false` | Will **attempt** to return an array based on `val`.<br>`unique` will return only unique array values.<br>`unique` defaults to `false`.
+`array.unique(ar)` | | Return only unique array values.
+
+```javascript
+var myElement = document.getElementById('#element');
+var myNumbers = [1,1,2,3,4,5,5,5,5];
+var myString = 'This is a string';
+
+Rocket.array.make(myElement); // Returns [element]
+Rocket.array.make(myNumbers); // Returns [1,1,2,3,4,5,5,5,5]
+Rocket.array.make(myNumbers, true) // Returns [1,2,3,4,5]
+Rocket.array.make(myString) // Returns ['This', 'is', 'a', 'string']
+```
 
 #### Basic Checks
 Method | Description
@@ -274,19 +292,11 @@ Rocket.get.extension('awesome.jpg'); // Returns 'jpg'.
 #### Helpers
 Method | Options | Description
 ---- | ---- | ----
-`helper.makeArray(val, unique)` | unique: `true` `false` | Will **attempt** to return an array based on `val`.<br>`unique` will return only unique array values.<br>`unique` defaults to `false`.
 `helper.parse.json(json)` | | Will attempt to safely parse `json`. |
 `helper.setDefault(val, default)` | | Will compare `val` to `default` and return.<br>Should be used for **matching value types** only.
 
 ```javascript
-var myElement = document.getElementById('#element');
-var myNumbers = [1,1,2,3,4,5,5,5,5];
 var myString = 'This is a string';
-
-Rocket.helper.makeArray(myElement); // Returns [element]
-Rocket.helper.makeArray(myNumbers); // Returns [1,1,2,3,4,5,5,5,5]
-Rocket.helper.makeArray(myNumbers, true) // Returns [1,2,3,4,5]
-Rocket.helper.makeArray(myString) // Returns ['This', 'is', 'a', 'string']
 
 Rocket.helper.setDefault(awesome, myString); // Returns 'This is a string' as awesome is undefined.
 Rocket.helper.setDefault('Coolio', myString); // Returns 'Coolio' as the types match to string.
