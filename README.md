@@ -129,8 +129,8 @@ Rocket.defaults.log = false;
 Below is a list of the all the methods with a description.
 
 #### Arrays
-Method | Description
----- | ----
+Method | Defaults | Description
+---- | ---- | ----
 `array.make(val, unique)` | unique: `true` `false` | Will **attempt** to return an array based on `val`.<br>`unique` will return only unique array values.<br>`unique` defaults to `false`.
 `array.unique(ar)` | | Return only unique array values.
 
