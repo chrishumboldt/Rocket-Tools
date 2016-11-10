@@ -1,5 +1,5 @@
 /**
- * File: build/js/rocket-tools.js
+ * File: build/js/tools.js
  * Type: Javascript tools
  * Author: Chris Humboldt
 **/
