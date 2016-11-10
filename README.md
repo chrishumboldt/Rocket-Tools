@@ -41,7 +41,7 @@ Next include the required Javascript file.
 ```html
 <body>
 	/* Your content goes here */
-	<script src="js/rocket-tools.min.js"></script>
+	<script src="rocket-tools/js/tools.min.js"></script>
 </body>
 ```
 

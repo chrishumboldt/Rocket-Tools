@@ -6,7 +6,7 @@
  * Author: Chris Humboldt
 **/
 
-var RocketTools = (function () {
+var Rocket = (function () {
 	// Defaults
 	var defaults = {
 		extensions: {
@@ -109,6 +109,50 @@ var RocketTools = (function () {
 		},
 		list: ['active', 'closed', 'hidden', 'inactive', 'open', 'selected', 'toggled', 'visible']
 	};
+
+	// Arrays
+	var array = {
+		make: function (arValue, unique) {
+			var returnArray = [];
+			// Catch
+			if (!arValue) {
+				return returnArray;
+			}
+			// Continue
+			var unique = (typeof unique === 'boolean') ? unique : false;
+			if (is.array(arValue)) {
+				// Already an array
+				if (unique) {
+					returnArray = array.unique(arValue);
+				} else {
+					returnArray = arValue;
+				}
+			} else if (is.element(arValue)) {
+				// Element
+				returnArray.push(arValue);
+			} else if (typeof arValue === 'string') {
+				// String
+				if (has.spaces(arValue)) {
+					if (unique) {
+						returnArray = arValue.split(' ').filter(function (val) {
+							return returnArray.indexOf(val) < 0;
+						});
+					} else {
+						returnArray = arValue.split(' ');
+					}
+				} else {
+					returnArray.push(arValue);
+				}
+			}
+
+			return returnArray;
+		},
+		unique: function (thisArray) {
+			return thisArray.filter(function (value, index, self) {
+				return self.indexOf(value) === index;
+			});
+		}
+	}
 
 	// Basic checks
 	var exists = function (check) {
@@ -216,17 +260,17 @@ var RocketTools = (function () {
 				return false;
 			}
 			// Create classes array
-			var arClassesAdd = helper.makeArray(classesAdd, true);
-			var arClassesRemove = helper.makeArray(classesRemove, true);
+			var arClassesAdd = array.make(classesAdd, true);
+			var arClassesRemove = array.make(classesRemove, true);
 			var actionAdd = (arClassesAdd.length > 0) ? true : false;
-			var actionRemvoe = (arClassesRemove.length > 0) ? true : false;
+			var actionRemove = (arClassesRemove.length > 0) ? true : false;
 
 			// Execute
 			for (var i = 0, len = arElements.length; i < len; i++) {
-			   if (actionAdd) {
+				if (actionAdd) {
 					classMethods.executeAdd(arElements[i], arClassesAdd)
 				}
-				if (actionRemvoe) {
+				if (actionRemove) {
 					classMethods.executeRemove(arElements[i], arClassesRemove)
 				}
 			}
@@ -476,8 +520,7 @@ var RocketTools = (function () {
 
 	// Development
 	var log = function (text, error) {
-		// CHANGE
-		if (defaults.log) {
+		if (window && window.console && defaults.log) {
 			var error = (typeof error === 'boolean') ? error : false;
 
 			if (error) {
@@ -585,43 +628,6 @@ var RocketTools = (function () {
 
 	// Helpers
 	var helper = {
-		makeArray: function (arValue, unique) {
-			var returnArray = [];
-			// Catch
-			if (!arValue) {
-				return returnArray;
-			}
-			// Continue
-			var unique = (typeof unique === 'boolean') ? unique : false;
-			if (is.array(arValue)) {
-				// Already an array
-				if (unique) {
-					returnArray = arValue.filter(function (val) {
-						return returnArray.indexOf(val) < 0;
-					});
-				} else {
-					returnArray = arValue;
-				}
-			} else if (is.element(arValue)) {
-				// Element
-				returnArray.push(arValue);
-			} else if (typeof arValue === 'string') {
-				// String
-				if (has.spaces(arValue)) {
-					if (unique) {
-						returnArray = arValue.split(' ').filter(function (val) {
-							return returnArray.indexOf(val) < 0;
-						});
-					} else {
-						returnArray = arValue.split(' ');
-					}
-				} else {
-					returnArray.push(arValue);
-				}
-			}
-
-			return returnArray;
-		},
 		parse: {
 			json: function (json) {
 				if (is.json(json)) {
@@ -1042,18 +1048,32 @@ var RocketTools = (function () {
 	var time = {
 		basic: function (thisTime) {
 			var thisTime = date.transform(thisTime);
-			return thisTime.getHours() + ':' + thisTime.getMinutes();
+			var hours = time.leadingZero(thisTime.getHours());
+			var minutes = time.leadingZero(thisTime.getMinutes());
+			return hours + ':' + minutes;
 		},
 		exact: function (thisTime) {
 			var thisTime = date.transform(thisTime);
-			return thisTime.getHours() + ':' + thisTime.getMinutes() + ':' + thisTime.getSeconds() + ':' + thisTime.getMilliseconds();
+			var hours =  time.leadingZero(thisTime.getHours());
+			var minutes =  time.leadingZero(thisTime.getMinutes());
+			var seconds =  time.leadingZero(thisTime.getSeconds());
+			var milliseconds =  time.leadingZero(thisTime.getMilliseconds());
+
+			return hours + ':' + minutes + ':' + seconds + ':' + milliseconds;
 		},
 		full: function (thisTime) {
 			var thisTime = date.transform(thisTime);
-			return thisTime.getHours() + ':' + thisTime.getMinutes() + ':' + thisTime.getSeconds();
+			var hours = time.leadingZero(thisTime.getHours());
+			var minutes = time.leadingZero(thisTime.getMinutes());
+			var seconds = time.leadingZero(thisTime.getSeconds());
+
+			return hours + ':' + minutes + ':' + seconds;
 		},
 		hours: function (hours) {
 			return hours * 60 * 60 * 1000;
+		},
+		leadingZero: function (int) {
+			return ((int < 10) ? '0' : '') + int;
 		},
 		minutes: function (minutes) {
 			return minutes * 60 * 1000;
@@ -1129,6 +1149,7 @@ var RocketTools = (function () {
 	// Return
 	return  {
 		defaults: defaults,
+		array: array,
 		exists: exists,
 		has: has,
 		is: is,
