@@ -443,7 +443,7 @@ Method | Description
 `string.uppercase.last(str)` | Uppercase the last character of `str`.
 
 ```javascript
-var myString = 'hello bright world!'.
+var myString = 'hello bright world!';
 
 Rocket.string.remove.firstAndLast(myString); // Returns 'ello bright world'
 Rocket.string.uppercase.all(myString); // Returns 'HELLO BRIGHT WORLD!'
