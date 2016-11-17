@@ -87,8 +87,6 @@ Property | Default
 `defaults.regexp.colour` | `/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/`
 `defaults.regexp.date` | `/^[0-9]{4}-[0-9]{2}-[0-9]{2}/`
 `defaults.regexp.email` | `/([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i`
-`defaults.regexp.float` | `/^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?/`
-`defaults.regexp.integer` | `/^[0-9]+/`
 `defaults.regexp.password` | `/^(?=.*\d).{6,}/`
 `defaults.regexp.time` | `/([01]\d|2[0-3]):([0-5]\d)/`
 `defaults.regexp.url` | `/(https?:\/\/[^\s]+)/g`
@@ -157,11 +155,13 @@ Method | Description
 `is.date(date, regExp)` | Check if string `date` is in a date format (`regExp` optional).
 `is.element(elm)` | Check if `elm` is a DOM element.
 `is.email(email, regExp)` | Check if string `email` is a valid email address (`regExp` optional).
-`is.float(int)` | Check if `int` is a floating point number.
-`is.integer(int)` | Check if `int` is a whole number.
+`is.function(x)` | Check if `x` is a valid function.
+`is.integer(num)` | Check if `num` is a valid whole number.
 `is.image(str, ext)` | Check if string `str` has an extension in array `ext`.<br>`ext` checks against the images extensions array and is optional.
 `is.json(json)` | Check if `json` is valid JSON.
+`is.number(num)` | Check if `num` is a valid number.
 `is.password(str, regExp)` | Check if string `str` is a password (`regExp` optional).
+`is.string(str)` | Check if `str` is a valid string type.
 `is.time(str, regExp)` | Check if string `str` is a valid time value (`regExp` optional).
 `is.touch()` | A very basic touchscreen check on the current window.
 `is.url(str, regExp)` | Check if string `str` is a valid url (`regExp` optional).
@@ -176,7 +176,7 @@ Rocket.has.spaces('This is a test'); // true
 Rocket.has.class(elm, 'example'); // true
 Rocket.has.extension(filename, ['jpg', 'png']); // false
 
-Rocket.is.integer(filename); // false
+Rocket.is.number(filename); // false
 Rocket.is.time(time); // true
 ```
 
