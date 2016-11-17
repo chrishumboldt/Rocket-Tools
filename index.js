@@ -39,8 +39,11 @@ var RocketTools = (function () {
 			colour: /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/,
 			date: /^[0-9]{4}-[0-9]{2}-[0-9]{2}/,
 			email: /([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i,
-			float: /^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?/,
 			password: /^(?=.*\d).{6,}/,
+			selector: {
+				attribute: /([a-z])+\[([a-z])+(=)+([a-z"=]+)\]/,
+				tag: /^[a-zA-Z]+$/
+			},
 			time: /([01]\d|2[0-3]):([0-5]\d)/,
 			url: /(https?:\/\/[^\s]+)/g
 		},
@@ -132,6 +135,16 @@ var RocketTools = (function () {
 
 	// Arrays
 	var array = {
+		clean: function (thisArray) {
+			// Catch
+			if (!is.array(thisArray)) {
+				return false;
+			};
+			// Continue
+			return thisArray.filter(function (value) {
+				return (value !== null);
+			});
+		},
 		make: function (arValue, unique) {
 			var returnArray = [];
 			// Catch
@@ -168,6 +181,11 @@ var RocketTools = (function () {
 			return returnArray;
 		},
 		unique: function (thisArray) {
+			// Catch
+			if (!is.array(thisArray)) {
+				return false;
+			};
+			// Continue
 			return thisArray.filter(function (value, index, self) {
 				return self.indexOf(value) === index;
 			});
@@ -546,7 +564,7 @@ var RocketTools = (function () {
 
 	// Development
 	var log = function (text, error) {
-		if (window && window.console && defaults.log) {
+		if (defaults.log) {
 			var error = (typeof error === 'boolean') ? error : false;
 
 			if (error) {
@@ -586,24 +604,34 @@ var RocketTools = (function () {
 				}
 			}
 		},
-		select: function (selector) {
-			if (selector.indexOf('.') > -1 || has.spaces(selector)) {
-				var returnElements = document.querySelectorAll(selector);
-				if (returnElements.length > 0) {
-					return returnElements;
-				}
-				return false;
-			} else {
-				if (selector.indexOf('#') > -1) {
-					return [document.getElementById(selector.substring(1))];
-				} else {
-					var returnElements = document.getElementsByTagName(selector);
-					if (returnElements.length > 0) {
-						return returnElements;
+		select: function (selectors) {
+			var returnElms = [];
+			// Catch
+			if (!exists(selectors)) {
+				return returnElms;
+			}
+			// Continue
+			var selectorSplit = selectors.split(',').map(string.trim).filter(function (selector) {
+				return selector.length > 0;
+			});
+			if (selectorSplit.length > 0) {
+				for (var i = 0, len = selectorSplit.length; i < len; i++) {
+					// Select the elements
+					switch (get.selector.type(selectorSplit[i])) {
+						case 'gebi':
+							returnElms = returnElms.concat(document.getElementById(selectorSplit[i].substring(1)));
+							break;
+						case 'gebtn':
+							returnElms = returnElms.concat(Array.prototype.slice.call(document.getElementsByTagName(selectorSplit[i])));
+							break;
+						case 'qsa':
+							returnElms = returnElms.concat(Array.prototype.slice.call(document.querySelectorAll(selectorSplit[i])));
+							break;
 					}
-					return false;
 				}
 			}
+			// Return
+			return array.clean(array.unique(returnElms));
 		},
 		title: (typeof document !== 'undefined') ? document.getElementsByTagName('title')[0] : false,
 		wallpaper: function (selector) {
@@ -649,6 +677,19 @@ var RocketTools = (function () {
 		},
 		index: function (node) {
 			return [].indexOf.call(node.parentNode.children, node);
+		},
+		selector: {
+			type: function (selector) {
+				var selectType = false;
+				if (selector.indexOf('.') > -1 || has.spaces(selector) || defaults.regexp.selector.attribute.test(selector)) {
+					selectType = 'qsa';
+				} else if (selector.indexOf('#') > -1) {
+					selectType = 'gebi';
+				} else if (defaults.regexp.selector.tag.test(selector)) {
+					selectType = 'gebtn';
+				}
+				return selectType;
+			}
 		}
 	};
 
@@ -1056,6 +1097,9 @@ var RocketTools = (function () {
 			spaces: function (string) {
 				return string.replace(/ /g, '');
 			}
+		},
+		trim: function (string) {
+			return string.replace(/^ /, '').replace(/ +$/, '');
 		},
 		uppercase: {
 			all: function (string) {

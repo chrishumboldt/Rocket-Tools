@@ -129,8 +129,9 @@ Below is a list of the all the methods with a description.
 #### Arrays
 Method | Defaults | Description
 ---- | ---- | ----
+`array.clean(ar)` | | Remove any `null` values from array `ar`.
 `array.make(val, unique)` | unique: `true` `false` | Will **attempt** to return an array based on `val`.<br>`unique` will return only unique array values.<br>`unique` defaults to `false`.
-`array.unique(ar)` | | Return only unique array values.
+`array.unique(ar)` | | Return only unique array values from array `ar`.
 
 ```javascript
 var myElement = document.getElementById('#element');
@@ -434,6 +435,7 @@ Method | Description
 `string.remove.firstAndLast(str)` | Remove the first and last characters of `str`.
 `string.remove.last(str)` | Remove the last character of `str`.
 `string.remove.spaces(str)` | Remove all space characters of `str`.
+`string.trim(str)` | Remove the white space from before and after `str`.
 `string.uppercase.all(str)` | Uppercase all characters of `str`.
 `string.uppercase.first(str)` | Uppercase the first character of `str`.
 `string.uppercase.last(str)` | Uppercase the last character of `str`.
