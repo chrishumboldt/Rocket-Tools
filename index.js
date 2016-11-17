@@ -27,13 +27,19 @@ var RocketTools = (function () {
 			dots: true,
 			position: 1,
 		},
+		form: {
+			selector: '.form',
+			colour: 'blue',
+			label: 'normal',
+			size: 'normal',
+			style: 'line'
+		},
 		log: true,
 		regexp: {
 			colour: /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/,
 			date: /^[0-9]{4}-[0-9]{2}-[0-9]{2}/,
 			email: /([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i,
 			float: /^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?/,
-			integer: /^[0-9]+/,
 			password: /^(?=.*\d).{6,}/,
 			time: /([01]\d|2[0-3]):([0-5]\d)/,
 			url: /(https?:\/\/[^\s]+)/g
@@ -185,11 +191,11 @@ var RocketTools = (function () {
 		}
 	};
 	var is = {
-		array: function (array) {
-			return (typeof array === 'object' && array instanceof Array) ? true : false;
+		array: function (check) {
+			return (typeof check === 'object' && check instanceof Array) ? true : false;
 		},
 		color: function (color) {
-			is.colour(color);
+			return is.colour(color);
 		},
 		colour: function (colour) {
 			return defaults.regexp.colour.test(colour);
@@ -205,15 +211,15 @@ var RocketTools = (function () {
 			var regExp = (regExp instanceof RegExp) ? regExp : defaults.regexp.email;
 			return regExp.test(email);
 		},
-		float: function (int) {
-			return defaults.regexp.float.test(int);
-		},
-		integer: function (int) {
-			return defaults.regexp.integer.test(int);
+		function: function (check) {
+			return (typeof check === 'function');
 		},
 		image: function (file, arAllowedTypes) {
 			var allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : defaults.extensions.images;
 			return allowedTypes[file.split('.').pop().toLowerCase()];
+		},
+		integer: function (check) {
+			return (is.number(check) && (parseFloat(check) === parseInt(check)));
 		},
 		json: function (json) {
 			if (typeof json !== 'object') {
@@ -225,9 +231,15 @@ var RocketTools = (function () {
 			}
 			return true;
 		},
+		number: function (check) {
+			return (typeof check === 'number');
+		},
 		password: function (password, regExp) {
 			var regExp = (regExp instanceof RegExp) ? regExp : defaults.regexp.password;
 			return regExp.test(password);
+		},
+		string: function (str) {
+			return (typeof str === 'string');
 		},
 		time: function (time, regExp) {
 			var regExp = (regExp instanceof RegExp) ? regExp : defaults.regexp.time;
@@ -534,7 +546,7 @@ var RocketTools = (function () {
 
 	// Development
 	var log = function (text, error) {
-		if (defaults.log) {
+		if (window && window.console && defaults.log) {
 			var error = (typeof error === 'boolean') ? error : false;
 
 			if (error) {
