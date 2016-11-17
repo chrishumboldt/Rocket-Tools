@@ -157,8 +157,8 @@ Method | Description
 `is.element(elm)` | Check if `elm` is a DOM element.
 `is.email(email, regExp)` | Check if string `email` is a valid email address (`regExp` optional).
 `is.function(x)` | Check if `x` is a valid function.
-`is.integer(num)` | Check if `num` is a valid whole number.
 `is.image(str, ext)` | Check if string `str` has an extension in array `ext`.<br>`ext` checks against the images extensions array and is optional.
+`is.integer(num)` | Check if `num` is a valid whole number.
 `is.json(json)` | Check if `json` is valid JSON.
 `is.number(num)` | Check if `num` is a valid number.
 `is.password(str, regExp)` | Check if string `str` is a password (`regExp` optional).
