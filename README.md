@@ -134,14 +134,14 @@ Method | Defaults | Description
 `array.unique(ar)` | | Return only unique array values from array `ar`.
 
 ```javascript
-var myElement = document.getElementById('#element');
+var myElement = document.getElementById('element');
 var myNumbers = [1,1,2,3,4,5,5,5,5];
 var myString = 'This is a string';
 
 Rocket.array.make(myElement); // Returns [element]
 Rocket.array.make(myNumbers); // Returns [1,1,2,3,4,5,5,5,5]
-Rocket.array.make(myNumbers, true) // Returns [1,2,3,4,5]
-Rocket.array.make(myString) // Returns ['This', 'is', 'a', 'string']
+Rocket.array.make(myNumbers, true); // Returns [1,2,3,4,5]
+Rocket.array.make(myString); // Returns ['This', 'is', 'a', 'string']
 ```
 
 #### Basic Checks
@@ -157,10 +157,11 @@ Method | Description
 `is.element(elm)` | Check if `elm` is a DOM element.
 `is.email(email, regExp)` | Check if string `email` is a valid email address (`regExp` optional).
 `is.function(x)` | Check if `x` is a valid function.
-`is.integer(num)` | Check if `num` is a valid whole number.
 `is.image(str, ext)` | Check if string `str` has an extension in array `ext`.<br>`ext` checks against the images extensions array and is optional.
+`is.integer(num)` | Check if `num` is a valid whole number.
 `is.json(json)` | Check if `json` is valid JSON.
 `is.number(num)` | Check if `num` is a valid number.
+`is.object(obj)` | Check if `obj` is a valid object.
 `is.password(str, regExp)` | Check if string `str` is a password (`regExp` optional).
 `is.string(str)` | Check if `str` is a valid string type.
 `is.time(str, regExp)` | Check if string `str` is a valid time value (`regExp` optional).

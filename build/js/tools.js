@@ -177,33 +177,22 @@ var Rocket = (function () {
 				return returnArray;
 			}
 			// Continue
-			var unique = (typeof unique === 'boolean') ? unique : false;
-			if (is.array(arValue)) {
-				// Already an array
-				if (unique) {
-					returnArray = array.unique(arValue);
-				} else {
-					returnArray = arValue;
-				}
+			var unique = helper.setDefault(unique, false);
+			if (is.array(arValue) && arValue.length > 0) {
+				returnArray = arValue;
 			} else if (is.element(arValue)) {
-				// Element
 				returnArray.push(arValue);
-			} else if (typeof arValue === 'string') {
-				// String
-				if (has.spaces(arValue)) {
-					if (unique) {
-						returnArray = arValue.split(' ').filter(function (val) {
-							return returnArray.indexOf(val) < 0;
-						});
-					} else {
-						returnArray = arValue.split(' ');
-					}
-				} else {
-					returnArray.push(arValue);
+			} else if (is.string(arValue)) {
+				returnArray = arValue.split(' ');
+			} else if (is.object(arValue)) {
+				// Try and catch HTMLCollection and NodeList
+				arValue = Array.prototype.slice.call(arValue);
+				if (is.array(arValue) && arValue.length > 0) {
+					returnArray = arValue;
 				}
 			}
 
-			return returnArray;
+			return (unique) ? array.unique(returnArray) : returnArray;
 		},
 		unique: function (thisArray) {
 			// Catch
@@ -236,6 +225,9 @@ var Rocket = (function () {
 	var is = {
 		array: function (check) {
 			return (typeof check === 'object' && check instanceof Array) ? true : false;
+		},
+		boolean: function (check) {
+			return (typeof check === 'boolean');
 		},
 		color: function (color) {
 			return is.colour(color);
@@ -276,6 +268,9 @@ var Rocket = (function () {
 		},
 		number: function (check) {
 			return (typeof check === 'number');
+		},
+		object: function (check) {
+			return (typeof check === 'object');
 		},
 		password: function (password, regExp) {
 			var regExp = (regExp instanceof RegExp) ? regExp : defaults.regexp.password;
