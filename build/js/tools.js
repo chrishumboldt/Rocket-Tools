@@ -617,13 +617,11 @@ var Rocket = (function () {
 			if (exists(selElm)) {
 				if (is.element(selElm)) {
 					selElm.parentNode.removeChild(selElm);
-				} else if (typeof selElm === 'string') {
+				} else if (is.string(selElm)) {
 					var elements = dom.select(selElm);
-					if (elements.length > 0) {
-						for (var i = elements.length - 1; i >= 0; i--) {
-							if (is.element(elements[i])) {
-								elements[i].parentNode.removeChild(elements[i]);
-							}
+					for (var i = 0, len = elements.length; i < len; i++) {
+						if (is.element(elements[i])) {
+							elements[i].parentNode.removeChild(elements[i]);
 						}
 					}
 				}
@@ -661,7 +659,7 @@ var Rocket = (function () {
 		title: (typeof document !== 'undefined') ? document.getElementsByTagName('title')[0] : false,
 		wallpaper: function (selector) {
 			var elements = dom.select(selector);
-			for (var i = elements.length - 1; i >= 0; i--) {
+			for (var i = 0, len = elements.length; i < len; i++) {
 				var thisWallpaper = elements[i].getAttribute('data-wallpaper');
 				if (thisWallpaper !== null) {
 					elements[i].style.backgroundImage = 'url("' + thisWallpaper + '")';
@@ -758,23 +756,15 @@ var Rocket = (function () {
 	// Inputs
 	var input = {
 		disable: function (selector) {
-			var inputElements = dom.select(selector);
-			if (inputElements.nodeType == undefined) {
-				for (var i = inputElements.length - 1; i >= 0; i--) {
-					inputElements[i].disabled = true;
-				}
-			} else {
-				inputElements.disabled = true;
+			var elements = dom.select(selector);
+			for (var i = 0, len = elements.length; i < len; i++) {
+			   elements[i].disabled = true;
 			}
 		},
 		enable: function (selector) {
-			var inputElements = dom.select(selector);
-			if (inputElements.nodeType == undefined) {
-				for (var i = inputElements.length - 1; i >= 0; i--) {
-					inputElements[i].disabled = false;
-				}
-			} else {
-				inputElements.disabled = false;
+			var elements = dom.select(selector);
+			for (var i = 0, len = elements.length; i < len; i++) {
+			   elements[i].disabled = false;
 			}
 		}
 	};
