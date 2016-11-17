@@ -152,6 +152,7 @@ Method | Description
 `has.class(elm, class)` | Check if element `elm` has the class name `class`.
 `has.extension(str, ext)` | Check if string `str` has an extension in array `ext`.<br>`ext` checks against the all extensions array and is optional.
 `is.array(ar)` | Check if `ar` is an array.
+`is.boolean(x)` | Check if `x` is a boolean value.
 `is.colour(hex)` | Check if `hex` is a hexadecimal colour code.
 `is.date(date, regExp)` | Check if string `date` is in a date format (`regExp` optional).
 `is.element(elm)` | Check if `elm` is a DOM element.
