@@ -66,11 +66,11 @@ var Rocket = (function () {
 			email: /([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i,
 			password: /^(?=.*\d).{6,}/,
 			selector: {
-				attribute: /([a-z])+\[([a-z])+(=)+([a-z"=]+)\]/,
+				attribute: /([a-z])+(\[)+([a-z])+(=")+([a-zA-Z])+("\])/,
 				tag: /^[a-zA-Z]+$/
 			},
 			time: /([01]\d|2[0-3]):([0-5]\d)/,
-			url: /(https?:\/\/[^\s]+)/g
+			url: /^(https?:\/\/[^\s]+)/
 		},
 		request: {
 			async: true,

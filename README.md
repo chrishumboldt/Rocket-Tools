@@ -89,7 +89,7 @@ Property | Default
 `defaults.regexp.email` | `/([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i`
 `defaults.regexp.password` | `/^(?=.*\d).{6,}/`
 `defaults.regexp.time` | `/([01]\d|2[0-3]):([0-5]\d)/`
-`defaults.regexp.url` | `/(https?:\/\/[^\s]+)/g`
+`defaults.regexp.url` | `/^(https?:\/\/[^\s]+)/`
 
 #### Request
 Property | Default
