@@ -766,6 +766,7 @@ var RocketTools = (function () {
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		},
 		string: function (stringLength, textOnly) {
+			var rNum;
 			var textOnly = (typeof textOnly === 'boolean') ? textOnly : false;
 			var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 			var len = (typeof stringLength === 'number') ? stringLength : 5;
