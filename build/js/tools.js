@@ -34,9 +34,6 @@
 var Rocket = (function () {
 	// Defaults
 	var defaults = {
-		button: {
-			selector: '.button'
-		},
 		extensions: {
 			all: ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv'],
 			images: ['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png']
