@@ -38,7 +38,7 @@ var RocketTools = (function () {
 			email: /([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i,
 			password: /^(?=.*\d).{6,}/,
 			selector: {
-				attribute: /([a-z])+(\[)+([a-z])+(=")+([a-zA-Z])+("\])/,
+				attribute: /([a-z])+(\[)+([a-z])+(=")+([a-zA-Z\-])+("\])/,
 				tag: /^[a-zA-Z]+$/
 			},
 			time: /([01]\d|2[0-3]):([0-5]\d)/,
@@ -556,7 +556,7 @@ var RocketTools = (function () {
 
 	// Development
 	var log = function (text, error) {
-		if (defaults.log) {
+		if (window && window.console && defaults.log) {
 			var error = (typeof error === 'boolean') ? error : false;
 
 			if (error) {
