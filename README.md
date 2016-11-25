@@ -411,7 +411,8 @@ These methods facade the browser storage API by putting all data into a JSON obj
 Method | Description
 ---- | ----
 `storage.add(key, value)` | Add a `key`, `value` store pair to the storage.
-`storage.clear()` | Destroy the storage with the name set by `Rocket.defaults.storage.name`.
+`storage.add(obj)` | Add an object of `key`, `value` store pairs to the storage.
+`storage.clear(exclude)` | Destroy the storage with the name set by `Rocket.defaults.storage.name`. `exclude` is optional and allows you to exclude a certain `key` from the storage clear. `exclude` can either a string or an array.
 `storage.get(key)` | Get the storage `value` of `key`.
 `storage.remove(key)` | Remove the storage item reference with `key`.
 
@@ -424,6 +425,12 @@ Rocket.storage.get('name'); // Return 'Chris Humboldt'
 Rocket.storage.remove('name');
 
 Rocket.storage.clear(); // Storage with name 'my-storage-name' will no longer exist.
+
+// Exclusion example
+Rocket.storage.add('firstCar', 'Mazda 323');
+Rocket.storage.add('lastCar', 'Ford Fiesta');
+Rocket.storage.add('coolCar', 'Nissan GT-R');
+Rocket.storage.clear(['coolCar']); // Only 'coolCar' will remain in the storage.
 ```
 
 #### Strings

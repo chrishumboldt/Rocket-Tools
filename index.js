@@ -9,9 +9,6 @@
 var RocketTools = (function () {
 	// Defaults
 	var defaults = {
-		button: {
-			selector: '.button'
-		},
 		extensions: {
 			all: ['png', 'jpg', 'jpeg', 'json', 'gif', 'tif', 'tiff', 'bmp', 'doc', 'docx', 'xls', 'xlsx', 'pdf', 'txt', 'csv'],
 			images: ['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png']
@@ -962,13 +959,37 @@ var RocketTools = (function () {
 
 	// Storage
 	var storage = {
-		add: function (name, value) {
-			if (!exists(name) || !exists(value)) {
+		add: function (nameObj, value) {
+			// Catch
+			if (!exists(nameObj)) {
 				return false;
 			}
+			if (is.string(nameObj)) {
+				if (!exists(value)) {
+					return false;
+				}
+			}
+			else if (!is.object(nameObj) || is.array(nameObj)) {
+				return false;
+			}
+			// Continue
 			var store = storage.getStorageEngine();
+			var storeAdd = {};
 
-			store[name] = value;
+			// Transform the string / apply the object
+			if (is.string(nameObj)) {
+				storeAdd[nameObj] = value;
+			}
+			else {
+				storeAdd = nameObj;
+			}
+			for (var key in storeAdd) {
+				if (storeAdd.hasOwnProperty(key)) {
+					store[key] = storeAdd[key];
+				}
+			}
+
+			// Store it
 			switch (defaults.storage.type) {
 				case 'local':
 					localStorage.setItem(defaults.storage.name, JSON.stringify(store));
@@ -979,14 +1000,41 @@ var RocketTools = (function () {
 					break;
 			}
 		},
-		clear: function () {
-			if (defaults.storage.name !== false) {
+		clear: function (exclusion) {
+			function deleteStorage () {
 				localStorage.removeItem(defaults.storage.name);
 				sessionStorage.removeItem(defaults.storage.name);
+			};
+			// Check for exclusion
+			if (is.string(exclusion)) {
+				var exclValue = storage.get(exclusion);
+				deleteStorage();
+				if (exclValue !== false) {
+					storage.add(exclusion, exclValue);
+				}
+			}
+			else if (is.array(exclusion)) {
+				var newStore = {};
+				var store = storage.getStorageEngine();
+				// Build new storage object
+				for (var i = 0, len = exclusion.length; i < len; i++) {
+					var exclusionValue = store[exclusion[i]];
+					if (exists(exclusionValue)) {
+						newStore[exclusion[i]] = exclusionValue;
+					}
+				}
+				deleteStorage();
+				// Create new storage
+				if (Object.keys(newStore).length > 0) {
+					storage.add(newStore);
+				}
+			}
+			else {
+				deleteStorage();
 			}
 		},
 		get: function (key) {
-			if (!exists(key)) {
+			if (!is.string(key)) {
 				return false;
 			}
 			var store = storage.getStorageEngine();
@@ -1021,7 +1069,7 @@ var RocketTools = (function () {
 			return {};
 		},
 		remove: function (key) {
-			if (!exists(key)) {
+			if (!is.string(key)) {
 				return false;
 			}
 			var store = storage.getStorageEngine();
