@@ -412,7 +412,7 @@ Method | Description
 ---- | ----
 `storage.add(key, value)` | Add a `key`, `value` store pair to the storage.
 `storage.add(obj)` | Add an object of `key`, `value` store pairs to the storage.
-`storage.clear(exclude)` | Destroy the storage with the name set by `Rocket.defaults.storage.name`. `exclude` is optional and allows you to exclude a certain `key` from the storage clear. `exclude` can be either a string or an array.
+`storage.clear(exclude)` | Destroy the storage with the name set by `Rocket.defaults.storage.name`.<br>`exclude` is optional and allows you to exclude a certain `key` from the clear.<br>`exclude` can be either a string or an array.
 `storage.get(key)` | Get the storage `value` of `key`.
 `storage.remove(key)` | Remove the storage item reference with `key`.
 
