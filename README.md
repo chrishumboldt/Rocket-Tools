@@ -428,9 +428,9 @@ Rocket.storage.clear(); // Storage with name 'my-storage-name' will no longer ex
 
 // Exclusion example with object add
 Rocket.storage.add({
-	firstCar, 'Mazda 323',
-	lastCar, 'Ford Fiesta',
-	coolCar, 'Nissan GT-R'
+	firstCar: 'Mazda 323',
+	lastCar: 'Ford Fiesta',
+	coolCar: 'Nissan GT-R'
 });
 Rocket.storage.clear(['coolCar']); // Only 'coolCar' will remain in the storage.
 ```
