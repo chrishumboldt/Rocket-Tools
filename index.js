@@ -556,7 +556,7 @@ var RocketTools = (function () {
 
 	// Development
 	var log = function (text, error) {
-		if (window && window.console && defaults.log) {
+		if (defaults.log) {
 			var error = (typeof error === 'boolean') ? error : false;
 
 			if (error) {
