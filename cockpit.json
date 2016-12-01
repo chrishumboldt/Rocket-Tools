@@ -1,6 +1,6 @@
 {
 	"build": [{
 		"name": "tools",
-		"js": ["tools.js"]
+		"js": ["tools.js", "bindings.js"]
 	}]
 }

@@ -176,7 +176,7 @@ var time = '12:54:07';
 
 Rocket.exists(elm); // true
 Rocket.has.spaces('This is a test'); // true
-Rocket.has.class(elm, 'example'); // true
+Rocket.has.class(elm, 'element'); // true
 Rocket.has.extension(filename, ['jpg', 'png']); // false
 
 Rocket.is.number(filename); // false
@@ -217,19 +217,19 @@ Method | Options | Description
 `date.crtDB()` | | Will return the current date in a standard db format. <br>`yyyy-mm-dd`
 `date.day(date, type)` | type: `short` `long` | Return the day value of `date`.<br>A `type` of "long" adds a leading zero if required.<br>`type` defaults to `short`.
 `date.month(date, type)` | type: `short` `long` `number` | Return the month value of `date`.<br>`type` defaults to `short`.
-`date.toISO(date, time)` | time: `true` `false` | Attempt to transform `date` into an ISO format.<br>`time` defaults to `false`.
 `date.transform(date)` | | Attempt to transform `date` into a Javascript date.
 `date.year(date, type)` | type: `short` `long` | Return the year value of `date`.<br>`type` defaults to `short`.
 
 ```javascript
-Rocket.date.basic('22-04-2016', true) // 22 Apr 2016, 16:45
-Rocket.date.month('12-03-2016', 'long') // March
+Rocket.date.basic('22-04-2016', true); // 22 Apr 2016, 16:45
+Rocket.date.month('12-03-2016', 'long'); // March
 ```
 
 #### Development
-Method | Optins | Description
+Method | Description
 ---- | ---- | ----
-`log(val, error)` | error: `true` `false` | Console log `val` if the window.log option is available.<br>The `Rocket.defaults.log` option must also be set to `true`.<br>`error` defaults to `false`, but if `true` will throw an error instead.
+`log(val)` | Console log `val` if the window.log option is available.<br>The `Rocket.defaults.log` option must also be set to `true`.
+`error(val)` | Console out an error `val` if allowed. Will fallback to a normal console.log if errors are prohibited.<br>The `Rocket.defaults.log` option must also be set to `true`.
 
 ```javascript
 Rocket.log('This is a test.');
