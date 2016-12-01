@@ -264,13 +264,7 @@ var Rocket;
             if (!Rocket.exists(elements)) {
                 return false;
             }
-            var arElements = [];
-            if (Rocket.is.element(elements)) {
-                arElements.push(elements);
-            }
-            else if (Rocket.is.array(elements)) {
-                arElements = elements;
-            }
+            var arElements = Rocket.array.make(elements);
             if (arElements.length < 1) {
                 return false;
             }

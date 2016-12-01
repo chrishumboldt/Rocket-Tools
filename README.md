@@ -176,7 +176,7 @@ var time = '12:54:07';
 
 Rocket.exists(elm); // true
 Rocket.has.spaces('This is a test'); // true
-Rocket.has.class(elm, 'example'); // true
+Rocket.has.class(elm, 'element'); // true
 Rocket.has.extension(filename, ['jpg', 'png']); // false
 
 Rocket.is.number(filename); // false

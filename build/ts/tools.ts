@@ -169,7 +169,7 @@ module Rocket {
             return (value !== null);
          });
       },
-      make: function (arValue, isUnique) {
+      make: function (arValue: any, isUnique?) {
          let returnArray = [];
          // Catch
          if (!arValue) {
@@ -323,12 +323,7 @@ module Rocket {
             return false;
          }
          // Create elements array
-         let arElements = [];
-         if (is.element(elements)) {
-            arElements.push(elements);
-         } else if (is.array(elements)) {
-            arElements = elements;
-         }
+         let arElements = array.make(elements);
          // Catch
          if (arElements.length < 1) {
             return false;
