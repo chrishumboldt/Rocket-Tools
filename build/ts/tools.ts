@@ -964,19 +964,19 @@ module Rocket {
             xhr.send();
          }
       },
-      runDelete: function (uOptions) {
+      delete: function (uOptions) {
          uOptions.type = 'DELETE';
          this.run(uOptions);
       },
-      runGet: function (uOptions) {
+      get: function (uOptions) {
          uOptions.type = 'GET';
          this.run(uOptions);
       },
-      runPost: function (uOptions) {
+      post: function (uOptions) {
          uOptions.type = 'POST';
          this.run(uOptions);
       },
-      runPut: function (uOptions) {
+      put: function (uOptions) {
          uOptions.type = 'PUT';
          this.run(uOptions);
       }
