@@ -396,25 +396,21 @@ module Rocket {
 
    // Dates
    export const date = {
-      basic: function (thisDate, withTime: boolean) {
-         const transDate = this.transform(thisDate);
+      basic: function (thisDate, thisWithTime: boolean) {
+         const transDate = date.transform(thisDate);
          // Catch
          if (!transDate) {
             return false;
          }
          // Continue
-         const thisWithTime = (typeof withTime === 'boolean') ? withTime : false;
+         const withTime = (typeof thisWithTime === 'boolean') ? thisWithTime : false;
          let returnValue = '';
-
-         if (!thisDate) {
-            return false;
-         }
-         const day = this.day(thisDate.getDate());
-         const month = this.month(thisDate.getMonth() + 1);
-         const year = this.year(thisDate.getFullYear());
+         const day = this.day(transDate.getDate());
+         const month = this.month(transDate.getMonth() + 1);
+         const year = this.year(transDate.getFullYear());
 
          returnValue += day + ' ' + month + ' ' + year;
-         if (thisWithTime) {
+         if (withTime) {
             returnValue += ', ' + time.basic(thisDate);
          }
          return returnValue;
@@ -502,7 +498,7 @@ module Rocket {
          }
          return thisMonth;
       },
-      toISO: function (thisDate, thisFullDate: any) {
+      toISO: function (thisDate: any, thisFullDate: any) {
          const fullDate = (typeof thisFullDate !== 'undefined') ? thisFullDate : true;
 
          // Spaced dates
@@ -541,12 +537,30 @@ module Rocket {
          any string passed into a date. This should really only be used with date
          formats that are known to be correct.
          */
-         let date = (thisDate) ? new Date(thisDate) : new Date();
+         function fixDateOrder (fixDate: any, seperator: string) {
+            return fixDate.split(seperator).reverse().join(seperator);
+         };
+
+         // Execute
+         let dateIndexDash = thisDate.indexOf('-');
+         let dateIndexDot = thisDate.indexOf('.');
+         let dateIndexSlash = thisDate.indexOf('/');
+         if (dateIndexDash == 2) {
+            thisDate = fixDateOrder(thisDate, '-');
+         }
+         else if (dateIndexDot == 2) {
+            thisDate = fixDateOrder(thisDate, '.');
+         }
+         else if (dateIndexSlash == 2) {
+            thisDate = fixDateOrder(thisDate, '/');
+         }
+         // Make the date
+         let newDate = (typeof thisDate !== 'undefined') ? new Date(thisDate) : new Date();
          // Fail test
-         if (date.toString() == 'Invalid Date') {
+         if (newDate.toString() == 'Invalid Date') {
             return false;
          }
-         return date;
+         return newDate;
       },
       year: function (thisYearVal: any, thisType: string) {
          let thisYear: any;
@@ -674,7 +688,7 @@ module Rocket {
       wallpaper: function (selector) {
          let elements = dom.select(selector);
          for (let i = 0, len = elements.length; i < len; i++) {
-            let thisWallpaper = elements[i].getAttribute('data-wallpaper');
+            let thisWallpaper = elements[i].getAttribute('data-background');
             if (thisWallpaper !== null) {
                elements[i].style.backgroundImage = 'url("' + thisWallpaper + '")';
             }
@@ -1203,8 +1217,8 @@ module Rocket {
 
    // Time
    export const time = {
-      basic: function (time: any) {
-         const transTime = date.transform(time);
+      basic: function (thisTime: any) {
+         const transTime = date.transform(thisTime);
          // Catch
          if (!transTime) {
             return false;
@@ -1214,8 +1228,8 @@ module Rocket {
          const minutes = time.leadingZero(transTime.getMinutes());
          return hours + ':' + minutes;
       },
-      exact: function (time: any) {
-         const transTime = date.transform(time);
+      exact: function (thisTime: any) {
+         const transTime = date.transform(thisTime);
          // Catch
          if (!transTime) {
             return false;
@@ -1228,8 +1242,8 @@ module Rocket {
 
          return hours + ':' + minutes + ':' + seconds + ':' + milliseconds;
       },
-      full: function (time: any) {
-         const transTime = date.transform(time);
+      full: function (thisTime: any) {
+         const transTime = date.transform(thisTime);
          // Catch
          if (!transTime) {
             return false;

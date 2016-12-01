@@ -323,21 +323,18 @@ var Rocket;
         return Rocket.helper.parse.json(JSON.stringify(original));
     };
     Rocket.date = {
-        basic: function (thisDate, withTime) {
-            var transDate = this.transform(thisDate);
+        basic: function (thisDate, thisWithTime) {
+            var transDate = Rocket.date.transform(thisDate);
             if (!transDate) {
                 return false;
             }
-            var thisWithTime = (typeof withTime === 'boolean') ? withTime : false;
+            var withTime = (typeof thisWithTime === 'boolean') ? thisWithTime : false;
             var returnValue = '';
-            if (!thisDate) {
-                return false;
-            }
-            var day = this.day(thisDate.getDate());
-            var month = this.month(thisDate.getMonth() + 1);
-            var year = this.year(thisDate.getFullYear());
+            var day = this.day(transDate.getDate());
+            var month = this.month(transDate.getMonth() + 1);
+            var year = this.year(transDate.getFullYear());
             returnValue += day + ' ' + month + ' ' + year;
-            if (thisWithTime) {
+            if (withTime) {
                 returnValue += ', ' + Rocket.time.basic(thisDate);
             }
             return returnValue;
@@ -453,11 +450,27 @@ var Rocket;
             }
         },
         transform: function (thisDate) {
-            var date = (thisDate) ? new Date(thisDate) : new Date();
-            if (date.toString() == 'Invalid Date') {
+            function fixDateOrder(fixDate, seperator) {
+                return fixDate.split(seperator).reverse().join(seperator);
+            }
+            ;
+            var dateIndexDash = thisDate.indexOf('-');
+            var dateIndexDot = thisDate.indexOf('.');
+            var dateIndexSlash = thisDate.indexOf('/');
+            if (dateIndexDash == 2) {
+                thisDate = fixDateOrder(thisDate, '-');
+            }
+            else if (dateIndexDot == 2) {
+                thisDate = fixDateOrder(thisDate, '.');
+            }
+            else if (dateIndexSlash == 2) {
+                thisDate = fixDateOrder(thisDate, '/');
+            }
+            var newDate = (typeof thisDate !== 'undefined') ? new Date(thisDate) : new Date();
+            if (newDate.toString() == 'Invalid Date') {
                 return false;
             }
-            return date;
+            return newDate;
         },
         year: function (thisYearVal, thisType) {
             var thisYear;
@@ -574,7 +587,7 @@ var Rocket;
         wallpaper: function (selector) {
             var elements = Rocket.dom.select(selector);
             for (var i = 0, len = elements.length; i < len; i++) {
-                var thisWallpaper = elements[i].getAttribute('data-wallpaper');
+                var thisWallpaper = elements[i].getAttribute('data-background');
                 if (thisWallpaper !== null) {
                     elements[i].style.backgroundImage = 'url("' + thisWallpaper + '")';
                 }
@@ -1058,34 +1071,34 @@ var Rocket;
         }
     };
     Rocket.time = {
-        basic: function (time) {
-            var transTime = Rocket.date.transform(time);
+        basic: function (thisTime) {
+            var transTime = Rocket.date.transform(thisTime);
             if (!transTime) {
                 return false;
             }
             var hours = this.leadingZero(transTime.getHours());
-            var minutes = time.leadingZero(transTime.getMinutes());
+            var minutes = Rocket.time.leadingZero(transTime.getMinutes());
             return hours + ':' + minutes;
         },
-        exact: function (time) {
-            var transTime = Rocket.date.transform(time);
+        exact: function (thisTime) {
+            var transTime = Rocket.date.transform(thisTime);
             if (!transTime) {
                 return false;
             }
-            var hours = time.leadingZero(transTime.getHours());
-            var minutes = time.leadingZero(transTime.getMinutes());
-            var seconds = time.leadingZero(transTime.getSeconds());
-            var milliseconds = time.leadingZero(transTime.getMilliseconds());
+            var hours = Rocket.time.leadingZero(transTime.getHours());
+            var minutes = Rocket.time.leadingZero(transTime.getMinutes());
+            var seconds = Rocket.time.leadingZero(transTime.getSeconds());
+            var milliseconds = Rocket.time.leadingZero(transTime.getMilliseconds());
             return hours + ':' + minutes + ':' + seconds + ':' + milliseconds;
         },
-        full: function (time) {
-            var transTime = Rocket.date.transform(time);
+        full: function (thisTime) {
+            var transTime = Rocket.date.transform(thisTime);
             if (!transTime) {
                 return false;
             }
-            var hours = time.leadingZero(transTime.getHours());
-            var minutes = time.leadingZero(transTime.getMinutes());
-            var seconds = time.leadingZero(transTime.getSeconds());
+            var hours = Rocket.time.leadingZero(transTime.getHours());
+            var minutes = Rocket.time.leadingZero(transTime.getMinutes());
+            var seconds = Rocket.time.leadingZero(transTime.getSeconds());
             return hours + ':' + minutes + ':' + seconds;
         },
         hours: function (hours) {

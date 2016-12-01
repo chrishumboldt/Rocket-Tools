@@ -217,13 +217,12 @@ Method | Options | Description
 `date.crtDB()` | | Will return the current date in a standard db format. <br>`yyyy-mm-dd`
 `date.day(date, type)` | type: `short` `long` | Return the day value of `date`.<br>A `type` of "long" adds a leading zero if required.<br>`type` defaults to `short`.
 `date.month(date, type)` | type: `short` `long` `number` | Return the month value of `date`.<br>`type` defaults to `short`.
-`date.toISO(date, time)` | time: `true` `false` | Attempt to transform `date` into an ISO format.<br>`time` defaults to `false`.
 `date.transform(date)` | | Attempt to transform `date` into a Javascript date.
 `date.year(date, type)` | type: `short` `long` | Return the year value of `date`.<br>`type` defaults to `short`.
 
 ```javascript
-Rocket.date.basic('22-04-2016', true) // 22 Apr 2016, 16:45
-Rocket.date.month('12-03-2016', 'long') // March
+Rocket.date.basic('22-04-2016', true); // 22 Apr 2016, 16:45
+Rocket.date.month('12-03-2016', 'long'); // March
 ```
 
 #### Development
