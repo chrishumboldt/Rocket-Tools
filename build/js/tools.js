@@ -532,9 +532,45 @@ var Rocket;
         Rocket.log(text, true);
     };
     Rocket.dimensions = {
-        window: {
-            height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
-            width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+        getWidthOrHeight: function (elm, type) {
+            if (!Rocket.is.element(elm) && !Rocket.is.string(elm) && elm !== window) {
+                return false;
+            }
+            if (!Rocket.is.string(type) || (type !== 'width' && type !== 'height')) {
+                return false;
+            }
+            var retValue;
+            if (elm === window) {
+                switch (type) {
+                    case 'height':
+                        retValue = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+                        break;
+                    case 'width':
+                        retValue = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                        break;
+                }
+            }
+            else {
+                if (Rocket.is.string(elm)) {
+                    elm = Rocket.dom.select(elm)[0];
+                }
+                if (elm.length < 1) {
+                    return false;
+                }
+                if (elm.getClientRects().length) {
+                    retValue = elm.getBoundingClientRect()[type];
+                }
+                if (retValue < 1 || retValue == null) {
+                    retValue = elm.style[type];
+                }
+            }
+            return parseFloat(retValue) || 0;
+        },
+        height: function (elm) {
+            return Rocket.dimensions.getWidthOrHeight(elm, 'height');
+        },
+        width: function (elm) {
+            return Rocket.dimensions.getWidthOrHeight(elm, 'width');
         }
     };
     Rocket.dom = {

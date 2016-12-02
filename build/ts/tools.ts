@@ -630,9 +630,52 @@ module Rocket {
 
    // Dimensions
    export const dimensions: any = {
-      window: {
-         height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
-         width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+      getWidthOrHeight: function (elm: any, type: string) {
+         // Catch
+         if (!is.element(elm) && !is.string(elm) && elm !== window) {
+            return false;
+         }
+         if (!is.string(type) || (type !== 'width' && type !== 'height')) {
+            return false;
+         }
+         // Continue
+         let retValue;
+         // Check for window
+         if (elm === window) {
+            switch (type) {
+               case 'height':
+                  retValue = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+                  break;
+               case 'width':
+                  retValue = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                  break;
+            }
+         }
+         else {
+            // Check if string selector
+            if (is.string(elm)) {
+               elm = dom.select(elm)[0];
+            }
+            // Catch
+            if (elm.length < 1) {
+               return false;
+            }
+            // Continue
+            if (elm.getClientRects().length) {
+               retValue = elm.getBoundingClientRect()[type];
+            }
+            if (retValue < 1 || retValue == null ) {
+               retValue = elm.style[type];
+            }
+         }
+         // Return
+         return parseFloat(retValue) || 0;
+      },
+      height: function (elm: any) {
+         return dimensions.getWidthOrHeight(elm, 'height');
+      },
+      width: function (elm: any) {
+         return dimensions.getWidthOrHeight(elm, 'width');
       }
    }
 
