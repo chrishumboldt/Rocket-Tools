@@ -19,6 +19,7 @@ not require this toolset but if included make sure that this library is loaded f
 // Clone
 // Dates
 // Development
+// Dimensions
 // DOM
 // Events
 // Gets
@@ -627,6 +628,14 @@ module Rocket {
       log(text, true);
    };
 
+   // Dimensions
+   export const dimensions: any = {
+      window: {
+         height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
+         width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+      }
+   }
+
    // DOM
    export const dom: any = {
       body: (typeof document !== 'undefined') ? document.getElementsByTagName('body')[0] : false,
@@ -694,7 +703,7 @@ module Rocket {
             }
          }
       },
-      webplateScript: (typeof document !== 'undefined') ? document.getElementById('webplate') : false
+      window: (typeof window !== 'undefined') ? window : false,
    };
 
    // Events
