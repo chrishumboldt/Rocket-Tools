@@ -635,21 +635,15 @@ module Rocket {
          if (!is.element(elm) && !is.string(elm) && elm !== window) {
             return false;
          }
-         if (!is.string(type) || (type !== 'width' && type !== 'height')) {
+         if (is.string(type) && (type !== 'width' && type !== 'height')) {
             return false;
          }
          // Continue
          let retValue;
          // Check for window
          if (elm === window) {
-            switch (type) {
-               case 'height':
-                  retValue = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-                  break;
-               case 'width':
-                  retValue = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-                  break;
-            }
+            type = string.uppercase.first(type);
+            retValue = window['inner' + type] || document.documentElement['client' + type] || document.body['client' + type];
          }
          else {
             // Check if string selector

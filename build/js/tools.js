@@ -536,19 +536,13 @@ var Rocket;
             if (!Rocket.is.element(elm) && !Rocket.is.string(elm) && elm !== window) {
                 return false;
             }
-            if (!Rocket.is.string(type) || (type !== 'width' && type !== 'height')) {
+            if (Rocket.is.string(type) && (type !== 'width' && type !== 'height')) {
                 return false;
             }
             var retValue;
             if (elm === window) {
-                switch (type) {
-                    case 'height':
-                        retValue = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-                        break;
-                    case 'width':
-                        retValue = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-                        break;
-                }
+                type = Rocket.string.uppercase.first(type);
+                retValue = window['inner' + type] || document.documentElement['client' + type] || document.body['client' + type];
             }
             else {
                 if (Rocket.is.string(elm)) {
