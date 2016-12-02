@@ -531,6 +531,12 @@ var Rocket;
     Rocket.error = function (text) {
         Rocket.log(text, true);
     };
+    Rocket.dimensions = {
+        window: {
+            height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
+            width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+        }
+    };
     Rocket.dom = {
         body: (typeof document !== 'undefined') ? document.getElementsByTagName('body')[0] : false,
         html: (typeof document !== 'undefined') ? document.getElementsByTagName('html')[0] : false,
@@ -593,7 +599,7 @@ var Rocket;
                 }
             }
         },
-        webplateScript: (typeof document !== 'undefined') ? document.getElementById('webplate') : false
+        window: (typeof window !== 'undefined') ? window : false,
     };
     Rocket.event = {
         add: function (elem, type, eventHandle) {
