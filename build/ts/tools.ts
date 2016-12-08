@@ -704,7 +704,7 @@ module Rocket {
       select: function (selectors) {
          let returnElms = [];
          // Catch
-         if (!exists(selectors)) {
+         if (!is.string(selectors)) {
             return returnElms;
          }
          // Continue

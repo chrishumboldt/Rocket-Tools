@@ -596,7 +596,7 @@ var Rocket;
         },
         select: function (selectors) {
             var returnElms = [];
-            if (!Rocket.exists(selectors)) {
+            if (!Rocket.is.string(selectors)) {
                 return returnElms;
             }
             var selectorSplit = selectors.split(',').map(Rocket.string.trim).filter(function (selector) {
