@@ -739,6 +739,17 @@ var Rocket;
             }
         }
     };
+    Rocket.milliseconds = {
+        hours: function (hours) {
+            return hours * 60 * 60 * 1000;
+        },
+        minutes: function (minutes) {
+            return minutes * 60 * 1000;
+        },
+        seconds: function (seconds) {
+            return seconds * 1000;
+        }
+    };
     Rocket.overlay = {
         add: function () {
             var rocketOverlay = document.createElement('div');
@@ -1150,17 +1161,6 @@ var Rocket;
                 return false;
             }
             return this.leadingZero(transTime.getHours());
-        },
-        milliseconds: {
-            hours: function (hours) {
-                return hours * 60 * 60 * 1000;
-            },
-            minutes: function (minutes) {
-                return minutes * 60 * 1000;
-            },
-            seconds: function (seconds) {
-                return seconds * 1000;
-            }
         },
         minutes: function (thisTime) {
             var transTime = Rocket.date.transform(thisTime);
