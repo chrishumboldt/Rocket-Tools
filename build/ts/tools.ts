@@ -854,6 +854,19 @@ module Rocket {
       }
    };
 
+   // Milliseconds
+   export const milliseconds = {
+      hours: function (hours: number) {
+         return hours * 60 * 60 * 1000;
+      },
+      minutes: function (minutes: number) {
+         return minutes * 60 * 1000;
+      },
+      seconds: function (seconds: number) {
+         return seconds * 1000;
+      }
+   };
+
    // Overlay
    export const overlay = {
       add: function () {
@@ -1314,17 +1327,6 @@ module Rocket {
          }
          // Continue
          return this.leadingZero(transTime.getHours());
-      },
-      milliseconds: {
-         hours: function (hours: number) {
-            return hours * 60 * 60 * 1000;
-         },
-         minutes: function (minutes: number) {
-            return minutes * 60 * 1000;
-         },
-         seconds: function (seconds: number) {
-            return seconds * 1000;
-         }
       },
       minutes: function (thisTime: any) {
          const transTime = date.transform(thisTime);

@@ -21,6 +21,7 @@ The Rocket Tools library is a lightweight (18 KB) set of Javascript methods for 
 	* [Helpers](#helpers)
 	* [ID's](#ids)
 	* [Inputs](#inputs)
+   * [Milliseconds](#milliseconds)
 	* [Random](#random)
 	* [Request](#request-1)
 	* [States](#states)
@@ -330,6 +331,17 @@ Rocket.input.disable('.form-input');
 Rocket.input.enable('.form-input');
 ```
 
+#### Milliseconds
+Method | Description
+---- | ----
+`milliseconds.hours(int)` | Return the millisecond value of `int` hours.
+`milliseconds.minutes(int)` | Return the millisecond value of `int` minutes.
+`milliseconds.seconds(int)` | Return the millisecond value of `int` seconds.
+
+```javascript
+Rocket.milliseconds.minutes(5); // Returns '300000' milliseconds
+```
+
 #### Random
 All arguments are `optional`.
 
@@ -469,9 +481,6 @@ Method | Description
 `time.hours(date)` | Transform and return the hours value of `date`.
 `time.minutes(date)` | Transform and return the minutes value of `date`.
 `time.seconds(date)` | Transform and return the seconds value of `date`.
-`time.milliseconds.hours(int)` | Return the millisecond value of `int` hours.
-`time.milliseconds.minutes(int)` | Return the millisecond value of `int` minutes.
-`time.milliseconds.seconds(int)` | Return the millisecond value of `int` seconds.
 
 ```javascript
 var myDate = new Date();
@@ -479,8 +488,6 @@ var myDate = new Date();
 Rocket.time.basic(myDate); // Returns the time in format '21:17'
 Rocket.time.full(myDate); // Returns the time in format '21:17:05'
 Rocket.time.minutes(myDate); // Returns '17'
-
-Rocket.time.milliseconds.minutes(5); // Returns '300000' milliseconds
 ```
 
 #### URL
