@@ -481,7 +481,6 @@ Rocket.time.full(myDate); // Returns the time in format '21:17:05'
 Rocket.time.minutes(myDate); // Returns '17'
 
 Rocket.time.milliseconds.minutes(5); // Returns '300000' milliseconds
-```vascript
 ```
 
 #### URL
