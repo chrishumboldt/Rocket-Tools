@@ -1,6 +1,4 @@
 /**
- * File: build/ts/tools.ts
- * Type: Typescript file
  * Author: Chris Humboldt
 **/
 
@@ -1222,41 +1220,41 @@ module Rocket {
       },
       lowercase: {
          all: function (string) {
-            return string.toLowerCase();
+            return (is.string(string)) ? string.toLowerCase() : string;
          },
          first: function (string) {
-            return string.charAt(0).toLowerCase() + string.slice(1);
+            return (is.string(string)) ? string.charAt(0).toLowerCase() + string.slice(1) : string;
          },
          last: function (string) {
-            return string.slice(0, string.length - 1) + string.charAt(string.length - 1).toLowerCase();
+            return (is.string(string)) ? string.slice(0, string.length - 1) + string.charAt(string.length - 1).toLowerCase() : string;
          }
       },
       remove: {
          first: function (string) {
-            return string.substring(1);
+            return (is.string(string)) ? string.substring(1) : string;
          },
          firstAndLast: function (string) {
-            return string.substring(1, string.length - 1);
+            return (is.string(string)) ? string.substring(1, string.length - 1) : string;
          },
          last: function (string) {
-            return string.substring(0, string.length - 1);
+            return (is.string(string)) ? string.substring(0, string.length - 1) : string;
          },
          spaces: function (string) {
-            return string.replace(/ /g, '');
+            return (is.string(string)) ? string.replace(/ /g, '') : string;
          }
       },
       trim: function (string) {
-         return string.replace(/^ /, '').replace(/ +$/, '');
+         return (is.string(string)) ? string.replace(/^ /, '').replace(/ +$/, '') : string;
       },
       uppercase: {
          all: function (string) {
-            return string.toUpperCase();
+            return (is.string(string)) ? string.toUpperCase() : string;
          },
          first: function (string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
+            return (is.string(string)) ? string.charAt(0).toUpperCase() + string.slice(1) : string;
          },
          last: function (string) {
-            return string.slice(0, string.length - 1) + string.charAt(string.length - 1).toUpperCase();
+            return (is.string(string)) ? string.slice(0, string.length - 1) + string.charAt(string.length - 1).toUpperCase() : string;
          }
       }
    };
