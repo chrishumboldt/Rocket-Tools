@@ -1,6 +1,4 @@
 /**
- * File: build/js/bindings.js
- * Type: Javascript file
  * Author: Chris Humboldt
 **/
 
@@ -12,7 +10,7 @@ declaration before it. I get why but I do not want to change the class methods
 name to something less intuitive.
 
 As such I am binding the exposed "classMethods" property to a new "class" property.
-A double up I know but so be it. Hopefully I can find an actual solution soon.
+A double up I know but so be it. Hopefully I can find an actual solution.
 */
 Rocket.class = Rocket.classMethods;
 
