@@ -27,7 +27,6 @@ The Rocket Tools library is a lightweight (18 KB) set of Javascript methods for 
 	* [Storage](#storage-1)
 	* [Strings](#strings)
 	* [Time](#time)
-   * [Timer](#timer)
 	* [URL](#url)
 
 ## Getting Started
