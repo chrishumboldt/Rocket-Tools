@@ -27,6 +27,7 @@ The Rocket Tools library is a lightweight (18 KB) set of Javascript methods for 
 	* [Storage](#storage-1)
 	* [Strings](#strings)
 	* [Time](#time)
+   * [Timer](#timer)
 	* [URL](#url)
 
 ## Getting Started
@@ -214,9 +215,9 @@ The arguments in the date methods below are all optional. Also if no `date` is p
 Method | Options | Description
 ---- | ---- | ----
 `date.basic(date, time)` | time: `true` `false` | Return a basic date value.<br>`time` defaults to `false`.
-`date.crtDB()` | | Will return the current date in a standard db format. <br>`yyyy-mm-dd`
 `date.day(date, type)` | type: `short` `long` | Return the day value of `date`.<br>A `type` of "long" adds a leading zero if required.<br>`type` defaults to `short`.
 `date.month(date, type)` | type: `short` `long` `number` | Return the month value of `date`.<br>`type` defaults to `short`.
+`date.safe(date, time)` | | Will return a date in a standard safe format. <br>`yyyy-mm-dd`.
 `date.transform(date)` | | Attempt to transform `date` into a Javascript date.
 `date.year(date, type)` | type: `short` `long` | Return the year value of `date`.<br>`type` defaults to `short`.
 
@@ -459,22 +460,29 @@ Rocket.string.uppercase.all(myString); // Returns 'HELLO BRIGHT WORLD!'
 ```
 
 #### Time
+If no `date` is provided or is `false`, then the current date and time will be used.
+
 Method | Description
 ---- | ----
 `time.basic(date)` | Transform and return the time value of `date`. This **excludes** seconds and milliseconds.
 `time.exact(date)` | Transform and return the time value of `date`. This **includes** seconds and milliseconds.
 `time.full(date)` | Transform and return the time value of `date`. This **includes** seconds.
-`time.hours(int)` | Return the millisecond value of `int` hours.
-`time.minutes(int)` | Return the millisecond value of `int` minutes.
-`time.seconds(int)` | Return the millisecond value of `int` seconds.
+`time.hours(date)` | Transform and return the hours value of `date`.
+`time.minutes(date)` | Transform and return the minutes value of `date`.
+`time.seconds(date)` | Transform and return the seconds value of `date`.
+`time.milliseconds.hours(int)` | Return the millisecond value of `int` hours.
+`time.milliseconds.minutes(int)` | Return the millisecond value of `int` minutes.
+`time.milliseconds.seconds(int)` | Return the millisecond value of `int` seconds.
 
 ```javascript
 var myDate = new Date();
 
 Rocket.time.basic(myDate); // Returns the time in format '21:17'
 Rocket.time.full(myDate); // Returns the time in format '21:17:05'
+Rocket.time.minutes(myDate); // Returns '17'
 
-Rocket.time.minutes(5); // Returns '300000' milliseconds
+Rocket.time.milliseconds.minutes(5); // Returns '300000' milliseconds
+```vascript
 ```
 
 #### URL

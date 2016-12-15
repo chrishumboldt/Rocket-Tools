@@ -396,7 +396,7 @@ module Rocket {
    // Dates
    export const date = {
       basic: function (thisDate, thisWithTime: boolean) {
-         const transDate = date.transform(thisDate);
+         const transDate = (thisDate) ? date.transform(thisDate) : new Date();
          // Catch
          if (!transDate) {
             return false;
@@ -413,15 +413,6 @@ module Rocket {
             returnValue += ', ' + time.basic(thisDate);
          }
          return returnValue;
-      },
-      crtDB: function (thisDate) {
-         const newData = (thisDate) ? date.transform(thisDate) : new Date();
-         // Catch
-         if (!newData) {
-            return false;
-         }
-         // Continue
-         return newData.getFullYear() + '-' + ('0' + (newData.getMonth() + 1)).slice(-2) + '-' + ('0' + newData.getDate()).slice(-2);
       },
       day: function (thisDayVal, thisType: string) {
          let thisDay;
@@ -450,6 +441,20 @@ module Rocket {
          } else {
             return parseInt(thisDay);
          }
+      },
+      safe: function (thisDate, thisWithTime: boolean) {
+         const newData = (thisDate) ? date.transform(thisDate) : new Date();
+         // Catch
+         if (!newData) {
+            return false;
+         }
+         // Continue
+         const withTime = (typeof thisWithTime === 'boolean') ? thisWithTime : false;
+         var returnValue = newData.getFullYear() + '-' + ('0' + (newData.getMonth() + 1)).slice(-2) + '-' + ('0' + newData.getDate()).slice(-2);
+         if (withTime) {
+            returnValue += ' ' + time.full(thisDate);
+         }
+         return returnValue;
       },
       month: function (thisMonthVal, thisType: string) {
          let thisMonth;
@@ -541,17 +546,19 @@ module Rocket {
          };
 
          // Execute
-         let dateIndexDash = thisDate.indexOf('-');
-         let dateIndexDot = thisDate.indexOf('.');
-         let dateIndexSlash = thisDate.indexOf('/');
-         if (dateIndexDash == 2) {
-            thisDate = fixDateOrder(thisDate, '-');
-         }
-         else if (dateIndexDot == 2) {
-            thisDate = fixDateOrder(thisDate, '.');
-         }
-         else if (dateIndexSlash == 2) {
-            thisDate = fixDateOrder(thisDate, '/');
+         if (typeof thisDate === 'string') {
+            let dateIndexDash = thisDate.indexOf('-');
+            let dateIndexDot = thisDate.indexOf('.');
+            let dateIndexSlash = thisDate.indexOf('/');
+            if (dateIndexDash == 2) {
+               thisDate = fixDateOrder(thisDate, '-');
+            }
+            else if (dateIndexDot == 2) {
+               thisDate = fixDateOrder(thisDate, '.');
+            }
+            else if (dateIndexSlash == 2) {
+               thisDate = fixDateOrder(thisDate, '/');
+            }
          }
          // Make the date
          let newDate = (typeof thisDate !== 'undefined') ? new Date(thisDate) : new Date();
@@ -1299,17 +1306,46 @@ module Rocket {
 
          return hours + ':' + minutes + ':' + seconds;
       },
-      hours: function (hours: number) {
-         return hours * 60 * 60 * 1000;
+      hours: function (thisTime: any) {
+         const transTime = date.transform(thisTime);
+         // Catch
+         if (!transTime) {
+            return false;
+         }
+         // Continue
+         return this.leadingZero(transTime.getHours());
+      },
+      milliseconds: {
+         hours: function (hours: number) {
+            return hours * 60 * 60 * 1000;
+         },
+         minutes: function (minutes: number) {
+            return minutes * 60 * 1000;
+         },
+         seconds: function (seconds: number) {
+            return seconds * 1000;
+         }
+      },
+      minutes: function (thisTime: any) {
+         const transTime = date.transform(thisTime);
+         // Catch
+         if (!transTime) {
+            return false;
+         }
+         // Continue
+         return time.leadingZero(transTime.getMinutes());
+      },
+      seconds: function (thisTime: any) {
+         const transTime = date.transform(thisTime);
+         // Catch
+         if (!transTime) {
+            return false;
+         }
+         // Continue
+         return time.leadingZero(transTime.getSeconds());
       },
       leadingZero: function (int: any) {
          return ((int < 10) ? '0' : '') + int;
-      },
-      minutes: function (minutes: number) {
-         return minutes * 60 * 1000;
-      },
-      seconds: function (seconds: number) {
-         return seconds * 1000;
       }
    };
 

@@ -324,7 +324,7 @@ var Rocket;
     };
     Rocket.date = {
         basic: function (thisDate, thisWithTime) {
-            var transDate = Rocket.date.transform(thisDate);
+            var transDate = (thisDate) ? Rocket.date.transform(thisDate) : new Date();
             if (!transDate) {
                 return false;
             }
@@ -338,13 +338,6 @@ var Rocket;
                 returnValue += ', ' + Rocket.time.basic(thisDate);
             }
             return returnValue;
-        },
-        crtDB: function (thisDate) {
-            var newData = (thisDate) ? Rocket.date.transform(thisDate) : new Date();
-            if (!newData) {
-                return false;
-            }
-            return newData.getFullYear() + '-' + ('0' + (newData.getMonth() + 1)).slice(-2) + '-' + ('0' + newData.getDate()).slice(-2);
         },
         day: function (thisDayVal, thisType) {
             var thisDay;
@@ -371,6 +364,18 @@ var Rocket;
             else {
                 return parseInt(thisDay);
             }
+        },
+        safe: function (thisDate, thisWithTime) {
+            var newData = (thisDate) ? Rocket.date.transform(thisDate) : new Date();
+            if (!newData) {
+                return false;
+            }
+            var withTime = (typeof thisWithTime === 'boolean') ? thisWithTime : false;
+            var returnValue = newData.getFullYear() + '-' + ('0' + (newData.getMonth() + 1)).slice(-2) + '-' + ('0' + newData.getDate()).slice(-2);
+            if (withTime) {
+                returnValue += ' ' + Rocket.time.full(thisDate);
+            }
+            return returnValue;
         },
         month: function (thisMonthVal, thisType) {
             var thisMonth;
@@ -454,17 +459,19 @@ var Rocket;
                 return fixDate.split(seperator).reverse().join(seperator);
             }
             ;
-            var dateIndexDash = thisDate.indexOf('-');
-            var dateIndexDot = thisDate.indexOf('.');
-            var dateIndexSlash = thisDate.indexOf('/');
-            if (dateIndexDash == 2) {
-                thisDate = fixDateOrder(thisDate, '-');
-            }
-            else if (dateIndexDot == 2) {
-                thisDate = fixDateOrder(thisDate, '.');
-            }
-            else if (dateIndexSlash == 2) {
-                thisDate = fixDateOrder(thisDate, '/');
+            if (typeof thisDate === 'string') {
+                var dateIndexDash = thisDate.indexOf('-');
+                var dateIndexDot = thisDate.indexOf('.');
+                var dateIndexSlash = thisDate.indexOf('/');
+                if (dateIndexDash == 2) {
+                    thisDate = fixDateOrder(thisDate, '-');
+                }
+                else if (dateIndexDot == 2) {
+                    thisDate = fixDateOrder(thisDate, '.');
+                }
+                else if (dateIndexSlash == 2) {
+                    thisDate = fixDateOrder(thisDate, '/');
+                }
             }
             var newDate = (typeof thisDate !== 'undefined') ? new Date(thisDate) : new Date();
             if (newDate.toString() == 'Invalid Date') {
@@ -1137,17 +1144,40 @@ var Rocket;
             var seconds = Rocket.time.leadingZero(transTime.getSeconds());
             return hours + ':' + minutes + ':' + seconds;
         },
-        hours: function (hours) {
-            return hours * 60 * 60 * 1000;
+        hours: function (thisTime) {
+            var transTime = Rocket.date.transform(thisTime);
+            if (!transTime) {
+                return false;
+            }
+            return this.leadingZero(transTime.getHours());
+        },
+        milliseconds: {
+            hours: function (hours) {
+                return hours * 60 * 60 * 1000;
+            },
+            minutes: function (minutes) {
+                return minutes * 60 * 1000;
+            },
+            seconds: function (seconds) {
+                return seconds * 1000;
+            }
+        },
+        minutes: function (thisTime) {
+            var transTime = Rocket.date.transform(thisTime);
+            if (!transTime) {
+                return false;
+            }
+            return Rocket.time.leadingZero(transTime.getMinutes());
+        },
+        seconds: function (thisTime) {
+            var transTime = Rocket.date.transform(thisTime);
+            if (!transTime) {
+                return false;
+            }
+            return Rocket.time.leadingZero(transTime.getSeconds());
         },
         leadingZero: function (int) {
             return ((int < 10) ? '0' : '') + int;
-        },
-        minutes: function (minutes) {
-            return minutes * 60 * 1000;
-        },
-        seconds: function (seconds) {
-            return seconds * 1000;
         }
     };
     Rocket.url = {
