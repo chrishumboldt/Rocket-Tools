@@ -2,7 +2,8 @@
 The Rocket Tools library is a lightweight (18 KB) set of Javascript methods for quicker and easier development.
 
 * [Getting Started](#getting-started)
-* [Getting Started With NPM](#getting-started-with-npm)
+   * [Use In HTML](#include-in-html)
+   * [Use In NodeJS](#use-in-nodejs)
 * [Initialization](#initialization)
 * [Defaults](#defaults)
 	* [Basic](#basic)
@@ -31,13 +32,14 @@ The Rocket Tools library is a lightweight (18 KB) set of Javascript methods for 
 	* [URL](#url)
 
 ## Getting Started
-You can either download a copy of the [source files](https://github.com/chrishumboldt/Rocket-Tools/archive/master.zip) or install Rocket Tools via NPM.
+You can install Rocket Tools via NPM.
 
 ```
 npm install rocket-tools
 ```
 
-Next include the required Javascript file.
+#### Use In HTML
+Simply add in the Rocket Tools script tag as shown below.
 
 ```html
 <body>
@@ -46,14 +48,8 @@ Next include the required Javascript file.
 </body>
 ```
 
-## Getting Started With NPM
-If you instead wish to use Rocket Tools as a Node module then just require as show below.
-
-```
-npm install rocket-tools
-```
-
-Once done require Rocket Tools as you would any other module.
+#### Use In NodeJS
+If you wish to use Rocket Tools as a Node module then just require it as you would any other module.
 
 ```javascript
 var Rocket = require('rocket-tools');
