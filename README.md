@@ -181,7 +181,7 @@ Rocket.is.time(time); // true
 ```
 
 #### Classes
-All `elms` arguments can be either a string or DOM elements.
+All `elms` arguments can be either a string selector or DOM elements.
 
 Method | Description
 ---- | ----
