@@ -2,7 +2,7 @@
 The Rocket Tools library is a lightweight (18 KB) set of Javascript methods for quicker and easier development.
 
 * [Getting Started](#getting-started)
-   * [Use In HTML](#include-in-html)
+   * [Use In HTML](#use-in-html)
    * [Use In NodeJS](#use-in-nodejs)
 * [Initialization](#initialization)
 * [Defaults](#defaults)
