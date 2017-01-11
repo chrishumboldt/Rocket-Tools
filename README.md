@@ -187,26 +187,25 @@ Rocket.is.time(time); // true
 #### Classes
 Method | Description
 ---- | ----
-`class.add(elms, classes)` | Add class names `classes` to all elements `elms`.
-`class.clear(elm)` | Remove all class names from a single element `elm`.
-`class.remove(elms, classes)` | Remove class names `classes` from all elements `elms`.
-`class.replace(elms, remove, add)` | Remove class names `remove` from all elements `elms`.<br>Replace with `add`.
-`class.toggle(elms, class)` | Remove / add class name `class` from all elements `elms`.
+`classes.add(elms, classes)` | Add class names `classes` to all elements `elms`. `elms` can be a string or DOM elements.
+`classes.clear(elm)` | Remove all class names from a single element `elm`.
+`classes.remove(elms, classes)` | Remove class names `classes` from all elements `elms`. `elms` can be a string or DOM elements.
+`classes.replace(elms, remove, add)` | Remove class names `remove` from all elements `elms`.<br>Replace with `add`. `elms` can be a string or DOM elements.
+`classes.toggle(elms, class)` | Remove / add class name `class` from all elements `elms`. `elms` can be a string or DOM elements.
 
 ```javascript
-var elm = document.querySelector('.element');
-
 // Classes can be either a string, space separated string list or an array.
-Rocket.class.add(elm, 'block');
-Rocket.class.add(elm, 'block blue rounded');
-Rocket.class.add(elm, ['block', 'blue', 'rounded']);
+Rocket.classes.add('.element', 'block');
+Rocket.classes.add('.element', 'block blue rounded');
+Rocket.classes.add('.element', ['block', 'blue', 'rounded']);
 
-Rocket.class.replace(elm, 'block', 'circle');
+Rocket.classes.replace('.element', 'block', 'circle');
 
 // You can also execute one class change on multiple elements at once.
+// Here DOM elements are provided instead of a target selector.
+// Either options will work.
 var elms = document.querySelectorAll('.elements');
-
-Rocket.class.add(elms, 'block');
+Rocket.classes.add(elms, 'block');
 ```
 
 #### Dates
