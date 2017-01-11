@@ -246,13 +246,20 @@ var Rocket;
             return regExp.test(url);
         }
     };
-    Rocket.classMethods = {
+    Rocket.classes = {
         add: function (elements, classNames) {
-            Rocket.classMethods.executeClasses(elements, classNames, false);
+            var elms = (Rocket.is.string(elements)) ? Rocket.dom.select(elements) : elements;
+            Rocket.classes.executeClasses(elms, classNames, false);
         },
         clear: function (element) {
-            if (Rocket.exists(element)) {
-                element.removeAttribute('class');
+            var elms = (Rocket.is.string(element)) ? Rocket.dom.select(element) : element;
+            if (elms.length > 0) {
+                for (var _i = 0, elms_1 = elms; _i < elms_1.length; _i++) {
+                    var elm = elms_1[_i];
+                    if (Rocket.exists(elm)) {
+                        elm.removeAttribute('class');
+                    }
+                }
             }
         },
         executeAdd: function (element, classes) {
@@ -274,10 +281,10 @@ var Rocket;
             var actionRemove = (arClassesRemove.length > 0) ? true : false;
             for (var i = 0, len = arElements.length; i < len; i++) {
                 if (actionAdd) {
-                    Rocket.classMethods.executeAdd(arElements[i], arClassesAdd);
+                    Rocket.classes.executeAdd(arElements[i], arClassesAdd);
                 }
                 if (actionRemove) {
-                    Rocket.classMethods.executeRemove(arElements[i], arClassesRemove);
+                    Rocket.classes.executeRemove(arElements[i], arClassesRemove);
                 }
             }
         },
@@ -286,35 +293,38 @@ var Rocket;
                 return classes.indexOf(val) < 0;
             }).toString().replace(/,/g, ' ');
             if (element.className === '') {
-                Rocket.classMethods.clear(element);
+                classes.clear(element);
             }
         },
         remove: function (elements, classNames) {
-            Rocket.classMethods.executeClasses(elements, false, classNames);
+            var elms = (Rocket.is.string(elements)) ? Rocket.dom.select(elements) : elements;
+            Rocket.classes.executeClasses(elms, false, classNames);
         },
         replace: function (elements, classesRemove, classesAdd) {
-            Rocket.classMethods.executeClasses(elements, classesAdd, classesRemove);
+            var elms = (Rocket.is.string(elements)) ? Rocket.dom.select(elements) : elements;
+            Rocket.classes.executeClasses(elms, classesAdd, classesRemove);
         },
         toggle: function (elements, className) {
-            if (!Rocket.exists(elements) || typeof className !== 'string' || Rocket.has.spaces(className)) {
+            var elms = (Rocket.is.string(elements)) ? Rocket.dom.select(elements) : elements;
+            if (!Rocket.exists(elms) || typeof className !== 'string' || Rocket.has.spaces(className)) {
                 return false;
             }
             var arElements = [];
-            if (Rocket.is.element(elements)) {
-                arElements.push(elements);
+            if (Rocket.is.element(elms)) {
+                arElements.push(elms);
             }
-            else if (Rocket.is.array(elements)) {
-                arElements = elements;
+            else if (Rocket.is.array(elms)) {
+                arElements = elms;
             }
             if (arElements.length < 1) {
                 return false;
             }
-            for (var i = 0, len = elements.length; i < len; i++) {
-                if (!Rocket.has.class(elements[i], className)) {
-                    Rocket.classMethods.executeAdd(elements[i], [className]);
+            for (var i = 0, len = arElements.length; i < len; i++) {
+                if (!Rocket.has.class(arElements[i], className)) {
+                    Rocket.classes.executeAdd(arElements[i], [className]);
                 }
                 else {
-                    Rocket.classMethods.executeRemove(elements[i], [className]);
+                    Rocket.classes.executeRemove(arElements[i], [className]);
                 }
             }
         }
@@ -759,11 +769,11 @@ var Rocket;
             }
         },
         hide: function () {
-            Rocket.classMethods.remove(Rocket.dom.html, 'rocket-overlay-reveal');
+            Rocket.classes.remove(Rocket.dom.html, 'rocket-overlay-reveal');
         },
         show: function () {
             setTimeout(function () {
-                Rocket.classMethods.add(Rocket.dom.html, 'rocket-overlay-reveal');
+                Rocket.classes.add(Rocket.dom.html, 'rocket-overlay-reveal');
             }, 50);
         }
     };
@@ -924,7 +934,7 @@ var Rocket;
                 return rocketPrefix.state + newState;
             });
             var stateClass = newRocketStates.splice(newRocketStates.indexOf(rocketPrefix.state + state), 1);
-            Rocket.classMethods.replace(element, newRocketStates, stateClass);
+            Rocket.classes.replace(element, newRocketStates, stateClass);
         },
         clear: function (element) {
             if (!Rocket.exists(element)) {
@@ -933,7 +943,7 @@ var Rocket;
             var newRocketStates = rocketState.list.slice().map(function (newState) {
                 return rocketPrefix.state + newState;
             });
-            Rocket.classMethods.remove(element, newRocketStates);
+            Rocket.classes.remove(element, newRocketStates);
         },
         toggle: function (element, state, thisClear) {
             if (!Rocket.exists(element)) {

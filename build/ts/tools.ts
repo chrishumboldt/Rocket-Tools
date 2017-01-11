@@ -37,6 +37,7 @@ not require this toolset but if included make sure that this library is loaded f
 
 // Rocket module
 module Rocket {
+
    // Defaults
    export let defaults = {
       extensions: {
@@ -140,10 +141,12 @@ module Rocket {
          nameShort: 'dec'
       }
    ];
+
    const rocketPrefix = {
       basic: 'rocket-',
       state: '_state-'
    };
+
    const rocketState = {
       alts: {
          active: 'inactive',
@@ -211,6 +214,7 @@ module Rocket {
    export const exists = function (check) {
       return (typeof check === 'undefined' || check === null || check === false) ? false : true;
    };
+
    export const has = {
       spaces: function (check) {
          return /\s/.test(check);
@@ -223,6 +227,7 @@ module Rocket {
          return (allowedTypes.indexOf(file.split('.').pop().toLowerCase()) > -1) ? true : false;
       }
    };
+
    export const is = {
       array: function (check) {
          return (typeof check === 'object' && check instanceof Array) ? true : false;
@@ -302,13 +307,19 @@ module Rocket {
    };
 
    // Classes
-   export const classMethods = {
+   export const classes = {
       add: function (elements, classNames) {
-         classMethods.executeClasses(elements, classNames, false);
+         const elms = (is.string(elements)) ? dom.select(elements) : elements;
+         classes.executeClasses(elms, classNames, false);
       },
       clear: function (element) {
-         if (exists(element)) {
-            element.removeAttribute('class');
+         const elms = (is.string(element)) ? dom.select(element) : element;
+         if (elms.length > 0) {
+            for (let elm of elms) {
+               if (exists(elm)) {
+                  elm.removeAttribute('class');
+               }
+            }
          }
       },
       executeAdd: function (element, classes) {
@@ -336,10 +347,10 @@ module Rocket {
          // Execute
          for (let i = 0, len = arElements.length; i < len; i++) {
             if (actionAdd) {
-               classMethods.executeAdd(arElements[i], arClassesAdd)
+               classes.executeAdd(arElements[i], arClassesAdd)
             }
             if (actionRemove) {
-               classMethods.executeRemove(arElements[i], arClassesRemove)
+               classes.executeRemove(arElements[i], arClassesRemove)
             }
          }
       },
@@ -348,37 +359,40 @@ module Rocket {
             return classes.indexOf(val) < 0;
          }).toString().replace(/,/g, ' ');
          if (element.className === '') {
-            classMethods.clear(element);
+            classes.clear(element);
          }
       },
       remove: function (elements, classNames) {
-         classMethods.executeClasses(elements, false, classNames);
+         const elms = (is.string(elements)) ? dom.select(elements) : elements;
+         classes.executeClasses(elms, false, classNames);
       },
       replace: function (elements, classesRemove, classesAdd) {
-         classMethods.executeClasses(elements, classesAdd, classesRemove);
+         const elms = (is.string(elements)) ? dom.select(elements) : elements;
+         classes.executeClasses(elms, classesAdd, classesRemove);
       },
       toggle: function (elements, className) {
+         const elms = (is.string(elements)) ? dom.select(elements) : elements;
          // Catch
-         if (!exists(elements) || typeof className !== 'string' || has.spaces(className)) {
+         if (!exists(elms) || typeof className !== 'string' || has.spaces(className)) {
             return false;
          }
          // Create elements array
          let arElements = [];
-         if (is.element(elements)) {
-            arElements.push(elements);
-         } else if (is.array(elements)) {
-            arElements = elements;
+         if (is.element(elms)) {
+            arElements.push(elms);
+         } else if (is.array(elms)) {
+            arElements = elms;
          }
          // Catch
          if (arElements.length < 1) {
             return false;
          }
          // Execute
-         for (let i = 0, len = elements.length; i < len; i++) {
-            if (!has.class(elements[i], className)) {
-               classMethods.executeAdd(elements[i], [className]);
+         for (let i = 0, len = arElements.length; i < len; i++) {
+            if (!has.class(arElements[i], className)) {
+               classes.executeAdd(arElements[i], [className]);
             } else {
-               classMethods.executeRemove(elements[i], [className]);
+               classes.executeRemove(arElements[i], [className]);
             }
          }
       }
@@ -629,6 +643,7 @@ module Rocket {
          }
       }
    };
+
    export const error = function (text: string) {
       log(text, true);
    };
@@ -877,11 +892,11 @@ module Rocket {
          }
       },
       hide: function () {
-         classMethods.remove(dom.html, 'rocket-overlay-reveal');
+         classes.remove(dom.html, 'rocket-overlay-reveal');
       },
       show: function () {
          setTimeout(function () {
-            classMethods.add(dom.html, 'rocket-overlay-reveal');
+            classes.add(dom.html, 'rocket-overlay-reveal');
          }, 50);
       }
    };
@@ -1056,7 +1071,7 @@ module Rocket {
             return rocketPrefix.state + newState;
          });
          let stateClass = newRocketStates.splice(newRocketStates.indexOf(rocketPrefix.state + state), 1);
-         classMethods.replace(element, newRocketStates, stateClass);
+         classes.replace(element, newRocketStates, stateClass);
       },
       clear: function (element) {
          if (!exists(element)) {
@@ -1065,7 +1080,7 @@ module Rocket {
          let newRocketStates = rocketState.list.slice().map(function (newState) {
             return rocketPrefix.state + newState;
          });
-         classMethods.remove(element, newRocketStates);
+         classes.remove(element, newRocketStates);
       },
       toggle: function (element, state, thisClear) {
          if (!exists(element)) {
