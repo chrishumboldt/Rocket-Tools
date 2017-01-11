@@ -181,13 +181,15 @@ Rocket.is.time(time); // true
 ```
 
 #### Classes
+All `elms` arguments can be either a string selector or DOM elements.
+
 Method | Description
 ---- | ----
-`classes.add(elms, classes)` | Add class names `classes` to all elements `elms`. `elms` can be a string or DOM elements.
-`classes.clear(elm)` | Remove all class names from a single element `elm`.
-`classes.remove(elms, classes)` | Remove class names `classes` from all elements `elms`. `elms` can be a string or DOM elements.
-`classes.replace(elms, remove, add)` | Remove class names `remove` from all elements `elms`.<br>Replace with `add`. `elms` can be a string or DOM elements.
-`classes.toggle(elms, class)` | Remove / add class name `class` from all elements `elms`. `elms` can be a string or DOM elements.
+`classes.add(elms, classes)` | Add class names `classes` to all elements `elms`.
+`classes.clear(elms)` | Remove all class names from elements `elms`.
+`classes.remove(elms, classes)` | Remove class names `classes` from all elements `elms`.
+`classes.replace(elms, remove, add)` | Remove class names `remove` from all elements `elms`.<br>Replace with `add`.
+`classes.toggle(elms, class)` | Remove / add class name `class` from all elements `elms`.
 
 ```javascript
 // Classes can be either a string, space separated string list or an array.
@@ -197,10 +199,11 @@ Rocket.classes.add('.element', ['block', 'blue', 'rounded']);
 
 Rocket.classes.replace('.element', 'block', 'circle');
 
-// You can also execute one class change on multiple elements at once.
+// You can also execute class changes on multiple elements at once.
 // Here DOM elements are provided instead of a target selector.
-// Either options will work.
+// Either option will work.
 var elms = document.querySelectorAll('.elements');
+
 Rocket.classes.add(elms, 'block');
 ```
 
