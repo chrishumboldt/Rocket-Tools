@@ -201,7 +201,7 @@ Rocket.classes.replace('.element', 'block', 'circle');
 
 // You can also execute class changes on multiple elements at once.
 // Here DOM elements are provided instead of a target selector.
-// Either options will work.
+// Either option will work.
 var elms = document.querySelectorAll('.elements');
 
 Rocket.classes.add(elms, 'block');
