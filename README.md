@@ -181,13 +181,15 @@ Rocket.is.time(time); // true
 ```
 
 #### Classes
+All `elms` arguments can be either a string or DOM elements.
+
 Method | Description
 ---- | ----
-`classes.add(elms, classes)` | Add class names `classes` to all elements `elms`.<br>`elms` can be a string or DOM elements.
-`classes.clear(elm)` | Remove all class names from a single element `elm`.
-`classes.remove(elms, classes)` | Remove class names `classes` from all elements `elms`.<br>`elms` can be a string or DOM elements.
-`classes.replace(elms, remove, add)` | Remove class names `remove` from all elements `elms`.<br>Replace with `add`.<br>`elms` can be a string or DOM elements.
-`classes.toggle(elms, class)` | Remove / add class name `class` from all elements `elms`.<br>`elms` can be a string or DOM elements.
+`classes.add(elms, classes)` | Add class names `classes` to all elements `elms`.
+`classes.clear(elms)` | Remove all class names from elements `elms`.
+`classes.remove(elms, classes)` | Remove class names `classes` from all elements `elms`.
+`classes.replace(elms, remove, add)` | Remove class names `remove` from all elements `elms`.<br>Replace with `add`.
+`classes.toggle(elms, class)` | Remove / add class name `class` from all elements `elms`.
 
 ```javascript
 // Classes can be either a string, space separated string list or an array.
