@@ -67,7 +67,7 @@ var boldName = Rocket.string.uppercase.all('Chris Humboldt'); // Convert a strin
 var randomNumber = Rocket.random.integer(); // Generate a random integer
 ```
 
-Make sure not to overwrite or reassign the `Rocket` variable name to anything else within your project. Also **note** that a no touch check run and the result assigned to the HTML element in the form of a class `rocket-no-touch`. An [overlay](#overlay) is also automatically applied.
+Make sure not to overwrite or reassign the `Rocket` variable name to anything else within your project. Also **note** that a no touch check is run and the result assigned to the HTML element in the form of a class `rocket-no-touch`. An [overlay](#overlay) is also automatically applied.
 
 ## Defaults
 You can overwrite the library options globally by altering the defaults. To do so reference the defaults object property.
