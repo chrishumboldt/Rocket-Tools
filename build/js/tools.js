@@ -589,6 +589,7 @@ var Rocket;
     };
     Rocket.dom = {
         body: (typeof document !== 'undefined') ? document.getElementsByTagName('body')[0] : false,
+        header: (typeof document !== 'undefined') ? document.getElementsByTagName('header')[0] : false,
         html: (typeof document !== 'undefined') ? document.getElementsByTagName('html')[0] : false,
         ratio: function (selector, multiplier) {
             var elements = document.querySelectorAll(selector);
