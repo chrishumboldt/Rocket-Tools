@@ -16,6 +16,7 @@ The Rocket Tools library is a lightweight (18 KB) set of Javascript methods for 
 	* [Classes](#classes)
 	* [Dates](#dates)
 	* [Development](#development)
+   * [Dimensions](#dimensions)
 	* [DOM](#dom)
 	* [Events](#events)
 	* [Gets](#gets)
@@ -237,10 +238,17 @@ Method | Description
 Rocket.log('This is a test.');
 ```
 
+#### Dimensions
+Method | Description
+---- | ----
+`dimensions.height(elm)` | Get the height value of element `elm`;
+`dimensions.width(elm)` | Get the width value of element `elm`;
+
 #### DOM
 Method | Description
 ---- | ----
 `dom.body` | Access the document body element.
+`dom.header` | Access the document header element.
 `dom.html` | Access the document html element.
 `dom.ratio(sel, int)` | Select all elements with selector `sel`.<br>Set the height values to the width values times `int`.
 `dom.remove(val)` | Remove element(s). `val` can either be an element or a selector.

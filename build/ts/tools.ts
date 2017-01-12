@@ -700,6 +700,7 @@ module Rocket {
    // DOM
    export const dom: any = {
       body: (typeof document !== 'undefined') ? document.getElementsByTagName('body')[0] : false,
+      header: (typeof document !== 'undefined') ? document.getElementsByTagName('header')[0] : false,
       html: (typeof document !== 'undefined') ? document.getElementsByTagName('html')[0] : false,
       ratio: function (selector, multiplier: number) {
          let elements = document.querySelectorAll(selector);
