@@ -23,6 +23,7 @@ The Rocket Tools library is a lightweight (18 KB) set of Javascript methods for 
 	* [ID's](#ids)
 	* [Inputs](#inputs)
    * [Milliseconds](#milliseconds)
+   * [Overlay](#overlay)
 	* [Random](#random)
 	* [Request](#request-1)
 	* [States](#states)
@@ -66,7 +67,7 @@ var boldName = Rocket.string.uppercase.all('Chris Humboldt'); // Convert a strin
 var randomNumber = Rocket.random.integer(); // Generate a random integer
 ```
 
-Make sure not to overwrite or reassign the `Rocket` variable name to anything else within your project.
+Make sure not to overwrite or reassign the `Rocket` variable name to anything else within your project. Also **note** that a no touch check run and the result assigned to the HTML element in the form of a class `rocket-no-touch`. An [overlay](#overlay) is also automatically applied.
 
 ## Defaults
 You can overwrite the library options globally by altering the defaults. To do so reference the defaults object property.
@@ -339,6 +340,15 @@ Method | Description
 ```javascript
 Rocket.milliseconds.minutes(5); // Returns '300000' milliseconds
 ```
+
+#### Overlay
+An overlay element is automatically added to the DOM when the library is initialized. It has an id of **rocket-overlay** and has the following methods.
+
+Method | Description
+---- | ----
+`overlay.add()` | Add the overlay to the page.<br>Will only execute if an existing overlay cannot be found.
+`overlay.show()` | Show the overlay.
+`overlay.hide()` | Hide the overlay.
 
 #### Random
 All arguments are `optional`.

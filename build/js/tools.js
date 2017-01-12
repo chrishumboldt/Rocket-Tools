@@ -6,6 +6,9 @@ var Rocket;
             images: ['jpg', 'jpeg', 'gif', 'tif', 'tiff', 'bmp', 'png']
         },
         log: true,
+        overlay: {
+            backgroundColor: 'rgba(56,56,56,0.6)'
+        },
         regexp: {
             colour: /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/,
             date: /^[0-9]{4}-[0-9]{2}-[0-9]{2}/,
@@ -763,17 +766,35 @@ var Rocket;
     Rocket.overlay = {
         add: function () {
             var rocketOverlay = document.createElement('div');
+            rocketOverlay.setAttribute('style', '-webkit-transition: all .4s ease-out 0s;-moz-transition: all .4s ease-out 0s;-ms-transition: all .4s ease-out 0s;transition: all .4s ease-out 0s;');
+            rocketOverlay.style.display = 'block';
+            rocketOverlay.style.position = 'fixed';
+            rocketOverlay.style.top = '0';
+            rocketOverlay.style.right = '0';
+            rocketOverlay.style.bottom = '0';
+            rocketOverlay.style.left = '0';
+            rocketOverlay.style.backgroundColor = Rocket.defaults.overlay.backgroundColor;
+            rocketOverlay.style.zIndex = '1000';
+            rocketOverlay.style.visibility = 'hidden';
+            rocketOverlay.style.opacity = '0';
+            rocketOverlay.style.filter = 'alpha(opacity=0)';
             Rocket.id.add(rocketOverlay, rocketPrefix.basic + 'overlay');
             if (!Rocket.exists(document.getElementById(rocketPrefix.basic + 'overlay'))) {
                 Rocket.dom.body.appendChild(rocketOverlay);
             }
         },
         hide: function () {
-            Rocket.classes.remove(Rocket.dom.html, 'rocket-overlay-reveal');
+            var rocketOverlay = Rocket.dom.select('#rocket-overlay')[0];
+            rocketOverlay.style.visibility = 'hidden';
+            rocketOverlay.style.opacity = '0';
+            rocketOverlay.style.filter = 'alpha(opacity=0)';
         },
         show: function () {
+            var rocketOverlay = Rocket.dom.select('#rocket-overlay')[0];
             setTimeout(function () {
-                Rocket.classes.add(Rocket.dom.html, 'rocket-overlay-reveal');
+                rocketOverlay.style.visibility = 'visible';
+                rocketOverlay.style.opacity = '1';
+                rocketOverlay.style.filter = 'alpha(opacity=100)';
             }, 50);
         }
     };
@@ -925,6 +946,13 @@ var Rocket;
             this.run(uOptions);
         }
     };
+    function setup() {
+        if (!Rocket.is.touch() && !Rocket.has.class(Rocket.dom.html, 'rocket-no-touch')) {
+            Rocket.classes.add(Rocket.dom.html, 'rocket-no-touch');
+        }
+        Rocket.overlay.add();
+    }
+    setup();
     Rocket.state = {
         add: function (element, state) {
             if (!Rocket.exists(element)) {
