@@ -241,8 +241,8 @@ Rocket.log('This is a test.');
 #### Dimensions
 Method | Description
 ---- | ----
-`dimensions.height(elm)` | Get the height value of element `elm`;
-`dimensions.width(elm)` | Get the width value of element `elm`;
+`dimensions.height(elm)` | Get the height value of element `elm`.
+`dimensions.width(elm)` | Get the width value of element `elm`.
 
 #### DOM
 Method | Description
