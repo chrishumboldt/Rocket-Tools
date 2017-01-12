@@ -67,7 +67,9 @@ var boldName = Rocket.string.uppercase.all('Chris Humboldt'); // Convert a strin
 var randomNumber = Rocket.random.integer(); // Generate a random integer
 ```
 
-Make sure not to overwrite or reassign the `Rocket` variable name to anything else within your project. Also **note** that a no touch check is run and the result assigned to the HTML element in the form of a class `rocket-no-touch`. An [overlay](#overlay) is also automatically applied.
+Make sure not to overwrite or reassign the `Rocket` variable name to anything else within your project.
+
+**NOTE** that a no touch check is run and the result assigned to the HTML element in the form of a class `rocket-no-touch`. An [overlay](#overlay) is also automatically applied.
 
 ## Defaults
 You can overwrite the library options globally by altering the defaults. To do so reference the defaults object property.
@@ -346,7 +348,7 @@ An overlay element is automatically added to the DOM when the library is initial
 
 Method | Description
 ---- | ----
-`overlay.add()` | Add the overlay to the page.<br>Will only execute if an existing overlay cannot be found.
+`overlay.add()` | Add the overlay to the page. Will only execute if an existing overlay cannot be found.
 `overlay.show()` | Show the overlay.
 `overlay.hide()` | Hide the overlay.
 
