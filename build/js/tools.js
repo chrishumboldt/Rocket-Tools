@@ -255,7 +255,7 @@ var Rocket;
             Rocket.classes.executeClasses(elms, classNames, false);
         },
         clear: function (element) {
-            var elms = (Rocket.is.string(element)) ? Rocket.dom.select(element) : element;
+            var elms = (Rocket.is.string(element)) ? Rocket.dom.select(element) : [element];
             if (elms.length > 0) {
                 for (var _i = 0, elms_1 = elms; _i < elms_1.length; _i++) {
                     var elm = elms_1[_i];
@@ -296,7 +296,7 @@ var Rocket;
                 return classes.indexOf(val) < 0;
             }).toString().replace(/,/g, ' ');
             if (element.className === '') {
-                classes.clear(element);
+                Rocket.classes.clear(element);
             }
         },
         remove: function (elements, classNames) {
@@ -766,6 +766,7 @@ var Rocket;
     Rocket.overlay = {
         add: function () {
             var rocketOverlay = document.createElement('div');
+            Rocket.id.add(rocketOverlay, rocketPrefix.basic + 'overlay');
             rocketOverlay.setAttribute('style', '-webkit-transition: all .4s ease-out 0s;-moz-transition: all .4s ease-out 0s;-ms-transition: all .4s ease-out 0s;transition: all .4s ease-out 0s;');
             rocketOverlay.style.display = 'block';
             rocketOverlay.style.position = 'fixed';
@@ -778,7 +779,6 @@ var Rocket;
             rocketOverlay.style.visibility = 'hidden';
             rocketOverlay.style.opacity = '0';
             rocketOverlay.style.filter = 'alpha(opacity=0)';
-            Rocket.id.add(rocketOverlay, rocketPrefix.basic + 'overlay');
             if (!Rocket.exists(document.getElementById(rocketPrefix.basic + 'overlay'))) {
                 Rocket.dom.body.appendChild(rocketOverlay);
             }

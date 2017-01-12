@@ -317,7 +317,7 @@ module Rocket {
          classes.executeClasses(elms, classNames, false);
       },
       clear: function (element) {
-         const elms = (is.string(element)) ? dom.select(element) : element;
+         const elms = (is.string(element)) ? dom.select(element) : [element];
          if (elms.length > 0) {
             for (let elm of elms) {
                if (exists(elm)) {
@@ -363,7 +363,7 @@ module Rocket {
             return classes.indexOf(val) < 0;
          }).toString().replace(/,/g, ' ');
          if (element.className === '') {
-            classes.clear(element);
+            Rocket.classes.clear(element);
          }
       },
       remove: function (elements, classNames) {
@@ -890,6 +890,9 @@ module Rocket {
    export const overlay = {
       add: function () {
          let rocketOverlay = document.createElement('div');
+         id.add(rocketOverlay, rocketPrefix.basic + 'overlay');
+
+         // Styles
          rocketOverlay.setAttribute('style', '-webkit-transition: all .4s ease-out 0s;-moz-transition: all .4s ease-out 0s;-ms-transition: all .4s ease-out 0s;transition: all .4s ease-out 0s;');
          rocketOverlay.style.display = 'block';
          rocketOverlay.style.position = 'fixed';
@@ -903,7 +906,6 @@ module Rocket {
          rocketOverlay.style.opacity = '0';
          rocketOverlay.style.filter = 'alpha(opacity=0)';
 
-         id.add(rocketOverlay, rocketPrefix.basic + 'overlay');
          if (!exists(document.getElementById(rocketPrefix.basic + 'overlay'))) {
             dom.body.appendChild(rocketOverlay);
          }
