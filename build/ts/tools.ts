@@ -668,15 +668,16 @@ module Rocket {
          if (elm === window) {
             type = string.uppercase.first(type);
             retValue = window['inner' + type] || document.documentElement['client' + type] || document.body['client' + type];
-         }
-         else {
+         } else {
             // Check if string selector
             if (is.string(elm)) {
-               elm = dom.select(elm)[0];
-            }
-            // Catch
-            if (elm.length < 1) {
-               return false;
+               elm = dom.select(elm);
+               // Catch
+               if (elm.length < 1) {
+                  return false;
+               }
+               // Continue
+               elm = elm[0];
             }
             // Continue
             if (elm.getClientRects().length) {

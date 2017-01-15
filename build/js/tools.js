@@ -566,10 +566,11 @@ var Rocket;
             }
             else {
                 if (Rocket.is.string(elm)) {
-                    elm = Rocket.dom.select(elm)[0];
-                }
-                if (elm.length < 1) {
-                    return false;
+                    elm = Rocket.dom.select(elm);
+                    if (elm.length < 1) {
+                        return false;
+                    }
+                    elm = elm[0];
                 }
                 if (elm.getClientRects().length) {
                     retValue = elm.getBoundingClientRect()[type];
