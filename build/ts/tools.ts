@@ -245,7 +245,7 @@ module Rocket {
          Lifted this directly from the Require.js check.
          https://github.com/requirejs/requirejs/blob/master/require.js
          */
-         return !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document)
+         return !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document);
       },
       color: function (color) {
          return is.colour(color);
@@ -302,6 +302,11 @@ module Rocket {
          return regExp.test(time);
       },
       touch: function () {
+         // Catch
+         if (!is.browser() || !window || !window.console) {
+            return false;
+         }
+         // Continue
          return 'ontouchstart' in window || 'onmsgesturechange' in window;
       },
       url: function (url, thisRegExp: any) {
@@ -656,6 +661,9 @@ module Rocket {
    export const dimensions: any = {
       getWidthOrHeight: function (elm: any, type: string) {
          // Catch
+         if (!is.browser() || !window || !window.console) {
+            return false;
+         }
          if (!is.element(elm) && !is.string(elm) && elm !== window) {
             return false;
          }
@@ -891,6 +899,11 @@ module Rocket {
    // Overlay
    export const overlay = {
       add: function () {
+         // Catch
+         if (!is.browser() || !window || !window.console) {
+            return false;
+         }
+         // Continue
          let rocketOverlay = document.createElement('div');
          id.add(rocketOverlay, rocketPrefix.basic + 'overlay');
 
@@ -913,12 +926,22 @@ module Rocket {
          }
       },
       hide: function () {
+         // Catch
+         if (!is.browser() || !window || !window.console) {
+            return false;
+         }
+         // Continue
          let rocketOverlay = dom.select('#rocket-overlay')[0];
          rocketOverlay.style.visibility = 'hidden';
          rocketOverlay.style.opacity = '0';
          rocketOverlay.style.filter = 'alpha(opacity=0)';
       },
       show: function () {
+         // Catch
+         if (!is.browser() || !window || !window.console) {
+            return false;
+         }
+         // Continue
          let rocketOverlay = dom.select('#rocket-overlay')[0];
          setTimeout(function () {
             rocketOverlay.style.visibility = 'visible';
@@ -1090,6 +1113,11 @@ module Rocket {
 
    // Setup
    function setup() {
+      // Catch
+      if (!is.browser() || !window || !window.console) {
+         return false;
+      }
+      // Continue
       // No touch class
       if (!is.touch() && !has.class(dom.html, 'rocket-no-touch')) {
          classes.add(dom.html, 'rocket-no-touch');
