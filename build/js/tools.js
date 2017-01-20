@@ -242,6 +242,9 @@ var Rocket;
             return regExp.test(time);
         },
         touch: function () {
+            if (!Rocket.is.browser() || !window || !window.console) {
+                return false;
+            }
             return 'ontouchstart' in window || 'onmsgesturechange' in window;
         },
         url: function (url, thisRegExp) {
@@ -553,6 +556,9 @@ var Rocket;
     };
     Rocket.dimensions = {
         getWidthOrHeight: function (elm, type) {
+            if (!Rocket.is.browser() || !window || !window.console) {
+                return false;
+            }
             if (!Rocket.is.element(elm) && !Rocket.is.string(elm) && elm !== window) {
                 return false;
             }

@@ -245,7 +245,7 @@ module Rocket {
          Lifted this directly from the Require.js check.
          https://github.com/requirejs/requirejs/blob/master/require.js
          */
-         return !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document)
+         return !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document);
       },
       color: function (color) {
          return is.colour(color);
@@ -302,6 +302,11 @@ module Rocket {
          return regExp.test(time);
       },
       touch: function () {
+         // Catch
+         if (!is.browser() || !window || !window.console) {
+            return false;
+         }
+         // Continue
          return 'ontouchstart' in window || 'onmsgesturechange' in window;
       },
       url: function (url, thisRegExp: any) {
@@ -656,6 +661,9 @@ module Rocket {
    export const dimensions: any = {
       getWidthOrHeight: function (elm: any, type: string) {
          // Catch
+         if (!is.browser() || !window || !window.console) {
+            return false;
+         }
          if (!is.element(elm) && !is.string(elm) && elm !== window) {
             return false;
          }
