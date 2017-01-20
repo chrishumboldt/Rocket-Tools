@@ -773,6 +773,9 @@ var Rocket;
     };
     Rocket.overlay = {
         add: function () {
+            if (!Rocket.is.browser() || !window || !window.console) {
+                return false;
+            }
             var rocketOverlay = document.createElement('div');
             Rocket.id.add(rocketOverlay, rocketPrefix.basic + 'overlay');
             rocketOverlay.setAttribute('style', '-webkit-transition: all .4s ease-out 0s;-moz-transition: all .4s ease-out 0s;-ms-transition: all .4s ease-out 0s;transition: all .4s ease-out 0s;');
@@ -792,12 +795,18 @@ var Rocket;
             }
         },
         hide: function () {
+            if (!Rocket.is.browser() || !window || !window.console) {
+                return false;
+            }
             var rocketOverlay = Rocket.dom.select('#rocket-overlay')[0];
             rocketOverlay.style.visibility = 'hidden';
             rocketOverlay.style.opacity = '0';
             rocketOverlay.style.filter = 'alpha(opacity=0)';
         },
         show: function () {
+            if (!Rocket.is.browser() || !window || !window.console) {
+                return false;
+            }
             var rocketOverlay = Rocket.dom.select('#rocket-overlay')[0];
             setTimeout(function () {
                 rocketOverlay.style.visibility = 'visible';
@@ -955,6 +964,9 @@ var Rocket;
         }
     };
     function setup() {
+        if (!Rocket.is.browser() || !window || !window.console) {
+            return false;
+        }
         if (!Rocket.is.touch() && !Rocket.has.class(Rocket.dom.html, 'rocket-no-touch')) {
             Rocket.classes.add(Rocket.dom.html, 'rocket-no-touch');
         }

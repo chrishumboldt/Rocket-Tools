@@ -899,6 +899,11 @@ module Rocket {
    // Overlay
    export const overlay = {
       add: function () {
+         // Catch
+         if (!is.browser() || !window || !window.console) {
+            return false;
+         }
+         // Continue
          let rocketOverlay = document.createElement('div');
          id.add(rocketOverlay, rocketPrefix.basic + 'overlay');
 
@@ -921,12 +926,22 @@ module Rocket {
          }
       },
       hide: function () {
+         // Catch
+         if (!is.browser() || !window || !window.console) {
+            return false;
+         }
+         // Continue
          let rocketOverlay = dom.select('#rocket-overlay')[0];
          rocketOverlay.style.visibility = 'hidden';
          rocketOverlay.style.opacity = '0';
          rocketOverlay.style.filter = 'alpha(opacity=0)';
       },
       show: function () {
+         // Catch
+         if (!is.browser() || !window || !window.console) {
+            return false;
+         }
+         // Continue
          let rocketOverlay = dom.select('#rocket-overlay')[0];
          setTimeout(function () {
             rocketOverlay.style.visibility = 'visible';
@@ -1098,6 +1113,11 @@ module Rocket {
 
    // Setup
    function setup() {
+      // Catch
+      if (!is.browser() || !window || !window.console) {
+         return false;
+      }
+      // Continue
       // No touch class
       if (!is.touch() && !has.class(dom.html, 'rocket-no-touch')) {
          classes.add(dom.html, 'rocket-no-touch');
