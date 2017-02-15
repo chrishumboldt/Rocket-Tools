@@ -193,7 +193,7 @@ var Rocket;
             return regExp.test(date);
         },
         element: function (element) {
-            return (element.nodeType && element.nodeType === 1) ? true : false;
+            return (element.nodeType && element.nodeType === 1);
         },
         email: function (email, thisRegExp) {
             var regExp = (thisRegExp instanceof RegExp) ? thisRegExp : Rocket.defaults.regexp.email;
@@ -226,16 +226,16 @@ var Rocket;
         object: function (check) {
             return (typeof check === 'object');
         },
-        password: function (password, thisRegExp) {
+        password: function (check, thisRegExp) {
             var regExp = (thisRegExp instanceof RegExp) ? thisRegExp : Rocket.defaults.regexp.password;
-            return regExp.test(password);
+            return regExp.test(check);
         },
-        string: function (str) {
-            return (typeof str === 'string');
+        string: function (check) {
+            return (typeof check === 'string');
         },
-        time: function (time, thisRegExp) {
+        time: function (check, thisRegExp) {
             var regExp = (thisRegExp instanceof RegExp) ? thisRegExp : Rocket.defaults.regexp.time;
-            return regExp.test(time);
+            return regExp.test(check);
         },
         touch: function () {
             if (!Rocket.is.browser() || !window || !window.console) {
