@@ -2,7 +2,45 @@
 Author: Chris Humboldt
 */
 
-declare namespace Rocket {
+/*
+Author: Chris Humboldt
+*/
+
+declare module MRocket {
+   // Basic Checks
+   interface Has {
+      class(element: any, className: string): any;
+      extension(file: string, types?: string[]): boolean;
+      spaces(check: any): boolean;
+   }
+
+   interface Is {
+      array(check: any): boolean;
+      boolean(check: any): boolean;
+      browser(): boolean;
+      colour(check: string): boolean;
+   }
+
+   // Main interface
+   export interface Main {
+      defaults: any;
+
+      // Basic checks
+      exists(check: any): any;
+      has: Has;
+      is: Is;
+
+      // Development
+      log(text: any): any;
+   }
+}
+
+// Declare the module
+declare var Rocket: MRocket.Main;
+
+
+/*
+declare module Rocket {
    let defaults: any;
 
    // Basic checks
@@ -22,7 +60,7 @@ declare namespace Rocket {
       password(check: any): boolean;
       string(check: any): boolean;
       touch(): boolean;
-   }
+    }
    let is: is;
 
    // Button
@@ -116,3 +154,4 @@ declare namespace Rocket {
    let form: any;
    let message: any;
 }
+*/
