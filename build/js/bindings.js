@@ -1,6 +1,6 @@
-/**
- * Author: Chris Humboldt
-**/
+/*
+Author: Chris Humboldt
+*/
 
 /*
 Rocket Node module
