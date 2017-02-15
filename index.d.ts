@@ -239,7 +239,7 @@ declare module MRocket {
       error(text: any);
       dimensions: _Dimensions;
       dom: _Dom;
-      events: _Events;
+      event: _Events;
       get: _Get
       helper: _Helper;
       id: _Id;
