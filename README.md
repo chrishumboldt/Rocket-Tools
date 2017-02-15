@@ -68,7 +68,15 @@ var boldName = Rocket.string.uppercase.all('Chris Humboldt'); // Convert a strin
 var randomNumber = Rocket.random.integer(); // Generate a random integer
 ```
 
-Make sure not to overwrite or reassign the `Rocket` variable name to anything else within your project.
+Make sure not to overwrite the `Rocket` variable name to anything else within your project. Often a new reference will be made for the library and its defaults making typing easier. For example:
+
+```javascript
+// Here we assign the library to a quick variable reference
+var _R = Rocket;
+var _RD = Rocket.defaults;
+
+var randomNumber = _R.random.integer(); // Generate a random integer
+```
 
 **NOTE** that a no touch check is run and the result assigned to the HTML element in the form of a class `rocket-no-touch`. An [overlay](#overlay) is also automatically applied.
 
@@ -375,6 +383,7 @@ Method | Description
 ---- | ----
 `request.delete(options)` | Make a `DELETE` request. See the available `options` below.
 `request.get(options)` | Make a `GET` request. See the available `options` below.
+`request.patch(options)` | Make a `PATCH` request. See the available `options` below.
 `request.post(options)` | Make a `POST` request. See the available `options` below.
 `request.put(options)` | Make a `PUT` request. See the available `options` below.
 `request.run(options)` | Make a request of your choice. See the available `options` below.
@@ -385,7 +394,7 @@ Option | Default | Description
 ---- | ---- | ----
 `url` | | Set the request `URL`.
 `async` | `true` | Determine if request must be asynchronous.
-`data` | `false` | Attach data to the request. `GET` request data is attached as a query string. `POST` request data is attached in the body.
+`data` | `false` | Attach data to the request. `GET`, `DELETE` request data is attached as a query string. `PATCH`, `POST` and `PUT` request data is attached to the body.
 `dataForce` | `false` | If set, force the way data is attached. In this way you can attach a body to a `GET` request. The options are `queryString` or `body`.
 `dataType` | `json` | Set the data type that you will be sending. The options are `json`, `form` or `formdata`.
 `headers` | `false` | Attach custom headers to the request.
@@ -400,7 +409,7 @@ Option | Default | Description
 
 ```javascript
 Rocket.request.get({
-	url: 'http://restplate.com/api/tests/get',
+	url: 'http://someurl.com',
 	data: {
 		key: 'value'
 	},

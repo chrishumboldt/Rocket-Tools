@@ -1,11 +1,11 @@
-/**
- * Author: Chris Humboldt
-**/
+/*
+Author: Chris Humboldt
+*/
 
 /*
 NOTE:
 Rocket serves as the "namespace" for all subsequent modules. Rocket modules do
-not require this toolset but if included make sure that this library is loaded first.
+require this toolset so make sure that this library is loaded first.
 */
 
 // Table of contents
@@ -165,17 +165,15 @@ module Rocket {
 
    // Arrays
    export const array = {
-      clean: function (thisArray) {
+      clean: (thisArray) => {
          // Catch
          if (!is.array(thisArray)) {
             return false;
          };
          // Continue
-         return thisArray.filter(function (value) {
-            return (value !== null);
-         });
+         return thisArray.filter(value => value !== null);
       },
-      make: function (arValue: any, isUnique?) {
+      make: (arValue: any, isUnique?) => {
          let returnArray = [];
          // Catch
          if (!arValue) {
@@ -202,44 +200,42 @@ module Rocket {
 
          return (unique) ? array.unique(returnArray) : returnArray;
       },
-      unique: function (thisArray) {
+      unique: (thisArray) => {
          // Catch
          if (!is.array(thisArray)) {
             return false;
          };
          // Continue
-         return thisArray.filter(function (value, index, self) {
-            return self.indexOf(value) === index;
-         });
+         return thisArray.filter((value, index, self) => self.indexOf(value) === index);
       }
    }
 
    // Basic checks
-   export const exists = function (check) {
-      return (typeof check === 'undefined' || check === null || check === false) ? false : true;
+   export const exists = (check) => {
+      return !(typeof check === 'undefined' || check === null || check === false);
    };
 
    export const has = {
-      spaces: function (check) {
+      spaces: (check) => {
          return /\s/.test(check);
       },
-      class: function (element, thisClass) {
+      class: (element, thisClass) => {
          return (' ' + element.className + ' ').indexOf(' ' + thisClass + ' ') > -1;
       },
-      extension: function (file, arAllowedTypes) {
+      extension: (file, arAllowedTypes) => {
          let allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : defaults.extensions.all;
-         return (allowedTypes.indexOf(file.split('.').pop().toLowerCase()) > -1) ? true : false;
+         return (allowedTypes.indexOf(file.split('.').pop().toLowerCase()) > -1);
       }
    };
 
    export const is = {
-      array: function (check) {
-         return (typeof check === 'object' && check instanceof Array) ? true : false;
+      array: (check) => {
+         return (typeof check === 'object' && check instanceof Array);
       },
-      boolean: function (check) {
+      boolean: (check) => {
          return (typeof check === 'boolean');
       },
-      browser: function () {
+      browser: () => {
          /*
          A very basic check to detect if using a browser.
          Lifted this directly from the Require.js check.
@@ -247,34 +243,34 @@ module Rocket {
          */
          return !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document);
       },
-      color: function (color) {
+      color: (color) => {
          return is.colour(color);
       },
-      colour: function (colour) {
+      colour: (colour) => {
          return defaults.regexp.colour.test(colour);
       },
-      date: function (date, thisRegExp: any) {
+      date: (date, thisRegExp: any) => {
          let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.date;
          return regExp.test(date);
       },
-      element: function (element) {
+      element: (element) => {
          return (element.nodeType && element.nodeType === 1) ? true : false;
       },
-      email: function (email, thisRegExp: any) {
+      email: (email, thisRegExp: any) => {
          let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.email;
          return regExp.test(email);
       },
-      function: function (check) {
+      function: (check) => {
          return (typeof check === 'function');
       },
-      image: function (file, arAllowedTypes) {
+      image: (file, arAllowedTypes) => {
          let allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : defaults.extensions.images;
          return allowedTypes[file.split('.').pop().toLowerCase()];
       },
-      integer: function (check) {
+      integer: (check) => {
          return (is.number(check) && (parseFloat(check) === parseInt(check)));
       },
-      json: function (json) {
+      json: (json) => {
          if (typeof json !== 'object') {
             try {
                JSON.parse(json);
@@ -284,24 +280,24 @@ module Rocket {
          }
          return true;
       },
-      number: function (check) {
+      number: (check) => {
          return (typeof check === 'number');
       },
-      object: function (check) {
+      object: (check) => {
          return (typeof check === 'object');
       },
-      password: function (password, thisRegExp: any) {
+      password: (password, thisRegExp: any) => {
          let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.password;
          return regExp.test(password);
       },
-      string: function (str) {
+      string: (str) => {
          return (typeof str === 'string');
       },
-      time: function (time, thisRegExp: any) {
+      time: (time, thisRegExp: any) => {
          let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.time;
          return regExp.test(time);
       },
-      touch: function () {
+      touch: () => {
          // Catch
          if (!is.browser() || !window || !window.console) {
             return false;
@@ -309,7 +305,7 @@ module Rocket {
          // Continue
          return 'ontouchstart' in window || 'onmsgesturechange' in window;
       },
-      url: function (url, thisRegExp: any) {
+      url: (url, thisRegExp: any) => {
          let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.url;
          return regExp.test(url);
       }
@@ -317,11 +313,11 @@ module Rocket {
 
    // Classes
    export const classes = {
-      add: function (elements, classNames) {
+      add: (elements, classNames) => {
          const elms = (is.string(elements)) ? dom.select(elements) : elements;
          classes.executeClasses(elms, classNames, false);
       },
-      clear: function (element) {
+      clear: (element) => {
          const elms = (is.string(element)) ? dom.select(element) : [element];
          if (elms.length > 0) {
             for (let elm of elms) {
@@ -331,16 +327,18 @@ module Rocket {
             }
          }
       },
-      executeAdd: function (element, classes) {
-         element.className = element.className.split(' ').concat(classes).filter(function (val, i, ar) {
-            return (ar.indexOf(val) === i) && (val !== '');
-         }).toString().replace(/,/g, ' ');
+      executeAdd: (element, classes) => {
+         element.className = element.className
+            .split(' ')
+            .concat(classes)
+            .filter((val, i, ar) => (ar.indexOf(val) === i) && (val !== ''))
+            .toString()
+            .replace(/,/g, ' ');
       },
-      executeClasses: function (elements, classesAdd, classesRemove) {
+      executeClasses: (elements, classesAdd, classesRemove) => {
          // Catch
-         if (!exists(elements)) {
-            return false;
-         }
+         if (!exists(elements)) { return false; }
+         // Continue
          // Create elements array
          let arElements = array.make(elements);
          // Catch
@@ -363,28 +361,33 @@ module Rocket {
             }
          }
       },
-      executeRemove: function (element, classes) {
-         element.className = element.className.split(' ').filter(function (val) {
-            return classes.indexOf(val) < 0;
-         }).toString().replace(/,/g, ' ');
+      executeRemove: (element, classes) => {
+         element.className = element.className
+            .split(' ')
+            .filter(val => classes.indexOf(val) < 0)
+            .toString()
+            .replace(/,/g, ' ');
+
          if (element.className === '') {
             Rocket.classes.clear(element);
          }
       },
-      remove: function (elements, classNames) {
+      remove: (elements, classNames) => {
          const elms = (is.string(elements)) ? dom.select(elements) : elements;
          classes.executeClasses(elms, false, classNames);
       },
-      replace: function (elements, classesRemove, classesAdd) {
+      replace: (elements, classesRemove, classesAdd) => {
          const elms = (is.string(elements)) ? dom.select(elements) : elements;
          classes.executeClasses(elms, classesAdd, classesRemove);
       },
-      toggle: function (elements, className) {
+      toggle: (elements, className) => {
          const elms = (is.string(elements)) ? dom.select(elements) : elements;
+
          // Catch
          if (!exists(elms) || typeof className !== 'string' || has.spaces(className)) {
             return false;
          }
+
          // Create elements array
          let arElements = [];
          if (is.element(elms)) {
@@ -392,6 +395,7 @@ module Rocket {
          } else if (is.array(elms)) {
             arElements = elms;
          }
+
          // Catch
          if (arElements.length < 1) {
             return false;
@@ -412,24 +416,24 @@ module Rocket {
    NOTE: INCOMPLETE!
    Needs a ton more work and really is not a viable method right now.
    */
-   export const clone = function (original: any) {
+   export const clone = (original: any) => {
       return helper.parse.json(JSON.stringify(original));
    };
 
    // Dates
    export const date = {
-      basic: function (thisDate, thisWithTime: boolean) {
+      basic: (thisDate, thisWithTime: boolean) => {
          const transDate = (thisDate) ? date.transform(thisDate) : new Date();
          // Catch
          if (!transDate) {
             return false;
          }
          // Continue
-         const withTime = (typeof thisWithTime === 'boolean') ? thisWithTime : false;
+         const withTime = (is.boolean(thisWithTime)) ? thisWithTime : false;
          let returnValue = '';
-         const day = this.day(transDate.getDate());
-         const month = this.month(transDate.getMonth() + 1);
-         const year = this.year(transDate.getFullYear());
+         const day = date.day(transDate.getDate());
+         const month = date.month(transDate.getMonth() + 1);
+         const year = date.year(transDate.getFullYear());
 
          returnValue += day + ' ' + month + ' ' + year;
          if (withTime) {
@@ -437,14 +441,14 @@ module Rocket {
          }
          return returnValue;
       },
-      day: function (thisDayVal, thisType: string) {
+      day: (thisDayVal, thisType?: string) => {
          let thisDay;
-         const type = (typeof thisType === 'string') ? thisType : false;
+         const type = (is.string(thisType)) ? thisType : false;
 
          // Get month
-         if (typeof thisDayVal === 'number') {
+         if (is.number(thisDayVal)) {
             thisDay = thisDayVal;
-         } else if (typeof thisDayVal === 'string') {
+         } else if (is.string(thisDayVal)) {
             const transDayVal = date.transform(thisDayVal);
             thisDay = (transDayVal) ? transDayVal.getDate() : thisDayVal;
          } else {
@@ -465,28 +469,28 @@ module Rocket {
             return parseInt(thisDay);
          }
       },
-      safe: function (thisDate, thisWithTime: boolean) {
+      safe: (thisDate, thisWithTime?: boolean) => {
          const newData = (thisDate) ? date.transform(thisDate) : new Date();
          // Catch
          if (!newData) {
             return false;
          }
          // Continue
-         const withTime = (typeof thisWithTime === 'boolean') ? thisWithTime : false;
+         const withTime = (is.boolean(thisWithTime)) ? thisWithTime : false;
          var returnValue = newData.getFullYear() + '-' + ('0' + (newData.getMonth() + 1)).slice(-2) + '-' + ('0' + newData.getDate()).slice(-2);
          if (withTime) {
             returnValue += ' ' + time.full(thisDate);
          }
          return returnValue;
       },
-      month: function (thisMonthVal, thisType: string) {
+      month: (thisMonthVal, thisType?: string) => {
          let thisMonth;
-         const type = (typeof thisType === 'string') ? thisType : false;
+         const type = (is.string(thisType)) ? thisType : false;
 
          // Get month
-         if (typeof thisMonthVal === 'number') {
+         if (is.number(thisMonthVal)) {
             thisMonth = thisMonthVal;
-         } else if (typeof thisMonthVal === 'string') {
+         } else if (is.string(thisMonthVal)) {
             const transMonthVal = date.transform(thisMonthVal);
             thisMonth = (transMonthVal) ? transMonthVal.getMonth() + 1 : thisMonthVal;
          } else {
@@ -503,35 +507,40 @@ module Rocket {
          // Return
          switch (type) {
             case 'long':
-            thisMonth = (thisMonth.length === 1) ? '0' + thisMonth : thisMonth;
-            for (let i = 0, len = rocketMonths.length; i < len; i++) {
-               if (rocketMonths[i].number == thisMonth) {
-                  thisMonth = string.uppercase.first(rocketMonths[i].name);
-                  break;
+               thisMonth = (thisMonth.length === 1) ? '0' + thisMonth : thisMonth;
+
+               for (let i = 0, len = rocketMonths.length; i < len; i++) {
+                  if (rocketMonths[i].number == thisMonth) {
+                     thisMonth = string.uppercase.first(rocketMonths[i].name);
+                     break;
+                  }
                }
-            }
-            break;
+               break;
+
             case 'number':
-            thisMonth = parseInt(thisMonth);
-            break;
+               thisMonth = parseInt(thisMonth);
+               break;
+
             default:
-            thisMonth = (thisMonth.length === 1) ? '0' + thisMonth : thisMonth;
-            for (let i = 0, len = rocketMonths.length; i < len; i++) {
-               if (rocketMonths[i].number == thisMonth) {
-                  thisMonth = string.uppercase.first(rocketMonths[i].nameShort);
-                  break;
+               thisMonth = (thisMonth.length === 1) ? '0' + thisMonth : thisMonth;
+
+               for (let i = 0, len = rocketMonths.length; i < len; i++) {
+                  if (rocketMonths[i].number == thisMonth) {
+                     thisMonth = string.uppercase.first(rocketMonths[i].nameShort);
+                     break;
+                  }
                }
-            }
          }
          return thisMonth;
       },
-      toISO: function (thisDate: any, thisFullDate: any) {
+      toISO: (thisDate: any, thisFullDate?: any) => {
          const fullDate = (typeof thisFullDate !== 'undefined') ? thisFullDate : true;
 
          // Spaced dates
          if (thisDate.indexOf(' ') > -1) {
             let year, month, day, time, returnDate;
             let dateSplit = thisDate.split(' ');
+
             for (let i = 0, len = dateSplit.length; i < len; i++) {
                if (is.integer(dateSplit[i])) {
                   if (dateSplit[i].length === 2) {
@@ -543,6 +552,7 @@ module Rocket {
                   time = dateSplit[i];
                } else {
                   let lowerDateSplit = string.lowercase.all(dateSplit[i]);
+
                   for (let i2 = 0, len2 = rocketMonths.length; i2 < len2; i2++) {
                      if (lowerDateSplit === rocketMonths[i2].name || lowerDateSplit === rocketMonths[i2].nameShort) {
                         month = rocketMonths[i2].number;
@@ -551,14 +561,16 @@ module Rocket {
                   }
                }
             }
+
             returnDate = year + '-' + month + '-' + day;
             if (fullDate === true && time !== undefined) {
                returnDate += 'T' + time;
             }
+
             return returnDate;
          }
       },
-      transform: function (thisDate: any) {
+      transform: (thisDate: any) => {
          /*
          NOTE: This is not a perfect test. This function will attempt to convert
          any string passed into a date. This should really only be used with date
@@ -566,13 +578,14 @@ module Rocket {
          */
          function fixDateOrder (fixDate: any, seperator: string) {
             return fixDate.split(seperator).reverse().join(seperator);
-         };
+         }
 
          // Execute
-         if (typeof thisDate === 'string') {
+         if (is.string(thisDate)) {
             let dateIndexDash = thisDate.indexOf('-');
             let dateIndexDot = thisDate.indexOf('.');
             let dateIndexSlash = thisDate.indexOf('/');
+
             if (dateIndexDash == 2) {
                thisDate = fixDateOrder(thisDate, '-');
             }
@@ -583,22 +596,24 @@ module Rocket {
                thisDate = fixDateOrder(thisDate, '/');
             }
          }
+
          // Make the date
          let newDate = (typeof thisDate !== 'undefined') ? new Date(thisDate) : new Date();
+
          // Fail test
          if (newDate.toString() == 'Invalid Date') {
             return false;
          }
          return newDate;
       },
-      year: function (thisYearVal: any, thisType: string) {
+      year: (thisYearVal: any, thisType?: string) => {
          let thisYear: any;
-         const type = (typeof thisType === 'string') ? thisType : false;
+         const type = (is.string(thisType)) ? thisType : false;
 
          // Get month
-         if (typeof thisYearVal === 'number') {
+         if (is.number(thisYearVal)) {
             thisYear = thisYearVal;
-         } else if (typeof thisYearVal === 'string') {
+         } else if (is.string(thisYearVal)) {
             const transYearVal = date.transform(thisYearVal);
             thisYear = (transYearVal) ? transYearVal.getFullYear() : thisYearVal;
          } else {
@@ -615,51 +630,52 @@ module Rocket {
          // Return
          switch (type) {
             case 'long':
-            if (thisYear.length < 4) {
-               let newDate = new Date().getFullYear().toString().substring(0, 4 - thisYear.length).toString();
-               thisYear = parseInt(newDate + thisYear);
-            } else {
-               thisYear = parseInt(thisYear);
-            }
-            break;
+               if (thisYear.length < 4) {
+                  let newDate = new Date().getFullYear().toString().substring(0, 4 - thisYear.length).toString();
+                  thisYear = parseInt(newDate + thisYear);
+               } else {
+                  thisYear = parseInt(thisYear);
+               }
+               break;
+
             case 'short':
-            if (thisYear.length === 1) {
-               let newDate = new Date().getFullYear().toString().substr(2, 1);
-               thisYear = newDate + thisYear;
-            } else {
-               thisYear = thisYear.substr(thisYear.length - 2, 2);
-            }
-            break;
+               if (thisYear.length === 1) {
+                  let newDate = new Date().getFullYear().toString().substr(2, 1);
+                  thisYear = newDate + thisYear;
+               } else {
+                  thisYear = thisYear.substr(thisYear.length - 2, 2);
+               }
+               break;
          }
          return parseInt(thisYear);
       }
    };
 
    // Development
-   export const log = function (text: string, thisError?: boolean) {
+   export const log = (text: string, thisError?: boolean) => {
       // Catch
       if (is.browser() && (!window || !window.console)) {
          return false;
       }
       // Continue
       if (defaults.log) {
-         let error = (typeof thisError === 'boolean') ? thisError : false;
+         let error = (is.boolean(thisError)) ? thisError : false;
+
          if (error && is.browser()) {
             throw new Error(text);
-         }
-         else {
+         } else {
             console.log(text);
          }
       }
    };
 
-   export const error = function (text: string) {
-      log(text, true);
+   export const error = (text: string) => {
+      Rocket.log(text, true);
    };
 
    // Dimensions
    export const dimensions: any = {
-      getWidthOrHeight: function (elm: any, type: string) {
+      getWidthOrHeight: (elm: any, type: string) => {
          // Catch
          if (!is.browser() || !window || !window.console) {
             return false;
@@ -672,6 +688,7 @@ module Rocket {
          }
          // Continue
          let retValue;
+
          // Check for window
          if (elm === window) {
             type = string.uppercase.first(type);
@@ -687,6 +704,7 @@ module Rocket {
                // Continue
                elm = elm[0];
             }
+
             // Continue
             if (elm.getClientRects().length) {
                retValue = elm.getBoundingClientRect()[type];
@@ -695,13 +713,13 @@ module Rocket {
                retValue = elm.style[type];
             }
          }
-         // Return
+
          return parseFloat(retValue) || 0;
       },
-      height: function (elm: any) {
+      height: (elm: any) => {
          return dimensions.getWidthOrHeight(elm, 'height');
       },
-      width: function (elm: any) {
+      width: (elm: any) => {
          return dimensions.getWidthOrHeight(elm, 'width');
       }
    }
@@ -711,7 +729,7 @@ module Rocket {
       body: (typeof document !== 'undefined') ? document.getElementsByTagName('body')[0] : false,
       header: (typeof document !== 'undefined') ? document.getElementsByTagName('header')[0] : false,
       html: (typeof document !== 'undefined') ? document.getElementsByTagName('html')[0] : false,
-      ratio: function (selector, multiplier: number) {
+      ratio: (selector, multiplier: number) => {
          let elements = document.querySelectorAll(selector);
          if (typeof (multiplier) === 'undefined') {
             multiplier = 1;
@@ -720,13 +738,13 @@ module Rocket {
             elements[i].style.height = Math.floor(elements[i].offsetWidth * multiplier) + 'px';
          }
       },
-      remove: function (selElm) {
+      remove: (selElm) => {
          if (exists(selElm)) {
             if (is.element(selElm)) {
                selElm.parentNode.removeChild(selElm);
-            }
-            else if (is.string(selElm)) {
+            } else if (is.string(selElm)) {
                let elements = dom.select(selElm);
+
                for (let i = 0, len = elements.length; i < len; i++) {
                   if (is.element(elements[i])) {
                      elements[i].parentNode.removeChild(elements[i]);
@@ -735,38 +753,40 @@ module Rocket {
             }
          }
       },
-      select: function (selectors) {
+      select: (selectors) => {
          let returnElms = [];
          // Catch
          if (!is.string(selectors)) {
             return returnElms;
          }
          // Continue
-         let selectorSplit = selectors.split(',').map(string.trim).filter(function (selector) {
-            return selector.length > 0;
-         });
+         let selectorSplit = selectors.split(',').map(string.trim).filter(selector => selector.length > 0);
+
          if (selectorSplit.length > 0) {
             for (let i = 0, len = selectorSplit.length; i < len; i++) {
                // Select the elements
                switch (get.selector.type(selectorSplit[i])) {
                   case 'gebi':
-                  returnElms = returnElms.concat(document.getElementById(selectorSplit[i].substring(1)));
-                  break;
+                     returnElms = returnElms.concat(document.getElementById(selectorSplit[i].substring(1)));
+                     break;
+
                   case 'gebtn':
-                  returnElms = returnElms.concat(Array.prototype.slice.call(document.getElementsByTagName(selectorSplit[i])));
-                  break;
+                     returnElms = returnElms.concat(Array.prototype.slice.call(document.getElementsByTagName(selectorSplit[i])));
+                     break;
+
                   case 'qsa':
-                  returnElms = returnElms.concat(Array.prototype.slice.call(document.querySelectorAll(selectorSplit[i])));
-                  break;
+                     returnElms = returnElms.concat(Array.prototype.slice.call(document.querySelectorAll(selectorSplit[i])));
+                     break;
                }
             }
          }
-         // Return
+
          return array.clean(array.unique(returnElms));
       },
       title: (typeof document !== 'undefined') ? document.getElementsByTagName('title')[0] : false,
-      wallpaper: function (selector) {
+      wallpaper: (selector) => {
          let elements = dom.select(selector);
+
          for (let i = 0, len = elements.length; i < len; i++) {
             let thisWallpaper = elements[i].getAttribute('data-background');
             if (thisWallpaper !== null) {
@@ -779,27 +799,25 @@ module Rocket {
 
    // Events
    export const event = {
-      add: function (elem, type, eventHandle) {
+      add: (elem, type, eventHandle) => {
          if (elem == null || typeof (elem) == 'undefined') return;
+
          if (elem.addEventListener) {
             elem.addEventListener(type, eventHandle, false);
-         }
-         else if (elem.attachEvent) {
+         } else if (elem.attachEvent) {
             elem.attachEvent('on' + type, eventHandle);
-         }
-         else {
+         } else {
             elem['on' + type] = eventHandle;
          }
       },
-      remove: function (elem, type, eventHandle) {
+      remove: (elem, type, eventHandle) => {
          if (elem == null || typeof (elem) == 'undefined') return;
+
          if (elem.removeEventListener) {
             elem.removeEventListener(type, eventHandle, false);
-         }
-         else if (elem.detachEvent) {
+         } else if (elem.detachEvent) {
             elem.detachEvent('on' + type, eventHandle);
-         }
-         else {
+         } else {
             elem['on' + type] = eventHandle;
          }
       }
@@ -807,24 +825,24 @@ module Rocket {
 
    // Gets
    export const get = {
-      extension: function (file) {
+      extension: (file) => {
          return file.split('.').pop().toLowerCase();
       },
-      index: function (node) {
+      index: (node) => {
          return [].indexOf.call(node.parentNode.children, node);
       },
       selector: {
-         type: function (selector) {
+         type: (selector) => {
             let selectType: any = false;
+
             if (selector.indexOf('.') > -1 || has.spaces(selector) || defaults.regexp.selector.attribute.test(selector)) {
                selectType = 'qsa';
-            }
-            else if (selector.indexOf('#') > -1) {
+            } else if (selector.indexOf('#') > -1) {
                selectType = 'gebi';
-            }
-            else if (defaults.regexp.selector.tag.test(selector)) {
+            } else if (defaults.regexp.selector.tag.test(selector)) {
                selectType = 'gebtn';
             }
+
             return selectType;
          }
       }
@@ -833,14 +851,14 @@ module Rocket {
    // Helpers
    export const helper = {
       parse: {
-         json: function (json) {
+         json: (json) => {
             if (is.json(json)) {
                return JSON.parse(json);
             }
             return json;
          }
       },
-      setDefault: function (setValue, defaultValue) {
+      setDefault: (setValue, defaultValue) => {
          if (typeof setValue == 'undefined' && typeof defaultValue == 'undefined') {
             return false;
          } else if (typeof setValue != 'undefined' && typeof defaultValue == 'undefined') {
@@ -855,12 +873,12 @@ module Rocket {
 
    // ID's
    export const id = {
-      add: function (element, id) {
+      add: (element, id) => {
          if (exists(element)) {
             element.setAttribute('id', id);
          }
       },
-      remove: function (element) {
+      remove: (element) => {
          if (exists(element)) {
             element.removeAttribute('id');
          }
@@ -869,14 +887,16 @@ module Rocket {
 
    // Inputs
    export const input = {
-      disable: function (selector) {
+      disable: (selector) => {
          const elements = dom.select(selector);
+
          for (let i = 0, len = elements.length; i < len; i++) {
             elements[i].disabled = true;
          }
       },
-      enable: function (selector) {
+      enable: (selector) => {
          const elements = dom.select(selector);
+
          for (let i = 0, len = elements.length; i < len; i++) {
             elements[i].disabled = false;
          }
@@ -885,20 +905,20 @@ module Rocket {
 
    // Milliseconds
    export const milliseconds = {
-      hours: function (hours: number) {
+      hours: (hours: number) => {
          return hours * 60 * 60 * 1000;
       },
-      minutes: function (minutes: number) {
+      minutes: (minutes: number) => {
          return minutes * 60 * 1000;
       },
-      seconds: function (seconds: number) {
+      seconds: (seconds: number) => {
          return seconds * 1000;
       }
    };
 
    // Overlay
    export const overlay = {
-      add: function () {
+      add: () => {
          // Catch
          if (!is.browser() || !window || !window.console) {
             return false;
@@ -925,7 +945,7 @@ module Rocket {
             dom.body.appendChild(rocketOverlay);
          }
       },
-      hide: function () {
+      hide: () => {
          // Catch
          if (!is.browser() || !window || !window.console) {
             return false;
@@ -936,14 +956,15 @@ module Rocket {
          rocketOverlay.style.opacity = '0';
          rocketOverlay.style.filter = 'alpha(opacity=0)';
       },
-      show: function () {
+      show: () => {
          // Catch
          if (!is.browser() || !window || !window.console) {
             return false;
          }
          // Continue
          let rocketOverlay = dom.select('#rocket-overlay')[0];
-         setTimeout(function () {
+
+         setTimeout(() => {
             rocketOverlay.style.visibility = 'visible';
             rocketOverlay.style.opacity = '1';
             rocketOverlay.style.filter = 'alpha(opacity=100)';
@@ -953,17 +974,19 @@ module Rocket {
 
    // Random
    export let random = {
-      integer: function (thisMax: number, thisMin: number) {
+      integer: (thisMax: number, thisMin: number) => {
          const max = (typeof thisMax === 'number') ? thisMax : 10;
          const min = (typeof thisMin === 'number') ? thisMin : 1;
+
          return Math.floor(Math.random() * (max - min + 1)) + min;
       },
-      string: function (stringLength, thisTextOnly: boolean) {
+      string: (stringLength, thisTextOnly: boolean) => {
          let rNum;
-         const textOnly = (typeof thisTextOnly === 'boolean') ? thisTextOnly : false;
+         const textOnly = (is.boolean(thisTextOnly)) ? thisTextOnly : false;
          let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
-         const len = (typeof stringLength === 'number') ? stringLength : 5;
+         const len = (is.number(stringLength)) ? stringLength : 5;
          let randomString = '';
+
          if (!textOnly) {
             chars += '0123456789';
          }
@@ -971,31 +994,34 @@ module Rocket {
             rNum = Math.floor(Math.random() * chars.length);
             randomString += chars[rNum];
          }
+
          return randomString;
       }
    };
 
    // Request
    export let request = {
-      run: function (uOptions) {
+      run: (uOptions) => {
+         // Catch
          if (!exists(uOptions) || !exists(uOptions.url)) {
             return false;
          }
+         // Continue
          let options = {
             url: uOptions.url,
-            async: (typeof uOptions.async === 'string') ? uOptions.async : defaults.request.async,
+            async: (is.string(uOptions.async)) ? uOptions.async : defaults.request.async,
             data: (exists(uOptions.data)) ? uOptions.data : defaults.request.data,
-            dataForce: (typeof uOptions.dataForce === 'string') ? uOptions.dataForce : defaults.request.dataForce,
+            dataForce: (is.string(uOptions.dataForce)) ? uOptions.dataForce : defaults.request.dataForce,
             dataType: (exists(uOptions.dataType)) ? uOptions.dataType : defaults.request.dataType,
-            headers: (typeof uOptions.headers === 'object') ? uOptions.headers : defaults.request.headers,
-            onStart: (typeof uOptions.onStart === 'function') ? uOptions.onStart : defaults.request.onStart,
-            onLoading: (typeof uOptions.onLoading === 'function') ? uOptions.onLoading : defaults.request.onLoading,
-            onSuccess: (typeof uOptions.onSuccess === 'function') ? uOptions.onSuccess : defaults.request.onSuccess,
-            onError: (typeof uOptions.onError === 'function') ? uOptions.onError : defaults.request.onError,
-            onComplete: (typeof uOptions.onComplete === 'function') ? uOptions.onComplete : defaults.request.onComplete,
-            timeout: (typeof uOptions.timeout === 'number') ? time.seconds(uOptions.timeout) : defaults.request.timeout,
+            headers: (is.object(uOptions.headers)) ? uOptions.headers : defaults.request.headers,
+            onStart: (is.function(uOptions.onStart)) ? uOptions.onStart : defaults.request.onStart,
+            onLoading: (is.function(uOptions.onLoading)) ? uOptions.onLoading : defaults.request.onLoading,
+            onSuccess: (is.function(uOptions.onSuccess)) ? uOptions.onSuccess : defaults.request.onSuccess,
+            onError: (is.function(uOptions.onError)) ? uOptions.onError : defaults.request.onError,
+            onComplete: (is.function(uOptions.onComplete)) ? uOptions.onComplete : defaults.request.onComplete,
+            timeout: (is.number(uOptions.timeout)) ? time.seconds(uOptions.timeout) : defaults.request.timeout,
             type: (exists(uOptions.type)) ? string.uppercase.all(uOptions.type) : defaults.request.type,
-            withCredentials: (typeof uOptions.withCredentials === 'boolean') ? uOptions.withCredentials : defaults.request.withCredentials
+            withCredentials: (is.boolean(uOptions.withCredentials)) ? uOptions.withCredentials : defaults.request.withCredentials
          };
          let xhr: any = new XMLHttpRequest();
          xhr.withCredentials = options.withCredentials;
@@ -1007,45 +1033,48 @@ module Rocket {
          xhr.onreadystatechange = function () {
             switch (this.readyState) {
                case 1:
-               if (options.onStart) {
-                  options.onStart();
-               }
-               break;
+                  if (options.onStart) {
+                     options.onStart();
+                  }
+                  break;
 
                case 3:
-               if (options.onLoading) {
-                  options.onLoading();
-               }
-               break;
+                  if (options.onLoading) {
+                     options.onLoading();
+                  }
+                  break;
 
                case 4:
-               if (options.onComplete) {
-                  options.onComplete(this);
-               }
-               if (this.status >= 200 && this.status < 300) {
-                  if (options.onSuccess) {
-                     options.onSuccess(helper.parse.json(this.responseText), this.status, xhr.getAllResponseHeaders());
+                  if (options.onComplete) {
+                     options.onComplete(this);
                   }
-               } else {
-                  if (options.onError) {
-                     options.onError(helper.parse.json(this.responseText), this.status, xhr.getAllResponseHeaders());
+                  if (this.status >= 200 && this.status < 300) {
+                     if (options.onSuccess) {
+                        options.onSuccess(helper.parse.json(this.responseText), this.status, xhr.getAllResponseHeaders());
+                     }
+                  } else {
+                     if (options.onError) {
+                        options.onError(helper.parse.json(this.responseText), this.status, xhr.getAllResponseHeaders());
+                     }
                   }
-               }
-               break;
+                  break;
             }
          };
 
          // Make the request
-         if (options.data && options.dataForce !== 'body' && (options.type === 'GET' || options.dataForce === 'queryString')) {
+         if (options.data && options.dataForce !== 'body' && (options.type === 'GET' || options.type === 'DELETE' || options.dataForce === 'queryString')) {
             let queryString = '';
+
             for (let key in options.data) {
                if (options.data.hasOwnProperty(key)) {
                   queryString += '&' + encodeURIComponent(key) + '=' + encodeURIComponent(options.data[key]);
                }
             }
+
             options.url = options.url + '?' + string.remove.first(queryString);
          }
          xhr.open(options.type, options.url, options.async);
+
          // Set headers
          if (options.headers) {
             for (let key in options.headers) {
@@ -1056,34 +1085,37 @@ module Rocket {
          }
 
          // Send (with data if need be)
-         if (options.data && options.dataForce !== 'queryString' && (options.type === 'POST' || options.dataForce === 'body')) {
+         if (options.data && options.dataForce !== 'queryString' && (options.type === 'POST' || options.type === 'PUT' || options.type === 'PATCH' || options.dataForce === 'body')) {
             if (is.json(options.data)) {
                let send;
                switch (string.lowercase.all(options.dataType)) {
                   case 'form':
-                  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                  let formQuery = '';
-                  for (let key in options.data) {
-                     if (options.data.hasOwnProperty(key)) {
-                        formQuery += '&' + key + '=' + options.data[key];
+                     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                     let formQuery = '';
+
+                     for (let key in options.data) {
+                        if (options.data.hasOwnProperty(key)) {
+                           formQuery += '&' + key + '=' + options.data[key];
+                        }
                      }
-                  }
-                  send = string.remove.first(formQuery);
-                  break;
+
+                     send = string.remove.first(formQuery);
+                     break;
 
                   case 'formdata':
-                  send = new FormData();
-                  for (let key in options.data) {
-                     if (options.data.hasOwnProperty(key)) {
-                        send.append(key, options.data[key]);
+                     send = new FormData();
+
+                     for (let key in options.data) {
+                        if (options.data.hasOwnProperty(key)) {
+                           send.append(key, options.data[key]);
+                        }
                      }
-                  }
-                  break;
+                     break;
 
                   default:
-                  xhr.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
-                  send = JSON.stringify(options.data);
-                  break;
+                     xhr.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+                     send = JSON.stringify(options.data);
+                     break;
                }
                xhr.send(send);
             } else {
@@ -1093,21 +1125,25 @@ module Rocket {
             xhr.send();
          }
       },
-      delete: function (uOptions) {
+      delete: (uOptions) => {
          uOptions.type = 'DELETE';
-         this.run(uOptions);
+         request.run(uOptions);
       },
-      get: function (uOptions) {
+      get: (uOptions) => {
          uOptions.type = 'GET';
-         this.run(uOptions);
+         request.run(uOptions);
       },
-      post: function (uOptions) {
+      patch: (uOptions) => {
+         uOptions.type = 'PATCH';
+         request.run(uOptions);
+      },
+      post: (uOptions) => {
          uOptions.type = 'POST';
-         this.run(uOptions);
+         request.run(uOptions);
       },
-      put: function (uOptions) {
+      put: (uOptions) => {
          uOptions.type = 'PUT';
-         this.run(uOptions);
+         request.run(uOptions);
       }
    };
 
@@ -1129,41 +1165,36 @@ module Rocket {
 
    // State
    export let state = {
-      add: function (element, state) {
-         if (!exists(element)) {
-            return false;
-         }
-         let newRocketStates = rocketState.list.slice().map(function (newState) {
-            return rocketPrefix.state + newState;
-         });
+      add: (element, state) => {
+         if (!exists(element)) { return false; }
+
+         let newRocketStates = rocketState.list.slice().map(newState => rocketPrefix.state + newState);
          let stateClass = newRocketStates.splice(newRocketStates.indexOf(rocketPrefix.state + state), 1);
          classes.replace(element, newRocketStates, stateClass);
       },
-      clear: function (element) {
-         if (!exists(element)) {
-            return false;
-         }
-         let newRocketStates = rocketState.list.slice().map(function (newState) {
-            return rocketPrefix.state + newState;
-         });
+      clear: (element) => {
+         if (!exists(element)) { return false; }
+
+         let newRocketStates = rocketState.list.slice().map(newState => rocketPrefix.state + newState);
          classes.remove(element, newRocketStates);
       },
-      toggle: function (element, state, thisClear) {
+      toggle: (element, state, thisClear) => {
          if (!exists(element)) {
             return false;
          }
+
          if (rocketState.list.indexOf(state) > -1) {
             let altState = rocketState.alts[state] || false;
             let clear = (typeof thisClear === 'boolean') ? thisClear : false;
             let stateClass = rocketPrefix.state + state;
             if (has.class(element, stateClass)) {
                if (clear || altState === false) {
-                  this.clear(element);
+                  state.clear(element);
                } else {
-                  this.add(element, altState);
+                  state.add(element, altState);
                }
             } else {
-               this.add(element, state);
+               state.add(element, state);
             }
          }
       }
@@ -1171,7 +1202,7 @@ module Rocket {
 
    // Storage
    export let storage = {
-      add: function (nameObj: any, value?: any) {
+      add: (nameObj: any, value?: any) => {
          // Catch
          if (!exists(nameObj)) {
             return false;
@@ -1204,30 +1235,33 @@ module Rocket {
          // Store it
          switch (defaults.storage.type) {
             case 'local':
-            localStorage.setItem(defaults.storage.name, JSON.stringify(store));
-            break;
+               localStorage.setItem(defaults.storage.name, JSON.stringify(store));
+               break;
 
             case 'session':
-            sessionStorage.setItem(defaults.storage.name, JSON.stringify(store));
-            break;
+               sessionStorage.setItem(defaults.storage.name, JSON.stringify(store));
+               break;
          }
       },
-      clear: function (exclusion) {
+      clear: (exclusion) => {
          function deleteStorage () {
             localStorage.removeItem(defaults.storage.name);
             sessionStorage.removeItem(defaults.storage.name);
          };
+
          // Check for exclusion
          if (is.string(exclusion)) {
             let exclValue = storage.get(exclusion);
+
             deleteStorage();
+
             if (exclValue !== false) {
                storage.add(exclusion, exclValue);
             }
-         }
-         else if (is.array(exclusion)) {
+         } else if (is.array(exclusion)) {
             let newStore = {};
             let store = storage.getStorageEngine();
+
             // Build new storage object
             for (let i = 0, len = exclusion.length; i < len; i++) {
                let exclusionValue = store[exclusion[i]];
@@ -1235,21 +1269,23 @@ module Rocket {
                   newStore[exclusion[i]] = exclusionValue;
                }
             }
+
             deleteStorage();
+
             // Create new storage
             if (Object.keys(newStore).length > 0) {
                storage.add(newStore);
             }
-         }
-         else {
+         } else {
             deleteStorage();
          }
       },
-      get: function (key) {
+      get: (key) => {
          if (!is.string(key)) {
             return false;
          }
          let store = storage.getStorageEngine();
+
          // Catch
          if (!exists(store[key])) {
             return false;
@@ -1257,7 +1293,7 @@ module Rocket {
          // Continue
          return store[key];
       },
-      getStorageEngine: function () {
+      getStorageEngine: () => {
          // Catch
          if (!defaults.storage.name) {
             log('ROCKET: You have not set the storage name. Provide a name for [Rocket].defaults.storage.name.', true);
@@ -1267,38 +1303,42 @@ module Rocket {
          let store;
          switch (defaults.storage.type) {
             case 'local':
-            store = localStorage.getItem(defaults.storage.name);
-            break;
+               store = localStorage.getItem(defaults.storage.name);
+               break;
 
             case 'session':
-            store = sessionStorage.getItem(defaults.storage.name);
-            break;
+               store = sessionStorage.getItem(defaults.storage.name);
+               break;
          }
-         // Return
+
+
          if (store) {
             return helper.parse.json(store);
+         } else {
+            return {};
          }
-         return {};
       },
-      remove: function (key) {
+      remove: (key) => {
          if (!is.string(key)) {
             return false;
          }
          let store = storage.getStorageEngine();
+
          // Catch
          if (!exists(store[key])) {
             return false;
          }
          // Continue
          delete store[key];
+
          switch (defaults.storage.type) {
             case 'local':
-            localStorage.setItem(defaults.storage.name, JSON.stringify(store));
-            break;
+               localStorage.setItem(defaults.storage.name, JSON.stringify(store));
+               break;
 
             case 'session':
-            sessionStorage.setItem(defaults.storage.name, JSON.stringify(store));
-            break;
+               sessionStorage.setItem(defaults.storage.name, JSON.stringify(store));
+               break;
          }
       }
    };
@@ -1308,7 +1348,7 @@ module Rocket {
       format: {
          // As per Aliceljm
          // http://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
-         bytes: function (bytes, decimals) {
+         bytes: (bytes, decimals) => {
             if (typeof bytes !== 'number' || bytes == 0) {
                return '0 Byte';
             }
@@ -1316,45 +1356,46 @@ module Rocket {
             let dm = decimals + 1 || 3;
             let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
             let i = Math.floor(Math.log(bytes) / Math.log(k));
+
             return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
          }
       },
       lowercase: {
-         all: function (string) {
+         all: (string) => {
             return (is.string(string)) ? string.toLowerCase() : string;
          },
-         first: function (string) {
+         first: (string) => {
             return (is.string(string)) ? string.charAt(0).toLowerCase() + string.slice(1) : string;
          },
-         last: function (string) {
+         last: (string) => {
             return (is.string(string)) ? string.slice(0, string.length - 1) + string.charAt(string.length - 1).toLowerCase() : string;
          }
       },
       remove: {
-         first: function (string) {
+         first: (string) => {
             return (is.string(string)) ? string.substring(1) : string;
          },
-         firstAndLast: function (string) {
+         firstAndLast: (string) => {
             return (is.string(string)) ? string.substring(1, string.length - 1) : string;
          },
-         last: function (string) {
+         last: (string) => {
             return (is.string(string)) ? string.substring(0, string.length - 1) : string;
          },
-         spaces: function (string) {
+         spaces: (string) => {
             return (is.string(string)) ? string.replace(/ /g, '') : string;
          }
       },
-      trim: function (string) {
+      trim: (string) => {
          return (is.string(string)) ? string.replace(/^ /, '').replace(/ +$/, '') : string;
       },
       uppercase: {
-         all: function (string) {
+         all: (string) => {
             return (is.string(string)) ? string.toUpperCase() : string;
          },
-         first: function (string) {
+         first: (string) => {
             return (is.string(string)) ? string.charAt(0).toUpperCase() + string.slice(1) : string;
          },
-         last: function (string) {
+         last: (string) => {
             return (is.string(string)) ? string.slice(0, string.length - 1) + string.charAt(string.length - 1).toUpperCase() : string;
          }
       }
@@ -1362,19 +1403,22 @@ module Rocket {
 
    // Time
    export const time = {
-      basic: function (thisTime: any) {
+      basic: (thisTime: any) => {
          const transTime = date.transform(thisTime);
+
          // Catch
          if (!transTime) {
             return false;
          }
          // Continue
-         const hours = this.leadingZero(transTime.getHours());
+         const hours = time.leadingZero(transTime.getHours());
          const minutes = time.leadingZero(transTime.getMinutes());
+
          return hours + ':' + minutes;
       },
-      exact: function (thisTime: any) {
+      exact: (thisTime: any) => {
          const transTime = date.transform(thisTime);
+
          // Catch
          if (!transTime) {
             return false;
@@ -1387,7 +1431,7 @@ module Rocket {
 
          return hours + ':' + minutes + ':' + seconds + ':' + milliseconds;
       },
-      full: function (thisTime: any) {
+      full: (thisTime: any) => {
          const transTime = date.transform(thisTime);
          // Catch
          if (!transTime) {
@@ -1400,17 +1444,19 @@ module Rocket {
 
          return hours + ':' + minutes + ':' + seconds;
       },
-      hours: function (thisTime: any) {
+      hours: (thisTime: any) => {
          const transTime = date.transform(thisTime);
+
          // Catch
          if (!transTime) {
             return false;
          }
          // Continue
-         return this.leadingZero(transTime.getHours());
+         return time.leadingZero(transTime.getHours());
       },
-      minutes: function (thisTime: any) {
+      minutes: (thisTime: any) => {
          const transTime = date.transform(thisTime);
+
          // Catch
          if (!transTime) {
             return false;
@@ -1418,8 +1464,9 @@ module Rocket {
          // Continue
          return time.leadingZero(transTime.getMinutes());
       },
-      seconds: function (thisTime: any) {
+      seconds: (thisTime: any) => {
          const transTime = date.transform(thisTime);
+
          // Catch
          if (!transTime) {
             return false;
@@ -1427,14 +1474,14 @@ module Rocket {
          // Continue
          return time.leadingZero(transTime.getSeconds());
       },
-      leadingZero: function (int: any) {
+      leadingZero: (int: any) => {
          return ((int < 10) ? '0' : '') + int;
       }
    };
 
    // URL
    export let url = {
-      all: function () {
+      all: () => {
          let windowLocation = window.location;
          let fullUrl = windowLocation.href;
 
@@ -1469,28 +1516,28 @@ module Rocket {
             segments: segments
          };
       },
-      base: function () {
+      base: () => {
          return url.all().base;
       },
-      current: function () {
+      current: () => {
          return url.all().current;
       },
-      full: function () {
+      full: () => {
          return url.all().full;
       },
-      hash: function () {
+      hash: () => {
          return url.all().hash;
       },
-      host: function () {
+      host: () => {
          return url.all().host;
       },
-      pathname: function () {
+      pathname: () => {
          return url.all().pathname;
       },
-      protocol: function () {
+      protocol: () => {
          return url.all().protocol;
       },
-      segments: function () {
+      segments: () => {
          return url.all().segments;
       }
    };
