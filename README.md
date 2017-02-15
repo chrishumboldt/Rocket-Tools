@@ -68,7 +68,7 @@ var boldName = Rocket.string.uppercase.all('Chris Humboldt'); // Convert a strin
 var randomNumber = Rocket.random.integer(); // Generate a random integer
 ```
 
-Make sure not to overwrite the `Rocket` variable name to anything else within your project. Often a new reference will be made for the library and its defaults. This might make typing easier. For example:
+Make sure not to overwrite the `Rocket` variable name to anything else within your project. Often a new reference will be made for the library and its defaults making typing easier. For example:
 
 ```javascript
 // Here we assign the library to a quick variable reference
