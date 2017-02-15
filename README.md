@@ -75,7 +75,6 @@ Make sure not to overwrite the `Rocket` variable name to anything else within yo
 var _R = Rocket;
 var _RD = Rocket.defaults;
 
-// You can then process to call methods
 var randomNumber = _R.random.integer(); // Generate a random integer
 ```
 
