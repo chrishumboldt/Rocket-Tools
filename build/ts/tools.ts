@@ -254,7 +254,7 @@ module Rocket {
          return regExp.test(date);
       },
       element: (element) => {
-         return (element.nodeType && element.nodeType === 1) ? true : false;
+         return (element.nodeType && element.nodeType === 1);
       },
       email: (email, thisRegExp: any) => {
          let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.email;
@@ -286,16 +286,16 @@ module Rocket {
       object: (check) => {
          return (typeof check === 'object');
       },
-      password: (password, thisRegExp: any) => {
+      password: (check, thisRegExp: any) => {
          let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.password;
-         return regExp.test(password);
+         return regExp.test(check);
       },
-      string: (str) => {
-         return (typeof str === 'string');
+      string: (check) => {
+         return (typeof check === 'string');
       },
-      time: (time, thisRegExp: any) => {
+      time: (check, thisRegExp: any) => {
          let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.time;
-         return regExp.test(time);
+         return regExp.test(check);
       },
       touch: () => {
          // Catch
@@ -729,7 +729,7 @@ module Rocket {
       body: (typeof document !== 'undefined') ? document.getElementsByTagName('body')[0] : false,
       header: (typeof document !== 'undefined') ? document.getElementsByTagName('header')[0] : false,
       html: (typeof document !== 'undefined') ? document.getElementsByTagName('html')[0] : false,
-      ratio: (selector, multiplier: number) => {
+      ratio: (selector: any, multiplier: number) => {
          let elements = document.querySelectorAll(selector);
          if (typeof (multiplier) === 'undefined') {
             multiplier = 1;
@@ -784,7 +784,7 @@ module Rocket {
          return array.clean(array.unique(returnElms));
       },
       title: (typeof document !== 'undefined') ? document.getElementsByTagName('title')[0] : false,
-      wallpaper: (selector) => {
+      wallpaper: (selector: string) => {
          let elements = dom.select(selector);
 
          for (let i = 0, len = elements.length; i < len; i++) {
