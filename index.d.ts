@@ -46,7 +46,7 @@ declare module MRocket {
    interface _Classes {
       add(elms: any, classNames: any);
       clear(elm: any);
-      add(elms: any, classNames: any);
+      remove(elms: any, classNames: any);
       replace(elm: any, remove: any, add: any);
       toggle(elms: any, classNames: any);
    }
