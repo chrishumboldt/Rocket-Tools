@@ -3,7 +3,7 @@ Author: Chris Humboldt
 */
 
 declare namespace Rocket {
-   const defaults: any;
+   let defaults: any;
 
    // Basic checks
    function exists(check: any): any;
@@ -11,7 +11,7 @@ declare namespace Rocket {
    interface has {
       class(element: any, className: any): any;
    }
-   const has: has;
+   let has: has;
 
    interface is {
       element(check: any): boolean;
@@ -23,7 +23,7 @@ declare namespace Rocket {
       string(check: any): boolean;
       touch(): boolean;
    }
-   const is: is;
+   let is: is;
 
    // Button
    interface buttonLoaderOptions {
@@ -43,7 +43,7 @@ declare namespace Rocket {
       add(elements: any, classes: any): any;
       remove(elements: any, classes: any): any;
    }
-   const classes: classes;
+   let classes: classes;
 
    // Development
    function log(text: any): any;
@@ -54,27 +54,27 @@ declare namespace Rocket {
       html: any;
       select(target: string): any;
    }
-   const dom: dom;
+   let dom: dom;
 
    // Events
    interface event {
       add(element: any, type: string, eventHandle: any): any;
       remove(element: any, type: string, eventHandle: any): any;
    }
-   const event: event;
+   let event: event;
 
    // Gets
    interface get {
       extension(ext: string): string;
       index(elm: any): number;
    }
-   const get: get
+   let get: get
 
    // Helpers
    interface helper {
       setDefault(set: any, defauit: any): any;
    }
-   const helper: helper;
+   let helper: helper;
 
    // Request
    interface requestOptions {
@@ -100,7 +100,7 @@ declare namespace Rocket {
       put(options: requestOptions): any;
       run(options: requestOptions): any;
    }
-   const request: request;
+   let request: request;
 
    // Storage
    interface storage {
@@ -109,10 +109,10 @@ declare namespace Rocket {
       get(key: string): string;
       remove(key: string): any;
    }
-   const storage: storage;
+   let storage: storage;
 
    // Modules
-   const flicker: any;
-   const form: any;
-   const message: any;
+   let flicker: any;
+   let form: any;
+   let message: any;
 }
