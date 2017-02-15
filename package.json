@@ -1,6 +1,6 @@
 {
    "name": "rocket-tools",
-   "version": "1.12.2",
+   "version": "1.12.3",
    "description": "The Rocket Tools library is a lightweight set of Javascript methods for quicker and easier development.",
    "main": "js/tools.min.js",
    "repository": {

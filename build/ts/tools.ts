@@ -338,6 +338,7 @@ module Rocket {
       executeClasses: (elements, classesAdd, classesRemove) => {
          // Catch
          if (!exists(elements)) { return false; }
+
          // Continue
          // Create elements array
          let arElements = array.make(elements);

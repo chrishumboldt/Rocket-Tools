@@ -133,6 +133,98 @@ declare module MRocket {
       string(length?: number, text?: boolean): string;
    }
 
+   // Request
+   interface _RequestOptions {
+      url: string;
+      asynch?: boolean;
+      data?: any;
+      dataForce?: string;
+      dataType?: string;
+      headers?: string;
+      onComplete?: any;
+      onError?: any;
+      onLoading?: any;
+      onStart?: any;
+      onSuccess?: any;
+      timeout?: number;
+      type?: string;
+      withCredentials?: boolean;
+   }
+   interface _Request {
+      delete(options: _RequestOptions): any;
+      get(options: _RequestOptions): any;
+      patch(options: _RequestOptions): any;
+      post(options: _RequestOptions): any;
+      put(options: _RequestOptions): any;
+      run(options: _RequestOptions): any;
+   }
+
+   // States
+   interface _State {
+      add(elm: any, state: string);
+      clear(elm);
+      toggle(elm: any, state: string);
+   }
+
+   // Storage
+   interface _Storage {
+      add(key: string, value: any);
+      clear();
+      get(key: string): string;
+      remove(key: string);
+   }
+
+   // Strings
+   interface _StringFormat {
+      bytes(bytes: number): string;
+   }
+   interface _StringLowercase {
+      all(str: string): string;
+      first(str: string): string;
+      last(str: string): string;
+   }
+   interface _StringRemove {
+      first(str: string): string;
+      firstAndLast(str: string): string;
+      last(str: string): string;
+      spaces(str: string): string;
+   }
+   interface _StringUppercase {
+      all(str: string): string;
+      first(str: string): string;
+      last(str: string): string;
+   }
+   interface _String {
+      format: _StringFormat;
+      lowercase: _StringLowercase;
+      remove: _StringRemove;
+      trim(str: string): string;
+      uppercase: _StringUppercase;
+   }
+
+   // Time
+   interface _Time {
+      basic(time: any): string;
+      exact(time: any): string;
+      full(time: any): string;
+      hours(time: any): string;
+      minutes(time: any): string;
+      seconds(time: any): string;
+   }
+
+   // URL
+   interface _Url {
+      all(): any;
+      base(): string;
+      current(): string;
+      full(): string;
+      hash(): string;
+      host(): string;
+      pathname(): string;
+      protocol(): string;
+      segments(): string[];
+   }
+
    // Main interface
    export interface Main {
       defaults: any;
@@ -155,126 +247,25 @@ declare module MRocket {
       milliseconds: _Milliseconds;
       overlay: _Overlay;
       random: _Random;
+      request: _Request;
+      state: _State;
+      storage: _Storage;
+      string: _String;
+      time: _Time;
+      Url: _Url;
+      button: any;
+      flicker: any;
+      form: any;
+      inject: any;
+      loader: any;
+      menu: any;
+      message: any;
+      modal: any;
+      pen: any;
+      require: any;
+      tab: any;
    }
 }
 
 // Declare the module
 declare var Rocket: MRocket.Main;
-
-
-/*
-declare module Rocket {
-   let defaults: any;
-
-   // Basic checks
-   function exists(check: any): any;
-
-   interface has {
-      class(element: any, className: any): any;
-   }
-   let has: has;
-
-   interface is {
-      element(check: any): boolean;
-      email(check: any): boolean;
-      function(check: any): boolean;
-      number(check: any): boolean;
-      object(check: any): boolean;
-      password(check: any): boolean;
-      string(check: any): boolean;
-      touch(): boolean;
-    }
-   let is: is;
-
-   // Button
-   interface buttonLoaderOptions {
-      element?: any;
-      parseEvent?: any;
-      reveal?: string;
-      selector?: string;
-      timeout?: number;
-   }
-   interface button {
-      loader(options: buttonLoaderOptions): any;
-   }
-   let button: button;
-
-   // Classes
-   interface classes {
-      add(elements: any, classes: any): any;
-      remove(elements: any, classes: any): any;
-   }
-   let classes: classes;
-
-   // Development
-   function log(text: any): any;
-
-   // DOM
-   interface dom {
-      body: any;
-      html: any;
-      select(target: string): any;
-   }
-   let dom: dom;
-
-   // Events
-   interface event {
-      add(element: any, type: string, eventHandle: any): any;
-      remove(element: any, type: string, eventHandle: any): any;
-   }
-   let event: event;
-
-   // Gets
-   interface get {
-      extension(ext: string): string;
-      index(elm: any): number;
-   }
-   let get: get
-
-   // Helpers
-   interface helper {
-      setDefault(set: any, defauit: any): any;
-   }
-   let helper: helper;
-
-   // Request
-   interface requestOptions {
-      url: string;
-      asynch?: boolean;
-      data?: any;
-      dataForce?: string;
-      dataType?: string;
-      headers?: string;
-      onComplete?: any;
-      onError?: any;
-      onLoading?: any;
-      onStart?: any;
-      onSuccess?: any;
-      timeout?: number;
-      type?: string;
-      withCredentials?: boolean;
-   }
-   interface request {
-      delete(options: requestOptions): any;
-      get(options: requestOptions): any;
-      post(options: requestOptions): any;
-      put(options: requestOptions): any;
-      run(options: requestOptions): any;
-   }
-   let request: request;
-
-   // Storage
-   interface storage {
-      add(key: string, value: any): any;
-      clear(): any;
-      get(key: string): string;
-      remove(key: string): any;
-   }
-   let storage: storage;
-
-   // Modules
-   let flicker: any;
-   let form: any;
-   let message: any;
-}
-*/
