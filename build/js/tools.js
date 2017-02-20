@@ -41,68 +41,55 @@ var Rocket;
             type: 'session'
         }
     };
-    var rocketMonths = [
-        {
+    var rocketMonths = [{
             number: '01',
             name: 'january',
             nameShort: 'jan'
-        },
-        {
+        }, {
             number: '02',
             name: 'february',
             nameShort: 'feb'
-        },
-        {
+        }, {
             number: '03',
             name: 'march',
             nameShort: 'mar'
-        },
-        {
+        }, {
             number: '04',
             name: 'april',
             nameShort: 'apr'
-        },
-        {
+        }, {
             number: '05',
             name: 'may',
             nameShort: 'may'
-        },
-        {
+        }, {
             number: '06',
             name: 'june',
             nameShort: 'jun'
-        },
-        {
+        }, {
             number: '07',
             name: 'july',
             nameShort: 'jul'
-        },
-        {
+        }, {
             number: '08',
             name: 'august',
             nameShort: 'aug'
-        },
-        {
+        }, {
             number: '09',
             name: 'september',
             nameShort: 'sep'
-        },
-        {
+        }, {
             number: '10',
             name: 'october',
             nameShort: 'oct'
-        },
-        {
+        }, {
             number: '11',
             name: 'november',
             nameShort: 'nov'
-        },
-        {
+        }, {
             number: '12',
             name: 'december',
             nameShort: 'dec'
-        }
-    ];
+        }];
     var rocketPrefix = {
         basic: 'rocket-',
         state: '_state-'
@@ -596,7 +583,18 @@ var Rocket;
     };
     Rocket.dom = {
         body: (typeof document !== 'undefined') ? document.getElementsByTagName('body')[0] : false,
-        header: (typeof document !== 'undefined') ? document.getElementsByTagName('header')[0] : false,
+        element: function (selector) {
+            if (!Rocket.is.string(selector)) {
+                return null;
+            }
+            switch (Rocket.get.selector.type(selector)) {
+                case 'gebi':
+                    return document.getElementById(selector.substring(1));
+                default:
+                    return document.querySelector(selector);
+            }
+        },
+        head: (typeof document !== 'undefined') ? document.getElementsByTagName('head')[0] : false,
         html: (typeof document !== 'undefined') ? document.getElementsByTagName('html')[0] : false,
         ratio: function (selector, multiplier) {
             var elements = document.querySelectorAll(selector);
@@ -646,15 +644,6 @@ var Rocket;
             return Rocket.array.clean(Rocket.array.unique(returnElms));
         },
         title: (typeof document !== 'undefined') ? document.getElementsByTagName('title')[0] : false,
-        wallpaper: function (selector) {
-            var elements = Rocket.dom.select(selector);
-            for (var i = 0, len = elements.length; i < len; i++) {
-                var thisWallpaper = elements[i].getAttribute('data-background');
-                if (thisWallpaper !== null) {
-                    elements[i].style.backgroundImage = 'url("' + thisWallpaper + '")';
-                }
-            }
-        },
         window: (typeof window !== 'undefined') ? window : false,
     };
     Rocket.event = {
