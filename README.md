@@ -265,9 +265,9 @@ Method | Description
 `dom.title` | Access the document title element.
 
 ```html
-<div id="example" style="width:50px;">Example One</div>
-<div class="example">Example Two</div>
-<div class="example">Example Three</div>
+<div id="example" style="width:50px;"></div>
+<div class="example"></div>
+<div class="example"></div>
 
 <script>
 Rocket.dom.title.innerHTML = 'New Title'; // The document title is now changed.
