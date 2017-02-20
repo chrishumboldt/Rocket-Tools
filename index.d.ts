@@ -11,7 +11,7 @@ declare module MRocket {
    interface _Array {
       clean(array: any[]): any[];
       make(values: any, unique?: boolean): any[];
-      unque(array: any[]): any[];
+      unique(array: any[]): any[];
    }
 
    // Basic Checks
@@ -71,11 +71,12 @@ declare module MRocket {
    // DOM
    interface _Dom {
       body: any;
+      element(sel: string);
       header: any;
       html: any;
       ratio(sel: string, multiplier: number);
       remove(elms: any);
-      select(sel: string);
+      select(sel: string): any[];
       title: any;
       wallpaper(sel: string);
    }
@@ -261,6 +262,7 @@ declare module MRocket {
       menu: any;
       message: any;
       modal: any;
+      module: any;
       pen: any;
       require: any;
       tab: any;

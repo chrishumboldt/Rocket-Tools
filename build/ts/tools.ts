@@ -83,68 +83,55 @@ module Rocket {
    }
 
    // Variables
-   const rocketMonths = [
-      {
-         number: '01',
-         name: 'january',
-         nameShort: 'jan'
-      },
-      {
-         number: '02',
-         name: 'february',
-         nameShort: 'feb'
-      },
-      {
-         number: '03',
-         name: 'march',
-         nameShort: 'mar'
-      },
-      {
-         number: '04',
-         name: 'april',
-         nameShort: 'apr'
-      },
-      {
-         number: '05',
-         name: 'may',
-         nameShort: 'may'
-      },
-      {
-         number: '06',
-         name: 'june',
-         nameShort: 'jun'
-      },
-      {
-         number: '07',
-         name: 'july',
-         nameShort: 'jul'
-      },
-      {
-         number: '08',
-         name: 'august',
-         nameShort: 'aug'
-      },
-      {
-         number: '09',
-         name: 'september',
-         nameShort: 'sep'
-      },
-      {
-         number: '10',
-         name: 'october',
-         nameShort: 'oct'
-      },
-      {
-         number: '11',
-         name: 'november',
-         nameShort: 'nov'
-      },
-      {
-         number: '12',
-         name: 'december',
-         nameShort: 'dec'
-      }
-   ];
+   const rocketMonths = [{
+      number: '01',
+      name: 'january',
+      nameShort: 'jan'
+   }, {
+      number: '02',
+      name: 'february',
+      nameShort: 'feb'
+   }, {
+      number: '03',
+      name: 'march',
+      nameShort: 'mar'
+   }, {
+      number: '04',
+      name: 'april',
+      nameShort: 'apr'
+   }, {
+      number: '05',
+      name: 'may',
+      nameShort: 'may'
+   }, {
+      number: '06',
+      name: 'june',
+      nameShort: 'jun'
+   }, {
+      number: '07',
+      name: 'july',
+      nameShort: 'jul'
+   }, {
+      number: '08',
+      name: 'august',
+      nameShort: 'aug'
+   }, {
+      number: '09',
+      name: 'september',
+      nameShort: 'sep'
+   }, {
+      number: '10',
+      name: 'october',
+      nameShort: 'oct'
+   }, {
+      number: '11',
+      name: 'november',
+      nameShort: 'nov'
+   }, {
+      number: '12',
+      name: 'december',
+      nameShort: 'dec'
+   }];
 
    const rocketPrefix = {
       basic: 'rocket-',
@@ -175,24 +162,22 @@ module Rocket {
       },
       make: (arValue: any, isUnique?) => {
          let returnArray = [];
+
          // Catch
-         if (!arValue) {
-            return returnArray;
-         }
+         if (!arValue) { return returnArray; }
+
          // Continue
          let unique = helper.setDefault(isUnique, false);
          if (is.array(arValue) && arValue.length > 0) {
             returnArray = arValue;
-         }
-         else if (is.element(arValue)) {
+         } else if (is.element(arValue)) {
             returnArray.push(arValue);
-         }
-         else if (is.string(arValue)) {
+         } else if (is.string(arValue)) {
             returnArray = arValue.split(' ');
-         }
-         else if (is.object(arValue)) {
+         } else if (is.object(arValue)) {
             // Try and catch HTMLCollection and NodeList
             arValue = Array.prototype.slice.call(arValue);
+
             if (is.array(arValue) && arValue.length > 0) {
                returnArray = arValue;
             }
@@ -205,6 +190,7 @@ module Rocket {
          if (!is.array(thisArray)) {
             return false;
          };
+
          // Continue
          return thisArray.filter((value, index, self) => self.indexOf(value) === index);
       }
@@ -342,10 +328,10 @@ module Rocket {
          // Continue
          // Create elements array
          let arElements = array.make(elements);
+
          // Catch
-         if (arElements.length < 1) {
-            return false;
-         }
+         if (arElements.length < 1) { return false; }
+
          // Create classes array
          let arClassesAdd = array.make(classesAdd, true);
          let arClassesRemove = array.make(classesRemove, true);
@@ -728,7 +714,24 @@ module Rocket {
    // DOM
    export const dom: any = {
       body: (typeof document !== 'undefined') ? document.getElementsByTagName('body')[0] : false,
-      header: (typeof document !== 'undefined') ? document.getElementsByTagName('header')[0] : false,
+      element: (selector: string) => {
+         /*
+         Only a single element is required. The below uses a more performant
+         code block to complete this action.
+         */
+         // Catch
+         if (!is.string(selector)) { return null; }
+
+         // Continue
+         switch (get.selector.type(selector)) {
+            case 'gebi':
+               return document.getElementById(selector.substring(1));
+
+            default:
+               return document.querySelector(selector);
+         }
+      },
+      head: (typeof document !== 'undefined') ? document.getElementsByTagName('head')[0] : false,
       html: (typeof document !== 'undefined') ? document.getElementsByTagName('html')[0] : false,
       ratio: (selector: any, multiplier: number) => {
          let elements = document.querySelectorAll(selector);
@@ -754,18 +757,25 @@ module Rocket {
             }
          }
       },
-      select: (selectors) => {
+      select: (selectors: string) => {
+         /*
+         Get multiple elements. The method assumes that many elements exist
+         on the DOM with the "selectors". As such an array will ALWAYS be returned.
+
+         Even an ID selector will return an array as the user has requested
+         this particular method type. It's important to maintain consistency.
+         */
          let returnElms = [];
+
          // Catch
-         if (!is.string(selectors)) {
-            return returnElms;
-         }
+         if (!is.string(selectors)) { return returnElms; }
+
          // Continue
          let selectorSplit = selectors.split(',').map(string.trim).filter(selector => selector.length > 0);
 
          if (selectorSplit.length > 0) {
+            // Loop through all the selectors
             for (let i = 0, len = selectorSplit.length; i < len; i++) {
-               // Select the elements
                switch (get.selector.type(selectorSplit[i])) {
                   case 'gebi':
                      returnElms = returnElms.concat(document.getElementById(selectorSplit[i].substring(1)));
@@ -785,16 +795,6 @@ module Rocket {
          return array.clean(array.unique(returnElms));
       },
       title: (typeof document !== 'undefined') ? document.getElementsByTagName('title')[0] : false,
-      wallpaper: (selector: string) => {
-         let elements = dom.select(selector);
-
-         for (let i = 0, len = elements.length; i < len; i++) {
-            let thisWallpaper = elements[i].getAttribute('data-background');
-            if (thisWallpaper !== null) {
-               elements[i].style.backgroundImage = 'url("' + thisWallpaper + '")';
-            }
-         }
-      },
       window: (typeof window !== 'undefined') ? window : false,
    };
 

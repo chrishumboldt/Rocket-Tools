@@ -256,29 +256,29 @@ Method | Description
 Method | Description
 ---- | ----
 `dom.body` | Access the document body element.
-`dom.header` | Access the document header element.
+`dom.element(sel)` | Select the first element with selector `sel`.<br>**Only** one element will ever be returned.
+`dom.head` | Access the document head element.
 `dom.html` | Access the document html element.
 `dom.ratio(sel, int)` | Select all elements with selector `sel`.<br>Set the height values to the width values times `int`.
 `dom.remove(val)` | Remove element(s). `val` can either be an element or a selector.
-`dom.select(sel)` | Select all elements with selector `sel`.<br>**Always** returns an array even if unique selector was used.
+`dom.select(sel)` | Select all elements with selector `sel`.<br>**Always** returns an array even if unique selector was used.<br>If you want only one element or the first use `dom.element(sel)`.
 `dom.title` | Access the document title element.
-`dom.wallpaper(sel)` | Select all elements with selector `sel`.<br>Set the background image of the element to the elements `data-background` attribute.<br>The background size property will be set to cover.
 
 ```html
 <div id="example" style="width:50px;"></div>
-<div class="example" data-background="img/cool-image-1.jpg"></div>
-<div class="example" data-background="img/cool-image-2.jpg"></div>
+<div class="example"></div>
+<div class="example"></div>
 
 <script>
 Rocket.dom.title.innerHTML = 'New Title'; // The document title is now changed.
 Rocket.dom.ratio('#example', 1.5); // The elements height will now be 75px.
-Rocket.dom.wallpaper('.example'); // A background style is now applied.
 
 Rocket.dom.select('.example'); // Both elements are returned in an array.
 Rocket.dom.select('#example')[0]; // This is how you would reference a unique element.
+Rocket.dom.element('#example'); // This will return only one element, similar to the above method.
 
 Rocket.dom.remove('#example'); // Remove with selector
-Rocket.dom.remove(document.getElementById('exmaple')); // Remove element directly
+Rocket.dom.remove(document.getElementById('example')); // Remove element directly
 </script>
 ```
 
