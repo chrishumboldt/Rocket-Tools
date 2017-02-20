@@ -265,20 +265,20 @@ Method | Description
 `dom.title` | Access the document title element.
 
 ```html
-<div id="example" style="width:50px;"></div>
-<div class="example" data-background="img/cool-image-1.jpg"></div>
-<div class="example" data-background="img/cool-image-2.jpg"></div>
+<div id="example" style="width:50px;">Example One</div>
+<div class="example">Example Two</div>
+<div class="example">Example Three</div>
 
 <script>
 Rocket.dom.title.innerHTML = 'New Title'; // The document title is now changed.
 Rocket.dom.ratio('#example', 1.5); // The elements height will now be 75px.
-Rocket.dom.wallpaper('.example'); // A background style is now applied.
 
 Rocket.dom.select('.example'); // Both elements are returned in an array.
 Rocket.dom.select('#example')[0]; // This is how you would reference a unique element.
+Rocket.dom.element('#example'); // This will return only one element, similar to the above method.
 
 Rocket.dom.remove('#example'); // Remove with selector
-Rocket.dom.remove(document.getElementById('exmaple')); // Remove element directly
+Rocket.dom.remove(document.getElementById('example')); // Remove element directly
 </script>
 ```
 
