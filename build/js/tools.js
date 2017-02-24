@@ -208,7 +208,7 @@ var Rocket;
             return true;
         },
         number: function (check) {
-            return (typeof check === 'number');
+            return (typeof check === 'number' && !isNaN(check));
         },
         object: function (check) {
             return (typeof check === 'object');

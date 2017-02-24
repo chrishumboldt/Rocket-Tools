@@ -267,7 +267,7 @@ module Rocket {
          return true;
       },
       number: (check) => {
-         return (typeof check === 'number');
+         return (typeof check === 'number' && !isNaN(check));
       },
       object: (check) => {
          return (typeof check === 'object');
