@@ -1190,12 +1190,12 @@ module Rocket {
             let stateClass = rocketPrefix.state + state;
             if (has.class(element, stateClass)) {
                if (clear || altState === false) {
-                  state.clear(element);
+                  Rocket.state.clear(element);
                } else {
-                  state.add(element, altState);
+                  Rocket.state.add(element, altState);
                }
             } else {
-               state.add(element, state);
+               Rocket.state.add(element, state);
             }
          }
       }
