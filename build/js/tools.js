@@ -807,38 +807,48 @@ var Rocket;
     Rocket.event = {
         add: function (elms, type, eventHandle) {
             if (type === void 0) { type = 'click'; }
+            Rocket.event.apply(elms, type, eventHandle, 'add');
         },
-        apply: function (elm, type, eventHandle, eventType) {
-            if (!Rocket.exists(elm))
+        apply: function (elms, type, eventHandle, eventType) {
+            if (type === void 0) { type = 'click'; }
+            var domElms = Rocket.dom.select(elms);
+            // Catch
+            if (domElms.length < 1) {
                 return;
-            // Check event type
-            switch (eventType) {
-                case 'add':
-                    if (elm.addEventListener) {
-                        elm.addEventListener(type, eventHandle, false);
-                    }
-                    else if (elm.attachEvent) {
-                        elm.attachEvent('on' + type, eventHandle);
-                    }
-                    else {
-                        elm['on' + type] = eventHandle;
-                    }
-                    break;
-                case 'remove':
-                    if (elm.removeEventListener) {
-                        elm.removeEventListener(type, eventHandle, false);
-                    }
-                    else if (elm.detachEvent) {
-                        elm.detachEvent('on' + type, eventHandle);
-                    }
-                    else {
-                        elm['on' + type] = eventHandle;
-                    }
-                    break;
+            }
+            // Continue
+            for (var _i = 0, domElms_1 = domElms; _i < domElms_1.length; _i++) {
+                var elm = domElms_1[_i];
+                // Check event type
+                switch (eventType) {
+                    case 'add':
+                        if (elm.addEventListener) {
+                            elm.addEventListener(type, eventHandle, false);
+                        }
+                        else if (elm.attachEvent) {
+                            elm.attachEvent('on' + type, eventHandle);
+                        }
+                        else {
+                            elm['on' + type] = eventHandle;
+                        }
+                        break;
+                    case 'remove':
+                        if (elm.removeEventListener) {
+                            elm.removeEventListener(type, eventHandle, false);
+                        }
+                        else if (elm.detachEvent) {
+                            elm.detachEvent('on' + type, eventHandle);
+                        }
+                        else {
+                            elm['on' + type] = eventHandle;
+                        }
+                        break;
+                }
             }
         },
         remove: function (elms, type, eventHandle) {
             if (type === void 0) { type = 'click'; }
+            Rocket.event.apply(elms, type, eventHandle, 'remove');
         }
     };
     // Gets
