@@ -711,21 +711,35 @@ module Rocket {
    // DOM
    export const dom: any = {
       body: (typeof document !== 'undefined') ? document.getElementsByTagName('body')[0] : false,
-      element: (selector: string) => {
+      element: (selector: any) => {
          /*
          Only a single element is required. The below uses a more performant
          code block to complete this action.
          */
-         // Catch
-         if (!is.string(selector)) { return null; }
+         if (is.string(selector)) {
+            switch (get.selector.type(selector)) {
+               case 'gebi':
+                  return document.getElementById(selector.substring(1));
 
-         // Continue
-         switch (get.selector.type(selector)) {
-            case 'gebi':
-               return document.getElementById(selector.substring(1));
+               default:
+                  return document.querySelector(selector);
+            }
+         }
+         // Check if already an element. This really shouldn't happen
+         else if (Rocket.is.element(selector)) {
+            return selector;
+         }
+         // Try and catch HTMLCollection and NodeList
+         else if (is.object(selector)) {
+            selector = Array.prototype.slice.call(selector);
 
-            default:
-               return document.querySelector(selector);
+            if (is.array(selector) && selector.length > 0) {
+               return selector[0];
+            }
+         }
+         // Fallback
+         else {
+            return null;
          }
       },
       head: (typeof document !== 'undefined') ? document.getElementsByTagName('head')[0] : false,
@@ -754,8 +768,9 @@ module Rocket {
             }
          }
       },
-      select: (selectors: string) => {
+      select: (selectors: any) => {
          /*
+         NOTE
          Get multiple elements. The method assumes that many elements exist
          on the DOM with the "selectors". As such an array will ALWAYS be returned.
 
@@ -764,10 +779,45 @@ module Rocket {
          */
          let returnElms = [];
 
-         // Catch
-         if (!is.string(selectors)) { return returnElms; }
+         // String selectors
+         if (Rocket.is.string(selectors)) {
+            returnElms = returnElms.concat(Rocket.dom.selectByString(selectors));
+         }
+         // Return an element
+         else if (Rocket.is.element(selectors)) {
+            returnElms.push(selectors);
+         }
+         // If an array (can be mixed)
+         else if (Rocket.is.array(selectors)) {
+            var stringSelectors = '';
 
-         // Continue
+            for (let selector of selectors) {
+               if (Rocket.is.string(selector)) {
+                  stringSelectors += `${selector},`;
+               }
+               else if (Rocket.is.element(selector)) {
+                  returnElms.push(selector);
+               }
+            }
+
+            // Check if there is any string selectors to use
+            if (stringSelectors.length > 0) {
+               returnElms = returnElms.concat(Rocket.dom.selectByString(stringSelectors));
+            }
+         }
+         // Try and catch HTMLCollection and NodeList
+         else if (is.object(selectors)) {
+            selectors = Array.prototype.slice.call(selectors);
+
+            if (is.array(selectors) && selectors.length > 0) {
+               returnElms = selectors;
+            }
+         }
+
+         return array.clean(array.unique(returnElms));
+      },
+      selectByString: (selectors: string) => {
+         let returnElms = [];
          let selectorSplit = selectors.split(',').map(string.trim).filter(selector => selector.length > 0);
 
          if (selectorSplit.length > 0) {
@@ -789,7 +839,7 @@ module Rocket {
             }
          }
 
-         return array.clean(array.unique(returnElms));
+         return returnElms;
       },
       title: (typeof document !== 'undefined') ? document.getElementsByTagName('title')[0] : false,
       window: (typeof window !== 'undefined') ? window : false,
@@ -797,27 +847,37 @@ module Rocket {
 
    // Events
    export const event = {
-      add: (elem, type, eventHandle) => {
-         if (elem == null || typeof (elem) == 'undefined') return;
+      add: (elms, type = 'click', eventHandle) => {
 
-         if (elem.addEventListener) {
-            elem.addEventListener(type, eventHandle, false);
-         } else if (elem.attachEvent) {
-            elem.attachEvent('on' + type, eventHandle);
-         } else {
-            elem['on' + type] = eventHandle;
+      },
+      apply: (elm, type, eventHandle, eventType) => {
+         if (!Rocket.exists(elm)) return;
+
+         // Check event type
+         switch (eventType) {
+            case 'add':
+               if (elm.addEventListener) {
+                  elm.addEventListener(type, eventHandle, false);
+               } else if (elm.attachEvent) {
+                  elm.attachEvent('on' + type, eventHandle);
+               } else {
+                  elm['on' + type] = eventHandle;
+               }
+               break;
+
+            case 'remove':
+               if (elm.removeEventListener) {
+                  elm.removeEventListener(type, eventHandle, false);
+               } else if (elm.detachEvent) {
+                  elm.detachEvent('on' + type, eventHandle);
+               } else {
+                  elm['on' + type] = eventHandle;
+               }
+               break;
          }
       },
-      remove: (elem, type, eventHandle) => {
-         if (elem == null || typeof (elem) == 'undefined') return;
+      remove: (elms, type = 'click', eventHandle) => {
 
-         if (elem.removeEventListener) {
-            elem.removeEventListener(type, eventHandle, false);
-         } else if (elem.detachEvent) {
-            elem.detachEvent('on' + type, eventHandle);
-         } else {
-            elem['on' + type] = eventHandle;
-         }
       }
    };
 
