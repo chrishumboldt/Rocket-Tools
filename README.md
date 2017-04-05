@@ -45,8 +45,8 @@ Simply add in the Rocket Tools script tag as shown below.
 
 ```html
 <body>
-	/* Your content goes here */
-	<script src="rocket-tools/js/tools.min.js"></script>
+   /* Your content goes here */
+   <script src="rocket-tools/js/tools.min.js"></script>
 </body>
 ```
 
@@ -293,7 +293,7 @@ Method | Description
 ```javascript
 var button = document.getElementById('button');
 var sayHi = function () {
-	alert('Hi');
+   alert('Hi');
 };
 
 Rocket.event.add(button, 'click', sayHi); // Hi will be alerted every time the button is clicked.
@@ -409,22 +409,22 @@ Option | Default | Description
 
 ```javascript
 Rocket.request.get({
-	url: 'http://someurl.com',
-	data: {
-		key: 'value'
-	},
-	onStart: function () {
-		Rocket.log('Starting request...');
-	},
-	onError: function (error, status) {
-		Rocket.log(status + ': ' + error);
-	},
-	onSuccess: function (data) {
-		Rocket.log(data);
-	},
-	onComplete: function () {
-		Rocket.log('Request done!!!');
-	}
+   url: 'http://someurl.com',
+   data: {
+      key: 'value'
+   },
+   onStart: function () {
+      Rocket.log('Starting request...');
+   },
+   onError: function (error, status) {
+      Rocket.log(status + ': ' + error);
+   },
+   onSuccess: function (data) {
+      Rocket.log(data);
+   },
+   onComplete: function () {
+      Rocket.log('Request done!!!');
+   }
 });
 ```
 
@@ -467,9 +467,9 @@ Rocket.storage.clear(); // Storage with name 'my-storage-name' will no longer ex
 
 // Exclusion example with object add
 Rocket.storage.add({
-	firstCar: 'Mazda 323',
-	lastCar: 'Ford Fiesta',
-	coolCar: 'Nissan GT-R'
+   firstCar: 'Mazda 323',
+   lastCar: 'Ford Fiesta',
+   coolCar: 'Nissan GT-R'
 });
 Rocket.storage.clear(['coolCar']); // Only 'coolCar' will remain in the storage.
 ```
