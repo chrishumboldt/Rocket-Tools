@@ -691,16 +691,25 @@ var Rocket;
             Only a single element is required. The below uses a more performant
             code block to complete this action.
             */
-            // Catch
-            if (!Rocket.is.string(selector)) {
-                return null;
+            if (Rocket.is.string(selector)) {
+                switch (Rocket.get.selector.type(selector)) {
+                    case 'gebi':
+                        return document.getElementById(selector.substring(1));
+                    default:
+                        return document.querySelector(selector);
+                }
             }
-            // Continue
-            switch (Rocket.get.selector.type(selector)) {
-                case 'gebi':
-                    return document.getElementById(selector.substring(1));
-                default:
-                    return document.querySelector(selector);
+            else if (Rocket.is.element(selector)) {
+                return selector;
+            }
+            else if (Rocket.is.object(selector)) {
+                selector = Array.prototype.slice.call(selector);
+                if (Rocket.is.array(selector) && selector.length > 0) {
+                    return selector[0];
+                }
+            }
+            else {
+                return null;
             }
         },
         head: (typeof document !== 'undefined') ? document.getElementsByTagName('head')[0] : false,
@@ -731,6 +740,7 @@ var Rocket;
         },
         select: function (selectors) {
             /*
+            NOTE
             Get multiple elements. The method assumes that many elements exist
             on the DOM with the "selectors". As such an array will ALWAYS be returned.
    
@@ -738,11 +748,39 @@ var Rocket;
             this particular method type. It's important to maintain consistency.
             */
             var returnElms = [];
-            // Catch
-            if (!Rocket.is.string(selectors)) {
-                return returnElms;
+            // String selectors
+            if (Rocket.is.string(selectors)) {
+                returnElms = returnElms.concat(Rocket.dom.selectByString(selectors));
             }
-            // Continue
+            else if (Rocket.is.element(selectors)) {
+                returnElms.push(selectors);
+            }
+            else if (Rocket.is.array(selectors)) {
+                var stringSelectors = '';
+                for (var _i = 0, selectors_1 = selectors; _i < selectors_1.length; _i++) {
+                    var selector = selectors_1[_i];
+                    if (Rocket.is.string(selector)) {
+                        stringSelectors += selector + ",";
+                    }
+                    else if (Rocket.is.element(selector)) {
+                        returnElms.push(selector);
+                    }
+                }
+                // Check if there is any string selectors to use
+                if (stringSelectors.length > 0) {
+                    returnElms = returnElms.concat(Rocket.dom.selectByString(stringSelectors));
+                }
+            }
+            else if (Rocket.is.object(selectors)) {
+                selectors = Array.prototype.slice.call(selectors);
+                if (Rocket.is.array(selectors) && selectors.length > 0) {
+                    returnElms = selectors;
+                }
+            }
+            return Rocket.array.clean(Rocket.array.unique(returnElms));
+        },
+        selectByString: function (selectors) {
+            var returnElms = [];
             var selectorSplit = selectors.split(',').map(Rocket.string.trim).filter(function (selector) { return selector.length > 0; });
             if (selectorSplit.length > 0) {
                 // Loop through all the selectors
@@ -760,38 +798,47 @@ var Rocket;
                     }
                 }
             }
-            return Rocket.array.clean(Rocket.array.unique(returnElms));
+            return returnElms;
         },
         title: (typeof document !== 'undefined') ? document.getElementsByTagName('title')[0] : false,
         window: (typeof window !== 'undefined') ? window : false,
     };
     // Events
     Rocket.event = {
-        add: function (elem, type, eventHandle) {
-            if (elem == null || typeof (elem) == 'undefined')
+        add: function (elms, type, eventHandle) {
+            if (type === void 0) { type = 'click'; }
+        },
+        apply: function (elm, type, eventHandle, eventType) {
+            if (!Rocket.exists(elm))
                 return;
-            if (elem.addEventListener) {
-                elem.addEventListener(type, eventHandle, false);
-            }
-            else if (elem.attachEvent) {
-                elem.attachEvent('on' + type, eventHandle);
-            }
-            else {
-                elem['on' + type] = eventHandle;
+            // Check event type
+            switch (eventType) {
+                case 'add':
+                    if (elm.addEventListener) {
+                        elm.addEventListener(type, eventHandle, false);
+                    }
+                    else if (elm.attachEvent) {
+                        elm.attachEvent('on' + type, eventHandle);
+                    }
+                    else {
+                        elm['on' + type] = eventHandle;
+                    }
+                    break;
+                case 'remove':
+                    if (elm.removeEventListener) {
+                        elm.removeEventListener(type, eventHandle, false);
+                    }
+                    else if (elm.detachEvent) {
+                        elm.detachEvent('on' + type, eventHandle);
+                    }
+                    else {
+                        elm['on' + type] = eventHandle;
+                    }
+                    break;
             }
         },
-        remove: function (elem, type, eventHandle) {
-            if (elem == null || typeof (elem) == 'undefined')
-                return;
-            if (elem.removeEventListener) {
-                elem.removeEventListener(type, eventHandle, false);
-            }
-            else if (elem.detachEvent) {
-                elem.detachEvent('on' + type, eventHandle);
-            }
-            else {
-                elem['on' + type] = eventHandle;
-            }
+        remove: function (elms, type, eventHandle) {
+            if (type === void 0) { type = 'click'; }
         }
     };
     // Gets
