@@ -1,12 +1,10 @@
-/*
-Author: Chris Humboldt
-*/
+/**
+@author Chris Humboldt
 
-/*
-NOTE:
+NOTE
 Rocket serves as the "namespace" for all subsequent modules. Rocket modules do
 require this toolset so make sure that this library is loaded first.
-*/
+**/
 
 // Table of contents
 // Defaults
@@ -168,6 +166,7 @@ module Rocket {
 
          // Continue
          let unique = helper.setDefault(isUnique, false);
+
          if (is.array(arValue) && arValue.length > 0) {
             returnArray = arValue;
          } else if (is.element(arValue)) {
@@ -400,8 +399,8 @@ module Rocket {
 
    // Clone
    /*
-   NOTE: INCOMPLETE!
-   Needs a ton more work and really is not a viable method right now.
+   NOTE
+   INCOMPLETE! Needs a ton more work and really is not a viable method right now.
    */
    export const clone = (original: any) => {
       return helper.parse.json(JSON.stringify(original));
@@ -559,7 +558,7 @@ module Rocket {
       },
       transform: (thisDate: any) => {
          /*
-         NOTE: This is not a perfect test. This function will attempt to convert
+         NOTE This is not a perfect test. This function will attempt to convert
          any string passed into a date. This should really only be used with date
          formats that are known to be correct.
          */
@@ -640,10 +639,8 @@ module Rocket {
 
    // Development
    export const log = (text: string, thisError?: boolean) => {
-      // Catch
-      if (is.browser() && (!window || !window.console)) {
-         return false;
-      }
+      if (is.browser() && (!window || !window.console)) { return; }
+
       // Continue
       if (defaults.log) {
          let error = (is.boolean(thisError)) ? thisError : false;
