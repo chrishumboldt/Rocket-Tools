@@ -729,12 +729,16 @@ module Rocket {
          else if (Rocket.is.element(selector)) {
             return selector;
          }
-         // Try and catch HTMLCollection and NodeList
+         // Try and catch HTMLCollection and NodeList / window / document
          else if (is.object(selector)) {
-            selector = Array.prototype.slice.call(selector);
+            if (selector === window || selector === document) {
+               return selector;
+            } else {
+               selector = Array.prototype.slice.call(selector);
 
-            if (is.array(selector) && selector.length > 0) {
-               return selector[0];
+               if (is.array(selector) && selector.length > 0) {
+                  return selector[0];
+               }
             }
          }
          // Fallback
@@ -805,13 +809,19 @@ module Rocket {
                returnElms = returnElms.concat(Rocket.dom.selectByString(stringSelectors));
             }
          }
-         // Try and catch HTMLCollection and NodeList
+         // Try and catch HTMLCollection and NodeList / window / document
          else if (is.object(selectors)) {
-            selectors = Array.prototype.slice.call(selectors);
+            if (selectors === window || selectors === document) {
+               returnElms = [selectors];
+            } else {
+               selectors = Array.prototype.slice.call(selectors);
 
-            if (is.array(selectors) && selectors.length > 0) {
-               returnElms = selectors;
+               if (is.array(selectors) && selectors.length > 0) {
+                  returnElms = selectors;
+               }
             }
+         } else if (selectors === window || selectors === document) {
+            returnElms = [selectors];
          }
 
          return array.clean(array.unique(returnElms));
