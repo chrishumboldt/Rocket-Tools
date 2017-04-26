@@ -1,10 +1,6 @@
-/*
-Author: Chris Humboldt
-*/
-
-/*
-Author: Chris Humboldt
-*/
+/**
+@author Chris Humboldt
+**/
 
 declare module MRocket {
    // Arrays

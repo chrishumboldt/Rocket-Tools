@@ -239,7 +239,7 @@ module Rocket {
          return regExp.test(date);
       },
       element: (element) => {
-         return (element.nodeType && element.nodeType === 1);
+         return (Rocket.exists(element)) ? (element.nodeType && element.nodeType === 1) : false;
       },
       email: (email, thisRegExp: any) => {
          let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.email;
