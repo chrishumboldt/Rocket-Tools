@@ -68,7 +68,7 @@ declare module MRocket {
    interface _Dom {
       body: any;
       element(sel: string);
-      header: any;
+      head: any;
       html: any;
       ratio(sel: string, multiplier: number);
       remove(elms: any);
