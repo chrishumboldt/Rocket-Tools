@@ -249,7 +249,7 @@ declare module MRocket {
       storage: _Storage;
       string: _String;
       time: _Time;
-      Url: _Url;
+      url: _Url;
       button: any;
       flicker: any;
       form: any;

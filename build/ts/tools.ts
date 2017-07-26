@@ -250,7 +250,7 @@ module Rocket {
       },
       image: (file, arAllowedTypes) => {
          let allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : defaults.extensions.images;
-         return allowedTypes[file.split('.').pop().toLowerCase()];
+         return (allowedTypes.indexOf(file.split('.').pop().toLowerCase()) > -1);
       },
       integer: (check) => {
          return (is.number(check) && (parseFloat(check) === parseInt(check)));
