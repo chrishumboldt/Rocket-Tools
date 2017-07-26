@@ -242,7 +242,7 @@ var Rocket;
         },
         image: function (file, arAllowedTypes) {
             var allowedTypes = (Rocket.is.array(arAllowedTypes)) ? arAllowedTypes : Rocket.defaults.extensions.images;
-            return allowedTypes[file.split('.').pop().toLowerCase()];
+            return (allowedTypes.indexOf(file.split('.').pop().toLowerCase()) > -1);
         },
         integer: function (check) {
             return (Rocket.is.number(check) && (parseFloat(check) === parseInt(check)));
