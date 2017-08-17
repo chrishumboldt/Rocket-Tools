@@ -93,11 +93,11 @@ Property | Default
 #### Regular Expressions
 Property | Default
 ---- | ----
-`defaults.regexp.colour` | `/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/`
+`defaults.regexp.colour` | <code>/^#([A-Fa-f0-9]{6}&#124;[A-Fa-f0-9]{3})/</code>
 `defaults.regexp.date` | `/^[0-9]{4}-[0-9]{2}-[0-9]{2}/`
 `defaults.regexp.email` | `/([\w\.\-]+)@([\w\.\-]+)\.(\w+)/i`
 `defaults.regexp.password` | `/^(?=.*\d).{6,}/`
-`defaults.regexp.time` | `/([01]\d|2[0-3]):([0-5]\d)/`
+`defaults.regexp.time` | <code>/([01]\d&#124;2[0-3]):([0-5]\d)/</code>
 `defaults.regexp.url` | `/^(https?:\/\/[^\s]+)/`
 
 #### Request
