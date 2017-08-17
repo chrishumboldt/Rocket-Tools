@@ -1,2 +1,4 @@
 // Files to ignore
 test.html
+test.js
+test.ts

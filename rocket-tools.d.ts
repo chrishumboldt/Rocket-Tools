@@ -1,10 +1,6 @@
-/*
-Author: Chris Humboldt
-*/
-
-/*
-Author: Chris Humboldt
-*/
+/**
+@author Chris Humboldt
+**/
 
 declare module MRocket {
    // Arrays
@@ -72,7 +68,7 @@ declare module MRocket {
    interface _Dom {
       body: any;
       element(sel: string);
-      header: any;
+      head: any;
       html: any;
       ratio(sel: string, multiplier: number);
       remove(elms: any);
@@ -253,7 +249,7 @@ declare module MRocket {
       storage: _Storage;
       string: _String;
       time: _Time;
-      Url: _Url;
+      url: _Url;
       button: any;
       flicker: any;
       form: any;
