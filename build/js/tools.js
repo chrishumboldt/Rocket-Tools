@@ -78,87 +78,48 @@ var Rocket;
         }
     };
     // Variables
-    var rocketMonths = [{
-            number: '01',
-            name: 'january',
-            nameShort: 'jan'
-        }, {
-            number: '02',
-            name: 'february',
-            nameShort: 'feb'
-        }, {
-            number: '03',
-            name: 'march',
-            nameShort: 'mar'
-        }, {
-            number: '04',
-            name: 'april',
-            nameShort: 'apr'
-        }, {
-            number: '05',
-            name: 'may',
-            nameShort: 'may'
-        }, {
-            number: '06',
-            name: 'june',
-            nameShort: 'jun'
-        }, {
-            number: '07',
-            name: 'july',
-            nameShort: 'jul'
-        }, {
-            number: '08',
-            name: 'august',
-            nameShort: 'aug'
-        }, {
-            number: '09',
-            name: 'september',
-            nameShort: 'sep'
-        }, {
-            number: '10',
-            name: 'october',
-            nameShort: 'oct'
-        }, {
-            number: '11',
-            name: 'november',
-            nameShort: 'nov'
-        }, {
-            number: '12',
-            name: 'december',
-            nameShort: 'dec'
-        }];
-    var rocketPrefix = {
-        basic: 'rocket-',
-        state: '_state-'
-    };
-    var rocketState = {
-        alts: {
-            active: 'inactive',
-            closed: 'open',
-            hidden: 'visible',
-            inactive: 'active',
-            open: 'closed',
-            visible: 'hidden'
+    var _var = {
+        months: [
+            { number: '01', name: 'january', nameShort: 'jan' },
+            { number: '02', name: 'february', nameShort: 'feb' },
+            { number: '03', name: 'march', nameShort: 'mar' },
+            { number: '04', name: 'april', nameShort: 'apr' },
+            { number: '05', name: 'may', nameShort: 'may' },
+            { number: '06', name: 'june', nameShort: 'jun' },
+            { number: '07', name: 'july', nameShort: 'jul' },
+            { number: '08', name: 'august', nameShort: 'aug' },
+            { number: '09', name: 'september', nameShort: 'sep' },
+            { number: '10', name: 'october', nameShort: 'oct' },
+            { number: '11', name: 'november', nameShort: 'nov' },
+            { number: '12', name: 'december', nameShort: 'dec' }
+        ],
+        prefix: {
+            basic: 'rocket-',
+            state: '_state-'
         },
-        list: ['active', 'closed', 'hidden', 'inactive', 'open', 'selected', 'toggled', 'visible']
+        state: {
+            alts: {
+                active: 'inactive',
+                closed: 'open',
+                hidden: 'visible',
+                inactive: 'active',
+                open: 'closed',
+                visible: 'hidden'
+            },
+            list: ['active', 'closed', 'hidden', 'inactive', 'open', 'selected', 'toggled', 'visible']
+        }
     };
     // Arrays
     Rocket.array = {
         clean: function (thisArray) {
-            // Catch
-            if (!Rocket.is.array(thisArray)) {
+            if (!Rocket.is.array(thisArray))
                 return false;
-            }
-            ;
-            // Continue
             return thisArray.filter(function (value) { return value !== null; });
         },
         make: function (arValue, isUnique) {
             var returnArray = [];
-            // Catch
-            if (!arValue) {
+            if (!arValue)
                 return returnArray;
-            }
             // Continue
             var unique = Rocket.helper.setDefault(isUnique, false);
             if (Rocket.is.array(arValue) && arValue.length > 0) {
@@ -180,12 +141,8 @@ var Rocket;
             return (unique) ? Rocket.array.unique(returnArray) : returnArray;
         },
         unique: function (thisArray) {
-            // Catch
-            if (!Rocket.is.array(thisArray)) {
+            if (!Rocket.is.array(thisArray))
                 return false;
-            }
-            ;
-            // Continue
             return thisArray.filter(function (value, index, self) { return self.indexOf(value) === index; });
         }
     };
@@ -276,11 +233,8 @@ var Rocket;
             return regExp.test(check);
         },
         touch: function () {
-            // Catch
-            if (!Rocket.is.browser() || !window || !window.console) {
+            if (!Rocket.is.browser() || !window || !window.console)
                 return false;
-            }
-            // Continue
             return 'ontouchstart' in window || 'onmsgesturechange' in window;
         },
         url: function (url, thisRegExp) {
@@ -314,17 +268,12 @@ var Rocket;
                 .replace(/,/g, ' ');
         },
         executeClasses: function (elements, classesAdd, classesRemove) {
-            // Catch
-            if (!Rocket.exists(elements)) {
+            if (!Rocket.exists(elements))
                 return false;
-            }
-            // Continue
             // Create elements array
             var arElements = Rocket.array.make(elements);
-            // Catch
-            if (arElements.length < 1) {
+            if (arElements.length < 1)
                 return false;
-            }
             // Create classes array
             var arClassesAdd = Rocket.array.make(classesAdd, true);
             var arClassesRemove = Rocket.array.make(classesRemove, true);
@@ -346,9 +295,8 @@ var Rocket;
                 .filter(function (val) { return classes.indexOf(val) < 0; })
                 .toString()
                 .replace(/,/g, ' ');
-            if (element.className === '') {
+            if (element.className === '')
                 Rocket.classes.clear(element);
-            }
         },
         remove: function (elements, classNames) {
             var elms = (Rocket.is.string(elements)) ? Rocket.dom.select(elements) : elements;
@@ -360,10 +308,8 @@ var Rocket;
         },
         toggle: function (elements, className) {
             var elms = (Rocket.is.string(elements)) ? Rocket.dom.select(elements) : elements;
-            // Catch
-            if (!Rocket.exists(elms) || typeof className !== 'string' || Rocket.has.spaces(className)) {
+            if (!Rocket.exists(elms) || typeof className !== 'string' || Rocket.has.spaces(className))
                 return false;
-            }
             // Create elements array
             var arElements = [];
             if (Rocket.is.element(elms)) {
@@ -372,10 +318,8 @@ var Rocket;
             else if (Rocket.is.array(elms)) {
                 arElements = elms;
             }
-            // Catch
-            if (arElements.length < 1) {
+            if (arElements.length < 1)
                 return false;
-            }
             // Execute
             for (var i = 0, len = arElements.length; i < len; i++) {
                 if (!Rocket.has.class(arElements[i], className)) {
@@ -399,10 +343,8 @@ var Rocket;
     Rocket.date = {
         basic: function (thisDate, thisWithTime) {
             var transDate = (thisDate) ? Rocket.date.transform(thisDate) : new Date();
-            // Catch
-            if (!transDate) {
+            if (!transDate)
                 return false;
-            }
             // Continue
             var withTime = (Rocket.is.boolean(thisWithTime)) ? thisWithTime : false;
             var returnValue = '';
@@ -446,10 +388,8 @@ var Rocket;
         },
         safe: function (thisDate, thisWithTime) {
             var newData = (thisDate) ? Rocket.date.transform(thisDate) : new Date();
-            // Catch
-            if (!newData) {
+            if (!newData)
                 return false;
-            }
             // Continue
             var withTime = (Rocket.is.boolean(thisWithTime)) ? thisWithTime : false;
             var returnValue = newData.getFullYear() + '-' + ('0' + (newData.getMonth() + 1)).slice(-2) + '-' + ('0' + newData.getDate()).slice(-2);
@@ -483,9 +423,9 @@ var Rocket;
             switch (type) {
                 case 'long':
                     thisMonth = (thisMonth.length === 1) ? '0' + thisMonth : thisMonth;
-                    for (var i = 0, len = rocketMonths.length; i < len; i++) {
-                        if (rocketMonths[i].number == thisMonth) {
-                            thisMonth = Rocket.string.uppercase.first(rocketMonths[i].name);
+                    for (var i = 0, len = _var.months.length; i < len; i++) {
+                        if (_var.months[i].number == thisMonth) {
+                            thisMonth = Rocket.string.uppercase.first(_var.months[i].name);
                             break;
                         }
                     }
@@ -495,9 +435,9 @@ var Rocket;
                     break;
                 default:
                     thisMonth = (thisMonth.length === 1) ? '0' + thisMonth : thisMonth;
-                    for (var i = 0, len = rocketMonths.length; i < len; i++) {
-                        if (rocketMonths[i].number == thisMonth) {
-                            thisMonth = Rocket.string.uppercase.first(rocketMonths[i].nameShort);
+                    for (var i = 0, len = _var.months.length; i < len; i++) {
+                        if (_var.months[i].number == thisMonth) {
+                            thisMonth = Rocket.string.uppercase.first(_var.months[i].nameShort);
                             break;
                         }
                     }
@@ -524,9 +464,9 @@ var Rocket;
                     }
                     else {
                         var lowerDateSplit = Rocket.string.lowercase.all(dateSplit[i]);
-                        for (var i2 = 0, len2 = rocketMonths.length; i2 < len2; i2++) {
-                            if (lowerDateSplit === rocketMonths[i2].name || lowerDateSplit === rocketMonths[i2].nameShort) {
-                                month = rocketMonths[i2].number;
+                        for (var i2 = 0, len2 = _var.months.length; i2 < len2; i2++) {
+                            if (lowerDateSplit === _var.months[i2].name || lowerDateSplit === _var.months[i2].nameShort) {
+                                month = _var.months[i2].number;
                                 break;
                             }
                         }
@@ -563,12 +503,9 @@ var Rocket;
                     thisDate = fixDateOrder(thisDate, '/');
                 }
             }
-            // Make the date
-            var newDate = (typeof thisDate !== 'undefined') ? new Date(thisDate) : new Date();
-            // Fail test
-            if (newDate.toString() == 'Invalid Date') {
-                return false;
-            }
+            var newDate = (typeof thisDate !== 'undefined') ? new Date(thisDate) : new Date(); // Make the date
+            if (newDate.toString() == 'Invalid Date')
+                return false; // Fail test
             return newDate;
         },
         year: function (thisYearVal, thisType) {
@@ -618,9 +555,8 @@ var Rocket;
     };
     // Development
     Rocket.log = function (text, thisError) {
-        if (Rocket.is.browser() && (!window || !window.console)) {
+        if (Rocket.is.browser() && (!window || !window.console))
             return;
-        }
         // Continue
         if (Rocket.defaults.log) {
             var error_1 = (Rocket.is.boolean(thisError)) ? thisError : false;
@@ -638,16 +574,12 @@ var Rocket;
     // Dimensions
     Rocket.dimensions = {
         getWidthOrHeight: function (elm, type) {
-            // Catch
-            if (!Rocket.is.browser() || !window || !window.console) {
+            if (!Rocket.is.browser() || !window || !window.console)
                 return false;
-            }
-            if (!Rocket.is.element(elm) && !Rocket.is.string(elm) && elm !== window) {
+            if (!Rocket.is.element(elm) && !Rocket.is.string(elm) && elm !== window)
                 return false;
-            }
-            if (Rocket.is.string(type) && (type !== 'width' && type !== 'height')) {
+            if (Rocket.is.string(type) && (type !== 'width' && type !== 'height'))
                 return false;
-            }
             // Continue
             var retValue;
             // Check for window
@@ -659,10 +591,8 @@ var Rocket;
                 // Check if string selector
                 if (Rocket.is.string(elm)) {
                     elm = Rocket.dom.select(elm);
-                    // Catch
-                    if (elm.length < 1) {
+                    if (elm.length < 1)
                         return false;
-                    }
                     // Continue
                     elm = elm[0];
                 }
@@ -825,14 +755,11 @@ var Rocket;
         apply: function (elms, type, eventHandle, eventType) {
             if (type === void 0) { type = 'click'; }
             var domElms = Rocket.dom.select(elms);
-            // Catch
-            if (domElms.length < 1) {
+            if (domElms.length < 1)
                 return;
-            }
             // Continue
             for (var _i = 0, domElms_1 = domElms; _i < domElms_1.length; _i++) {
                 var elm = domElms_1[_i];
-                // Check event type
                 switch (eventType) {
                     case 'add':
                         if (elm.addEventListener) {
@@ -892,9 +819,8 @@ var Rocket;
     Rocket.helper = {
         parse: {
             json: function (json) {
-                if (Rocket.is.json(json)) {
+                if (Rocket.is.json(json))
                     return JSON.parse(json);
-                }
                 return json;
             }
         },
@@ -956,13 +882,11 @@ var Rocket;
     // Overlay
     Rocket.overlay = {
         add: function () {
-            // Catch
-            if (!Rocket.is.browser() || !window || !window.console) {
+            if (!Rocket.is.browser() || !window || !window.console)
                 return false;
-            }
             // Continue
             var rocketOverlay = document.createElement('div');
-            Rocket.id.add(rocketOverlay, rocketPrefix.basic + 'overlay');
+            Rocket.id.add(rocketOverlay, _var.prefix.basic + 'overlay');
             // Styles
             rocketOverlay.setAttribute('style', '-webkit-transition: all .4s ease-out 0s;-moz-transition: all .4s ease-out 0s;-ms-transition: all .4s ease-out 0s;transition: all .4s ease-out 0s;');
             rocketOverlay.style.display = 'block';
@@ -976,15 +900,13 @@ var Rocket;
             rocketOverlay.style.visibility = 'hidden';
             rocketOverlay.style.opacity = '0';
             rocketOverlay.style.filter = 'alpha(opacity=0)';
-            if (!Rocket.exists(document.getElementById(rocketPrefix.basic + 'overlay'))) {
+            if (!Rocket.exists(document.getElementById(_var.prefix.basic + 'overlay'))) {
                 Rocket.dom.body.appendChild(rocketOverlay);
             }
         },
         hide: function () {
-            // Catch
-            if (!Rocket.is.browser() || !window || !window.console) {
+            if (!Rocket.is.browser() || !window || !window.console)
                 return false;
-            }
             // Continue
             var rocketOverlay = Rocket.dom.select('#rocket-overlay')[0];
             rocketOverlay.style.visibility = 'hidden';
@@ -992,10 +914,8 @@ var Rocket;
             rocketOverlay.style.filter = 'alpha(opacity=0)';
         },
         show: function () {
-            // Catch
-            if (!Rocket.is.browser() || !window || !window.console) {
+            if (!Rocket.is.browser() || !window || !window.console)
                 return false;
-            }
             // Continue
             var rocketOverlay = Rocket.dom.select('#rocket-overlay')[0];
             setTimeout(function () {
@@ -1031,10 +951,8 @@ var Rocket;
     // Request
     Rocket.request = {
         run: function (uOptions) {
-            // Catch
-            if (!Rocket.exists(uOptions) || !Rocket.exists(uOptions.url)) {
+            if (!Rocket.exists(uOptions) || !Rocket.exists(uOptions.url))
                 return false;
-            }
             // Continue
             var options = {
                 url: uOptions.url,
@@ -1166,44 +1084,36 @@ var Rocket;
     };
     // Setup
     function setup() {
-        // Catch
-        if (!Rocket.is.browser() || !window || !window.console) {
+        if (!Rocket.is.browser() || !window || !window.console)
             return false;
-        }
-        // Continue
-        // No touch class
         if (!Rocket.is.touch() && !Rocket.has.class(Rocket.dom.html, 'rocket-no-touch')) {
             Rocket.classes.add(Rocket.dom.html, 'rocket-no-touch');
         }
-        // Add overlay
         Rocket.overlay.add();
     }
     setup();
     // State
     Rocket.state = {
         add: function (element, state) {
-            if (!Rocket.exists(element)) {
+            if (!Rocket.exists(element))
                 return false;
-            }
-            var newRocketStates = rocketState.list.slice().map(function (newState) { return rocketPrefix.state + newState; });
-            var stateClass = newRocketStates.splice(newRocketStates.indexOf(rocketPrefix.state + state), 1);
+            var newRocketStates = _var.state.list.slice().map(function (newState) { return _var.prefix.state + newState; });
+            var stateClass = newRocketStates.splice(newRocketStates.indexOf(_var.prefix.state + state), 1);
             Rocket.classes.replace(element, newRocketStates, stateClass);
         },
         clear: function (element) {
-            if (!Rocket.exists(element)) {
+            if (!Rocket.exists(element))
                 return false;
-            }
-            var newRocketStates = rocketState.list.slice().map(function (newState) { return rocketPrefix.state + newState; });
+            var newRocketStates = _var.state.list.slice().map(function (newState) { return _var.prefix.state + newState; });
             Rocket.classes.remove(element, newRocketStates);
         },
         toggle: function (element, state, thisClear) {
-            if (!Rocket.exists(element)) {
+            if (!Rocket.exists(element))
                 return false;
-            }
-            if (rocketState.list.indexOf(state) > -1) {
-                var altState = rocketState.alts[state] || false;
+            if (_var.state.list.indexOf(state) > -1) {
+                var altState = _var.state.alts[state] || false;
                 var clear = (typeof thisClear === 'boolean') ? thisClear : false;
-                var stateClass = rocketPrefix.state + state;
+                var stateClass = _var.prefix.state + state;
                 if (Rocket.has.class(element, stateClass)) {
                     if (clear || altState === false) {
                         Rocket.state.clear(element);
@@ -1221,10 +1131,8 @@ var Rocket;
     // Storage
     Rocket.storage = {
         add: function (nameObj, value) {
-            // Catch
-            if (!Rocket.exists(nameObj)) {
+            if (!Rocket.exists(nameObj))
                 return false;
-            }
             if (Rocket.is.string(nameObj)) {
                 if (!Rocket.exists(value)) {
                     return false;
@@ -1263,7 +1171,6 @@ var Rocket;
                 localStorage.removeItem(Rocket.defaults.storage.name);
                 sessionStorage.removeItem(Rocket.defaults.storage.name);
             }
-            ;
             // Check for exclusion
             if (Rocket.is.string(exclusion)) {
                 var exclValue = Rocket.storage.get(exclusion);
@@ -1293,19 +1200,14 @@ var Rocket;
             }
         },
         get: function (key) {
-            if (!Rocket.is.string(key)) {
+            if (!Rocket.is.string(key))
                 return false;
-            }
             var store = Rocket.storage.getStorageEngine();
-            // Catch
-            if (!Rocket.exists(store[key])) {
+            if (!Rocket.exists(store[key]))
                 return false;
-            }
-            // Continue
             return store[key];
         },
         getStorageEngine: function () {
-            // Catch
             if (!Rocket.defaults.storage.name) {
                 Rocket.log('ROCKET: You have not set the storage name. Provide a name for [Rocket].defaults.storage.name.', true);
                 return false;
@@ -1328,15 +1230,11 @@ var Rocket;
             }
         },
         remove: function (key) {
-            if (!Rocket.is.string(key)) {
+            if (!Rocket.is.string(key))
                 return false;
-            }
             var store = Rocket.storage.getStorageEngine();
-            // Catch
-            if (!Rocket.exists(store[key])) {
+            if (!Rocket.exists(store[key]))
                 return false;
-            }
-            // Continue
             delete store[key];
             switch (Rocket.defaults.storage.type) {
                 case 'local':
@@ -1408,10 +1306,8 @@ var Rocket;
     Rocket.time = {
         basic: function (thisTime) {
             var transTime = Rocket.date.transform(thisTime);
-            // Catch
-            if (!transTime) {
+            if (!transTime)
                 return false;
-            }
             // Continue
             var hours = Rocket.time.leadingZero(transTime.getHours());
             var minutes = Rocket.time.leadingZero(transTime.getMinutes());
@@ -1419,10 +1315,8 @@ var Rocket;
         },
         exact: function (thisTime) {
             var transTime = Rocket.date.transform(thisTime);
-            // Catch
-            if (!transTime) {
+            if (!transTime)
                 return false;
-            }
             // Continue
             var hours = Rocket.time.leadingZero(transTime.getHours());
             var minutes = Rocket.time.leadingZero(transTime.getMinutes());
@@ -1432,11 +1326,8 @@ var Rocket;
         },
         full: function (thisTime) {
             var transTime = Rocket.date.transform(thisTime);
-            // Catch
-            if (!transTime) {
+            if (!transTime)
                 return false;
-            }
-            // Continue
             var hours = Rocket.time.leadingZero(transTime.getHours());
             var minutes = Rocket.time.leadingZero(transTime.getMinutes());
             var seconds = Rocket.time.leadingZero(transTime.getSeconds());
@@ -1444,29 +1335,20 @@ var Rocket;
         },
         hours: function (thisTime) {
             var transTime = Rocket.date.transform(thisTime);
-            // Catch
-            if (!transTime) {
+            if (!transTime)
                 return false;
-            }
-            // Continue
             return Rocket.time.leadingZero(transTime.getHours());
         },
         minutes: function (thisTime) {
             var transTime = Rocket.date.transform(thisTime);
-            // Catch
-            if (!transTime) {
+            if (!transTime)
                 return false;
-            }
-            // Continue
             return Rocket.time.leadingZero(transTime.getMinutes());
         },
         seconds: function (thisTime) {
             var transTime = Rocket.date.transform(thisTime);
-            // Catch
-            if (!transTime) {
+            if (!transTime)
                 return false;
-            }
-            // Continue
             return Rocket.time.leadingZero(transTime.getSeconds());
         },
         leadingZero: function (int) {
