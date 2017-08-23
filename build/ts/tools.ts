@@ -81,144 +81,99 @@ module Rocket {
    }
 
    // Variables
-   const rocketMonths = [{
-      number: '01',
-      name: 'january',
-      nameShort: 'jan'
-   }, {
-      number: '02',
-      name: 'february',
-      nameShort: 'feb'
-   }, {
-      number: '03',
-      name: 'march',
-      nameShort: 'mar'
-   }, {
-      number: '04',
-      name: 'april',
-      nameShort: 'apr'
-   }, {
-      number: '05',
-      name: 'may',
-      nameShort: 'may'
-   }, {
-      number: '06',
-      name: 'june',
-      nameShort: 'jun'
-   }, {
-      number: '07',
-      name: 'july',
-      nameShort: 'jul'
-   }, {
-      number: '08',
-      name: 'august',
-      nameShort: 'aug'
-   }, {
-      number: '09',
-      name: 'september',
-      nameShort: 'sep'
-   }, {
-      number: '10',
-      name: 'october',
-      nameShort: 'oct'
-   }, {
-      number: '11',
-      name: 'november',
-      nameShort: 'nov'
-   }, {
-      number: '12',
-      name: 'december',
-      nameShort: 'dec'
-   }];
-
-   const rocketPrefix = {
-      basic: 'rocket-',
-      state: '_state-'
-   };
-
-   const rocketState = {
-      alts: {
-         active: 'inactive',
-         closed: 'open',
-         hidden: 'visible',
-         inactive: 'active',
-         open: 'closed',
-         visible: 'hidden'
+   const _var = {
+      months: [
+         { number: '01', name: 'january', nameShort: 'jan' },
+         { number: '02', name: 'february', nameShort: 'feb' },
+         { number: '03', name: 'march', nameShort: 'mar' },
+         { number: '04', name: 'april', nameShort: 'apr' },
+         { number: '05', name: 'may', nameShort: 'may' },
+         { number: '06', name: 'june', nameShort: 'jun' },
+         { number: '07', name: 'july', nameShort: 'jul' },
+         { number: '08', name: 'august', nameShort: 'aug' },
+         { number: '09', name: 'september', nameShort: 'sep' },
+         { number: '10', name: 'october', nameShort: 'oct' },
+         { number: '11', name: 'november', nameShort: 'nov' },
+         { number: '12', name: 'december', nameShort: 'dec' }
+      ],
+      prefix: {
+         basic: 'rocket-',
+         state: '_state-'
       },
-      list: ['active', 'closed', 'hidden', 'inactive', 'open', 'selected', 'toggled', 'visible']
-   };
+      state: {
+         alts: {
+            active: 'inactive',
+            closed: 'open',
+            hidden: 'visible',
+            inactive: 'active',
+            open: 'closed',
+            visible: 'hidden'
+         },
+         list: ['active', 'closed', 'hidden', 'inactive', 'open', 'selected', 'toggled', 'visible']
+      }
+   }
 
    // Arrays
    export const array = {
       clean: (thisArray) => {
-         // Catch
-         if (!is.array(thisArray)) {
-            return false;
-         };
-         // Continue
-         return thisArray.filter(value => value !== null);
+         if (!is.array(thisArray)) return false
+         return thisArray.filter(value => value !== null)
       },
       make: (arValue: any, isUnique?) => {
-         let returnArray = [];
+         let returnArray = []
 
-         // Catch
-         if (!arValue) { return returnArray; }
+         if (!arValue) return returnArray
 
          // Continue
-         let unique = helper.setDefault(isUnique, false);
+         let unique = helper.setDefault(isUnique, false)
 
          if (is.array(arValue) && arValue.length > 0) {
-            returnArray = arValue;
+            returnArray = arValue
          } else if (is.element(arValue)) {
-            returnArray.push(arValue);
+            returnArray.push(arValue)
          } else if (is.string(arValue)) {
-            returnArray = arValue.split(' ');
+            returnArray = arValue.split(' ')
          } else if (is.object(arValue)) {
             // Try and catch HTMLCollection and NodeList
-            arValue = Array.prototype.slice.call(arValue);
+            arValue = Array.prototype.slice.call(arValue)
 
             if (is.array(arValue) && arValue.length > 0) {
-               returnArray = arValue;
+               returnArray = arValue
             }
          }
 
-         return (unique) ? array.unique(returnArray) : returnArray;
+         return (unique) ? array.unique(returnArray) : returnArray
       },
       unique: (thisArray) => {
-         // Catch
-         if (!is.array(thisArray)) {
-            return false;
-         };
-
-         // Continue
-         return thisArray.filter((value, index, self) => self.indexOf(value) === index);
+         if (!is.array(thisArray)) return false
+         return thisArray.filter((value, index, self) => self.indexOf(value) === index)
       }
    }
 
    // Basic checks
    export const exists = (check) => {
-      return !(typeof check === 'undefined' || check === null || check === false);
-   };
+      return !(typeof check === 'undefined' || check === null || check === false)
+   }
 
    export const has = {
       spaces: (check) => {
-         return /\s/.test(check);
+         return /\s/.test(check)
       },
       class: (element, thisClass) => {
-         return (' ' + element.className + ' ').indexOf(' ' + thisClass + ' ') > -1;
+         return (' ' + element.className + ' ').indexOf(' ' + thisClass + ' ') > -1
       },
       extension: (file, arAllowedTypes) => {
-         let allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : defaults.extensions.all;
-         return (allowedTypes.indexOf(file.split('.').pop().toLowerCase()) > -1);
+         let allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : defaults.extensions.all
+         return (allowedTypes.indexOf(file.split('.').pop().toLowerCase()) > -1)
       }
-   };
+   }
 
    export const is = {
       array: (check) => {
-         return (typeof check === 'object' && check instanceof Array);
+         return (typeof check === 'object' && check instanceof Array)
       },
       boolean: (check) => {
-         return (typeof check === 'boolean');
+         return (typeof check === 'boolean')
       },
       browser: () => {
          /*
@@ -226,88 +181,86 @@ module Rocket {
          Lifted this directly from the Require.js check.
          https://github.com/requirejs/requirejs/blob/master/require.js
          */
-         return !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document);
+         return !!(typeof window !== 'undefined' && typeof navigator !== 'undefined' && window.document)
       },
       color: (color) => {
-         return is.colour(color);
+         return is.colour(color)
       },
       colour: (colour) => {
-         return defaults.regexp.colour.test(colour);
+         return defaults.regexp.colour.test(colour)
       },
       date: (date, thisRegExp: any) => {
-         let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.date;
-         return regExp.test(date);
+         let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.date
+         return regExp.test(date)
       },
       element: (element) => {
-         return (Rocket.exists(element)) ? (element.nodeType && element.nodeType === 1) : false;
+         return (Rocket.exists(element)) ? (element.nodeType && element.nodeType === 1) : false
       },
       email: (email, thisRegExp: any) => {
-         let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.email;
-         return regExp.test(email);
+         let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.email
+         return regExp.test(email)
       },
       function: (check) => {
-         return (typeof check === 'function');
+         return (typeof check === 'function')
       },
       image: (file, arAllowedTypes) => {
-         let allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : defaults.extensions.images;
-         return (allowedTypes.indexOf(file.split('.').pop().toLowerCase()) > -1);
+         let allowedTypes = (is.array(arAllowedTypes)) ? arAllowedTypes : defaults.extensions.images
+         return (allowedTypes.indexOf(file.split('.').pop().toLowerCase()) > -1)
       },
       integer: (check) => {
-         return (is.number(check) && (parseFloat(check) === parseInt(check)));
+         return (is.number(check) && (parseFloat(check) === parseInt(check)))
       },
       json: (json) => {
          if (typeof json !== 'object') {
             try {
-               JSON.parse(json);
+               JSON.parse(json)
             } catch (e) {
-               return false;
+               return false
             }
          }
-         return true;
+
+         return true
       },
       number: (check) => {
-         return (typeof check === 'number' && !isNaN(check));
+         return (typeof check === 'number' && !isNaN(check))
       },
       object: (check) => {
-         return (typeof check === 'object');
+         return (typeof check === 'object')
       },
       password: (check, thisRegExp: any) => {
-         let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.password;
-         return regExp.test(check);
+         let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.password
+         return regExp.test(check)
       },
       string: (check) => {
-         return (typeof check === 'string');
+         return (typeof check === 'string')
       },
       time: (check, thisRegExp: any) => {
-         let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.time;
-         return regExp.test(check);
+         let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.time
+         return regExp.test(check)
       },
       touch: () => {
-         // Catch
-         if (!is.browser() || !window || !window.console) {
-            return false;
-         }
-         // Continue
-         return 'ontouchstart' in window || 'onmsgesturechange' in window;
+         if (!is.browser() || !window || !window.console) return false
+         return 'ontouchstart' in window || 'onmsgesturechange' in window
       },
       url: (url, thisRegExp: any) => {
-         let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.url;
-         return regExp.test(url);
+         let regExp = (thisRegExp instanceof RegExp) ? thisRegExp : defaults.regexp.url
+         return regExp.test(url)
       }
-   };
+   }
 
    // Classes
    export const classes = {
       add: (elements, classNames) => {
-         const elms = (is.string(elements)) ? dom.select(elements) : elements;
-         classes.executeClasses(elms, classNames, false);
+         const elms = (is.string(elements)) ? dom.select(elements) : elements
+         classes.executeClasses(elms, classNames, false)
       },
       clear: (element) => {
-         const elms = (is.string(element)) ? dom.select(element) : [element];
+         const elms = (is.string(element)) ? dom.select(element) : [element]
+
          if (elms.length > 0) {
             for (let elm of elms) {
                if (exists(elm)) {
-                  elm.removeAttribute('class');
+                  elm.removeAttribute('class')
                }
             }
          }
@@ -318,24 +271,20 @@ module Rocket {
             .concat(classes)
             .filter((val, i, ar) => (ar.indexOf(val) === i) && (val !== ''))
             .toString()
-            .replace(/,/g, ' ');
+            .replace(/,/g, ' ')
       },
       executeClasses: (elements, classesAdd, classesRemove) => {
-         // Catch
-         if (!exists(elements)) { return false; }
+         if (!exists(elements)) return false
 
-         // Continue
          // Create elements array
-         let arElements = array.make(elements);
-
-         // Catch
-         if (arElements.length < 1) { return false; }
+         let arElements = array.make(elements)
+         if (arElements.length < 1) return false
 
          // Create classes array
-         let arClassesAdd = array.make(classesAdd, true);
-         let arClassesRemove = array.make(classesRemove, true);
-         let actionAdd = (arClassesAdd.length > 0) ? true : false;
-         let actionRemove = (arClassesRemove.length > 0) ? true : false;
+         let arClassesAdd = array.make(classesAdd, true)
+         let arClassesRemove = array.make(classesRemove, true)
+         let actionAdd = (arClassesAdd.length > 0) ? true : false
+         let actionRemove = (arClassesRemove.length > 0) ? true : false
 
          // Execute
          for (let i = 0, len = arElements.length; i < len; i++) {
@@ -352,50 +301,42 @@ module Rocket {
             .split(' ')
             .filter(val => classes.indexOf(val) < 0)
             .toString()
-            .replace(/,/g, ' ');
+            .replace(/,/g, ' ')
 
-         if (element.className === '') {
-            Rocket.classes.clear(element);
-         }
+         if (element.className === '') Rocket.classes.clear(element)
       },
       remove: (elements, classNames) => {
-         const elms = (is.string(elements)) ? dom.select(elements) : elements;
-         classes.executeClasses(elms, false, classNames);
+         const elms = (is.string(elements)) ? dom.select(elements) : elements
+         classes.executeClasses(elms, false, classNames)
       },
       replace: (elements, classesRemove, classesAdd) => {
-         const elms = (is.string(elements)) ? dom.select(elements) : elements;
-         classes.executeClasses(elms, classesAdd, classesRemove);
+         const elms = (is.string(elements)) ? dom.select(elements) : elements
+         classes.executeClasses(elms, classesAdd, classesRemove)
       },
       toggle: (elements, className) => {
-         const elms = (is.string(elements)) ? dom.select(elements) : elements;
-
-         // Catch
-         if (!exists(elms) || typeof className !== 'string' || has.spaces(className)) {
-            return false;
-         }
+         const elms = (is.string(elements)) ? dom.select(elements) : elements
+         if (!exists(elms) || typeof className !== 'string' || has.spaces(className)) return false
 
          // Create elements array
-         let arElements = [];
+         let arElements = []
          if (is.element(elms)) {
-            arElements.push(elms);
+            arElements.push(elms)
          } else if (is.array(elms)) {
-            arElements = elms;
+            arElements = elms
          }
 
-         // Catch
-         if (arElements.length < 1) {
-            return false;
-         }
+         if (arElements.length < 1) return false
+
          // Execute
          for (let i = 0, len = arElements.length; i < len; i++) {
             if (!has.class(arElements[i], className)) {
-               classes.executeAdd(arElements[i], [className]);
+               classes.executeAdd(arElements[i], [className])
             } else {
-               classes.executeRemove(arElements[i], [className]);
+               classes.executeRemove(arElements[i], [className])
             }
          }
       }
-   };
+   }
 
    // Clone
    /*
@@ -403,157 +344,156 @@ module Rocket {
    INCOMPLETE! Needs a ton more work and really is not a viable method right now.
    */
    export const clone = (original: any) => {
-      return helper.parse.json(JSON.stringify(original));
-   };
+      return helper.parse.json(JSON.stringify(original))
+   }
 
    // Dates
    export const date = {
       basic: (thisDate, thisWithTime: boolean) => {
-         const transDate = (thisDate) ? date.transform(thisDate) : new Date();
-         // Catch
-         if (!transDate) {
-            return false;
-         }
-         // Continue
-         const withTime = (is.boolean(thisWithTime)) ? thisWithTime : false;
-         let returnValue = '';
-         const day = date.day(transDate.getDate());
-         const month = date.month(transDate.getMonth() + 1);
-         const year = date.year(transDate.getFullYear());
+         const transDate = (thisDate) ? date.transform(thisDate) : new Date()
+         if (!transDate) return false
 
-         returnValue += day + ' ' + month + ' ' + year;
+         // Continue
+         const withTime = (is.boolean(thisWithTime)) ? thisWithTime : false
+         let returnValue = ''
+         const day = date.day(transDate.getDate())
+         const month = date.month(transDate.getMonth() + 1)
+         const year = date.year(transDate.getFullYear())
+
+         returnValue += day + ' ' + month + ' ' + year
          if (withTime) {
-            returnValue += ', ' + time.basic(thisDate);
+            returnValue += ', ' + time.basic(thisDate)
          }
-         return returnValue;
+
+         return returnValue
       },
       day: (thisDayVal, thisType?: string) => {
-         let thisDay;
-         const type = (is.string(thisType)) ? thisType : false;
+         let thisDay
+         const type = (is.string(thisType)) ? thisType : false
 
          // Get month
          if (is.number(thisDayVal)) {
-            thisDay = thisDayVal;
+            thisDay = thisDayVal
          } else if (is.string(thisDayVal)) {
-            const transDayVal = date.transform(thisDayVal);
-            thisDay = (transDayVal) ? transDayVal.getDate() : thisDayVal;
+            const transDayVal = date.transform(thisDayVal)
+            thisDay = (transDayVal) ? transDayVal.getDate() : thisDayVal
          } else {
-            thisDay = new Date().getDate();
+            thisDay = new Date().getDate()
          }
 
          // Validate
          if (!thisDay) {
-            return false;
+            return false
          } else {
-            thisDay = thisDay.toString();
+            thisDay = thisDay.toString()
          }
 
          // Return
          if (type === 'long') {
-            return (thisDay.length === 1) ? '0' + thisDay : thisDay;
+            return (thisDay.length === 1) ? '0' + thisDay : thisDay
          } else {
-            return parseInt(thisDay);
+            return parseInt(thisDay)
          }
       },
       safe: (thisDate, thisWithTime?: boolean) => {
-         const newData = (thisDate) ? date.transform(thisDate) : new Date();
-         // Catch
-         if (!newData) {
-            return false;
-         }
+         const newData = (thisDate) ? date.transform(thisDate) : new Date()
+         if (!newData) return false
+
          // Continue
-         const withTime = (is.boolean(thisWithTime)) ? thisWithTime : false;
-         var returnValue = newData.getFullYear() + '-' + ('0' + (newData.getMonth() + 1)).slice(-2) + '-' + ('0' + newData.getDate()).slice(-2);
+         const withTime = (is.boolean(thisWithTime)) ? thisWithTime : false
+         var returnValue = newData.getFullYear() + '-' + ('0' + (newData.getMonth() + 1)).slice(-2) + '-' + ('0' + newData.getDate()).slice(-2)
          if (withTime) {
-            returnValue += ' ' + time.full(thisDate);
+            returnValue += ' ' + time.full(thisDate)
          }
-         return returnValue;
+
+         return returnValue
       },
       month: (thisMonthVal, thisType?: string) => {
-         let thisMonth;
-         const type = (is.string(thisType)) ? thisType : false;
+         let thisMonth
+         const type = (is.string(thisType)) ? thisType : false
 
          // Get month
          if (is.number(thisMonthVal)) {
-            thisMonth = thisMonthVal;
+            thisMonth = thisMonthVal
          } else if (is.string(thisMonthVal)) {
-            const transMonthVal = date.transform(thisMonthVal);
-            thisMonth = (transMonthVal) ? transMonthVal.getMonth() + 1 : thisMonthVal;
+            const transMonthVal = date.transform(thisMonthVal)
+            thisMonth = (transMonthVal) ? transMonthVal.getMonth() + 1 : thisMonthVal
          } else {
-            thisMonth = new Date().getMonth() + 1;
+            thisMonth = new Date().getMonth() + 1
          }
 
          // Validate
          if (!thisMonth) {
-            return false;
+            return false
          } else {
-            thisMonth = thisMonth.toString();
+            thisMonth = thisMonth.toString()
          }
 
          // Return
          switch (type) {
             case 'long':
-               thisMonth = (thisMonth.length === 1) ? '0' + thisMonth : thisMonth;
+               thisMonth = (thisMonth.length === 1) ? '0' + thisMonth : thisMonth
 
-               for (let i = 0, len = rocketMonths.length; i < len; i++) {
-                  if (rocketMonths[i].number == thisMonth) {
-                     thisMonth = string.uppercase.first(rocketMonths[i].name);
-                     break;
+               for (let i = 0, len = _var.months.length; i < len; i++) {
+                  if (_var.months[i].number == thisMonth) {
+                     thisMonth = string.uppercase.first(_var.months[i].name)
+                     break
                   }
                }
-               break;
+               break
 
             case 'number':
-               thisMonth = parseInt(thisMonth);
-               break;
+               thisMonth = parseInt(thisMonth)
+               break
 
             default:
-               thisMonth = (thisMonth.length === 1) ? '0' + thisMonth : thisMonth;
+               thisMonth = (thisMonth.length === 1) ? '0' + thisMonth : thisMonth
 
-               for (let i = 0, len = rocketMonths.length; i < len; i++) {
-                  if (rocketMonths[i].number == thisMonth) {
-                     thisMonth = string.uppercase.first(rocketMonths[i].nameShort);
-                     break;
+               for (let i = 0, len = _var.months.length; i < len; i++) {
+                  if (_var.months[i].number == thisMonth) {
+                     thisMonth = string.uppercase.first(_var.months[i].nameShort)
+                     break
                   }
                }
          }
-         return thisMonth;
+
+         return thisMonth
       },
       toISO: (thisDate: any, thisFullDate?: any) => {
-         const fullDate = (typeof thisFullDate !== 'undefined') ? thisFullDate : true;
+         const fullDate = (typeof thisFullDate !== 'undefined') ? thisFullDate : true
 
          // Spaced dates
          if (thisDate.indexOf(' ') > -1) {
-            let year, month, day, time, returnDate;
-            let dateSplit = thisDate.split(' ');
+            let year, month, day, time, returnDate
+            let dateSplit = thisDate.split(' ')
 
             for (let i = 0, len = dateSplit.length; i < len; i++) {
                if (is.integer(dateSplit[i])) {
                   if (dateSplit[i].length === 2) {
-                     day = dateSplit[i];
+                     day = dateSplit[i]
                   } else if (dateSplit[i].length === 4) {
-                     year = dateSplit[i];
+                     year = dateSplit[i]
                   }
                } else if (dateSplit[i].indexOf(':') === 2 && fullDate === true) {
-                  time = dateSplit[i];
+                  time = dateSplit[i]
                } else {
-                  let lowerDateSplit = string.lowercase.all(dateSplit[i]);
+                  let lowerDateSplit = string.lowercase.all(dateSplit[i])
 
-                  for (let i2 = 0, len2 = rocketMonths.length; i2 < len2; i2++) {
-                     if (lowerDateSplit === rocketMonths[i2].name || lowerDateSplit === rocketMonths[i2].nameShort) {
-                        month = rocketMonths[i2].number;
-                        break;
+                  for (let i2 = 0, len2 = _var.months.length; i2 < len2; i2++) {
+                     if (lowerDateSplit === _var.months[i2].name || lowerDateSplit === _var.months[i2].nameShort) {
+                        month = _var.months[i2].number
+                        break
                      }
                   }
                }
             }
 
-            returnDate = year + '-' + month + '-' + day;
+            returnDate = year + '-' + month + '-' + day
             if (fullDate === true && time !== undefined) {
-               returnDate += 'T' + time;
+               returnDate += 'T' + time
             }
 
-            return returnDate;
+            return returnDate
          }
       },
       transform: (thisDate: any) => {
@@ -563,148 +503,135 @@ module Rocket {
          formats that are known to be correct.
          */
          function fixDateOrder (fixDate: any, seperator: string) {
-            return fixDate.split(seperator).reverse().join(seperator);
+            return fixDate.split(seperator).reverse().join(seperator)
          }
 
          // Execute
          if (is.string(thisDate)) {
-            let dateIndexDash = thisDate.indexOf('-');
-            let dateIndexDot = thisDate.indexOf('.');
-            let dateIndexSlash = thisDate.indexOf('/');
+            let dateIndexDash = thisDate.indexOf('-')
+            let dateIndexDot = thisDate.indexOf('.')
+            let dateIndexSlash = thisDate.indexOf('/')
 
             if (dateIndexDash == 2) {
-               thisDate = fixDateOrder(thisDate, '-');
-            }
-            else if (dateIndexDot == 2) {
-               thisDate = fixDateOrder(thisDate, '.');
-            }
-            else if (dateIndexSlash == 2) {
-               thisDate = fixDateOrder(thisDate, '/');
+               thisDate = fixDateOrder(thisDate, '-')
+            } else if (dateIndexDot == 2) {
+               thisDate = fixDateOrder(thisDate, '.')
+            } else if (dateIndexSlash == 2) {
+               thisDate = fixDateOrder(thisDate, '/')
             }
          }
 
-         // Make the date
-         let newDate = (typeof thisDate !== 'undefined') ? new Date(thisDate) : new Date();
+         let newDate = (typeof thisDate !== 'undefined') ? new Date(thisDate) : new Date() // Make the date
+         if (newDate.toString() == 'Invalid Date') return false // Fail test
 
-         // Fail test
-         if (newDate.toString() == 'Invalid Date') {
-            return false;
-         }
          return newDate;
       },
       year: (thisYearVal: any, thisType?: string) => {
-         let thisYear: any;
-         const type = (is.string(thisType)) ? thisType : false;
+         let thisYear: any
+         const type = (is.string(thisType)) ? thisType : false
 
          // Get month
          if (is.number(thisYearVal)) {
-            thisYear = thisYearVal;
+            thisYear = thisYearVal
          } else if (is.string(thisYearVal)) {
-            const transYearVal = date.transform(thisYearVal);
-            thisYear = (transYearVal) ? transYearVal.getFullYear() : thisYearVal;
+            const transYearVal = date.transform(thisYearVal)
+            thisYear = (transYearVal) ? transYearVal.getFullYear() : thisYearVal
          } else {
-            thisYear = new Date().getFullYear();
+            thisYear = new Date().getFullYear()
          }
 
          // Validate
          if (!thisYear) {
-            return false;
+            return false
          } else {
-            thisYear = thisYear.toString();
+            thisYear = thisYear.toString()
          }
 
          // Return
          switch (type) {
             case 'long':
                if (thisYear.length < 4) {
-                  let newDate = new Date().getFullYear().toString().substring(0, 4 - thisYear.length).toString();
-                  thisYear = parseInt(newDate + thisYear);
+                  let newDate = new Date().getFullYear().toString().substring(0, 4 - thisYear.length).toString()
+                  thisYear = parseInt(newDate + thisYear)
                } else {
-                  thisYear = parseInt(thisYear);
+                  thisYear = parseInt(thisYear)
                }
-               break;
+               break
 
             case 'short':
                if (thisYear.length === 1) {
-                  let newDate = new Date().getFullYear().toString().substr(2, 1);
-                  thisYear = newDate + thisYear;
+                  let newDate = new Date().getFullYear().toString().substr(2, 1)
+                  thisYear = newDate + thisYear
                } else {
-                  thisYear = thisYear.substr(thisYear.length - 2, 2);
+                  thisYear = thisYear.substr(thisYear.length - 2, 2)
                }
-               break;
+               break
          }
+
          return parseInt(thisYear);
       }
-   };
+   }
 
    // Development
    export const log = (text: string, thisError?: boolean) => {
-      if (is.browser() && (!window || !window.console)) { return; }
+      if (is.browser() && (!window || !window.console)) return
 
       // Continue
       if (defaults.log) {
-         let error = (is.boolean(thisError)) ? thisError : false;
+         let error = (is.boolean(thisError)) ? thisError : false
 
          if (error && is.browser()) {
-            throw new Error(text);
+            throw new Error(text)
          } else {
-            console.log(text);
+            console.log(text)
          }
       }
-   };
+   }
 
    export const error = (text: string) => {
-      Rocket.log(text, true);
-   };
+      Rocket.log(text, true)
+   }
 
    // Dimensions
    export const dimensions: any = {
       getWidthOrHeight: (elm: any, type: string) => {
-         // Catch
-         if (!is.browser() || !window || !window.console) {
-            return false;
-         }
-         if (!is.element(elm) && !is.string(elm) && elm !== window) {
-            return false;
-         }
-         if (is.string(type) && (type !== 'width' && type !== 'height')) {
-            return false;
-         }
+         if (!is.browser() || !window || !window.console) return false
+         if (!is.element(elm) && !is.string(elm) && elm !== window) return false
+         if (is.string(type) && (type !== 'width' && type !== 'height')) return false
+
          // Continue
-         let retValue;
+         let retValue
 
          // Check for window
          if (elm === window) {
-            type = string.uppercase.first(type);
-            retValue = window['inner' + type] || document.documentElement['client' + type] || document.body['client' + type];
+            type = string.uppercase.first(type)
+            retValue = window['inner' + type] || document.documentElement['client' + type] || document.body['client' + type]
          } else {
             // Check if string selector
             if (is.string(elm)) {
-               elm = dom.select(elm);
-               // Catch
-               if (elm.length < 1) {
-                  return false;
-               }
+               elm = dom.select(elm)
+               if (elm.length < 1) return false
+
                // Continue
-               elm = elm[0];
+               elm = elm[0]
             }
 
             // Continue
             if (elm.getClientRects().length) {
-               retValue = elm.getBoundingClientRect()[type];
+               retValue = elm.getBoundingClientRect()[type]
             }
             if (retValue < 1 || retValue == null ) {
-               retValue = elm.style[type];
+               retValue = elm.style[type]
             }
          }
 
-         return parseFloat(retValue) || 0;
+         return parseFloat(retValue) || 0
       },
       height: (elm: any) => {
-         return dimensions.getWidthOrHeight(elm, 'height');
+         return dimensions.getWidthOrHeight(elm, 'height')
       },
       width: (elm: any) => {
-         return dimensions.getWidthOrHeight(elm, 'width');
+         return dimensions.getWidthOrHeight(elm, 'width')
       }
    }
 
@@ -719,54 +646,53 @@ module Rocket {
          if (is.string(selector)) {
             switch (get.selector.type(selector)) {
                case 'gebi':
-                  return document.getElementById(selector.substring(1));
+                  return document.getElementById(selector.substring(1))
 
                default:
-                  return document.querySelector(selector);
+                  return document.querySelector(selector)
             }
          }
          // Check if already an element. This really shouldn't happen
          else if (Rocket.is.element(selector)) {
-            return selector;
+            return selector
          }
          // Try and catch HTMLCollection and NodeList / window / document
          else if (is.object(selector)) {
             if (selector === window || selector === document) {
-               return selector;
+               return selector
             } else {
-               selector = Array.prototype.slice.call(selector);
+               selector = Array.prototype.slice.call(selector)
 
                if (is.array(selector) && selector.length > 0) {
-                  return selector[0];
+                  return selector[0]
                }
             }
          }
          // Fallback
          else {
-            return null;
+            return null
          }
       },
       head: (typeof document !== 'undefined') ? document.getElementsByTagName('head')[0] : false,
       html: (typeof document !== 'undefined') ? document.getElementsByTagName('html')[0] : false,
       ratio: (selector: any, multiplier: number) => {
-         let elements = document.querySelectorAll(selector);
-         if (typeof (multiplier) === 'undefined') {
-            multiplier = 1;
-         }
+         let elements = document.querySelectorAll(selector)
+         if (typeof (multiplier) === 'undefined') { multiplier = 1 }
+
          for (let i = elements.length - 1; i >= 0; i--) {
-            elements[i].style.height = Math.floor(elements[i].offsetWidth * multiplier) + 'px';
+            elements[i].style.height = Math.floor(elements[i].offsetWidth * multiplier) + 'px'
          }
       },
       remove: (selElm) => {
          if (exists(selElm)) {
             if (is.element(selElm)) {
-               selElm.parentNode.removeChild(selElm);
+               selElm.parentNode.removeChild(selElm)
             } else if (is.string(selElm)) {
-               let elements = dom.select(selElm);
+               let elements = dom.select(selElm)
 
                for (let i = 0, len = elements.length; i < len; i++) {
                   if (is.element(elements[i])) {
-                     elements[i].parentNode.removeChild(elements[i]);
+                     elements[i].parentNode.removeChild(elements[i])
                   }
                }
             }
@@ -781,26 +707,26 @@ module Rocket {
          Even an ID selector will return an array as the user has requested
          this particular method type. It's important to maintain consistency.
          */
-         let returnElms = [];
+         let returnElms = []
 
          // String selectors
          if (Rocket.is.string(selectors)) {
-            returnElms = returnElms.concat(Rocket.dom.selectByString(selectors));
+            returnElms = returnElms.concat(Rocket.dom.selectByString(selectors))
          }
          // Return an element
          else if (Rocket.is.element(selectors)) {
-            returnElms.push(selectors);
+            returnElms.push(selectors)
          }
          // If an array (can be mixed)
          else if (Rocket.is.array(selectors)) {
-            var stringSelectors = '';
+            var stringSelectors = ''
 
             for (let selector of selectors) {
                if (Rocket.is.string(selector)) {
-                  stringSelectors += `${selector},`;
+                  stringSelectors += `${selector},`
                }
                else if (Rocket.is.element(selector)) {
-                  returnElms.push(selector);
+                  returnElms.push(selector)
                }
             }
 
@@ -999,7 +925,7 @@ module Rocket {
          }
          // Continue
          let rocketOverlay = document.createElement('div');
-         id.add(rocketOverlay, rocketPrefix.basic + 'overlay');
+         id.add(rocketOverlay, _var.prefix.basic + 'overlay');
 
          // Styles
          rocketOverlay.setAttribute('style', '-webkit-transition: all .4s ease-out 0s;-moz-transition: all .4s ease-out 0s;-ms-transition: all .4s ease-out 0s;transition: all .4s ease-out 0s;');
@@ -1015,7 +941,7 @@ module Rocket {
          rocketOverlay.style.opacity = '0';
          rocketOverlay.style.filter = 'alpha(opacity=0)';
 
-         if (!exists(document.getElementById(rocketPrefix.basic + 'overlay'))) {
+         if (!exists(document.getElementById(_var.prefix.basic + 'overlay'))) {
             dom.body.appendChild(rocketOverlay);
          }
       },
@@ -1242,14 +1168,14 @@ module Rocket {
       add: (element, state) => {
          if (!exists(element)) { return false; }
 
-         let newRocketStates = rocketState.list.slice().map(newState => rocketPrefix.state + newState);
-         let stateClass = newRocketStates.splice(newRocketStates.indexOf(rocketPrefix.state + state), 1);
+         let newRocketStates = _var.state.list.slice().map(newState => _var.prefix.state + newState);
+         let stateClass = newRocketStates.splice(newRocketStates.indexOf(_var.prefix.state + state), 1);
          classes.replace(element, newRocketStates, stateClass);
       },
       clear: (element) => {
          if (!exists(element)) { return false; }
 
-         let newRocketStates = rocketState.list.slice().map(newState => rocketPrefix.state + newState);
+         let newRocketStates = _var.state.list.slice().map(newState => _var.prefix.state + newState);
          classes.remove(element, newRocketStates);
       },
       toggle: (element, state, thisClear) => {
@@ -1257,10 +1183,10 @@ module Rocket {
             return false;
          }
 
-         if (rocketState.list.indexOf(state) > -1) {
-            let altState = rocketState.alts[state] || false;
+         if (_var.state.list.indexOf(state) > -1) {
+            let altState = _var.state.alts[state] || false;
             let clear = (typeof thisClear === 'boolean') ? thisClear : false;
-            let stateClass = rocketPrefix.state + state;
+            let stateClass = _var.prefix.state + state;
             if (has.class(element, stateClass)) {
                if (clear || altState === false) {
                   Rocket.state.clear(element);
