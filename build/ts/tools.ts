@@ -732,50 +732,50 @@ module Rocket {
 
             // Check if there is any string selectors to use
             if (stringSelectors.length > 0) {
-               returnElms = returnElms.concat(Rocket.dom.selectByString(stringSelectors));
+               returnElms = returnElms.concat(Rocket.dom.selectByString(stringSelectors))
             }
          }
          // Try and catch HTMLCollection and NodeList / window / document
          else if (is.object(selectors)) {
             if (selectors === window || selectors === document) {
-               returnElms = [selectors];
+               returnElms = [selectors]
             } else {
-               selectors = Array.prototype.slice.call(selectors);
+               selectors = Array.prototype.slice.call(selectors)
 
                if (is.array(selectors) && selectors.length > 0) {
-                  returnElms = selectors;
+                  returnElms = selectors
                }
             }
          } else if (selectors === window || selectors === document) {
-            returnElms = [selectors];
+            returnElms = [selectors]
          }
 
-         return array.clean(array.unique(returnElms));
+         return array.clean(array.unique(returnElms))
       },
       selectByString: (selectors: string) => {
-         let returnElms = [];
-         let selectorSplit = selectors.split(',').map(string.trim).filter(selector => selector.length > 0);
+         let returnElms = []
+         let selectorSplit = selectors.split(',').map(string.trim).filter(selector => selector.length > 0)
 
          if (selectorSplit.length > 0) {
             // Loop through all the selectors
             for (let i = 0, len = selectorSplit.length; i < len; i++) {
                switch (get.selector.type(selectorSplit[i])) {
                   case 'gebi':
-                     returnElms = returnElms.concat(document.getElementById(selectorSplit[i].substring(1)));
+                     returnElms = returnElms.concat(document.getElementById(selectorSplit[i].substring(1)))
                      break;
 
                   case 'gebtn':
-                     returnElms = returnElms.concat(Array.prototype.slice.call(document.getElementsByTagName(selectorSplit[i])));
+                     returnElms = returnElms.concat(Array.prototype.slice.call(document.getElementsByTagName(selectorSplit[i])))
                      break;
 
                   case 'qsa':
-                     returnElms = returnElms.concat(Array.prototype.slice.call(document.querySelectorAll(selectorSplit[i])));
+                     returnElms = returnElms.concat(Array.prototype.slice.call(document.querySelectorAll(selectorSplit[i])))
                      break;
                }
             }
          }
 
-         return returnElms;
+         return returnElms
       },
       title: (typeof document !== 'undefined') ? document.getElementsByTagName('title')[0] : false,
       window: (typeof window !== 'undefined') ? window : false,
@@ -784,66 +784,63 @@ module Rocket {
    // Events
    export const event = {
       add: (elms, type = 'click', eventHandle) => {
-         Rocket.event.apply(elms, type, eventHandle, 'add');
+         Rocket.event.apply(elms, type, eventHandle, 'add')
       },
       apply: (elms, type = 'click', eventHandle, eventType) => {
-         var domElms = Rocket.dom.select(elms);
-
-         // Catch
-         if (domElms.length < 1) { return; }
+         var domElms = Rocket.dom.select(elms)
+         if (domElms.length < 1) return
 
          // Continue
          for (let elm of domElms) {
-            // Check event type
             switch (eventType) {
                case 'add':
                   if (elm.addEventListener) {
-                     elm.addEventListener(type, eventHandle, false);
+                     elm.addEventListener(type, eventHandle, false)
                   } else if (elm.attachEvent) {
-                     elm.attachEvent('on' + type, eventHandle);
+                     elm.attachEvent('on' + type, eventHandle)
                   } else {
-                     elm['on' + type] = eventHandle;
+                     elm['on' + type] = eventHandle
                   }
-                  break;
+                  break
 
                case 'remove':
                   if (elm.removeEventListener) {
-                     elm.removeEventListener(type, eventHandle, false);
+                     elm.removeEventListener(type, eventHandle, false)
                   } else if (elm.detachEvent) {
-                     elm.detachEvent('on' + type, eventHandle);
+                     elm.detachEvent('on' + type, eventHandle)
                   } else {
-                     elm['on' + type] = eventHandle;
+                     elm['on' + type] = eventHandle
                   }
-                  break;
+                  break
             }
          }
       },
       remove: (elms, type = 'click', eventHandle) => {
-         Rocket.event.apply(elms, type, eventHandle, 'remove');
+         Rocket.event.apply(elms, type, eventHandle, 'remove')
       }
    };
 
    // Gets
    export const get = {
       extension: (file) => {
-         return file.split('.').pop().toLowerCase();
+         return file.split('.').pop().toLowerCase()
       },
       index: (node) => {
-         return [].indexOf.call(node.parentNode.children, node);
+         return [].indexOf.call(node.parentNode.children, node)
       },
       selector: {
          type: (selector) => {
-            let selectType: any = false;
+            let selectType: any = false
 
             if (selector.indexOf('.') > -1 || has.spaces(selector) || defaults.regexp.selector.attribute.test(selector)) {
-               selectType = 'qsa';
+               selectType = 'qsa'
             } else if (selector.indexOf('#') > -1) {
-               selectType = 'gebi';
+               selectType = 'gebi'
             } else if (defaults.regexp.selector.tag.test(selector)) {
-               selectType = 'gebtn';
+               selectType = 'gebtn'
             }
 
-            return selectType;
+            return selectType
          }
       }
    };
@@ -852,21 +849,19 @@ module Rocket {
    export const helper = {
       parse: {
          json: (json) => {
-            if (is.json(json)) {
-               return JSON.parse(json);
-            }
-            return json;
+            if (is.json(json)) return JSON.parse(json)
+            return json
          }
       },
       setDefault: (setValue, defaultValue) => {
          if (typeof setValue == 'undefined' && typeof defaultValue == 'undefined') {
-            return false;
+            return false
          } else if (typeof setValue != 'undefined' && typeof defaultValue == 'undefined') {
-            return setValue;
+            return setValue
          } else if (typeof setValue === typeof defaultValue) {
-            return setValue;
+            return setValue
          } else {
-            return defaultValue;
+            return defaultValue
          }
       }
    };
@@ -874,31 +869,27 @@ module Rocket {
    // ID's
    export const id = {
       add: (element, id) => {
-         if (exists(element)) {
-            element.setAttribute('id', id);
-         }
+         if (exists(element)) { element.setAttribute('id', id) }
       },
       remove: (element) => {
-         if (exists(element)) {
-            element.removeAttribute('id');
-         }
+         if (exists(element)) { element.removeAttribute('id') }
       }
    };
 
    // Inputs
    export const input = {
       disable: (selector) => {
-         const elements = dom.select(selector);
+         const elements = dom.select(selector)
 
          for (let i = 0, len = elements.length; i < len; i++) {
-            elements[i].disabled = true;
+            elements[i].disabled = true
          }
       },
       enable: (selector) => {
-         const elements = dom.select(selector);
+         const elements = dom.select(selector)
 
          for (let i = 0, len = elements.length; i < len; i++) {
-            elements[i].disabled = false;
+            elements[i].disabled = false
          }
       }
    };
@@ -906,106 +897,96 @@ module Rocket {
    // Milliseconds
    export const milliseconds = {
       hours: (hours: number) => {
-         return hours * 60 * 60 * 1000;
+         return hours * 60 * 60 * 1000
       },
       minutes: (minutes: number) => {
-         return minutes * 60 * 1000;
+         return minutes * 60 * 1000
       },
       seconds: (seconds: number) => {
-         return seconds * 1000;
+         return seconds * 1000
       }
    };
 
    // Overlay
    export const overlay = {
       add: () => {
-         // Catch
-         if (!is.browser() || !window || !window.console) {
-            return false;
-         }
+         if (!is.browser() || !window || !window.console) return false
+
          // Continue
-         let rocketOverlay = document.createElement('div');
-         id.add(rocketOverlay, _var.prefix.basic + 'overlay');
+         let rocketOverlay = document.createElement('div')
+         id.add(rocketOverlay, _var.prefix.basic + 'overlay')
 
          // Styles
-         rocketOverlay.setAttribute('style', '-webkit-transition: all .4s ease-out 0s;-moz-transition: all .4s ease-out 0s;-ms-transition: all .4s ease-out 0s;transition: all .4s ease-out 0s;');
-         rocketOverlay.style.display = 'block';
-         rocketOverlay.style.position = 'fixed';
-         rocketOverlay.style.top = '0';
-         rocketOverlay.style.right = '0';
-         rocketOverlay.style.bottom = '0';
-         rocketOverlay.style.left = '0';
-         rocketOverlay.style.backgroundColor = defaults.overlay.backgroundColor;
-         rocketOverlay.style.zIndex = '1000';
-         rocketOverlay.style.visibility = 'hidden';
-         rocketOverlay.style.opacity = '0';
-         rocketOverlay.style.filter = 'alpha(opacity=0)';
+         rocketOverlay.setAttribute('style', '-webkit-transition: all .4s ease-out 0s;-moz-transition: all .4s ease-out 0s;-ms-transition: all .4s ease-out 0s;transition: all .4s ease-out 0s;')
+         rocketOverlay.style.display = 'block'
+         rocketOverlay.style.position = 'fixed'
+         rocketOverlay.style.top = '0'
+         rocketOverlay.style.right = '0'
+         rocketOverlay.style.bottom = '0'
+         rocketOverlay.style.left = '0'
+         rocketOverlay.style.backgroundColor = defaults.overlay.backgroundColor
+         rocketOverlay.style.zIndex = '1000'
+         rocketOverlay.style.visibility = 'hidden'
+         rocketOverlay.style.opacity = '0'
+         rocketOverlay.style.filter = 'alpha(opacity=0)'
 
          if (!exists(document.getElementById(_var.prefix.basic + 'overlay'))) {
-            dom.body.appendChild(rocketOverlay);
+            dom.body.appendChild(rocketOverlay)
          }
       },
       hide: () => {
-         // Catch
-         if (!is.browser() || !window || !window.console) {
-            return false;
-         }
+         if (!is.browser() || !window || !window.console) return false
+
          // Continue
-         let rocketOverlay = dom.select('#rocket-overlay')[0];
-         rocketOverlay.style.visibility = 'hidden';
-         rocketOverlay.style.opacity = '0';
-         rocketOverlay.style.filter = 'alpha(opacity=0)';
+         let rocketOverlay = dom.select('#rocket-overlay')[0]
+         rocketOverlay.style.visibility = 'hidden'
+         rocketOverlay.style.opacity = '0'
+         rocketOverlay.style.filter = 'alpha(opacity=0)'
       },
       show: () => {
-         // Catch
-         if (!is.browser() || !window || !window.console) {
-            return false;
-         }
+         if (!is.browser() || !window || !window.console) return false
+
          // Continue
-         let rocketOverlay = dom.select('#rocket-overlay')[0];
+         let rocketOverlay = dom.select('#rocket-overlay')[0]
 
          setTimeout(() => {
-            rocketOverlay.style.visibility = 'visible';
-            rocketOverlay.style.opacity = '1';
-            rocketOverlay.style.filter = 'alpha(opacity=100)';
-         }, 50);
+            rocketOverlay.style.visibility = 'visible'
+            rocketOverlay.style.opacity = '1'
+            rocketOverlay.style.filter = 'alpha(opacity=100)'
+         }, 50)
       }
    };
 
    // Random
    export let random = {
       integer: (thisMax: number, thisMin: number) => {
-         const max = (typeof thisMax === 'number') ? thisMax : 10;
-         const min = (typeof thisMin === 'number') ? thisMin : 1;
+         const max = (typeof thisMax === 'number') ? thisMax : 10
+         const min = (typeof thisMin === 'number') ? thisMin : 1
 
-         return Math.floor(Math.random() * (max - min + 1)) + min;
+         return Math.floor(Math.random() * (max - min + 1)) + min
       },
       string: (stringLength, thisTextOnly: boolean) => {
-         let rNum;
-         const textOnly = (is.boolean(thisTextOnly)) ? thisTextOnly : false;
-         let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
-         const len = (is.number(stringLength)) ? stringLength : 5;
-         let randomString = '';
+         let rNum
+         const textOnly = (is.boolean(thisTextOnly)) ? thisTextOnly : false
+         let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'
+         const len = (is.number(stringLength)) ? stringLength : 5
+         let randomString = ''
 
-         if (!textOnly) {
-            chars += '0123456789';
-         }
+         if (!textOnly) { chars += '0123456789' }
          for (let i = 0; i < len; i++) {
-            rNum = Math.floor(Math.random() * chars.length);
-            randomString += chars[rNum];
+            rNum = Math.floor(Math.random() * chars.length)
+            randomString += chars[rNum]
          }
 
-         return randomString;
+         return randomString
       }
    };
 
    // Request
    export let request = {
       run: (uOptions) => {
-         // Catch
-         if (!exists(uOptions) || !exists(uOptions.url)) {
-            return false;
-         }
+         if (!exists(uOptions) || !exists(uOptions.url)) return false
+
          // Continue
          let options = {
             url: uOptions.url,
@@ -1022,64 +1003,64 @@ module Rocket {
             timeout: (is.number(uOptions.timeout)) ? time.seconds(uOptions.timeout) : defaults.request.timeout,
             type: (exists(uOptions.type)) ? string.uppercase.all(uOptions.type) : defaults.request.type,
             withCredentials: (is.boolean(uOptions.withCredentials)) ? uOptions.withCredentials : defaults.request.withCredentials
-         };
-         let xhr: any = new XMLHttpRequest();
-         xhr.withCredentials = options.withCredentials;
+         }
+         let xhr: any = new XMLHttpRequest()
+         xhr.withCredentials = options.withCredentials
 
          if (options.timeout) {
-            xhr.timeout = options.timeout;
+            xhr.timeout = options.timeout
          }
 
          xhr.onreadystatechange = function () {
             switch (this.readyState) {
                case 1:
                   if (options.onStart) {
-                     options.onStart();
+                     options.onStart()
                   }
-                  break;
+                  break
 
                case 3:
                   if (options.onLoading) {
-                     options.onLoading();
+                     options.onLoading()
                   }
-                  break;
+                  break
 
                case 4:
                   if (options.onComplete) {
-                     options.onComplete(this);
+                     options.onComplete(this)
                   }
                   if (this.status >= 200 && this.status < 300) {
                      if (options.onSuccess) {
-                        options.onSuccess(helper.parse.json(this.responseText), this.status, xhr.getAllResponseHeaders());
+                        options.onSuccess(helper.parse.json(this.responseText), this.status, xhr.getAllResponseHeaders())
                      }
                   } else {
                      if (options.onError) {
-                        options.onError(helper.parse.json(this.responseText), this.status, xhr.getAllResponseHeaders());
+                        options.onError(helper.parse.json(this.responseText), this.status, xhr.getAllResponseHeaders())
                      }
                   }
-                  break;
+                  break
             }
          };
 
          // Make the request
          if (options.data && options.dataForce !== 'body' && (options.type === 'GET' || options.type === 'DELETE' || options.dataForce === 'queryString')) {
-            let queryString = '';
+            let queryString = ''
 
             for (let key in options.data) {
                if (options.data.hasOwnProperty(key)) {
-                  queryString += '&' + encodeURIComponent(key) + '=' + encodeURIComponent(options.data[key]);
+                  queryString += '&' + encodeURIComponent(key) + '=' + encodeURIComponent(options.data[key])
                }
             }
 
-            options.url = options.url + '?' + string.remove.first(queryString);
+            options.url = options.url + '?' + string.remove.first(queryString)
          }
-         xhr.open(options.type, options.url, options.async);
+         xhr.open(options.type, options.url, options.async)
 
          // Set headers
          if (options.headers) {
             for (let key in options.headers) {
                if (options.headers.hasOwnProperty(key)) {
-                  xhr.setRequestHeader(key, options.headers[key]);
+                  xhr.setRequestHeader(key, options.headers[key])
                }
             }
          }
@@ -1087,261 +1068,245 @@ module Rocket {
          // Send (with data if need be)
          if (options.data && options.dataForce !== 'queryString' && (options.type === 'POST' || options.type === 'PUT' || options.type === 'PATCH' || options.dataForce === 'body')) {
             if (is.json(options.data)) {
-               let send;
+               let send
+
                switch (string.lowercase.all(options.dataType)) {
                   case 'form':
-                     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                     let formQuery = '';
+                     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+                     let formQuery = ''
 
                      for (let key in options.data) {
                         if (options.data.hasOwnProperty(key)) {
-                           formQuery += '&' + key + '=' + options.data[key];
+                           formQuery += '&' + key + '=' + options.data[key]
                         }
                      }
 
-                     send = string.remove.first(formQuery);
-                     break;
+                     send = string.remove.first(formQuery)
+                     break
 
                   case 'formdata':
-                     send = new FormData();
+                     send = new FormData()
 
                      for (let key in options.data) {
                         if (options.data.hasOwnProperty(key)) {
-                           send.append(key, options.data[key]);
+                           send.append(key, options.data[key])
                         }
                      }
-                     break;
+                     break
 
                   default:
-                     xhr.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
-                     send = JSON.stringify(options.data);
-                     break;
+                     xhr.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
+                     send = JSON.stringify(options.data)
+                     break
                }
-               xhr.send(send);
+
+               xhr.send(send)
             } else {
-               xhr.send(options.data);
+               xhr.send(options.data)
             }
          } else {
-            xhr.send();
+            xhr.send()
          }
       },
       delete: (uOptions) => {
-         uOptions.type = 'DELETE';
-         request.run(uOptions);
+         uOptions.type = 'DELETE'
+         request.run(uOptions)
       },
       get: (uOptions) => {
-         uOptions.type = 'GET';
-         request.run(uOptions);
+         uOptions.type = 'GET'
+         request.run(uOptions)
       },
       patch: (uOptions) => {
-         uOptions.type = 'PATCH';
-         request.run(uOptions);
+         uOptions.type = 'PATCH'
+         request.run(uOptions)
       },
       post: (uOptions) => {
-         uOptions.type = 'POST';
-         request.run(uOptions);
+         uOptions.type = 'POST'
+         request.run(uOptions)
       },
       put: (uOptions) => {
-         uOptions.type = 'PUT';
-         request.run(uOptions);
+         uOptions.type = 'PUT'
+         request.run(uOptions)
       }
-   };
+   }
 
    // Setup
    function setup() {
-      // Catch
-      if (!is.browser() || !window || !window.console) {
-         return false;
-      }
-      // Continue
-      // No touch class
+      if (!is.browser() || !window || !window.console) return false
+
       if (!is.touch() && !has.class(dom.html, 'rocket-no-touch')) {
-         classes.add(dom.html, 'rocket-no-touch');
+         classes.add(dom.html, 'rocket-no-touch')
       }
-      // Add overlay
-      overlay.add();
+      overlay.add()
    }
-   setup();
+   setup()
 
    // State
    export let state = {
       add: (element, state) => {
-         if (!exists(element)) { return false; }
+         if (!exists(element)) return false
 
-         let newRocketStates = _var.state.list.slice().map(newState => _var.prefix.state + newState);
-         let stateClass = newRocketStates.splice(newRocketStates.indexOf(_var.prefix.state + state), 1);
-         classes.replace(element, newRocketStates, stateClass);
+         let newRocketStates = _var.state.list.slice().map(newState => _var.prefix.state + newState)
+         let stateClass = newRocketStates.splice(newRocketStates.indexOf(_var.prefix.state + state), 1)
+         classes.replace(element, newRocketStates, stateClass)
       },
       clear: (element) => {
-         if (!exists(element)) { return false; }
+         if (!exists(element)) return false
 
-         let newRocketStates = _var.state.list.slice().map(newState => _var.prefix.state + newState);
-         classes.remove(element, newRocketStates);
+         let newRocketStates = _var.state.list.slice().map(newState => _var.prefix.state + newState)
+         classes.remove(element, newRocketStates)
       },
       toggle: (element, state, thisClear) => {
-         if (!exists(element)) {
-            return false;
-         }
+         if (!exists(element)) return false
 
          if (_var.state.list.indexOf(state) > -1) {
-            let altState = _var.state.alts[state] || false;
-            let clear = (typeof thisClear === 'boolean') ? thisClear : false;
-            let stateClass = _var.prefix.state + state;
+            let altState = _var.state.alts[state] || false
+            let clear = (typeof thisClear === 'boolean') ? thisClear : false
+            let stateClass = _var.prefix.state + state
+
             if (has.class(element, stateClass)) {
                if (clear || altState === false) {
-                  Rocket.state.clear(element);
+                  Rocket.state.clear(element)
                } else {
-                  Rocket.state.add(element, altState);
+                  Rocket.state.add(element, altState)
                }
             } else {
-               Rocket.state.add(element, state);
+               Rocket.state.add(element, state)
             }
          }
       }
-   };
+   }
 
    // Storage
    export let storage = {
       add: (nameObj: any, value?: any) => {
-         // Catch
-         if (!exists(nameObj)) {
-            return false;
-         }
+         if (!exists(nameObj)) return false
+
          if (is.string(nameObj)) {
             if (!exists(value)) {
-               return false;
+               return false
             }
+         } else if (!is.object(nameObj) || is.array(nameObj)) {
+            return false
          }
-         else if (!is.object(nameObj) || is.array(nameObj)) {
-            return false;
-         }
+
          // Continue
-         let store = storage.getStorageEngine();
-         let storeAdd = {};
+         let store = storage.getStorageEngine()
+         let storeAdd = {}
 
          // Transform the string / apply the object
          if (is.string(nameObj)) {
-            storeAdd[nameObj] = value;
+            storeAdd[nameObj] = value
+         } else {
+            storeAdd = nameObj
          }
-         else {
-            storeAdd = nameObj;
-         }
+
          for (let key in storeAdd) {
             if (storeAdd.hasOwnProperty(key)) {
-               store[key] = storeAdd[key];
+               store[key] = storeAdd[key]
             }
          }
 
          // Store it
          switch (defaults.storage.type) {
             case 'local':
-               localStorage.setItem(defaults.storage.name, JSON.stringify(store));
-               break;
+               localStorage.setItem(defaults.storage.name, JSON.stringify(store))
+               break
 
             case 'session':
-               sessionStorage.setItem(defaults.storage.name, JSON.stringify(store));
-               break;
+               sessionStorage.setItem(defaults.storage.name, JSON.stringify(store))
+               break
          }
       },
       clear: (exclusion) => {
          function deleteStorage () {
-            localStorage.removeItem(defaults.storage.name);
-            sessionStorage.removeItem(defaults.storage.name);
-         };
+            localStorage.removeItem(defaults.storage.name)
+            sessionStorage.removeItem(defaults.storage.name)
+         }
 
          // Check for exclusion
          if (is.string(exclusion)) {
-            let exclValue = storage.get(exclusion);
+            let exclValue = storage.get(exclusion)
 
-            deleteStorage();
+            deleteStorage()
 
             if (exclValue !== false) {
-               storage.add(exclusion, exclValue);
+               storage.add(exclusion, exclValue)
             }
          } else if (is.array(exclusion)) {
-            let newStore = {};
-            let store = storage.getStorageEngine();
+            let newStore = {}
+            let store = storage.getStorageEngine()
 
             // Build new storage object
             for (let i = 0, len = exclusion.length; i < len; i++) {
-               let exclusionValue = store[exclusion[i]];
+               let exclusionValue = store[exclusion[i]]
                if (exists(exclusionValue)) {
-                  newStore[exclusion[i]] = exclusionValue;
+                  newStore[exclusion[i]] = exclusionValue
                }
             }
 
-            deleteStorage();
+            deleteStorage()
 
             // Create new storage
             if (Object.keys(newStore).length > 0) {
-               storage.add(newStore);
+               storage.add(newStore)
             }
          } else {
-            deleteStorage();
+            deleteStorage()
          }
       },
       get: (key) => {
-         if (!is.string(key)) {
-            return false;
-         }
-         let store = storage.getStorageEngine();
+         if (!is.string(key)) return false
 
-         // Catch
-         if (!exists(store[key])) {
-            return false;
-         }
-         // Continue
-         return store[key];
+         let store = storage.getStorageEngine()
+         if (!exists(store[key])) return false
+
+         return store[key]
       },
       getStorageEngine: () => {
-         // Catch
          if (!defaults.storage.name) {
-            log('ROCKET: You have not set the storage name. Provide a name for [Rocket].defaults.storage.name.', true);
-            return false;
+            log('ROCKET: You have not set the storage name. Provide a name for [Rocket].defaults.storage.name.', true)
+            return false
          }
+
          // Continue
-         let store;
+         let store
+
          switch (defaults.storage.type) {
             case 'local':
-               store = localStorage.getItem(defaults.storage.name);
-               break;
+               store = localStorage.getItem(defaults.storage.name)
+               break
 
             case 'session':
-               store = sessionStorage.getItem(defaults.storage.name);
-               break;
+               store = sessionStorage.getItem(defaults.storage.name)
+               break
          }
 
-
          if (store) {
-            return helper.parse.json(store);
+            return helper.parse.json(store)
          } else {
-            return {};
+            return {}
          }
       },
       remove: (key) => {
-         if (!is.string(key)) {
-            return false;
-         }
-         let store = storage.getStorageEngine();
+         if (!is.string(key)) return false
 
-         // Catch
-         if (!exists(store[key])) {
-            return false;
-         }
-         // Continue
-         delete store[key];
+         let store = storage.getStorageEngine()
+         if (!exists(store[key])) return false
+
+         delete store[key]
 
          switch (defaults.storage.type) {
             case 'local':
-               localStorage.setItem(defaults.storage.name, JSON.stringify(store));
-               break;
+               localStorage.setItem(defaults.storage.name, JSON.stringify(store))
+               break
 
             case 'session':
-               sessionStorage.setItem(defaults.storage.name, JSON.stringify(store));
-               break;
+               sessionStorage.setItem(defaults.storage.name, JSON.stringify(store))
+               break
          }
       }
-   };
+   }
 
    // Strings
    export const string = {
@@ -1350,158 +1315,137 @@ module Rocket {
          // http://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
          bytes: (bytes, decimals) => {
             if (typeof bytes !== 'number' || bytes == 0) {
-               return '0 Byte';
+               return '0 Byte'
             }
-            let k = 1000;
-            let dm = decimals + 1 || 3;
-            let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-            let i = Math.floor(Math.log(bytes) / Math.log(k));
+            let k = 1000
+            let dm = decimals + 1 || 3
+            let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+            let i = Math.floor(Math.log(bytes) / Math.log(k))
 
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]
          }
       },
       lowercase: {
          all: (string) => {
-            return (is.string(string)) ? string.toLowerCase() : string;
+            return (is.string(string)) ? string.toLowerCase() : string
          },
          first: (string) => {
-            return (is.string(string)) ? string.charAt(0).toLowerCase() + string.slice(1) : string;
+            return (is.string(string)) ? string.charAt(0).toLowerCase() + string.slice(1) : string
          },
          last: (string) => {
-            return (is.string(string)) ? string.slice(0, string.length - 1) + string.charAt(string.length - 1).toLowerCase() : string;
+            return (is.string(string)) ? string.slice(0, string.length - 1) + string.charAt(string.length - 1).toLowerCase() : string
          }
       },
       remove: {
          first: (string) => {
-            return (is.string(string)) ? string.substring(1) : string;
+            return (is.string(string)) ? string.substring(1) : string
          },
          firstAndLast: (string) => {
-            return (is.string(string)) ? string.substring(1, string.length - 1) : string;
+            return (is.string(string)) ? string.substring(1, string.length - 1) : string
          },
          last: (string) => {
-            return (is.string(string)) ? string.substring(0, string.length - 1) : string;
+            return (is.string(string)) ? string.substring(0, string.length - 1) : string
          },
          spaces: (string) => {
-            return (is.string(string)) ? string.replace(/ /g, '') : string;
+            return (is.string(string)) ? string.replace(/ /g, '') : string
          }
       },
       trim: (string) => {
-         return (is.string(string)) ? string.replace(/^ /, '').replace(/ +$/, '') : string;
+         return (is.string(string)) ? string.replace(/^ /, '').replace(/ +$/, '') : string
       },
       uppercase: {
          all: (string) => {
-            return (is.string(string)) ? string.toUpperCase() : string;
+            return (is.string(string)) ? string.toUpperCase() : string
          },
          first: (string) => {
-            return (is.string(string)) ? string.charAt(0).toUpperCase() + string.slice(1) : string;
+            return (is.string(string)) ? string.charAt(0).toUpperCase() + string.slice(1) : string
          },
          last: (string) => {
-            return (is.string(string)) ? string.slice(0, string.length - 1) + string.charAt(string.length - 1).toUpperCase() : string;
+            return (is.string(string)) ? string.slice(0, string.length - 1) + string.charAt(string.length - 1).toUpperCase() : string
          }
       }
-   };
+   }
 
    // Time
    export const time = {
       basic: (thisTime: any) => {
-         const transTime = date.transform(thisTime);
+         const transTime = date.transform(thisTime)
+         if (!transTime) return false
 
-         // Catch
-         if (!transTime) {
-            return false;
-         }
          // Continue
-         const hours = time.leadingZero(transTime.getHours());
-         const minutes = time.leadingZero(transTime.getMinutes());
+         const hours = time.leadingZero(transTime.getHours())
+         const minutes = time.leadingZero(transTime.getMinutes())
 
-         return hours + ':' + minutes;
+         return hours + ':' + minutes
       },
       exact: (thisTime: any) => {
-         const transTime = date.transform(thisTime);
+         const transTime = date.transform(thisTime)
+         if (!transTime) return false
 
-         // Catch
-         if (!transTime) {
-            return false;
-         }
          // Continue
-         const hours =  time.leadingZero(transTime.getHours());
-         const minutes =  time.leadingZero(transTime.getMinutes());
-         const seconds =  time.leadingZero(transTime.getSeconds());
-         const milliseconds =  time.leadingZero(transTime.getMilliseconds());
+         const hours =  time.leadingZero(transTime.getHours())
+         const minutes =  time.leadingZero(transTime.getMinutes())
+         const seconds =  time.leadingZero(transTime.getSeconds())
+         const milliseconds =  time.leadingZero(transTime.getMilliseconds())
 
-         return hours + ':' + minutes + ':' + seconds + ':' + milliseconds;
+         return hours + ':' + minutes + ':' + seconds + ':' + milliseconds
       },
       full: (thisTime: any) => {
-         const transTime = date.transform(thisTime);
-         // Catch
-         if (!transTime) {
-            return false;
-         }
-         // Continue
-         const hours = time.leadingZero(transTime.getHours());
-         const minutes = time.leadingZero(transTime.getMinutes());
-         const seconds = time.leadingZero(transTime.getSeconds());
+         const transTime = date.transform(thisTime)
+         if (!transTime) return false
 
-         return hours + ':' + minutes + ':' + seconds;
+         const hours = time.leadingZero(transTime.getHours())
+         const minutes = time.leadingZero(transTime.getMinutes())
+         const seconds = time.leadingZero(transTime.getSeconds())
+
+         return hours + ':' + minutes + ':' + seconds
       },
       hours: (thisTime: any) => {
-         const transTime = date.transform(thisTime);
+         const transTime = date.transform(thisTime)
+         if (!transTime) return false
 
-         // Catch
-         if (!transTime) {
-            return false;
-         }
-         // Continue
-         return time.leadingZero(transTime.getHours());
+         return time.leadingZero(transTime.getHours())
       },
       minutes: (thisTime: any) => {
-         const transTime = date.transform(thisTime);
+         const transTime = date.transform(thisTime)
+         if (!transTime) return false
 
-         // Catch
-         if (!transTime) {
-            return false;
-         }
-         // Continue
-         return time.leadingZero(transTime.getMinutes());
+         return time.leadingZero(transTime.getMinutes())
       },
       seconds: (thisTime: any) => {
-         const transTime = date.transform(thisTime);
+         const transTime = date.transform(thisTime)
+         if (!transTime) return false
 
-         // Catch
-         if (!transTime) {
-            return false;
-         }
-         // Continue
-         return time.leadingZero(transTime.getSeconds());
+         return time.leadingZero(transTime.getSeconds())
       },
       leadingZero: (int: any) => {
-         return ((int < 10) ? '0' : '') + int;
+         return ((int < 10) ? '0' : '') + int
       }
-   };
+   }
 
    // URL
    export let url = {
       all: () => {
-         let windowLocation = window.location;
-         let fullUrl = windowLocation.href;
+         let windowLocation = window.location
+         let fullUrl = windowLocation.href
 
-         let currentUrl = fullUrl.split('#')[0];
-         let hash = windowLocation.hash.substring(1);
-         let host = windowLocation.host;
-         let protocol = windowLocation.protocol + '//';
+         let currentUrl = fullUrl.split('#')[0]
+         let hash = windowLocation.hash.substring(1)
+         let host = windowLocation.host
+         let protocol = windowLocation.protocol + '//'
 
-         let baseUrl = '';
+         let baseUrl = ''
          if (document.getElementsByTagName('base').length > 0) {
-            baseUrl = document.getElementsByTagName('base')[0].href;
+            baseUrl = document.getElementsByTagName('base')[0].href
          } else {
-            baseUrl = protocol + host;
+            baseUrl = protocol + host
          }
-         let pathname = windowLocation.pathname;
-         let segments = [];
-         let pathnameSplit = pathname.split('/');
+         let pathname = windowLocation.pathname
+         let segments = []
+         let pathnameSplit = pathname.split('/')
          for (let i = 0, len = pathnameSplit.length; i < len; i++) {
             if (pathnameSplit[i].indexOf('.') < 0 && pathnameSplit[i] != '') {
-               segments.push(pathnameSplit[i]);
+               segments.push(pathnameSplit[i])
             }
          }
 
@@ -1517,28 +1461,28 @@ module Rocket {
          };
       },
       base: () => {
-         return url.all().base;
+         return url.all().base
       },
       current: () => {
-         return url.all().current;
+         return url.all().current
       },
       full: () => {
-         return url.all().full;
+         return url.all().full
       },
       hash: () => {
-         return url.all().hash;
+         return url.all().hash
       },
       host: () => {
-         return url.all().host;
+         return url.all().host
       },
       pathname: () => {
-         return url.all().pathname;
+         return url.all().pathname
       },
       protocol: () => {
-         return url.all().protocol;
+         return url.all().protocol
       },
       segments: () => {
-         return url.all().segments;
+         return url.all().segments
       }
-   };
+   }
 }

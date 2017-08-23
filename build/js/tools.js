@@ -755,14 +755,11 @@ var Rocket;
         apply: function (elms, type, eventHandle, eventType) {
             if (type === void 0) { type = 'click'; }
             var domElms = Rocket.dom.select(elms);
-            // Catch
-            if (domElms.length < 1) {
+            if (domElms.length < 1)
                 return;
-            }
             // Continue
             for (var _i = 0, domElms_1 = domElms; _i < domElms_1.length; _i++) {
                 var elm = domElms_1[_i];
-                // Check event type
                 switch (eventType) {
                     case 'add':
                         if (elm.addEventListener) {
@@ -822,9 +819,8 @@ var Rocket;
     Rocket.helper = {
         parse: {
             json: function (json) {
-                if (Rocket.is.json(json)) {
+                if (Rocket.is.json(json))
                     return JSON.parse(json);
-                }
                 return json;
             }
         },
@@ -886,10 +882,8 @@ var Rocket;
     // Overlay
     Rocket.overlay = {
         add: function () {
-            // Catch
-            if (!Rocket.is.browser() || !window || !window.console) {
+            if (!Rocket.is.browser() || !window || !window.console)
                 return false;
-            }
             // Continue
             var rocketOverlay = document.createElement('div');
             Rocket.id.add(rocketOverlay, _var.prefix.basic + 'overlay');
@@ -911,10 +905,8 @@ var Rocket;
             }
         },
         hide: function () {
-            // Catch
-            if (!Rocket.is.browser() || !window || !window.console) {
+            if (!Rocket.is.browser() || !window || !window.console)
                 return false;
-            }
             // Continue
             var rocketOverlay = Rocket.dom.select('#rocket-overlay')[0];
             rocketOverlay.style.visibility = 'hidden';
@@ -922,10 +914,8 @@ var Rocket;
             rocketOverlay.style.filter = 'alpha(opacity=0)';
         },
         show: function () {
-            // Catch
-            if (!Rocket.is.browser() || !window || !window.console) {
+            if (!Rocket.is.browser() || !window || !window.console)
                 return false;
-            }
             // Continue
             var rocketOverlay = Rocket.dom.select('#rocket-overlay')[0];
             setTimeout(function () {
@@ -961,10 +951,8 @@ var Rocket;
     // Request
     Rocket.request = {
         run: function (uOptions) {
-            // Catch
-            if (!Rocket.exists(uOptions) || !Rocket.exists(uOptions.url)) {
+            if (!Rocket.exists(uOptions) || !Rocket.exists(uOptions.url))
                 return false;
-            }
             // Continue
             var options = {
                 url: uOptions.url,
@@ -1096,40 +1084,32 @@ var Rocket;
     };
     // Setup
     function setup() {
-        // Catch
-        if (!Rocket.is.browser() || !window || !window.console) {
+        if (!Rocket.is.browser() || !window || !window.console)
             return false;
-        }
-        // Continue
-        // No touch class
         if (!Rocket.is.touch() && !Rocket.has.class(Rocket.dom.html, 'rocket-no-touch')) {
             Rocket.classes.add(Rocket.dom.html, 'rocket-no-touch');
         }
-        // Add overlay
         Rocket.overlay.add();
     }
     setup();
     // State
     Rocket.state = {
         add: function (element, state) {
-            if (!Rocket.exists(element)) {
+            if (!Rocket.exists(element))
                 return false;
-            }
             var newRocketStates = _var.state.list.slice().map(function (newState) { return _var.prefix.state + newState; });
             var stateClass = newRocketStates.splice(newRocketStates.indexOf(_var.prefix.state + state), 1);
             Rocket.classes.replace(element, newRocketStates, stateClass);
         },
         clear: function (element) {
-            if (!Rocket.exists(element)) {
+            if (!Rocket.exists(element))
                 return false;
-            }
             var newRocketStates = _var.state.list.slice().map(function (newState) { return _var.prefix.state + newState; });
             Rocket.classes.remove(element, newRocketStates);
         },
         toggle: function (element, state, thisClear) {
-            if (!Rocket.exists(element)) {
+            if (!Rocket.exists(element))
                 return false;
-            }
             if (_var.state.list.indexOf(state) > -1) {
                 var altState = _var.state.alts[state] || false;
                 var clear = (typeof thisClear === 'boolean') ? thisClear : false;
@@ -1151,10 +1131,8 @@ var Rocket;
     // Storage
     Rocket.storage = {
         add: function (nameObj, value) {
-            // Catch
-            if (!Rocket.exists(nameObj)) {
+            if (!Rocket.exists(nameObj))
                 return false;
-            }
             if (Rocket.is.string(nameObj)) {
                 if (!Rocket.exists(value)) {
                     return false;
@@ -1193,7 +1171,6 @@ var Rocket;
                 localStorage.removeItem(Rocket.defaults.storage.name);
                 sessionStorage.removeItem(Rocket.defaults.storage.name);
             }
-            ;
             // Check for exclusion
             if (Rocket.is.string(exclusion)) {
                 var exclValue = Rocket.storage.get(exclusion);
@@ -1223,19 +1200,14 @@ var Rocket;
             }
         },
         get: function (key) {
-            if (!Rocket.is.string(key)) {
+            if (!Rocket.is.string(key))
                 return false;
-            }
             var store = Rocket.storage.getStorageEngine();
-            // Catch
-            if (!Rocket.exists(store[key])) {
+            if (!Rocket.exists(store[key]))
                 return false;
-            }
-            // Continue
             return store[key];
         },
         getStorageEngine: function () {
-            // Catch
             if (!Rocket.defaults.storage.name) {
                 Rocket.log('ROCKET: You have not set the storage name. Provide a name for [Rocket].defaults.storage.name.', true);
                 return false;
@@ -1258,15 +1230,11 @@ var Rocket;
             }
         },
         remove: function (key) {
-            if (!Rocket.is.string(key)) {
+            if (!Rocket.is.string(key))
                 return false;
-            }
             var store = Rocket.storage.getStorageEngine();
-            // Catch
-            if (!Rocket.exists(store[key])) {
+            if (!Rocket.exists(store[key]))
                 return false;
-            }
-            // Continue
             delete store[key];
             switch (Rocket.defaults.storage.type) {
                 case 'local':
@@ -1338,10 +1306,8 @@ var Rocket;
     Rocket.time = {
         basic: function (thisTime) {
             var transTime = Rocket.date.transform(thisTime);
-            // Catch
-            if (!transTime) {
+            if (!transTime)
                 return false;
-            }
             // Continue
             var hours = Rocket.time.leadingZero(transTime.getHours());
             var minutes = Rocket.time.leadingZero(transTime.getMinutes());
@@ -1349,10 +1315,8 @@ var Rocket;
         },
         exact: function (thisTime) {
             var transTime = Rocket.date.transform(thisTime);
-            // Catch
-            if (!transTime) {
+            if (!transTime)
                 return false;
-            }
             // Continue
             var hours = Rocket.time.leadingZero(transTime.getHours());
             var minutes = Rocket.time.leadingZero(transTime.getMinutes());
@@ -1362,11 +1326,8 @@ var Rocket;
         },
         full: function (thisTime) {
             var transTime = Rocket.date.transform(thisTime);
-            // Catch
-            if (!transTime) {
+            if (!transTime)
                 return false;
-            }
-            // Continue
             var hours = Rocket.time.leadingZero(transTime.getHours());
             var minutes = Rocket.time.leadingZero(transTime.getMinutes());
             var seconds = Rocket.time.leadingZero(transTime.getSeconds());
@@ -1374,29 +1335,20 @@ var Rocket;
         },
         hours: function (thisTime) {
             var transTime = Rocket.date.transform(thisTime);
-            // Catch
-            if (!transTime) {
+            if (!transTime)
                 return false;
-            }
-            // Continue
             return Rocket.time.leadingZero(transTime.getHours());
         },
         minutes: function (thisTime) {
             var transTime = Rocket.date.transform(thisTime);
-            // Catch
-            if (!transTime) {
+            if (!transTime)
                 return false;
-            }
-            // Continue
             return Rocket.time.leadingZero(transTime.getMinutes());
         },
         seconds: function (thisTime) {
             var transTime = Rocket.date.transform(thisTime);
-            // Catch
-            if (!transTime) {
+            if (!transTime)
                 return false;
-            }
-            // Continue
             return Rocket.time.leadingZero(transTime.getSeconds());
         },
         leadingZero: function (int) {
