@@ -139,10 +139,8 @@ declare module MRocket {
       dataType?: string;
       headers?: string;
       onComplete?: any;
-      onError?: any;
       onLoading?: any;
       onStart?: any;
-      onSuccess?: any;
       timeout?: number;
       type?: string;
       withCredentials?: boolean;
