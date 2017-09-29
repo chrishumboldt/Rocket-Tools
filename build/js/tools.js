@@ -1012,22 +1012,37 @@ let Rocket;
                xhr.timeout = options.timeout;
             }
 
-            xhr.onload = function() {
-               if (this.status >= 200 && this.status < 300) {
-                  resolve({
-                     response: Rocket.helper.parse.json(this.responseText),
-                     status: this.status,
-                     headers: xhr.getAllResponseHeaders()
-                  });
-               } else {
-                  reject({
-                     error: Rocket.helper.parse.json(this.responseText),
-                     status: this.status,
-                     headers: xhr.getAllResponseHeaders()
-                  });
+            xhr.onreadystatechange = function () {
+               switch (this.readyState) {
+                  case 1:
+                     if (options.onStart) options.onStart();
+                     break;
+
+                  case 3:
+                     if (options.onLoading) options.onLoading();
+                     break;
+
+                  case 4:
+                     if (options.onComplete) options.onComplete(this);
+
+                     if (this.status >= 200 && this.status < 300) {
+                        resolve({
+                           response: Rocket.helper.parse.json(this.responseText),
+                           status: this.status,
+                           headers: xhr.getAllResponseHeaders()
+                        });
+                     } else {
+                        reject({
+                           error: Rocket.helper.parse.json(this.responseText),
+                           status: this.status,
+                           headers: xhr.getAllResponseHeaders()
+                        });
+                     }
+
+                     break;
                }
             };
-
+            
             // Handle network errors
             xhr.onerror = function() {
                reject({
