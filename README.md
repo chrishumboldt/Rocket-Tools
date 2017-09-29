@@ -110,8 +110,6 @@ Property | Default
 `defaults.request.headers` | `false`
 `defaults.request.onStart` | `false`
 `defaults.request.onLoading` | `false`
-`defaults.request.onSuccess` | `false`
-`defaults.request.onError` | `false`
 `defaults.request.onEnd` | `false`
 `defaults.request.timeout` | `false`
 `defaults.request.type` | `false`
@@ -377,7 +375,7 @@ Method | Description
 `random.string(len, text)` | Return a random alphanumeric string of length `len`.<br>`text` defaults to `false` but if `true` will exclude integers. `len` defaults to 5.
 
 #### Request
-The `options` is **always** provided in the form of an object.
+The `options` is **always** provided in the form of an object. Success and error responses are managed using promises with a [polyfill](https://github.com/stefanpenner/es6-promise) for older browsers.
 
 Method | Description
 ---- | ----
@@ -399,10 +397,8 @@ Option | Default | Description
 `dataType` | `json` | Set the data type that you will be sending. The options are `json`, `form` or `formdata`.
 `headers` | `false` | Attach custom headers to the request.
 `onComplete` | `false` | Attach a function to execute once the request is complete.
-`onError` | `false` | Attach a function to execute if the request is unsuccessful. The `error`, `status` and `header` variables are returned.
 `onLoading` | `false` | Attach a function to execute while the request is loading. This is a continuous state.
 `onStart` | `false` | Attach a function to execute as the request is made.
-`onSuccess` | `false` | Attach a function to execute if the request is successful. The `data`, `status` and `header` variables are returned.
 `timeout` | `false` | Set the request timeout in seconds.
 `type` | `false` | Set the type of request made. **Only used** on the `Rocket.request.run()` method.
 `withCredentials` | `false` | Set the `withCredentials` option for the request.
@@ -416,15 +412,15 @@ Rocket.request.get({
    onStart: function () {
       Rocket.log('Starting request...');
    },
-   onError: function (error, status) {
-      Rocket.log(status + ': ' + error);
-   },
-   onSuccess: function (data) {
-      Rocket.log(data);
-   },
    onComplete: function () {
       Rocket.log('Request done!!!');
    }
+})
+.then(({ response }) => {
+   Rocket.log(response);
+})
+.catch(({ error, status }) => {
+   Rocket.log(status + ': ' + error);
 });
 ```
 
