@@ -54,7 +54,7 @@ Simply add in the Rocket Tools script tag as shown below.
 If you wish to use Rocket Tools as a Node module then just require it as you would any other module.
 
 ```javascript
-var Rocket = require('rocket-tools');
+const Rocket = require('rocket-tools');
 ```
 
 **NOTE** that there are slight differences between the NodeJS and standard library files. These differences should not affect its usage but please report any issue should you find any.
@@ -64,18 +64,18 @@ The library is automatically initialized and assigned to the variable `Rocket`. 
 
 ```javascript
 // Some methods
-var boldName = Rocket.string.uppercase.all('Chris Humboldt'); // Convert a string to uppercase
-var randomNumber = Rocket.random.integer(); // Generate a random integer
+const boldName = Rocket.string.uppercase.all('Chris Humboldt'); // Convert a string to uppercase
+const randomNumber = Rocket.random.integer(); // Generate a random integer
 ```
 
 Make sure not to overwrite the `Rocket` variable name to anything else within your project. Often a new reference will be made for the library and its defaults making typing easier. For example:
 
 ```javascript
 // Here we assign the library to a quick variable reference
-var _R = Rocket;
-var _RD = Rocket.defaults;
+const _R = Rocket;
+const _RD = Rocket.defaults;
 
-var randomNumber = _R.random.integer(); // Generate a random integer
+const randomNumber = _R.random.integer(); // Generate a random integer
 ```
 
 **NOTE** that a no touch check is run and the result assigned to the HTML element in the form of a class `rocket-no-touch`. An [overlay](#overlay) is also automatically applied.
@@ -141,9 +141,9 @@ Method | Defaults | Description
 `array.unique(ar)` | | Return only unique array values from array `ar`.
 
 ```javascript
-var myElement = document.getElementById('element');
-var myNumbers = [1,1,2,3,4,5,5,5,5];
-var myString = 'This is a string';
+const myElement = Rocket.dom.element('element');
+const myNumbers = [1,1,2,3,4,5,5,5,5];
+const myString = 'This is a string';
 
 Rocket.array.make(myElement); // Returns [element]
 Rocket.array.make(myNumbers); // Returns [1,1,2,3,4,5,5,5,5]
@@ -177,9 +177,9 @@ Method | Description
 `is.url(str, regExp)` | Check if string `str` is a valid url (`regExp` optional).
 
 ```javascript
-var elm = document.querySelector('.element');
-var filename = 'filename.json';
-var time = '12:54:07';
+const elm = Rocket.dom.element('.element');
+const filename = 'filename.json';
+const time = '12:54:07';
 
 Rocket.exists(elm); // true
 Rocket.has.spaces('This is a test'); // true
@@ -212,7 +212,7 @@ Rocket.classes.replace('.element', 'block', 'circle');
 // You can also execute class changes on multiple elements at once.
 // Here DOM elements are provided instead of a target selector.
 // Either option will work.
-var elms = document.querySelectorAll('.elements');
+const elms = Rocket.dom.select('.elements');
 
 Rocket.classes.add(elms, 'block');
 ```
@@ -276,7 +276,7 @@ Rocket.dom.select('#example')[0]; // This is how you would reference a unique el
 Rocket.dom.element('#example'); // This will return only one element, similar to the above method.
 
 Rocket.dom.remove('#example'); // Remove with selector
-Rocket.dom.remove(document.getElementById('example')); // Remove element directly
+Rocket.dom.remove(Rocket.dom.element('example')); // Remove element directly
 </script>
 ```
 
@@ -289,8 +289,8 @@ Method | Description
 `event.remove(elm, event, func)` | Remove function `func` from element `elm` when `event` occurs.
 
 ```javascript
-var button = document.getElementById('button');
-var sayHi = function () {
+const button = Rocket.dom.element('button');
+const sayHi = () => {
    alert('Hi');
 };
 
@@ -315,7 +315,7 @@ Method | Options | Description
 `helper.setDefault(val, default)` | | Will compare `val` to `default` and return.<br>Should be used for **matching value types** only.
 
 ```javascript
-var myString = 'This is a string';
+const myString = 'This is a string';
 
 Rocket.helper.setDefault(awesome, myString); // Returns 'This is a string' as awesome is undefined.
 Rocket.helper.setDefault('Coolio', myString); // Returns 'Coolio' as the types match to string.
@@ -329,7 +329,7 @@ Method | Description
 `id.remove(elm, id)` | Remove `id` from element `elm`.
 
 ```javascript
-var elm = document.querySelector('.element');
+const elm = Rocket.dom.element('.element');
 
 Rocket.id.add(elm, 'my-element');
 Rocket.id.remove(elm, 'my-element');
@@ -409,17 +409,19 @@ Rocket.request.get({
    data: {
       key: 'value'
    },
-   onStart: function () {
+   onStart: () => {
       Rocket.log('Starting request...');
    },
-   onComplete: function () {
+   onComplete: () => {
       Rocket.log('Request done!!!');
    }
 })
-.then(({ response }) => {
+// Successful response.
+.then(({ response, status, headers }) => {
    Rocket.log(response);
 })
-.catch(({ error, status }) => {
+// Error
+.catch(({ error, status, headers }) => {
    Rocket.log(status + ': ' + error);
 });
 ```
@@ -434,7 +436,7 @@ Method | Description
 `state.toggle(elm, state)` | Set a `state` on a single element `elm`. If set, then change it to its opposing state.
 
 ```javascript
-var elm = document.getElementById('my-element');
+const elm = Rocket.dom.element('#my-element');
 
 Rocket.state.set(elm, 'visible'); // A class of '_state-visible' has now been added to this element.
 Rocket.state.toggle(elm, 'visible'); // The class has now be changed to '_state-hidden'.
@@ -487,7 +489,7 @@ Method | Description
 `string.uppercase.last(str)` | Uppercase the last character of `str`.
 
 ```javascript
-var myString = 'hello bright world!';
+const myString = 'hello bright world!';
 
 Rocket.string.remove.firstAndLast(myString); // Returns 'ello bright world'
 Rocket.string.uppercase.all(myString); // Returns 'HELLO BRIGHT WORLD!'
@@ -506,7 +508,7 @@ Method | Description
 `time.seconds(date)` | Transform and return the seconds value of `date`.
 
 ```javascript
-var myDate = new Date();
+const myDate = new Date();
 
 Rocket.time.basic(myDate); // Returns the time in format '21:17'
 Rocket.time.full(myDate); // Returns the time in format '21:17:05'
