@@ -1,25 +1,28 @@
 {
-   "name": "rocket-tools",
-   "version": "1.14.6",
-   "description": "The Rocket Tools library is a lightweight set of Javascript methods for quicker and easier development.",
-   "main": "js/tools.min.js",
-   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/chrishumboldt/Webplate-Tools.git"
-   },
-   "keywords": [
-      "Rocket",
-      "Tools",
-      "Javascript",
-		"Library"
-   ],
-   "author": "Chris Humboldt",
-   "license": "Apache-2.0",
-   "bugs": {
-      "url": "https://github.com/chrishumboldt/Webplate-Tools/issues"
-   },
-   "homepage": "https://github.com/chrishumboldt/Webplate-Tools#readme",
-	"engines": {
-      "npm": "^3.0.0"
-   }
+  "name": "rocket-tools",
+  "version": "1.15.0",
+  "description": "The Rocket Tools library is a lightweight set of Javascript methods for quicker and easier development.",
+  "main": "js/tools.min.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrishumboldt/Rocket-Tools.git"
+  },
+  "keywords": [
+    "Rocket",
+    "Tools",
+    "Javascript",
+    "Library"
+  ],
+  "author": "Chris Humboldt",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/chrishumboldt/Rocket-Tools/issues"
+  },
+  "homepage": "https://github.com/chrishumboldt/Rocket-Tools#readme",
+  "engines": {
+    "npm": "^3.0.0"
+  },
+  "dependencies": {
+    "es6-promise": "^4.1.1"
+  }
 }

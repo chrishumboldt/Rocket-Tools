@@ -2,6 +2,7 @@
 	"build": [{
 		"name": "tools",
 		"js": [
+         "node_modules/es6-promise/dist/es6-promise.auto.min.js",
          "~/tools.js",
          "~/bindings.js"
       ]
