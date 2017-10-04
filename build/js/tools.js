@@ -260,8 +260,8 @@ let Rocket;
 
          if (elms.length > 0) {
             for (var i = 0, len = elms.length; i < len; i++) {
-               if (Rocket.exists(elm[i])) {
-                  elm[i].removeAttribute('class');
+               if (Rocket.exists(elms[i])) {
+                  elms[i].removeAttribute('class');
                }
             }
          }
@@ -1042,7 +1042,7 @@ let Rocket;
                      break;
                }
             };
-            
+
             // Handle network errors
             xhr.onerror = function() {
                reject({
