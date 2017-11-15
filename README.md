@@ -1,5 +1,5 @@
 # Rocket Tools
-The Rocket Tools library is a lightweight (21 KB) set of Javascript methods for quicker and easier development.
+The Rocket Tools library is a lightweight (28 KB) set of Javascript methods for quicker and easier development.
 
 * [Getting Started](#getting-started)
    * [Use In HTML](#use-in-html)
@@ -238,7 +238,7 @@ Rocket.date.month('12-03-2016', 'long'); // March
 Method | Description
 ---- | ----
 `log(val)` | Console log `val` if the window.log option is available.<br>The `Rocket.defaults.log` option must also be set to `true`.
-`error(val)` | Console out an error `val` if allowed. Will fallback to a normal console.log if errors are prohibited.<br>The `Rocket.defaults.log` option must also be set to `true`.
+`error(val)` | Console out an error `val` if allowed. The `Rocket.defaults.log` option must also be set to `true`.
 
 ```javascript
 Rocket.log('This is a test.');
@@ -416,7 +416,7 @@ Rocket.request.get({
       Rocket.log('Request done!!!');
    }
 })
-// Successful response.
+// Successful response
 .then(({ response, status, headers }) => {
    Rocket.log(response);
 })
@@ -427,19 +427,19 @@ Rocket.request.get({
 ```
 
 #### States
-There are a predefined list of states with an opposing state that can be added to elements in the form of a class. The states are `active`, `open` and `visible` with the opposites being `inactive`, `closed` and `hidden`. All states are prefixed with `_state-`.
+There are a predefined list of states with an opposing state that can be added to elements in the form of a class. The states are `active`, `open` and `visible` with the opposites being `inactive`, `closed` and `hidden`. All states are prefixed with `is-`.
 
 Method | Description
 ---- | ----
-`state.add(elm, state)` | Set a `state` on a single element `elm`.
-`state.clear(elm)` | Clear all states currently set on a single element `elm`.
-`state.toggle(elm, state)` | Set a `state` on a single element `elm`. If set, then change it to its opposing state.
+`state.add(elms, state)` | Set a `state` on all elements `elms`.
+`state.clear(elms)` | Clear all states currently set on all elements `elms`.
+`state.toggle(elms, state)` | Set a `state` on all elements `elms`. If set, then change it to its opposing state.
 
 ```javascript
 const elm = Rocket.dom.element('#my-element');
 
-Rocket.state.set(elm, 'visible'); // A class of '_state-visible' has now been added to this element.
-Rocket.state.toggle(elm, 'visible'); // The class has now be changed to '_state-hidden'.
+Rocket.state.set(elm, 'visible'); // A class of 'is-visible' has now been added to this element.
+Rocket.state.toggle(elm, 'visible'); // The class has now be changed to 'is-hidden'.
 ```
 
 #### Storage
@@ -543,7 +543,7 @@ Twitter: <a href="https://twitter.com/chrishumboldt">twitter.com/chrishumboldt</
 GitHub <a href="https://github.com/chrishumboldt">github.com/chrishumboldt</a><br>
 
 ## Copyright and License
-Copyright 2016 Rocket Project
+Copyright 2017 Rocket Project
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

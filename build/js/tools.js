@@ -6,7 +6,6 @@ Rocket serves as the "namespace" for all subsequent modules. Rocket modules do
 require this toolset so make sure that this library is loaded first.
 **/
 
-// Table of contents
 // Variables
 // Defaults
 // Arrays
@@ -55,7 +54,7 @@ let Rocket;
       ],
       prefix: {
          basic: 'rocket-',
-         state: '_state-'
+         state: 'is-'
       },
       state: {
          alts: {
@@ -66,9 +65,10 @@ let Rocket;
             open: 'closed',
             visible: 'hidden'
          },
-         list: ['active', 'closed', 'hidden', 'inactive', 'open', 'selected', 'toggled', 'visible']
+         list: [`active`, 'closed', 'hidden', 'inactive', 'open', 'selected', 'toggled', 'visible']
       }
    };
+   _var.state.list = _var.state.list.map((state) => `${_var.prefix.state}${state}`);
 
    // Defaults
    Rocket.defaults = {
@@ -208,7 +208,7 @@ let Rocket;
          return (allowedTypes.indexOf(file.split('.').pop().toLowerCase()) > -1);
       },
       integer: function (check) {
-         return (Rocket.is.number(check) && (parseFloat(check) === parseInt(check)));
+         return (check ^ 0) === check;
       },
       json: function (json) {
          if (typeof json !== 'object') {
@@ -289,11 +289,11 @@ let Rocket;
 
          // Execute
          for (var i = 0, len = arElements.length; i < len; i++) {
-            if (actionAdd) {
-               Rocket.classes.executeAdd(arElements[i], arClassesAdd);
-            }
             if (actionRemove) {
                Rocket.classes.executeRemove(arElements[i], arClassesRemove);
+            }
+            if (actionAdd) {
+               Rocket.classes.executeAdd(arElements[i], arClassesAdd);
             }
          }
       },
@@ -574,23 +574,14 @@ let Rocket;
    };
 
    // Development
-   Rocket.log = function (text, thisError) {
-      if (Rocket.is.browser() && (!window || !window.console)) return;
-
-      // Continue
-      if (Rocket.defaults.log) {
-         let error = (Rocket.is.boolean(thisError)) ? thisError : false
-
-         if (error && Rocket.is.browser()) {
-            throw new Error(text)
-         } else {
-            console.log(text)
-         }
-      }
+   Rocket.log = function (text) {
+      if ((Rocket.is.browser() && (!window || !window.console)) || !Rocket.defaults.log) return;
+      console.log(text);
    };
 
    Rocket.error = function (text) {
-      Rocket.log(text, true);
+      if ((Rocket.is.browser() && (!window || !window.console)) || !Rocket.is.browser() || !Rocket.defaults.log) return;
+      throw new Error(text);
    };
 
    // Dimensions
@@ -786,9 +777,8 @@ let Rocket;
          var domElms = Rocket.dom.select(elms);
          if (domElms.length < 1) return;
 
-         // Continue
-         for (var _i = 0, domElms_1 = domElms; _i < domElms_1.length; _i++) {
-            var elm = domElms_1[_i];
+         for (var i = 0, len = domElms.length; i < len; i++) {
+            var elm = domElms[i];
             switch (eventType) {
                case 'add':
                   if (elm.addEventListener) {
@@ -896,13 +886,13 @@ let Rocket;
 
    // Milliseconds
    Rocket.milliseconds = {
-      hours: function (hours) {
+      hours: (hours) => {
          return hours * 60 * 60 * 1000;
       },
-      minutes: function (minutes) {
+      minutes: (minutes) => {
          return minutes * 60 * 1000;
       },
-      seconds: function (seconds) {
+      seconds: (seconds) => {
          return seconds * 1000;
       }
    };
@@ -1152,37 +1142,31 @@ let Rocket;
 
    // State
    Rocket.state = {
-      add: function (element, state) {
-         if (!Rocket.exists(element)) return false;
-
-         var newRocketStates = _var.state.list.slice().map(function (newState) { return _var.prefix.state + newState; });
-         var stateClass = newRocketStates.splice(newRocketStates.indexOf(_var.prefix.state + state), 1);
-
-         Rocket.classes.replace(element, newRocketStates, stateClass);
+      add: function (elements, state) {
+         if (!Rocket.exists(elements) || _var.state.list.indexOf(`${_var.prefix.state}${state}`) < 0) return false;
+         Rocket.classes.replace(elements, _var.state.list, `${_var.prefix.state}${state}`);
       },
-      clear: function (element) {
-         if (!Rocket.exists(element)) return false;
-
-         var newRocketStates = _var.state.list.slice().map(function (newState) { return _var.prefix.state + newState; });
-
-         Rocket.classes.remove(element, newRocketStates);
+      clear: function (elements) {
+         if (!Rocket.exists(elements)) return false;
+         Rocket.classes.remove(elements, _var.state.list);
       },
-      toggle: function (element, state, thisClear) {
-         if (!Rocket.exists(element)) return false;
+      toggle: function (inpElements, inpState) {
+         const elements = Rocket.array.make(inpElements);
+         const state = `${_var.prefix.state}${inpState}`;
 
-         if (_var.state.list.indexOf(state) > -1) {
-            var altState = _var.state.alts[state] || false;
-            var clear = (typeof thisClear === 'boolean') ? thisClear : false;
-            var stateClass = _var.prefix.state + state;
+         if (!Rocket.exists(elements) || _var.state.list.indexOf(state) < 0) return false;
 
-            if (Rocket.has.class(element, stateClass)) {
-               if (clear || altState === false) {
-                  Rocket.state.clear(element);
-               } else {
-                  Rocket.state.add(element, altState);
-               }
+         const altState = _var.state.alts[inpState];
+
+         for (let i = 0, len = elements.length; i < len; i++) {
+            if (Rocket.has.class(elements[i], state)) {
+               Rocket.state.clear(elements[i]);
+               Rocket.state.add(elements[i], altState);
+            } else if (Rocket.has.class(elements[i], `${_var.prefix.state}${altState}`)) {
+               Rocket.state.clear(elements[i]);
+               Rocket.state.add(elements[i], inpState);
             } else {
-               Rocket.state.add(element, state);
+               Rocket.state.add(elements[i], state);
             }
          }
       }
