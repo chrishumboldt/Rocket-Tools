@@ -1,5 +1,5 @@
 # Rocket Tools
-The Rocket Tools library is a lightweight (21 KB) set of Javascript methods for quicker and easier development.
+The Rocket Tools library is a lightweight (28 KB) set of Javascript methods for quicker and easier development.
 
 * [Getting Started](#getting-started)
    * [Use In HTML](#use-in-html)
@@ -238,7 +238,7 @@ Rocket.date.month('12-03-2016', 'long'); // March
 Method | Description
 ---- | ----
 `log(val)` | Console log `val` if the window.log option is available.<br>The `Rocket.defaults.log` option must also be set to `true`.
-`error(val)` | Console out an error `val` if allowed. Will fallback to a normal console.log if errors are prohibited.<br>The `Rocket.defaults.log` option must also be set to `true`.
+`error(val)` | Console out an error `val` if allowed. The `Rocket.defaults.log` option must also be set to `true`.
 
 ```javascript
 Rocket.log('This is a test.');
@@ -416,7 +416,7 @@ Rocket.request.get({
       Rocket.log('Request done!!!');
    }
 })
-// Successful response.
+// Successful response
 .then(({ response, status, headers }) => {
    Rocket.log(response);
 })
@@ -431,9 +431,9 @@ There are a predefined list of states with an opposing state that can be added t
 
 Method | Description
 ---- | ----
-`state.add(elm, state)` | Set a `state` on a single element `elm`.
-`state.clear(elm)` | Clear all states currently set on a single element `elm`.
-`state.toggle(elm, state)` | Set a `state` on a single element `elm`. If set, then change it to its opposing state.
+`state.add(elms, state)` | Set a `state` on all elements `elms`.
+`state.clear(elms)` | Clear all states currently set on all elements `elms`.
+`state.toggle(elms, state)` | Set a `state` on all elements `elms`. If set, then change it to its opposing state.
 
 ```javascript
 const elm = Rocket.dom.element('#my-element');

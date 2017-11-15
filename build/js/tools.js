@@ -1142,16 +1142,16 @@ let Rocket;
 
    // State
    Rocket.state = {
-      add: function (element, state) {
-         if (!Rocket.exists(element) || _var.state.list.indexOf(`${_var.prefix.state}${state}`) < 0) return false;
-         Rocket.classes.replace(element, _var.state.list, `${_var.prefix.state}${state}`);
+      add: function (elements, state) {
+         if (!Rocket.exists(elements) || _var.state.list.indexOf(`${_var.prefix.state}${state}`) < 0) return false;
+         Rocket.classes.replace(elements, _var.state.list, `${_var.prefix.state}${state}`);
       },
-      clear: function (element) {
-         if (!Rocket.exists(element)) return false;
-         Rocket.classes.remove(element, _var.state.list);
+      clear: function (elements) {
+         if (!Rocket.exists(elements)) return false;
+         Rocket.classes.remove(elements, _var.state.list);
       },
-      toggle: function (inpElement, inpState) {
-         const elements = Rocket.array.make(inpElement);
+      toggle: function (inpElements, inpState) {
+         const elements = Rocket.array.make(inpElements);
          const state = `${_var.prefix.state}${inpState}`;
 
          if (!Rocket.exists(elements) || _var.state.list.indexOf(state) < 0) return false;
