@@ -427,7 +427,7 @@ Rocket.request.get({
 ```
 
 #### States
-There are a predefined list of states with an opposing state that can be added to elements in the form of a class. The states are `active`, `open` and `visible` with the opposites being `inactive`, `closed` and `hidden`. All states are prefixed with `_state-`.
+There are a predefined list of states with an opposing state that can be added to elements in the form of a class. The states are `active`, `open` and `visible` with the opposites being `inactive`, `closed` and `hidden`. All states are prefixed with `is-`.
 
 Method | Description
 ---- | ----
@@ -438,8 +438,8 @@ Method | Description
 ```javascript
 const elm = Rocket.dom.element('#my-element');
 
-Rocket.state.set(elm, 'visible'); // A class of '_state-visible' has now been added to this element.
-Rocket.state.toggle(elm, 'visible'); // The class has now be changed to '_state-hidden'.
+Rocket.state.set(elm, 'visible'); // A class of 'is-visible' has now been added to this element.
+Rocket.state.toggle(elm, 'visible'); // The class has now be changed to 'is-hidden'.
 ```
 
 #### Storage
@@ -543,7 +543,7 @@ Twitter: <a href="https://twitter.com/chrishumboldt">twitter.com/chrishumboldt</
 GitHub <a href="https://github.com/chrishumboldt">github.com/chrishumboldt</a><br>
 
 ## Copyright and License
-Copyright 2016 Rocket Project
+Copyright 2017 Rocket Project
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
