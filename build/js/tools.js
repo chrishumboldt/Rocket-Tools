@@ -674,7 +674,7 @@ let Rocket;
       },
       remove: function (selElm) {
          if (Rocket.exists(selElm)) {
-            if (Rocket.is.element(selElm)) {
+            if (Rocket.is.element(selElm) && Rocket.is.element(selElm.parentNode)) {
                selElm.parentNode.removeChild(selElm);
             } else if (Rocket.is.string(selElm)) {
                var elements = Rocket.dom.select(selElm);
